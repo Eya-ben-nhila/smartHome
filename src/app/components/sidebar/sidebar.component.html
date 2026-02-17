@@ -1,0 +1,16 @@
+<div class="sidebar">
+  <div class="nav-items">
+    <div class="nav-item" [class.active]="currentPage === 'dashboard'" (click)="navigateTo('dashboard')">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" [class.active]="currentPage === 'activity'" (click)="navigateTo('activity')">
+      <i class="fas fa-chart-line"></i>
+      <span>Activity</span>
+    </div>
+    <div class="nav-item" [class.active]="currentPage === 'automations'" (click)="navigateTo('automations')">
+      <i class="fas fa-robot"></i>
+      <span>Automations</span>
+    </div>
+  </div>
+</div>

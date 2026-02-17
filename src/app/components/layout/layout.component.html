@@ -1,0 +1,22 @@
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+  <div class="content-area">
+    <div class="top-bar">
+      <div class="time">9:30</div>
+      <div class="search-bar">
+        <i class="fas fa-lock"></i>
+        <input type="text" placeholder="Ask Spring Street" (click)="goToSearch()">
+      </div>
+      <div class="status-icons">
+        <span class="network-status">5G</span>
+        <i class="fas fa-signal"></i>
+        <div class="user-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

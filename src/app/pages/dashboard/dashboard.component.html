@@ -1,0 +1,238 @@
+<div class="dashboard-container">
+  <!-- Main Content - No duplicate nav or search since layout already has them -->
+  <div class="main-content">
+    <!-- Category Filters -->
+    <div class="category-filters">
+      <div class="filter-chip active">
+        <i class="fas fa-heart"></i>
+        <span>Favorites</span>
+      </div>
+      <div class="filter-chip">
+        <i class="fas fa-th"></i>
+        <span>All</span>
+      </div>
+      <div class="filter-chip">
+        <i class="fas fa-video"></i>
+        <span>Cameras</span>
+      </div>
+      <div class="filter-chip">
+        <i class="fas fa-lightbulb"></i>
+        <span>Lights</span>
+      </div>
+      <div class="filter-chip">
+        <i class="fas fa-wifi"></i>
+        <span>Wifi</span>
+      </div>
+      <div class="filter-chip">
+        <i class="fas fa-thermometer-half"></i>
+        <span>Climate</span>
+      </div>
+    </div>
+
+    <!-- Device Cards Grid - NEW LAYOUT -->
+    <div class="devices-grid">
+      <!-- Column 1: Live Camera + Front Door Lock + Garage -->
+      <div class="column">
+        <div class="device-card camera-card large">
+          <div class="camera-feed">
+            <img src="https://picsum.photos/seed/camera1/400/250.jpg" alt="Front door camera">
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              Live
+            </div>
+            <div class="camera-controls">
+              <i class="fas fa-expand"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card lock-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="device-info">
+              <h4>Front door lock</h4>
+              <p>Locked</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card garage-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="device-info">
+              <h4>Garage</h4>
+              <p>Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Front Door Light + TV + Speaker + Plug + Floor Lamp -->
+      <div class="column">
+        <div class="device-card light-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="device-info">
+              <h4>Front door light</h4>
+              <p>On - 50%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card tv-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-tv"></i>
+            </div>
+            <div class="device-info">
+              <h4>TV</h4>
+              <p>Off</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card speaker-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-volume-up"></i>
+            </div>
+            <div class="device-info">
+              <h4>Speaker</h4>
+              <p>Playing - 50%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card plug-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-plug"></i>
+            </div>
+            <div class="device-info">
+              <h4>Smart plug</h4>
+              <p>Off</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card floor-lamp-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="device-info">
+              <h4>Floor lamp</h4>
+              <p>On - 50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Downstairs Temp + Second Live Camera -->
+      <div class="column">
+        <div class="device-card temperature-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-thermometer-half"></i>
+            </div>
+            <div class="device-info">
+              <h4>Downstairs</h4>
+              <div class="temperature-display">
+                <span class="temp-value">68</span>
+                <span class="temp-label">Comfort</span>
+              </div>
+              <div class="temp-controls">
+                <button class="temp-btn">-</button>
+                <button class="temp-btn">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card camera-card">
+          <div class="camera-feed">
+            <img src="https://picsum.photos/seed/camera2/200/150.jpg" alt="Backyard camera">
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              Live
+            </div>
+            <div class="camera-controls">
+              <i class="fas fa-expand"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 4: Fan + Outdoor AQI + San Francisco Temp + Indoor Temperatures -->
+      <div class="column">
+        <div class="device-card fan-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-fan"></i>
+            </div>
+            <div class="device-info">
+              <h4>Fan</h4>
+              <p>On</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card air-quality-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-wind"></i>
+            </div>
+            <div class="device-info">
+              <h4>Outdoor AQI</h4>
+              <p>32 - Good</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card weather-card">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-sun"></i>
+            </div>
+            <div class="device-info">
+              <h4>San Francisco</h4>
+              <p>56° Clear</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card temperature-card indoor-temp">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-thermometer-half"></i>
+            </div>
+            <div class="device-info">
+              <h4>Indoor temperatures</h4>
+              <div class="room-list">
+                <div class="room-item">
+                  <i class="fas fa-home"></i>
+                  <span>Downstairs: 68°F</span>
+                </div>
+                <div class="room-item">
+                  <i class="fas fa-couch"></i>
+                  <span>Living room: 72°F</span>
+                </div>
+                <div class="room-item">
+                  <i class="fas fa-bed"></i>
+                  <span>Guest bedroom: 70°F</span>
+                </div>
+              </div>
+              <button class="select-sensors-btn">Select sensors</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

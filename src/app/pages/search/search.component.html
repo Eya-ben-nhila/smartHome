@@ -1,0 +1,93 @@
+<div class="search-page">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button class="close-btn" (click)="goBack()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h1>Search or ask your home</h1>
+    </div>
+    <div class="header-right">
+      <span class="time">9:30</span>
+      <span class="network-status">5G</span>
+      <i class="fas fa-signal"></i>
+    </div>
+  </div>
+
+  <!-- Device Cards -->
+  <div class="device-cards">
+    <div class="device-card light-card">
+      <div class="device-icon">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div class="device-info">
+        <h4>Kitchen light</h4>
+        <p>On - 50%</p>
+      </div>
+    </div>
+
+    <div class="device-card fan-card">
+      <div class="device-icon">
+        <i class="fas fa-fan"></i>
+      </div>
+      <div class="device-info">
+        <h4>Downstairs fan</h4>
+        <p>On</p>
+      </div>
+    </div>
+
+    <div class="device-card fan-card">
+      <div class="device-icon">
+        <i class="fas fa-fan"></i>
+      </div>
+      <div class="device-info">
+        <h4>Downstairs fan</h4>
+        <p>On</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggested Actions -->
+  <div class="suggested-actions">
+    <h3>Suggested</h3>
+    <div class="action-list">
+      <div class="action-item" (click)="selectAction('What happened today?')">
+        <i class="fas fa-arrow-right"></i>
+        <span>What happened today?</span>
+      </div>
+      <div class="action-item" (click)="selectAction('Create an automation')">
+        <i class="fas fa-arrow-right"></i>
+        <span>Create an automation</span>
+      </div>
+      <div class="action-item" (click)="selectAction('Is the front door locked?')">
+        <i class="fas fa-arrow-right"></i>
+        <span>Is the front door locked?</span>
+      </div>
+      <div class="action-item" (click)="selectAction('Turn on the Living Room TV')">
+        <i class="fas fa-arrow-right"></i>
+        <span>Turn on the Living Room TV</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Input -->
+  <div class="search-input-container">
+    <div class="search-input">
+      <input 
+        type="text" 
+        placeholder="Ask Spring Street" 
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="performSearch()"
+        #searchInput
+      >
+      <button class="send-btn" (click)="performSearch()" [disabled]="!searchQuery.trim()">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <p>Gemini can make mistakes, so double check it. <a href="#">Learn more</a></p>
+  </div>
+</div>
