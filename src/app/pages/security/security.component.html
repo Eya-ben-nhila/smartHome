@@ -1,0 +1,179 @@
+<div class="security-container">
+  <div class="security-header">
+    <h1>Security Center</h1>
+    <p class="subtitle">Monitor and control your home security systems</p>
+    <button class="emergency-btn">
+      <i class="fas fa-exclamation-triangle"></i>
+      Emergency
+    </button>
+  </div>
+
+  <div class="security-content">
+    <!-- Status Cards Row -->
+    <div class="status-cards">
+      <div class="status-card system-status">
+        <div class="card-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="card-info">
+          <h3>System Status</h3>
+          <div class="status-value armed">Armed</div>
+          <p>All systems active</p>
+        </div>
+      </div>
+
+      <div class="status-card cameras">
+        <div class="card-icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <div class="card-info">
+          <h3>Cameras</h3>
+          <div class="status-value">6/6</div>
+          <p>All online</p>
+        </div>
+      </div>
+
+      <div class="status-card sensors">
+        <div class="card-icon">
+          <i class="fas fa-broadcast-tower"></i>
+        </div>
+        <div class="card-info">
+          <h3>Sensors</h3>
+          <div class="status-value">12/12</div>
+          <p>All active</p>
+        </div>
+      </div>
+
+      <div class="status-card last-alert">
+        <div class="card-icon">
+          <i class="fas fa-bell"></i>
+        </div>
+        <div class="card-info">
+          <h3>Last Alert</h3>
+          <div class="status-value">2h</div>
+          <p>No new alerts</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions and Security Zones -->
+    <div class="middle-section">
+      <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="action-buttons">
+          <button class="action-btn lock">
+            <i class="fas fa-lock"></i>
+            <span>Lock All</span>
+          </button>
+          <button class="action-btn cameras">
+            <i class="fas fa-video"></i>
+            <span>View Cameras</span>
+          </button>
+          <button class="action-btn siren">
+            <i class="fas fa-bell"></i>
+            <span>Test Siren</span>
+          </button>
+          <button class="action-btn schedule">
+            <i class="fas fa-clock"></i>
+            <span>Schedule</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="security-zones">
+        <h3>Security Zones</h3>
+        <div class="zone-list">
+          <div class="zone-item">
+            <div class="zone-info">
+              <h4>Perimeter</h4>
+              <p>Doors & Windows</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="zone-item">
+            <div class="zone-info">
+              <h4>Interior</h4>
+              <p>Motion Sensors</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="zone-item">
+            <div class="zone-info">
+              <h4>Garage</h4>
+              <p>Garage Door</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camera Feeds and Emergency Contacts -->
+    <div class="bottom-section">
+      <div class="camera-feeds">
+        <div class="section-header">
+          <h3>Camera Feeds</h3>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="feed-grid">
+          <div class="feed-item">
+            <div class="feed-placeholder">
+              <i class="fas fa-video"></i>
+              <span class="live-tag">LIVE</span>
+            </div>
+            <p>Front Door</p>
+          </div>
+          <div class="feed-item">
+            <div class="feed-placeholder">
+              <i class="fas fa-video"></i>
+              <span class="live-tag">LIVE</span>
+            </div>
+            <p>Backyard</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="emergency-contacts">
+        <h3>Emergency Contacts</h3>
+        <div class="contact-list">
+          <div class="contact-item police">
+            <div class="contact-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="contact-info">
+              <h4>Police</h4>
+              <p>911</p>
+            </div>
+          </div>
+          <div class="contact-item fire">
+            <div class="contact-icon">
+              <i class="fas fa-fire-extinguisher"></i>
+            </div>
+            <div class="contact-info">
+              <h4>Fire Department</h4>
+              <p>911</p>
+            </div>
+          </div>
+          <div class="contact-item medical">
+            <div class="contact-icon">
+              <i class="fas fa-ambulance"></i>
+            </div>
+            <div class="contact-info">
+              <h4>Medical</h4>
+              <p>911</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

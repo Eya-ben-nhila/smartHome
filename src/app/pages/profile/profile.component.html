@@ -1,0 +1,174 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>User Profile</h1>
+    <p class="subtitle">Manage your account settings and preferences</p>
+  </div>
+
+  <div class="profile-content">
+    <!-- User Information Card - Full Width -->
+    <div class="profile-card user-info-card">
+      <div class="card-header">
+        <h3>User Information</h3>
+        <button class="edit-btn">Edit Profile</button>
+      </div>
+      <div class="card-content">
+        <div class="user-info">
+          <div class="user-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="user-details">
+            <h4>Alex Johnson</h4>
+            <p>alex.johnson&#64;smarthome.com</p>
+            <p class="member-date">Member since October 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two Column Grid Layout -->
+    <div class="row profile-grid">
+      <!-- Personal Information Card -->
+      <div class="col-md-6">
+        <div class="profile-card">
+          <div class="card-header">
+            <h3>Personal Information</h3>
+          </div>
+          <div class="card-content">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" value="Alex" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" value="Johnson" />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" value="alex.johnson&#64;smarthome.com" />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" value="+1 (555) 123-4567" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security Settings Card -->
+      <div class="col-md-6">
+        <div class="profile-card">
+          <div class="card-header">
+            <h3>Security Settings</h3>
+          </div>
+          <div class="card-content">
+            <div class="security-item">
+              <div class="security-info">
+                <h4>Two-Factor Authentication</h4>
+                <span class="status enabled">Enabled</span>
+              </div>
+            </div>
+            <div class="security-item">
+              <div class="security-info">
+                <h4>Password</h4>
+                <span class="password-info">Last changed 30 days ago</span>
+              </div>
+              <button class="change-btn">Change</button>
+            </div>
+            <div class="security-item">
+              <div class="security-info">
+                <h4>Login Alerts</h4>
+                <span>Get notified when someone logs in</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications Card -->
+      <div class="col-md-6">
+        <div class="profile-card">
+          <div class="card-header">
+            <h3>Notifications</h3>
+          </div>
+          <div class="card-content">
+            <div class="notification-item">
+              <div class="notification-info">
+                <h4>Email Notifications</h4>
+                <span>Receive updates via email</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="notification-item">
+              <div class="notification-info">
+                <h4>Push Notifications</h4>
+                <span>Get instant alerts on your device</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="notification-item">
+              <div class="notification-info">
+                <h4>SMS Alerts</h4>
+                <span>Receive text messages for urgent alerts</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preferences Card -->
+      <div class="col-md-6">
+        <div class="profile-card">
+          <div class="card-header">
+            <h3>Preferences</h3>
+          </div>
+          <div class="card-content">
+            <div class="form-group">
+              <label>Language</label>
+              <select>
+                <option>English</option>
+                <option>Spanish</option>
+                <option>French</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Timezone</label>
+              <select>
+                <option>Pacific Time (PT)</option>
+                <option>Eastern Time (ET)</option>
+                <option>Central Time (CT)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Theme</label>
+              <select>
+                <option>Light</option>
+                <option>Dark</option>
+                <option>Auto</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="save-btn">Save Changes</button>
+      <button class="cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>

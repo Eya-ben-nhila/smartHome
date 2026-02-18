@@ -1,0 +1,223 @@
+<div class="alerts-container">
+  <div class="alerts-header">
+    <h1>Alerts</h1>
+    <p class="subtitle">Monitor and manage your home security alerts</p>
+  </div>
+
+  <div class="alerts-content">
+    <!-- Summary Cards and Chart Row -->
+    <div class="top-section">
+      <!-- Summary Cards -->
+      <div class="summary-cards">
+        <div class="summary-card total">
+          <div class="card-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="card-info">
+            <h3>Total Alerts</h3>
+            <div class="card-value">24</div>
+            <p>Last 24 hours</p>
+          </div>
+        </div>
+
+        <div class="summary-card critical">
+          <div class="card-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="card-info">
+            <h3>Critical</h3>
+            <div class="card-value">3</div>
+            <p>Requires attention</p>
+          </div>
+        </div>
+
+        <div class="summary-card warning">
+          <div class="card-icon">
+            <i class="fas fa-exclamation-circle"></i>
+          </div>
+          <div class="card-info">
+            <h3>Warnings</h3>
+            <div class="card-value">8</div>
+            <p>Monitor closely</p>
+          </div>
+        </div>
+
+        <div class="summary-card info">
+          <div class="card-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div class="card-info">
+            <h3>Info</h3>
+            <div class="card-value">13</div>
+            <p>General updates</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alert Distribution Chart -->
+      <div class="chart-section">
+        <h3>Alert Distribution</h3>
+        <div class="chart-container">
+          <div class="donut-chart">
+            <div class="chart-center">
+              <div class="total-count">24</div>
+              <div class="total-label">Total</div>
+            </div>
+            <div class="chart-segments">
+              <div class="segment critical" style="--percentage: 12.5"></div>
+              <div class="segment warning" style="--percentage: 33.3"></div>
+              <div class="segment info" style="--percentage: 54.2"></div>
+            </div>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color critical"></div>
+              <span>Critical (12.5%)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color warning"></div>
+              <span>Warnings (33.3%)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color info"></div>
+              <span>Info (54.2%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Cards Row -->
+    <div class="alert-cards-row">
+      <div class="alert-card motion">
+        <div class="alert-header">
+          <div class="alert-icon">
+            <i class="fas fa-running"></i>
+          </div>
+          <div class="alert-title">
+            <h4>Motion Detection</h4>
+            <span class="new-badge">3 New</span>
+          </div>
+        </div>
+        <div class="alert-details">
+          <div class="detail-item">
+            <i class="fas fa-clock"></i>
+            <span>2 minutes ago</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Living Room</span>
+          </div>
+        </div>
+        <div class="alert-description">Activity detected in living room and hallway</div>
+      </div>
+
+      <div class="alert-card security">
+        <div class="alert-header">
+          <div class="alert-icon">
+            <i class="fas fa-door-open"></i>
+          </div>
+          <div class="alert-title">
+            <h4>Door Window</h4>
+            <span class="warning-badge">Warning</span>
+          </div>
+        </div>
+        <div class="alert-details">
+          <div class="detail-item">
+            <i class="fas fa-clock"></i>
+            <span>15 minutes ago</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Main Entrance</span>
+          </div>
+        </div>
+        <div class="alert-description">Front door unlocked and opened</div>
+      </div>
+
+      <div class="alert-card system">
+        <div class="alert-header">
+          <div class="alert-icon">
+            <i class="fas fa-thermometer-half"></i>
+          </div>
+          <div class="alert-title">
+            <h4>System Alerts</h4>
+            <span class="info-badge">Info</span>
+          </div>
+        </div>
+        <div class="alert-details">
+          <div class="detail-item">
+            <i class="fas fa-clock"></i>
+            <span>1 hour ago</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Living Room</span>
+          </div>
+        </div>
+        <div class="alert-description">Living room temperature above threshold</div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="recent-activity">
+      <h3>Recent Activity</h3>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon motion">
+            <i class="fas fa-running"></i>
+          </div>
+          <div class="activity-content">
+            <h4>Motion Detected</h4>
+            <p>Living room and hallway - 2 minutes ago</p>
+          </div>
+          <div class="activity-status critical"></div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon security">
+            <i class="fas fa-door-open"></i>
+          </div>
+          <div class="activity-content">
+            <h4>Door Access</h4>
+            <p>Main entrance - 15 minutes ago</p>
+          </div>
+          <div class="activity-status warning"></div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon system">
+            <i class="fas fa-thermometer-half"></i>
+          </div>
+          <div class="activity-content">
+            <h4>Temperature Alert</h4>
+            <p>Living room - 1 hour ago</p>
+          </div>
+          <div class="activity-status info"></div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon energy">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <div class="activity-content">
+            <h4>High Energy Usage</h4>
+            <p>Whole house - 2 hours ago</p>
+          </div>
+          <div class="activity-status warning"></div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon security">
+            <i class="fas fa-video"></i>
+          </div>
+          <div class="activity-content">
+            <h4>Camera Motion</h4>
+            <p>Backyard - 3 hours ago</p>
+          </div>
+          <div class="activity-status info"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

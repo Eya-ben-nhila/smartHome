@@ -1,0 +1,214 @@
+<div class="energy-container">
+  <div class="energy-header">
+    <h1>Energy</h1>
+    <p class="subtitle">Monitor your energy consumption and savings</p>
+    <div class="time-filter">
+      <select>
+        <option>Last 7 days</option>
+        <option>Last 24 hours</option>
+        <option>Last 30 days</option>
+        <option>Last year</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="energy-content">
+    <!-- Key Metrics -->
+    <div class="metrics-cards">
+      <div class="metric-card usage">
+        <div class="metric-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="metric-info">
+          <h3>Today's Usage</h3>
+          <div class="metric-value">24.5 <span>kWh</span></div>
+          <div class="metric-change positive">+12% from yesterday</div>
+        </div>
+      </div>
+
+      <div class="metric-card cost">
+        <div class="metric-icon">
+          <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="metric-info">
+          <h3>Monthly Cost</h3>
+          <div class="metric-value">$142.30</div>
+          <div class="metric-change positive">+8% from last month</div>
+        </div>
+      </div>
+
+      <div class="metric-card solar">
+        <div class="metric-icon">
+          <i class="fas fa-solar-panel"></i>
+        </div>
+        <div class="metric-info">
+          <h3>Solar Generated</h3>
+          <div class="metric-value">18.2 <span>kWh</span></div>
+          <div class="metric-change">75% of usage</div>
+        </div>
+      </div>
+
+      <div class="metric-card carbon">
+        <div class="metric-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <div class="metric-info">
+          <h3>Carbon Saved</h3>
+          <div class="metric-value">156 <span>kg</span></div>
+          <div class="metric-change">This month</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Energy Consumption and Usage Breakdown -->
+    <div class="middle-section">
+      <div class="consumption-chart">
+        <h3>Energy Consumption</h3>
+        <div class="time-segments">
+          <button class="segment-btn active">Day</button>
+          <button class="segment-btn">Week</button>
+          <button class="segment-btn">Month</button>
+        </div>
+        <div class="chart-container">
+          <svg class="energy-chart" viewBox="0 0 800 300">
+            <!-- Grid Lines -->
+            <g class="grid-lines">
+              <line x1="80" y1="20" x2="80" y2="250" stroke="#e0e0e0" stroke-width="2"/>
+              <line x1="80" y1="250" x2="750" y2="250" stroke="#e0e0e0" stroke-width="2"/>
+              
+              <!-- Horizontal grid lines -->
+              <line x1="80" y1="70" x2="750" y2="70" stroke="#f5f5f5" stroke-width="1"/>
+              <line x1="80" y1="120" x2="750" y2="120" stroke="#f5f5f5" stroke-width="1"/>
+              <line x1="80" y1="170" x2="750" y2="170" stroke="#f5f5f5" stroke-width="1"/>
+              <line x1="80" y1="220" x2="750" y2="220" stroke="#f5f5f5" stroke-width="1"/>
+            </g>
+            
+            <!-- Y-axis labels -->
+            <g class="y-labels">
+              <text x="70" y="25" text-anchor="end" fill="#757575" font-size="12">100</text>
+              <text x="70" y="75" text-anchor="end" fill="#757575" font-size="12">75</text>
+              <text x="70" y="125" text-anchor="end" fill="#757575" font-size="12">50</text>
+              <text x="70" y="175" text-anchor="end" fill="#757575" font-size="12">25</text>
+              <text x="70" y="225" text-anchor="end" fill="#757575" font-size="12">0</text>
+            </g>
+            
+            <!-- Chart Data -->
+            <g class="chart-data">
+              <!-- Area under the line -->
+              <path d="M 130,180 L 230,120 L 330,160 L 430,80 L 530,140 L 630,100 L 730,150 L 730,250 L 130,250 Z" 
+                    fill="url(#gradient)" opacity="0.3"/>
+              
+              <!-- Line chart -->
+              <path d="M 130,180 L 230,120 L 330,160 L 430,80 L 530,140 L 630,100 L 730,150" 
+                    stroke="#2196F3" stroke-width="3" fill="none"/>
+              
+              <!-- Data points -->
+              <circle cx="130" cy="180" r="5" fill="#2196F3"/>
+              <circle cx="230" cy="120" r="5" fill="#2196F3"/>
+              <circle cx="330" cy="160" r="5" fill="#2196F3"/>
+              <circle cx="430" cy="80" r="5" fill="#2196F3"/>
+              <circle cx="530" cy="140" r="5" fill="#2196F3"/>
+              <circle cx="630" cy="100" r="5" fill="#2196F3"/>
+              <circle cx="730" cy="150" r="5" fill="#2196F3"/>
+            </g>
+            
+            <!-- X-axis labels -->
+            <g class="x-labels">
+              <text x="130" y="270" text-anchor="middle" fill="#757575" font-size="12">Mon</text>
+              <text x="230" y="270" text-anchor="middle" fill="#757575" font-size="12">Tue</text>
+              <text x="330" y="270" text-anchor="middle" fill="#757575" font-size="12">Wed</text>
+              <text x="430" y="270" text-anchor="middle" fill="#757575" font-size="12">Thu</text>
+              <text x="530" y="270" text-anchor="middle" fill="#757575" font-size="12">Fri</text>
+              <text x="630" y="270" text-anchor="middle" fill="#757575" font-size="12">Sat</text>
+              <text x="730" y="270" text-anchor="middle" fill="#757575" font-size="12">Sun</text>
+            </g>
+            
+            <!-- Gradient definition -->
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#2196F3;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#2196F3;stop-opacity:0.1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <div class="usage-breakdown">
+        <h3>Usage Breakdown</h3>
+        <div class="breakdown-list">
+          <div class="breakdown-item">
+            <div class="breakdown-info">
+              <h4>Heating & Cooling</h4>
+              <span class="percentage">45%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill heating" style="--progress: 45%"></div>
+            </div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-info">
+              <h4>Lighting</h4>
+              <span class="percentage">20%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill lighting" style="--progress: 20%"></div>
+            </div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-info">
+              <h4>Appliances</h4>
+              <span class="percentage">25%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill appliances" style="--progress: 25%"></div>
+            </div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-info">
+              <h4>Electronics</h4>
+              <span class="percentage">10%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill electronics" style="--progress: 10%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Energy Saving Tips -->
+    <div class="energy-tips">
+      <h3>Energy Saving Tips</h3>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <div class="tip-content">
+            <h4>Smart Lighting</h4>
+            <p>Use LED bulbs and motion sensors to reduce lighting costs by up to 75%.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-thermometer-half"></i>
+          </div>
+          <div class="tip-content">
+            <h4>Optimize Temperature</h4>
+            <p>Adjust thermostat by 2°F to save up to 10% on heating/cooling.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="tip-content">
+            <h4>Peak Hours</h4>
+            <p>Run appliances during off-peak hours to reduce electricity costs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

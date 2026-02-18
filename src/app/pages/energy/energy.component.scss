@@ -1,0 +1,413 @@
+.energy-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e8 50%, #fff3e0 100%);
+  min-height: 100vh;
+
+  .energy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #212121;
+      margin: 0 0 8px 0;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #757575;
+      margin: 0;
+    }
+
+    .time-filter {
+      select {
+        padding: 8px 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #424242;
+        background: white;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+          border-color: #2196F3;
+        }
+      }
+    }
+  }
+
+  .energy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  // Metrics Cards
+  .metrics-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+
+    .metric-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      }
+
+      .metric-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 20px;
+          color: white;
+        }
+      }
+
+      .metric-info {
+        flex: 1;
+
+        h3 {
+          font-size: 14px;
+          font-weight: 500;
+          color: #757575;
+          margin: 0 0 4px 0;
+        }
+
+        .metric-value {
+          font-size: 24px;
+          font-weight: 700;
+          color: #212121;
+          margin: 0 0 4px 0;
+
+          span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #757575;
+          }
+        }
+
+        .metric-change {
+          font-size: 12px;
+          color: #757575;
+
+          &.positive {
+            color: #f44336;
+          }
+        }
+      }
+
+      &.usage {
+        .metric-icon {
+          background: #2196F3;
+        }
+      }
+
+      &.cost {
+        .metric-icon {
+          background: #4CAF50;
+        }
+      }
+
+      &.solar {
+        .metric-icon {
+          background: #FF9800;
+        }
+      }
+
+      &.carbon {
+        .metric-icon {
+          background: #8BC34A;
+        }
+      }
+    }
+  }
+
+  // Middle Section
+  .middle-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Consumption Chart
+  .consumption-chart {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #212121;
+      margin: 0 0 20px 0;
+    }
+
+    .time-segments {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+
+      .segment-btn {
+        padding: 8px 16px;
+        border: 1px solid #e0e0e0;
+        background: white;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #757575;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          border-color: #2196F3;
+          color: #2196F3;
+        }
+
+        &.active {
+          background: #2196F3;
+          color: white;
+          border-color: #2196F3;
+        }
+      }
+    }
+
+    .chart-placeholder {
+      .chart-bars {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        height: 200px;
+        margin-bottom: 12px;
+        gap: 8px;
+
+        .bar {
+          flex: 1;
+          background: linear-gradient(to top, #2196F3, #64B5F6);
+          border-radius: 4px 4px 0 0;
+          min-height: 20px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+
+      .chart-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #757575;
+      }
+    }
+  }
+
+  .chart-container {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .energy-chart {
+      width: 100%;
+      height: 100%;
+      
+      .grid-lines line {
+        stroke-dasharray: 2, 2;
+      }
+      
+      .chart-data circle {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        
+        &:hover {
+          r: 8;
+          fill: #1976D2;
+        }
+      }
+    }
+  }
+
+  // Usage Breakdown
+  .usage-breakdown {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #212121;
+      margin: 0 0 20px 0;
+    }
+
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .breakdown-item {
+        .breakdown-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 8px;
+
+          h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #212121;
+            margin: 0;
+          }
+
+          .percentage {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2196F3;
+          }
+        }
+
+        .progress-bar {
+          width: 100%;
+          height: 8px;
+          background: #f0f0f0;
+          border-radius: 4px;
+          overflow: hidden;
+
+          .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2196F3, #64B5F6);
+            border-radius: 4px;
+            width: var(--progress);
+            transition: width 0.3s ease;
+
+            &.heating {
+              background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+            }
+
+            &.lighting {
+              background: linear-gradient(90deg, #FFD93D, #FFE066);
+            }
+
+            &.appliances {
+              background: linear-gradient(90deg, #6BCF7F, #8FE1A0);
+            }
+
+            &.electronics {
+              background: linear-gradient(90deg, #A78BFA, #C4B5FD);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Energy Tips
+  .energy-tips {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #212121;
+      margin: 0 0 20px 0;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+
+      .tip-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px;
+        border: 1px solid #f0f0f0;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          border-color: #2196F3;
+          box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+        }
+
+        .tip-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+
+          i {
+            font-size: 18px;
+            color: white;
+          }
+
+          &:first-child {
+            background: #FF9800;
+          }
+
+          &:nth-child(2) {
+            background: #2196F3;
+          }
+
+          &:nth-child(3) {
+            background: #4CAF50;
+          }
+        }
+
+        .tip-content {
+          flex: 1;
+
+          h4 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #212121;
+            margin: 0 0 8px 0;
+          }
+
+          p {
+            font-size: 14px;
+            color: #757575;
+            margin: 0;
+            line-height: 1.4;
+          }
+        }
+      }
+    }
+  }
+}
