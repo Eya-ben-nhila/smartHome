@@ -288,15 +288,29 @@
 
           // Temperature card (orange background) - Solid color background
           &.temperature-card {
-            .device-icon {
-              background: #802A00;
-              width: 32px;
-              height: 32px;
-              border-radius: 16px;
-            }
             .card-content {
               background: #FFE8D6;
               position: relative;
+              display: flex;
+              flex-direction: row;
+              align-items: flex-start; // Changed from center to flex-start
+              
+              .device-icon {
+                background: #802A00;
+                width: 32px;
+                height: 32px;
+                border-radius: 16px;
+                margin-right: 12px;
+                margin-top: 8px; // Add top margin to position icon higher
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                i {
+                  font-size: 16px;
+                  color: white;
+                }
+              }
               
               .device-info {
                 h4, p {
@@ -352,15 +366,29 @@
 
           // Indoor temperatures card (light grey background) - Solid color background
           &.temperature-card.indoor-temp {
-            .device-icon {
-              background: #802A00;
-              width: 32px;
-              height: 32px;
-              border-radius: 16px;
-            }
             .card-content {
               background: #F5F5F5;
               position: relative;
+              display: flex;
+              flex-direction: row;
+              align-items: flex-start; // Changed from center to flex-start
+              
+              .device-icon {
+                background: #802A00;
+                width: 32px;
+                height: 32px;
+                border-radius: 16px;
+                margin-right: 12px;
+                margin-top: 8px; // Add top margin to position icon higher
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                i {
+                  font-size: 16px;
+                  color: white;
+                }
+              }
               
               .device-info {
                 h4, p {

@@ -18,7 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 72px 30px 15px 30px;
   background: white;
   border-bottom: 1px solid #e0e0e0;
 
@@ -64,7 +64,7 @@
   .status-icons {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
 
     .network-status {
       font-size: 12px;
@@ -78,18 +78,20 @@
     }
 
     .user-avatar {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: #e3f2fd;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      overflow: visible;
+      flex-shrink: 0;
 
       i {
         color: #2196F3;
-        font-size: 14px;
+        font-size: 18px;
       }
     }
   }
