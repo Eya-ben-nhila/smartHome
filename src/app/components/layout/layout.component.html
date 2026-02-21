@@ -1,7 +1,7 @@
 <div class="main-container">
-  <app-sidebar></app-sidebar>
+  <app-sidebar *ngIf="showSidebar"></app-sidebar>
   <div class="content-area">
-    <div class="top-bar">
+    <div class="top-bar" *ngIf="showTopBar">
       <div class="time">9:30</div>
       <div class="search-bar">
         <i class="fas fa-lock"></i>

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityComponent } from './pages/activity/activity.component';
 import { AutomationsComponent } from './pages/automations/automations.component';
@@ -16,6 +17,7 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: 'welcome', component: WelcomeComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'activity', component: ActivityComponent },
       { path: 'automations', component: AutomationsComponent },

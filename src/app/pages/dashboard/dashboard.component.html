@@ -1,31 +1,42 @@
 <div class="dashboard-container">
   <!-- Main Content - No duplicate nav or search since layout already has them -->
-  <div class="main-content">
-    <!-- Category Filters -->
-    <div class="category-filters">
-      <div class="filter-chip active">
-        <i class="fas fa-heart"></i>
-        <span>Favorites</span>
-      </div>
-      <div class="filter-chip">
-        <i class="fas fa-th"></i>
-        <span>All</span>
-      </div>
-      <div class="filter-chip">
-        <i class="fas fa-video"></i>
-        <span>Cameras</span>
-      </div>
-      <div class="filter-chip">
-        <i class="fas fa-lightbulb"></i>
-        <span>Lights</span>
-      </div>
-      <div class="filter-chip">
-        <i class="fas fa-wifi"></i>
-        <span>Wifi</span>
-      </div>
-      <div class="filter-chip">
-        <i class="fas fa-thermometer-half"></i>
-        <span>Climate</span>
+  <div class="dashboard-content">
+    <!-- Header Strip -->
+    <div class="header-strip">
+      <div class="strip-content">
+        <div class="left-section">
+          <h2 class="dashboard-title">Smart Home Dashboard</h2>
+          <div class="search-bar">
+            <i class="fas fa-lock"></i>
+            <input type="text" placeholder="Ask Spring Street" (click)="goToSearch()">
+          </div>
+        </div>
+        <div class="category-filters">
+          <div class="filter-chip active">
+            <i class="fas fa-heart"></i>
+            <span>Favorites</span>
+          </div>
+          <div class="filter-chip">
+            <i class="fas fa-th"></i>
+            <span>All</span>
+          </div>
+          <div class="filter-chip">
+            <i class="fas fa-video"></i>
+            <span>Cameras</span>
+          </div>
+          <div class="filter-chip">
+            <i class="fas fa-lightbulb"></i>
+            <span>Lights</span>
+          </div>
+          <div class="filter-chip">
+            <i class="fas fa-wifi"></i>
+            <span>Wifi</span>
+          </div>
+          <div class="filter-chip">
+            <i class="fas fa-thermometer-half"></i>
+            <span>Climate</span>
+          </div>
+        </div>
       </div>
     </div>
 

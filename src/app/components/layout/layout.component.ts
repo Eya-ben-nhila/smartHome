@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 
@@ -8,12 +8,25 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [SidebarComponent, CommonModule, RouterOutlet],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
+  showSidebar = true;
+  showTopBar = true;
+
   constructor(private router: Router) {}
 
-  goToSearch() {
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const currentUrl = (event as NavigationEnd).urlAfterRedirects;
+        this.showSidebar = !currentUrl.includes('/welcome');
+        this.showTopBar = !currentUrl.includes('/welcome');
+      }
+    });
+  }
+
+  goToSearch(): void {
     this.router.navigate(['/search']);
   }
 }
