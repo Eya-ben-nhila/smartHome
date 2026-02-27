@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background circle -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#F0F0F0" />
+            <size android:width="120dp" android:height="120dp" />
+        </shape>
+    </item>
+    
+    <!-- Pie segments using simple rectangles -->
+    <item android:top="10dp" android:left="10dp" android:bottom="10dp" android:right="10dp">
+        <shape android:shape="oval">
+            <solid android:color="#802A00" />
+        </shape>
+    </item>
+    
+    <item android:top="30dp" android:left="30dp" android:bottom="30dp" android:right="30dp">
+        <shape android:shape="oval">
+            <solid android:color="#564500" />
+        </shape>
+    </item>
+    
+    <item android:top="50dp" android:left="50dp" android:bottom="50dp" android:right="50dp">
+        <shape android:shape="oval">
+            <solid android:color="#0040A3" />
+        </shape>
+    </item>
+</layer-list>

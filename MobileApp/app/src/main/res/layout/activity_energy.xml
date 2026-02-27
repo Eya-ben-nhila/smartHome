@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/background">
+
+  <!-- Top Bar -->
+  <androidx.cardview.widget.CardView
+    android:id="@+id/topBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:padding="20dp">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Energy"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
+
+  <!-- Energy Graph Section -->
+  <LinearLayout
+    android:id="@+id/graphSection"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/topBar"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <!-- Section Title -->
+    <TextView
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Energy Consumption"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Graph Card -->
+    <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:background="@drawable/box_with_border"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="2dp">
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Graph Header -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+          <!-- Time Period Selector -->
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/box_with_border"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="This Week"
+              android:textColor="@color/accent"
+              android:textSize="12sp"
+              android:textStyle="bold" />
+
+            <ImageView
+              android:layout_width="16dp"
+              android:layout_height="16dp"
+              android:src="@android:drawable/ic_menu_more"
+              app:tint="@color/accent" />
+
+          </LinearLayout>
+
+          <!-- Stats -->
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="16dp"
+              android:text="Average: 10.2 kW"
+              android:textColor="@color/text_secondary"
+              android:textSize="12sp" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Peak: 12.5 kW"
+              android:textColor="@color/text_secondary"
+              android:textSize="12sp" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Graph Visualization -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_marginBottom="8dp"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <!-- Graph Background Grid -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Horizontal Grid Lines -->
+            <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="#E0E0E0" />
+
+            <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="20dp"
+              android:background="#E0E0E0" />
+
+            <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="20dp"
+              android:background="#E0E0E0" />
+
+            <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_marginTop="20dp"
+              android:background="#E0E0E0" />
+
+            <!-- Curved Line Graph -->
+            <View
+              android:layout_width="match_parent"
+              android:layout_height="2dp"
+              android:layout_marginTop="-60dp"
+              android:layout_marginBottom="20dp"
+              android:background="@drawable/energy_graph_line" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- X-axis Labels -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Mon"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Tue"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Wed"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Thu"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Fri"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sat"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sun"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp" />
+
+        </LinearLayout>
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+  </LinearLayout>
+
+  <!-- Energy Usage Breakdown Section -->
+  <LinearLayout
+    android:id="@+id/breakdownSection"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/graphSection"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <!-- Section Title -->
+    <TextView
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Energy Usage Breakdown"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Progress Bars -->
+    <LinearLayout
+      android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <!-- Solar Energy -->
+      <LinearLayout
+        android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:padding="16dp"
+          android:background="@drawable/box_with_border"
+          android:layout_marginBottom="12dp">
+
+        <!-- Icon -->
+        <View
+          android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#F5A623"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Content -->
+        <LinearLayout
+          android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Solar Energy"
+              android:textColor="@color/text"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:text="Generated from solar panels"
+              android:textColor="@color/text_secondary"
+              android:textSize="14sp" />
+
+          <!-- Progress Bar -->
+          <LinearLayout
+            android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="8dp">
+
+            <!-- Progress Background -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="1"
+                android:background="#E0E0E0"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Progress Fill -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="0.35"
+                android:background="#F5A623"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Percentage -->
+            <TextView
+              android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35%"
+                android:textColor="#F5A623"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <!-- Grid Energy -->
+      <LinearLayout
+        android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:padding="16dp"
+          android:background="@drawable/box_with_border"
+          android:layout_marginBottom="12dp">
+
+        <!-- Icon -->
+        <View
+          android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#4A90E2"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Content -->
+        <LinearLayout
+          android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Grid Energy"
+              android:textColor="@color/text"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:text="From power grid"
+              android:textColor="@color/text_secondary"
+              android:textSize="14sp" />
+
+          <!-- Progress Bar -->
+          <LinearLayout
+            android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="8dp">
+
+            <!-- Progress Background -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="1"
+                android:background="#E0E0E0"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Progress Fill -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="0.45"
+                android:background="#4A90E2"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Percentage -->
+            <TextView
+              android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45%"
+                android:textColor="#4A90E2"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <!-- Battery Storage -->
+      <LinearLayout
+        android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:padding="16dp"
+          android:background="@drawable/box_with_border"
+          android:layout_marginBottom="12dp">
+
+        <!-- Icon -->
+        <View
+          android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#7ED321"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Content -->
+        <LinearLayout
+          android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Battery Storage"
+              android:textColor="@color/text"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:text="Stored energy"
+              android:textColor="@color/text_secondary"
+              android:textSize="14sp" />
+
+          <!-- Progress Bar -->
+          <LinearLayout
+            android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="8dp">
+
+            <!-- Progress Background -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="1"
+                android:background="#E0E0E0"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Progress Fill -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="0.20"
+                android:background="#7ED321"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Percentage -->
+            <TextView
+              android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20%"
+                android:textColor="#7ED321"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!-- Energy Progress Section -->
+  <LinearLayout
+    android:id="@+id/progressSection"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="80dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/breakdownSection"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <!-- Section Title -->
+    <TextView
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Energy Progress"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Progress Items -->
+    <LinearLayout
+      android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <!-- Daily Goal Progress -->
+      <LinearLayout
+        android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:padding="16dp"
+          android:background="@drawable/box_with_border"
+          android:layout_marginBottom="12dp">
+
+        <!-- Icon -->
+        <View
+          android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#4A90E2"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Content -->
+        <LinearLayout
+          android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Daily Goal"
+              android:textColor="@color/text"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <TextView
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:text="75% achieved"
+              android:textColor="@color/text_secondary"
+              android:textSize="14sp" />
+
+          <!-- Progress Bar -->
+          <LinearLayout
+            android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="8dp">
+
+            <!-- Progress Background -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="1"
+                android:background="#E0E0E0"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Progress Fill -->
+            <View
+              android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="0.75"
+                android:background="#4A90E2"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Percentage -->
+            <TextView
+              android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="75%"
+                android:textColor="#4A90E2"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!-- Bottom Navigation -->
+  <androidx.cardview.widget.CardView
+    android:id="@+id/bottomNav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+      <!-- Home -->
+      <LinearLayout
+        android:id="@+id/homeNavButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_home_exact"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Home"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+      </LinearLayout>
+
+      <!-- Activity -->
+      <LinearLayout
+        android:id="@+id/activityNavButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_activity_exact"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Activity"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+      </LinearLayout>
+
+      <!-- Automations -->
+      <LinearLayout
+        android:id="@+id/automationsNavButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_automations_exact"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Auto"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+      </LinearLayout>
+
+      <!-- Alerts -->
+      <LinearLayout
+        android:id="@+id/alertsNavButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_alerts_exact"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Alerts"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+      </LinearLayout>
+
+      <!-- Security -->
+      <LinearLayout
+        android:id="@+id/securityNavButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_security_exact"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Security"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+      </LinearLayout>
+
+      <!-- Energy (Active) -->
+      <LinearLayout
+        android:id="@+id/energyNavButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+          android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_energy_exact"
+            app:tint="@color/accent" />
+
+        <TextView
+          android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Energy"
+            android:textColor="@color/accent"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

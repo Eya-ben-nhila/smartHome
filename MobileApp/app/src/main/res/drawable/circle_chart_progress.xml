@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background circle -->
+    <item android:id="@android:id/background">
+        <shape android:shape="oval">
+            <solid android:color="#E0E0E0" />
+            <size android:width="120dp" android:height="120dp" />
+        </shape>
+    </item>
+    
+    <!-- Progress segments -->
+    <item android:id="@android:id/progress">
+        <layer-list>
+            <!-- Critical segment (25%) -->
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#802A00" />
+                    <size android:width="120dp" android:height="120dp" />
+                </shape>
+            </item>
+            <!-- Warning segment (42%) -->
+            <item android:top="30dp" android:left="30dp" android:right="30dp" android:bottom="30dp">
+                <shape android:shape="oval">
+                    <solid android:color="#564500" />
+                </shape>
+            </item>
+            <!-- Info segment (33%) -->
+            <item android:top="50dp" android:left="50dp" android:right="50dp" android:bottom="50dp">
+                <shape android:shape="oval">
+                    <solid android:color="#0040A3" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</layer-list>

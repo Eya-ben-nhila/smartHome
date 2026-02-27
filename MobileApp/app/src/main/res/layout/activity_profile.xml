@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F4F9"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Header Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👤 My Profile"
+                android:textColor="@color/text"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Manage your account settings"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Profile Picture Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <!-- Profile Image Placeholder -->
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/img"
+                android:background="@color/gray_200"
+                android:padding="32dp"
+                app:tint="@color/text_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Change Photo"
+                android:textColor="#004A77"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- User Info Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Name Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Eya Ben Nhila"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- Email Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="eya.bnh@smarthome.com"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- Phone Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="+216 50657813"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal">
+
+        <!-- Edit Profile Button -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#004A77"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <Button
+                android:id="@+id/editProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:text="Edit Profile"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Logout Button -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFDBCF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+          <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:text="Logout"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back to Dashboard"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
