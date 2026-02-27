@@ -31,8 +31,8 @@
           <i class="fas fa-sign-in-alt"></i>
           <span>Login</span>
         </button>
-        <button class="nav-btn signup-btn" (click)="goToSignup()">
-          <i class="fas fa-rocket"></i>
+        <button class="nav-btn signup-btn" (click)="toggleSignup()">
+          <i class="fas fa-user-plus"></i>
           <span>Get Started</span>
         </button>
       </div>
@@ -349,15 +349,17 @@
       </div>
     </div>
 
-    <!-- Conditional Login Section -->
-    <div class="login-section" *ngIf="showLogin">
-      <div class="login-container">
-        <div class="login-header">
-          <h2 class="login-title">Welcome Back</h2>
-          <button class="close-login" (click)="toggleLogin()">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
+  <!-- Login Modal Overlay -->
+  <div class="login-modal-overlay" *ngIf="showLogin" (click)="toggleLogin()">
+    <div class="login-modal" (click)="$event.stopPropagation()">
+      <div class="login-modal-header">
+        <h2 class="login-modal-title">Welcome Back</h2>
+        <button class="close-modal" (click)="toggleLogin()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="login-modal-body">
         <form class="login-form" (ngSubmit)="onLogin()">
           <div class="form-group">
             <label for="email">
@@ -368,10 +370,11 @@
               type="email" 
               id="email" 
               name="email" 
-              placeholder="Enter your email"
-              [(ngModel)]="loginForm.email"
+              [(ngModel)]="loginForm.email" 
               required
-            />
+              placeholder="Enter your email"
+              autocomplete="email"
+            >
           </div>
           
           <div class="form-group">
@@ -383,31 +386,164 @@
               type="password" 
               id="password" 
               name="password" 
-              placeholder="Enter your password"
-              [(ngModel)]="loginForm.password"
+              [(ngModel)]="loginForm.password" 
               required
-            />
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            >
           </div>
           
           <div class="form-options">
             <label class="checkbox-label">
               <input 
                 type="checkbox" 
+                name="rememberMe" 
                 [(ngModel)]="loginForm.rememberMe"
-              />
-              <span>Remember me</span>
+              >
+              <span class="checkmark"></span>
+              Remember me
             </label>
-            <a href="#" class="forgot-password">Forgot password?</a>
+            <a href="#" class="forgot-password" (click)="$event.preventDefault()">Forgot password?</a>
           </div>
           
           <button type="submit" class="login-btn">
             <i class="fas fa-sign-in-alt"></i>
-            Access Your Smart Home
+            <span>Sign In</span>
           </button>
         </form>
         
+        <div class="login-divider">
+          <span>OR</span>
+        </div>
+        
+        <div class="social-login">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i>
+            <span>Continue with Google</span>
+          </button>
+        </div>
+        
         <div class="signup-link">
-          <p>New to SmartHome? <a href="#" (click)="goToSignup()">Start Your Journey</a></p>
+          <p>
+            Don't have an account? 
+            <a href="#" (click)="toggleSignup(); toggleLogin(); $event.preventDefault()">Sign up for free</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Modal Overlay -->
+  <div class="signup-modal-overlay" *ngIf="showSignup" (click)="toggleSignup()">
+    <div class="signup-modal" (click)="$event.stopPropagation()">
+      <div class="signup-modal-header">
+        <h2 class="signup-modal-title">Create Account</h2>
+        <button class="close-modal" (click)="toggleSignup()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="signup-modal-body">
+        <form class="signup-form" (ngSubmit)="onSignup()">
+          <div class="form-group">
+            <label for="signup-name">
+              <i class="fas fa-user"></i>
+              Full Name
+            </label>
+            <input 
+              type="text" 
+              id="signup-name" 
+              name="name" 
+              [(ngModel)]="signupForm.name" 
+              required
+              placeholder="Enter your full name"
+              autocomplete="name"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-email">
+              <i class="fas fa-envelope"></i>
+              Email Address
+            </label>
+            <input 
+              type="email" 
+              id="signup-email" 
+              name="email" 
+              [(ngModel)]="signupForm.email" 
+              required
+              placeholder="Enter your email"
+              autocomplete="email"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-password">
+              <i class="fas fa-lock"></i>
+              Password
+            </label>
+            <input 
+              type="password" 
+              id="signup-password" 
+              name="password" 
+              [(ngModel)]="signupForm.password" 
+              required
+              placeholder="Create a password"
+              autocomplete="new-password"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-confirm-password">
+              <i class="fas fa-lock"></i>
+              Confirm Password
+            </label>
+            <input 
+              type="password" 
+              id="signup-confirm-password" 
+              name="confirmPassword" 
+              [(ngModel)]="signupForm.confirmPassword" 
+              required
+              placeholder="Confirm your password"
+              autocomplete="new-password"
+            >
+          </div>
+          
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input 
+                type="checkbox" 
+                name="agreeTerms" 
+                [(ngModel)]="signupForm.agreeTerms"
+                required
+              >
+              <span class="checkmark"></span>
+              I agree to the Terms of Service and Privacy Policy
+            </label>
+          </div>
+          
+          <button type="submit" class="signup-btn">
+            <i class="fas fa-user-plus"></i>
+            <span>Create Account</span>
+          </button>
+        </form>
+        
+        <div class="login-divider">
+          <span>OR</span>
+        </div>
+        
+        <div class="social-login">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i>
+            <span>Continue with Google</span>
+          </button>
+        </div>
+        
+        <div class="login-link">
+          <p>
+            Already have an account? 
+            <a href="#" (click)="toggleLogin(); toggleSignup(); $event.preventDefault()">Sign in</a>
+          </p>
         </div>
       </div>
     </div>

@@ -12,10 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class WelcomeComponent implements OnInit {
   showLogin = false;
+  showSignup = false;
   loginForm = {
     email: '',
     password: '',
     rememberMe: false
+  };
+  signupForm = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agreeTerms: false
   };
 
   constructor(private router: Router) {}
@@ -24,6 +32,10 @@ export class WelcomeComponent implements OnInit {
 
   toggleLogin(): void {
     this.showLogin = !this.showLogin;
+  }
+
+  toggleSignup(): void {
+    this.showSignup = !this.showSignup;
   }
 
   onLogin(): void {
@@ -55,6 +67,47 @@ export class WelcomeComponent implements OnInit {
       // Navigate to dashboard
       this.router.navigate(['/dashboard']);
     }
+  }
+
+  onSignup(): void {
+    // Basic validation
+    if (!this.signupForm.name || !this.signupForm.email || !this.signupForm.password || !this.signupForm.confirmPassword) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.signupForm.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Password validation
+    if (this.signupForm.password.length < 8) {
+      alert('Password must be at least 8 characters long');
+      return;
+    }
+
+    // Password confirmation
+    if (this.signupForm.password !== this.signupForm.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    // Terms agreement
+    if (!this.signupForm.agreeTerms) {
+      alert('Please agree to the Terms of Service and Privacy Policy');
+      return;
+    }
+
+    // Simulate signup process
+    console.log('Signup attempt:', this.signupForm);
+    
+    // For demo purposes, redirect to dashboard after successful signup
+    // In real app, this would make an API call to create account
+    alert('Account created successfully! Redirecting to dashboard...');
+    this.router.navigate(['/dashboard']);
   }
 
   goToSignup(): void {
