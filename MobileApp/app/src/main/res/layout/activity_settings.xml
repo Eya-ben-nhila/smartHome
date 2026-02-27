@@ -20,25 +20,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:padding="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⚙️ Settings"
-                android:textColor="@color/text"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+            <!-- Back Arrow -->
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="@color/text"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="4dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Title Section -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Manage your preferences"
-                android:textColor="@color/text_secondary"
-                android:textSize="16sp" />
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚙️ Settings"
+                    android:textColor="@color/text"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Manage your preferences"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -150,111 +171,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🔒 Privacy &amp; Security"
-                        android:textColor="@color/text"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <!-- Privacy Items -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="16dp">
-
-                        <!-- Two-Factor Authentication -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="12dp"
-                            android:background="@color/gray_50">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Two-Factor Authentication"
-                                android:textColor="@color/text"
-                                android:textSize="16sp" />
-
-                            <Switch
-                                android:id="@+id/twoFactorSwitch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false" />
-
-                        </LinearLayout>
-
-                        <!-- Face ID -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="12dp"
-                            android:padding="12dp"
-                            android:background="@color/gray_50">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Face ID"
-                                android:textColor="@color/text"
-                                android:textSize="16sp" />
-
-                            <Switch
-                                android:id="@+id/faceIdSwitch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false" />
-
-                        </LinearLayout>
-
-                        <!-- Location Services -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="12dp"
-                            android:padding="12dp"
-                            android:background="@color/gray_50">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Location Services"
-                                android:textColor="@color/text"
-                                android:textSize="16sp" />
-
-                            <Switch
-                                android:id="@+id/locationSwitch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="true" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                app:cardElevation="4dp"/>
 
             <!-- Device Management Section -->
             <androidx.cardview.widget.CardView
@@ -439,7 +356,28 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation -->
+    <!-- Logout Button -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/warning"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:text="🚪 Logout"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+  <!-- Bottom Navigation -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -447,12 +385,12 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="← Back to Dashboard"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="← Back to Dashboard"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
     </LinearLayout>
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/box_with_border"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:elevation="8dp">
+
+    <!-- Profile Option -->
+    <LinearLayout
+        android:id="@+id/profileOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_profile"
+            app:tint="@color/text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Profile"
+            android:textColor="@color/text"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!-- Settings Option -->
+    <LinearLayout
+        android:id="@+id/settingsOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_nav_settings"
+            app:tint="@color/text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Settings"
+            android:textColor="@color/text"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

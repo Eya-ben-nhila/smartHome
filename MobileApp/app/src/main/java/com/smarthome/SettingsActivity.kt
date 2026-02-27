@@ -1,9 +1,13 @@
 package com.smarthome
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.Toast
@@ -11,15 +15,46 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SettingsActivity : AppCompatActivity() {
     
+    private lateinit var sharedPreferences: SharedPreferences
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        
+        // Setup button listeners
+        setupButtonListeners()
         
         // Setup switch listeners
         setupSwitchListeners()
         
         // Setup navigation
         setupNavigation()
+    }
+    
+    private fun setupButtonListeners() {
+        // Back button
+        findViewById<ImageView>(R.id.backButton)?.setOnClickListener {
+            finish() // Go back to previous screen
+        }
+        
+        // Logout button
+        findViewById<Button>(R.id.logoutButton)?.setOnClickListener {
+            Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show()
+            
+            // Clear remember me preferences
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+            
+            // Navigate back to main page (not dashboard)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
     
     private fun setupSwitchListeners() {
@@ -31,21 +66,6 @@ class SettingsActivity : AppCompatActivity() {
         // Email Notifications Switch
         findViewById<Switch>(R.id.emailNotificationsSwitch)?.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(this, "Email notifications: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
-        }
-        
-        // Two-Factor Switch
-        findViewById<Switch>(R.id.twoFactorSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Two-factor auth: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
-        }
-        
-        // Face ID Switch
-        findViewById<Switch>(R.id.faceIdSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Face ID: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
-        }
-        
-        // Location Services Switch
-        findViewById<Switch>(R.id.locationSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Location services: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
         }
         
         // Auto-Connect Switch

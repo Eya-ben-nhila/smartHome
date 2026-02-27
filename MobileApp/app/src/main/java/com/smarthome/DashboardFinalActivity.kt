@@ -2,7 +2,9 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class DashboardFinalActivity : AppCompatActivity() {
@@ -16,6 +18,11 @@ class DashboardFinalActivity : AppCompatActivity() {
     }
     
     private fun setupButtonListeners() {
+        // Menu icon (hamburger menu)
+        findViewById<ImageView>(R.id.menuIcon)?.setOnClickListener {
+            showProfileSettingsMenu()
+        }
+        
         // Header settings button
         findViewById<android.widget.ImageView>(R.id.headerSettingsButton)?.setOnClickListener {
             Toast.makeText(this, "Opening Settings", Toast.LENGTH_SHORT).show()
@@ -71,5 +78,29 @@ class DashboardFinalActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+    
+    private fun showProfileSettingsMenu() {
+        val options = arrayOf("Profile", "Settings")
+        
+        AlertDialog.Builder(this)
+            .setTitle("Menu")
+            .setItems(options) { dialog, which ->
+                when (which) {
+                    0 -> {
+                        Toast.makeText(this, "Opening Profile", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, ProfileActivity::class.java))
+                    }
+                    1 -> {
+                        Toast.makeText(this, "Opening Settings", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, SettingsActivity::class.java))
+                    }
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

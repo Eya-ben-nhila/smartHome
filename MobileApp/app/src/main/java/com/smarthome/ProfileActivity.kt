@@ -1,17 +1,25 @@
 package com.smarthome
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class ProfileActivity : AppCompatActivity() {
     
+    private lateinit var sharedPreferences: SharedPreferences
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
         
         // Setup button click listeners
         setupButtonListeners()
@@ -21,6 +29,11 @@ class ProfileActivity : AppCompatActivity() {
     }
     
     private fun setupButtonListeners() {
+        // Back button
+        findViewById<ImageView>(R.id.backButton)?.setOnClickListener {
+            finish() // Go back to previous screen
+        }
+        
         // Edit Profile button
         findViewById<Button>(R.id.editProfileButton)?.setOnClickListener {
             Toast.makeText(this, "Edit profile clicked", Toast.LENGTH_SHORT).show()
@@ -31,8 +44,14 @@ class ProfileActivity : AppCompatActivity() {
         findViewById<Button>(R.id.logoutButton)?.setOnClickListener {
             Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show()
             
-            // Navigate back to login
-            val intent = Intent(this, LoginActivity::class.java)
+            // Clear remember me preferences
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+            
+            // Navigate back to main page (not dashboard)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
         }
