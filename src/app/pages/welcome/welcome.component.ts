@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
+  showLogin = false;
   loginForm = {
     email: '',
     password: '',
@@ -19,6 +21,10 @@ export class WelcomeComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  toggleLogin(): void {
+    this.showLogin = !this.showLogin;
+  }
 
   onLogin(): void {
     // Basic validation
@@ -55,5 +61,12 @@ export class WelcomeComponent implements OnInit {
     // For now, just show an alert
     // In real app, this would navigate to a signup page
     alert('Sign up functionality coming soon! For demo, use any email and password to login.');
+  }
+
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

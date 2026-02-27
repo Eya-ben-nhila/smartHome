@@ -12,12 +12,12 @@ import { SecurityComponent } from './pages/security/security.component';
 import { EnergyComponent } from './pages/energy/energy.component';
 
 export const routes: Routes = [
+  { path: 'welcome', component: WelcomeComponent },
   {
     path: '',
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      { path: 'welcome', component: WelcomeComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'activity', component: ActivityComponent },
       { path: 'automations', component: AutomationsComponent },

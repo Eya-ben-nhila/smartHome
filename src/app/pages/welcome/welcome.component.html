@@ -1,63 +1,369 @@
 <div class="welcome-container">
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <span>SmartHome</span>
+      </div>
+      
+      <div class="nav-menu">
+        <div class="nav-links">
+          <a (click)="scrollToSection('features')" class="nav-link">Features</a>
+          <a (click)="scrollToSection('benefits')" class="nav-link">Benefits</a>
+          <a (click)="scrollToSection('testimonials')" class="nav-link">Testimonials</a>
+          <a (click)="scrollToSection('getting-started')" class="nav-link">Get Started</a>
+        </div>
+        <button class="nav-btn login-btn" (click)="toggleLogin()">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Login</span>
+        </button>
+        <button class="nav-btn signup-btn" (click)="goToSignup()">
+          <i class="fas fa-rocket"></i>
+          <span>Get Started</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
   <div class="welcome-content">
-    <!-- Hero Section with Insights -->
+    <!-- Hero Section with Creative Design -->
     <div class="hero-section">
       <div class="hero-content">
-        <h1 class="welcome-title">Welcome to Smart Home</h1>
-        <p class="welcome-subtitle">Your intelligent home monitoring solution</p>
+        <div class="hero-badge">
+          <i class="fas fa-bolt"></i>
+          <span>Next Generation</span>
+        </div>
         
-        <!-- Web Insights -->
-        <div class="insights-grid">
-          <div class="insight-card">
-            <div class="insight-icon">
-              <i class="fas fa-shield-alt"></i>
+        <h1 class="welcome-title">
+          <span class="title-gradient">Transform Your Home</span>
+          <br>
+          <span class="title-accent">Into Intelligence</span>
+        </h1>
+        
+        <p class="welcome-subtitle">
+          Experience the magic of AI-powered living spaces that learn, adapt, and evolve with your lifestyle
+        </p>
+        
+        <!-- Interactive Demo Section -->
+        <div class="demo-section">
+          <div class="demo-card">
+            <div class="demo-icon">
+              <i class="fas fa-play"></i>
             </div>
-            <div class="insight-info">
-              <h3>Security</h3>
-              <p>Advanced monitoring with AI-powered threat detection</p>
+            <div class="demo-content">
+              <h3>See It In Action</h3>
+              <p>Watch how SmartHome transforms everyday living</p>
+              <button class="demo-btn">
+                <i class="fas fa-play-circle"></i>
+                Watch Demo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Creative Features Showcase -->
+        <div id="features" class="creative-features">
+          <div class="feature-showcase">
+            <div class="showcase-item">
+              <div class="item-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="item-content">
+                <h4>AI-Powered Intelligence</h4>
+                <p>Neural networks that understand your patterns and predict your needs before you even think of them</p>
+              </div>
+            </div>
+            
+            <div class="showcase-item">
+              <div class="item-icon">
+                <i class="fas fa-shield-virus"></i>
+              </div>
+              <div class="item-content">
+                <h4>Quantum Security</h4>
+                <p>Military-grade encryption with biometric authentication and real-time threat neutralization</p>
+              </div>
+            </div>
+            
+            <div class="showcase-item">
+              <div class="item-icon">
+                <i class="fas fa-atom"></i>
+              </div>
+              <div class="item-content">
+                <h4>Energy Alchemy</h4>
+                <p>Convert waste into efficiency with smart grid integration and predictive optimization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Stats -->
+        <div class="interactive-stats">
+          <div class="stat-card">
+            <div class="stat-number" data-target="10000000">0</div>
+            <div class="stat-label">Homes Transformed</div>
+            <div class="stat-progress">
+              <div class="progress-bar"></div>
             </div>
           </div>
           
-          <div class="insight-card">
-            <div class="insight-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="insight-info">
-              <h3>Energy Efficiency</h3>
-              <p>Track consumption and save on utilities</p>
+          <div class="stat-card">
+            <div class="stat-number" data-target="99.9">0</div>
+            <div class="stat-label">Security Score</div>
+            <div class="stat-progress">
+              <div class="progress-bar"></div>
             </div>
           </div>
           
-          <div class="insight-card">
-            <div class="insight-icon">
-              <i class="fas fa-home"></i>
-            </div>
-            <div class="insight-info">
-              <h3>Smart Control</h3>
-              <p>Manage all devices from anywhere</p>
+          <div class="stat-card">
+            <div class="stat-number" data-target="45">0</div>
+            <div class="stat-label">Energy Saved (%)</div>
+            <div class="stat-progress">
+              <div class="progress-bar"></div>
             </div>
           </div>
           
-          <div class="insight-card">
-            <div class="insight-icon">
-              <i class="fas fa-bell"></i>
+          <div class="stat-card">
+            <div class="stat-number" data-target="24">0</div>
+            <div class="stat-label">Support (Hours)</div>
+            <div class="stat-progress">
+              <div class="progress-bar"></div>
             </div>
-            <div class="insight-info">
-              <h3>Real-time Alerts</h3>
-              <p>Instant notifications for important events</p>
+          </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="tech-stack">
+          <h3 class="stack-title">Powered by Tomorrow's Technology</h3>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <div class="tech-icon">
+                <i class="fas fa-microchip"></i>
+              </div>
+              <span>Neural Processors</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">
+                <i class="fas fa-satellite"></i>
+              </div>
+              <span>5G Connectivity</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">
+                <i class="fas fa-cloud"></i>
+              </div>
+              <span>Edge Computing</span>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <span>Blockchain Security</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div id="benefits" class="benefits-section">
+          <h3 class="section-title">Why Choose SmartHome?</h3>
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Save Energy & Money</h4>
+                <p>Reduce your energy bills by up to 40% with intelligent automation and real-time monitoring</p>
+                <ul class="benefit-list">
+                  <li>Smart scheduling</li>
+                  <li>Energy optimization</li>
+                  <li>Cost tracking</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Advanced Security</h4>
+                <p>Protect your home with military-grade encryption and AI-powered threat detection</p>
+                <ul class="benefit-list">
+                  <li>24/7 monitoring</li>
+                  <li>Instant alerts</li>
+                  <li>Biometric access</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Remote Control</h4>
+                <p>Manage your entire home from anywhere with our intuitive mobile app and voice commands</p>
+                <ul class="benefit-list">
+                  <li>Mobile app</li>
+                  <li>Voice control</li>
+                  <li>Remote access</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-plug"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Universal Compatibility</h4>
+                <p>Works with thousands of devices from all major brands and ecosystems</p>
+                <ul class="benefit-list">
+                  <li>Multi-brand support</li>
+                  <li>Easy integration</li>
+                  <li>Future-proof</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div id="testimonials" class="testimonials-section">
+          <h3 class="section-title">What Our Users Say</h3>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"SmartHome transformed how I manage my home. The energy savings alone paid for the system in just 6 months!"</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i class="fas fa-user-circle"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">Sarah Johnson</div>
+                    <div class="author-title">Homeowner</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The security features give me peace of mind when I'm traveling. I can monitor my home from anywhere in the world."</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i class="fas fa-user-circle"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">Michael Chen</div>
+                    <div class="author-title">Business Traveler</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Installation was incredibly simple, and the app is so intuitive. My whole family uses it daily!"</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i class="fas fa-user-circle"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">Emily Rodriguez</div>
+                    <div class="author-title">Tech Enthusiast</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Getting Started Section -->
+        <div id="getting-started" class="getting-started-section">
+          <h3 class="section-title">Ready to Transform Your Home?</h3>
+          <div class="cta-container">
+            <div class="cta-content">
+              <h4>Join 10M+ Smart Homeowners Worldwide</h4>
+              <p>Experience the future of home automation with our AI-powered platform</p>
+              <div class="cta-features">
+                <div class="cta-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>30-day money-back guarantee</span>
+                </div>
+                <div class="cta-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Free professional installation</span>
+                </div>
+                <div class="cta-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>24/7 expert support</span>
+                </div>
+                <div class="cta-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>No hidden fees</span>
+                </div>
+              </div>
+              <button class="cta-primary-btn" (click)="toggleLogin()">
+                <i class="fas fa-rocket"></i>
+                <span>Get Started Now</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Login Section -->
-    <div class="login-section">
+    <!-- Conditional Login Section -->
+    <div class="login-section" *ngIf="showLogin">
       <div class="login-container">
-        <h2 class="login-title">Sign In to Your Account</h2>
+        <div class="login-header">
+          <h2 class="login-title">Welcome Back</h2>
+          <button class="close-login" (click)="toggleLogin()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
         <form class="login-form" (ngSubmit)="onLogin()">
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <label for="email">
+              <i class="fas fa-envelope"></i>
+              Email Address
+            </label>
             <input 
               type="email" 
               id="email" 
@@ -69,7 +375,10 @@
           </div>
           
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">
+              <i class="fas fa-lock"></i>
+              Password
+            </label>
             <input 
               type="password" 
               id="password" 
@@ -93,12 +402,12 @@
           
           <button type="submit" class="login-btn">
             <i class="fas fa-sign-in-alt"></i>
-            Sign In
+            Access Your Smart Home
           </button>
         </form>
         
         <div class="signup-link">
-          <p>Don't have an account? <a href="#" (click)="goToSignup()">Sign up</a></p>
+          <p>New to SmartHome? <a href="#" (click)="goToSignup()">Start Your Journey</a></p>
         </div>
       </div>
     </div>

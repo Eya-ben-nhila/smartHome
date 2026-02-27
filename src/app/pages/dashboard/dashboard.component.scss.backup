@@ -82,6 +82,38 @@
             margin: 0;
           }
 
+          .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            align-self: flex-start;
+
+            i {
+              font-size: 14px;
+              color: white;
+            }
+
+            span {
+              color: white;
+            }
+
+            &:hover {
+              background: #c82333;
+              transform: translateY(-1px);
+              box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+            }
+          }
+
           .search-bar {
             display: flex;
             align-items: center;
@@ -153,49 +185,17 @@
                 color: #424242;
               }
 
-              &:hover {
-                background: #eeeeee;
-              }
-
-              &.active {
-                background: #2196F3;
-                color: white;
-
-                i, span {
-                  color: white;
-                }
-              }
-            }
-          }
-
-          .logout-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: #802A00;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-
-            i {
-              font-size: 14px;
-              color: white;
-            }
-
-            span {
-              color: white;
-            }
-
             &:hover {
-              background: #6A2200;
-              transform: translateY(-1px);
-              box-shadow: 0 4px 12px rgba(128, 42, 0, 0.3);
+              background: #eeeeee;
+            }
+
+            &.active {
+              background: #2196F3;
+              color: white;
+
+              i, span {
+                color: white;
+              }
             }
           }
         }

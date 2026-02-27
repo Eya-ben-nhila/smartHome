@@ -11,31 +11,37 @@
             <input type="text" placeholder="Ask Spring Street" (click)="goToSearch()">
           </div>
         </div>
-        <div class="category-filters">
-          <div class="filter-chip active">
-            <i class="fas fa-heart"></i>
-            <span>Favorites</span>
+        <div class="right-section">
+          <div class="category-filters">
+            <div class="filter-chip active">
+              <i class="fas fa-heart"></i>
+              <span>Favorites</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-th"></i>
+              <span>All</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-video"></i>
+              <span>Cameras</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-lightbulb"></i>
+              <span>Lights</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-wifi"></i>
+              <span>Wifi</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-thermometer-half"></i>
+              <span>Climate</span>
+            </div>
           </div>
-          <div class="filter-chip">
-            <i class="fas fa-th"></i>
-            <span>All</span>
-          </div>
-          <div class="filter-chip">
-            <i class="fas fa-video"></i>
-            <span>Cameras</span>
-          </div>
-          <div class="filter-chip">
-            <i class="fas fa-lightbulb"></i>
-            <span>Lights</span>
-          </div>
-          <div class="filter-chip">
-            <i class="fas fa-wifi"></i>
-            <span>Wifi</span>
-          </div>
-          <div class="filter-chip">
-            <i class="fas fa-thermometer-half"></i>
-            <span>Climate</span>
-          </div>
+          <button class="logout-btn" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
         </div>
       </div>
     </div>

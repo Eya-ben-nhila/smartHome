@@ -15,4 +15,13 @@ export class DashboardComponent {
   goToSearch(): void {
     this.router.navigate(['/search']);
   }
+
+  logout(): void {
+    // Clear any stored user data/tokens if needed
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userData');
+    
+    // Navigate to welcome page
+    this.router.navigate(['/welcome']);
+  }
 }
