@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/border">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@drawable/rounded_box_background"
+        android:layout_margin="8dp">
+
+        <!-- Profile Picture -->
+      <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/profile" />
+
+        <!-- App Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SmartHome"
+            android:textColor="#212121"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Camera Feeds Section -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/box_with_border"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:text="Security Cameras"
+          android:textColor="#212121"
+          android:textSize="16sp"
+          android:textStyle="bold" />
+
+        <!-- Camera Grid -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <!-- Top Row Cameras -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <!-- Front Door Camera -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="120dp"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:background="#E3F2FD"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Front Door"
+                android:textColor="#212121"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/frontdoor" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Live"
+                android:textColor="#4CAF50"
+                android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <!-- Backyard Camera -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="120dp"
+              android:layout_marginStart="4dp"
+              android:layout_weight="1"
+              android:background="#E3F2FD"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Backyard"
+                android:textColor="#212121"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/backyard" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Live"
+                android:textColor="#4CAF50"
+                android:textSize="10sp" />
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+          <!-- Bottom Row Cameras -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Garage Camera -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="120dp"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:background="#E3F2FD"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Garage"
+                android:textColor="#212121"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/garage" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Live"
+                android:textColor="#4CAF50"
+                android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <!-- Driveway Camera -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="120dp"
+              android:layout_marginStart="4dp"
+              android:layout_weight="1"
+              android:background="#E3F2FD"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driveway"
+                android:textColor="#212121"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/backyard" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Live"
+                android:textColor="#4CAF50"
+                android:textSize="10sp" />
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    <!-- Security Controls -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/box_with_border"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:text="Security Controls"
+          android:textColor="#212121"
+          android:textSize="16sp"
+          android:textStyle="bold" />
+
+        <!-- Control Boxes -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:orientation="vertical">
+
+          <!-- Arm System Box -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:background="#3BC2C7CC"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <ImageView
+              app:tint="#4CAF50"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginEnd="16dp"
+              android:src="@android:drawable/ic_menu_preferences" />
+
+            <!-- Name and State -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arm System"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Armed"
+                android:textColor="#4CAF50"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Switch Button -->
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="true"
+              android:thumbTint="#FDFDFD"
+              android:trackTint="#080D31" />
+
+          </LinearLayout>
+
+          <!-- Lock Doors Box -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:background="#3BC2C7CC"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <ImageView
+              app:tint="#4CAF50"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginEnd="16dp"
+              android:src="@android:drawable/ic_lock_lock" />
+
+            <!-- Name and State -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lock Doors"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Locked"
+                android:textColor="#4CAF50"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Switch Button -->
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="true"
+              android:thumbTint="#FDFDFD"
+              android:trackTint="#0061A4" />
+
+          </LinearLayout>
+
+          <!-- Motion Detection Box -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#3BC2C7CC"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <ImageView
+              app:tint="#FF9800"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginEnd="16dp"
+              android:src="@android:drawable/ic_menu_recent_history" />
+
+            <!-- Name and State -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motion Detection"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Standby"
+                android:textColor="#FF9800"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Switch Button -->
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="false"
+              android:thumbTint="#FFFFFF"
+              android:trackTint="#0C1442" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

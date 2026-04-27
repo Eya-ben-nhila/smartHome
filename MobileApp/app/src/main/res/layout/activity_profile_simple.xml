@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/border">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@drawable/rounded_box_background"
+        android:layout_margin="8dp">
+
+        <!-- Profile Picture -->
+      <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/profile" />
+
+        <!-- App Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SmartHome"
+            android:textColor="#212121"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Profile Info -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/box_with_border"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Profile Picture -->
+        <ImageView
+          android:layout_width="120dp"
+          android:layout_height="120dp"
+          android:layout_gravity="center"
+          android:layout_marginBottom="16dp"
+          android:background="@drawable/profile"
+          android:padding="8dp" />
+
+        <!-- Name -->
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginBottom="8dp"
+          android:text="John Doe"
+          android:textColor="#212121"
+          android:textSize="24sp"
+          android:textStyle="bold" />
+
+        <!-- Email -->
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginBottom="24dp"
+          android:text="john.doe@smarthome.com"
+          android:textColor="#757575"
+          android:textSize="14sp" />
+
+        <!-- Edit Profile Button -->
+
+      </LinearLayout>
+
+    <!-- Settings -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/box_with_border"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:text="Settings"
+          android:textColor="#212121"
+          android:textSize="16sp"
+          android:textStyle="bold" />
+
+        <!-- Settings List -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <!-- Notifications -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+              app:tint="#757575"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:layout_marginEnd="12dp"
+              android:src="@android:drawable/ic_menu_preferences" />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Notifications"
+              android:textColor="#212121"
+              android:textSize="14sp" />
+
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="true" />
+
+          </LinearLayout>
+
+          <!-- Privacy -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+              app:tint="#757575"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:layout_marginEnd="12dp"
+              android:src="@android:drawable/ic_lock_lock" />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Privacy"
+              android:textColor="#212121"
+              android:textSize="14sp" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text=">"
+              android:textColor="#757575"
+              android:textSize="16sp" />
+
+          </LinearLayout>
+
+          <!-- About -->
+
+          <!-- Help -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+              app:tint="#757575"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:layout_marginEnd="12dp"
+              android:src="@android:drawable/ic_menu_help" />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Help & Support"
+              android:textColor="#212121"
+              android:textSize="14sp" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text=">"
+              android:textColor="#757575"
+              android:textSize="16sp" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    <!-- Logout Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_box_background"
+        android:padding="20dp"
+        android:layout_margin="8dp">
+
+      <Button
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:backgroundTint="#E7D7D7"
+        android:text="Logout"
+        android:textColor="#F44336"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

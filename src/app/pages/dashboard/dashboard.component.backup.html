@@ -1,0 +1,383 @@
+<div class="dashboard-container">
+  <!-- Main Content - No duplicate nav or search since layout already has them -->
+  <div class="dashboard-content">
+    <!-- Header Strip -->
+    <div class="header-strip">
+      <div class="strip-content">
+        <div class="left-section">
+          <h2 class="dashboard-title">Smart Home Dashboard</h2>
+          <div class="search-bar">
+            <i class="fas fa-lock"></i>
+            <input type="text" placeholder="Ask Spring Street" (click)="goToSearch()">
+          </div>
+        </div>
+        <div class="right-section">
+          <div class="category-filters">
+            <div class="filter-chip active">
+              <i class="fas fa-heart"></i>
+              <span>Favorites</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-th"></i>
+              <span>All</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-video"></i>
+              <span>Cameras</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-lightbulb"></i>
+              <span>Lights</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-wifi"></i>
+              <span>Wifi</span>
+            </div>
+            <div class="filter-chip">
+              <i class="fas fa-thermometer-half"></i>
+              <span>Climate</span>
+            </div>
+          </div>
+          <button class="add-device-btn" (click)="openAddDeviceModal()">
+            <i class="fas fa-plus"></i>
+            <span>Ajouter un dispositif</span>
+          </button>
+          <button class="logout-btn" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Device Cards Grid - NEW LAYOUT -->
+    <div class="devices-grid">
+      <!-- Column 1: Live Camera + Front Door Lock + Garage -->
+      <div class="column">
+        <div class="device-card camera-card large" (dblclick)="openDeviceDetails('camera', 'Front door camera', 'Live', 'camera1')">
+          <div class="camera-feed">
+            <img src="https://picsum.photos/seed/camera1/400/250.jpg" alt="Front door camera">
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              Live
+            </div>
+            <div class="camera-controls">
+              <i class="fas fa-expand"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card lock-card" (dblclick)="openDeviceDetails('lock', 'Front door lock', 'Locked', 'lock1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="device-info">
+              <h4>Front door lock</h4>
+              <p>Locked</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card garage-card" (dblclick)="openDeviceDetails('garage', 'Garage', 'Closed', 'garage1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="device-info">
+              <h4>Garage</h4>
+              <p>Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Front Door Light + TV + Speaker + Plug + Floor Lamp -->
+      <div class="column">
+        <div class="device-card light-card" (dblclick)="openDeviceDetails('light', 'Front door light', 'On - 50%', 'light1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="device-info">
+              <h4>Front door light</h4>
+              <p>On - 50%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card tv-card" (dblclick)="openDeviceDetails('tv', 'TV', 'Off', 'tv1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-tv"></i>
+            </div>
+            <div class="device-info">
+              <h4>TV</h4>
+              <p>Off</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card speaker-card" (dblclick)="openDeviceDetails('speaker', 'Speaker', 'Playing - 50%', 'speaker1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-volume-up"></i>
+            </div>
+            <div class="device-info">
+              <h4>Speaker</h4>
+              <p>Playing - 50%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card plug-card" (dblclick)="openDeviceDetails('plug', 'Smart plug', 'Off', 'plug1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-plug"></i>
+            </div>
+            <div class="device-info">
+              <h4>Smart plug</h4>
+              <p>Off</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card floor-lamp-card" (dblclick)="openDeviceDetails('lamp', 'Floor lamp', 'On - 50%', 'lamp1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="device-info">
+              <h4>Floor lamp</h4>
+              <p>On - 50%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Downstairs Temp + Second Live Camera -->
+      <div class="column">
+        <div class="device-card temperature-card" (dblclick)="openDeviceDetails('temperature', 'Downstairs', '68°F - Comfort', 'temp1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-thermometer-half"></i>
+            </div>
+            <div class="device-info">
+              <h4>Downstairs</h4>
+              <div class="temperature-display">
+                <span class="temp-value">68</span>
+                <span class="temp-label">Comfort</span>
+              </div>
+              <div class="temp-controls">
+                <button class="temp-btn">-</button>
+                <button class="temp-btn">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card camera-card" (dblclick)="openDeviceDetails('camera', 'Backyard camera', 'Live', 'camera2')">
+          <div class="camera-feed">
+            <img src="https://picsum.photos/seed/camera2/200/150.jpg" alt="Backyard camera">
+            <div class="live-indicator">
+              <span class="live-dot"></span>
+              Live
+            </div>
+            <div class="camera-controls">
+              <i class="fas fa-expand"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 4: Fan + Outdoor AQI + San Francisco Temp + Indoor Temperatures -->
+      <div class="column">
+        <div class="device-card fan-card" (dblclick)="openDeviceDetails('fan', 'Fan', 'On', 'fan1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-fan"></i>
+            </div>
+            <div class="device-info">
+              <h4>Fan</h4>
+              <p>On</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card air-quality-card" (dblclick)="openDeviceDetails('air-quality', 'Outdoor AQI', '32 - Good', 'aqi1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-wind"></i>
+            </div>
+            <div class="device-info">
+              <h4>Outdoor AQI</h4>
+              <p>32 - Good</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card weather-card" (dblclick)="openDeviceDetails('weather', 'San Francisco', '56° Clear', 'weather1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-sun"></i>
+            </div>
+            <div class="device-info">
+              <h4>San Francisco</h4>
+              <p>56° Clear</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-card temperature-card indoor-temp" (dblclick)="openDeviceDetails('temperature', 'Indoor temperatures', 'Multiple rooms', 'indoor-temp1')">
+          <div class="card-content">
+            <div class="device-icon">
+              <i class="fas fa-thermometer-half"></i>
+            </div>
+            <div class="device-info">
+              <h4>Indoor temperatures</h4>
+              <div class="room-list">
+                <div class="room-item">
+                  <i class="fas fa-home"></i>
+                  <span>Downstairs: 68°F</span>
+                </div>
+                <div class="room-item">
+                  <i class="fas fa-couch"></i>
+                  <span>Living room: 72°F</span>
+                </div>
+                <div class="room-item">
+                  <i class="fas fa-bed"></i>
+                  <span>Guest bedroom: 70°F</span>
+                </div>
+              </div>
+              <button class="select-sensors-btn">Select sensors</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour ajouter un dispositif -->
+  <div class="modal-overlay" *ngIf="showAddDeviceModal" (click)="closeAddDeviceModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Ajouter un nouveau dispositif</h3>
+        <button class="close-btn" (click)="closeAddDeviceModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addDevice()">
+          <div class="form-group">
+            <label for="deviceName">Nom du dispositif</label>
+            <input type="text" id="deviceName" [(ngModel)]="newDevice.name" required>
+          </div>
+          <div class="form-group">
+            <label for="deviceType">Type</label>
+            <select id="deviceType" [(ngModel)]="newDevice.type" required>
+              <option value="">Sélectionner un type</option>
+              <option value="light">Lumière</option>
+              <option value="camera">Caméra</option>
+              <option value="lock">Serrure</option>
+              <option value="thermostat">Thermostat</option>
+              <option value="speaker">Haut-parleur</option>
+              <option value="plug">Prise intelligente</option>
+              <option value="fan">Ventilateur</option>
+              <option value="sensor">Capteur</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="deviceLocation">Emplacement</label>
+            <input type="text" id="deviceLocation" [(ngModel)]="newDevice.location" required>
+          </div>
+          <div class="form-group">
+            <label for="deviceStatus">Statut</label>
+            <select id="deviceStatus" [(ngModel)]="newDevice.status" required>
+              <option value="online">En ligne</option>
+              <option value="offline">Hors ligne</option>
+              <option value="standby">Veille</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeAddDeviceModal()">Annuler</button>
+            <button type="submit" class="submit-btn">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour les détails du dispositif -->
+  <div class="modal-overlay" *ngIf="showDeviceDetailsModal" (click)="closeDeviceDetailsModal()">
+    <div class="modal-content device-details-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Détails du dispositif</h3>
+        <button class="close-btn" (click)="closeDeviceDetailsModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="selectedDevice">
+        <form (ngSubmit)="updateDevice()">
+          <div class="device-info-section">
+            <div class="device-icon-large">
+              <i class="fas" [ngClass]="getDeviceIcon(selectedDevice.type)"></i>
+            </div>
+            <div class="device-basic-info">
+              <h4>{{ selectedDevice.name }}</h4>
+              <p class="device-type">{{ getDeviceTypeLabel(selectedDevice.type) }}</p>
+              <p class="device-status" [ngClass]="selectedDevice.status">{{ selectedDevice.status }}</p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="editDeviceName">Nom du dispositif</label>
+            <input type="text" id="editDeviceName" [(ngModel)]="selectedDevice.name" required>
+          </div>
+          <div class="form-group">
+            <label for="editDeviceLocation">Emplacement</label>
+            <input type="text" id="editDeviceLocation" [(ngModel)]="selectedDevice.location" required>
+          </div>
+          <div class="form-group">
+            <label for="editDeviceStatus">Statut</label>
+            <select id="editDeviceStatus" [(ngModel)]="selectedDevice.status" required>
+              <option value="online">En ligne</option>
+              <option value="offline">Hors ligne</option>
+              <option value="standby">Veille</option>
+            </select>
+          </div>
+          
+          <div class="device-metadata">
+            <h5>Informations système</h5>
+            <div class="metadata-grid">
+              <div class="metadata-item">
+                <label>ID:</label>
+                <span>{{ selectedDevice.id }}</span>
+              </div>
+              <div class="metadata-item">
+                <label>Type:</label>
+                <span>{{ getDeviceTypeLabel(selectedDevice.type) }}</span>
+              </div>
+              <div class="metadata-item">
+                <label>Ajouté le:</label>
+                <span>{{ selectedDevice.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+              <div class="metadata-item">
+                <label>Dernière activité:</label>
+                <span>{{ selectedDevice.lastActivity | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="delete-btn" (click)="deleteDevice()">
+              <i class="fas fa-trash"></i>
+              Supprimer
+            </button>
+            <button type="button" class="cancel-btn" (click)="closeDeviceDetailsModal()">Annuler</button>
+            <button type="submit" class="submit-btn">Mettre à jour</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

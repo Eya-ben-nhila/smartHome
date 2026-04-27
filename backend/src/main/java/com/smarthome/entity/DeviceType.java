@@ -1,0 +1,24 @@
+package com.smarthome.entity;
+
+public enum DeviceType {
+    LIGHT,
+    THERMOSTAT,
+    SECURITY_CAMERA,
+    DOOR_LOCK,
+    MOTION_SENSOR,
+    TEMPERATURE_SENSOR,
+    HUMIDITY_SENSOR,
+    SMART_SWITCH,
+    SMART_PLUG,
+    SMOKE_DETECTOR,
+    WATER_LEAK_SENSOR,
+    GARAGE_DOOR,
+    WINDOW_BLIND,
+    SPEAKER,
+    TV,
+    AIR_CONDITIONER,
+    HEATER,
+    FAN,
+    VACUUM_CLEANER,
+    OTHER
+}

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home IoT - Tableau de Bord</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4CAF50;
+        }
+        
+        .status.warning {
+            background: #FF9800;
+        }
+        
+        .status.error {
+            background: #F44336;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #6c757d, #5a6268);
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid;
+        }
+        
+        .alert.success {
+            background: #d4edda;
+            border-left-color: #4CAF50;
+            color: #155724;
+        }
+        
+        .alert.error {
+            background: #f8d7da;
+            border-left-color: #F44336;
+            color: #721c24;
+        }
+        
+        .alert.info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Smart Home IoT Dashboard</h1>
+            <p style="text-align: center; color: #666;">Tableau de bord de contrôle intelligent</p>
+        </div>
+
+        <div class="dashboard">
+            <!-- Section Authentification -->
+            <div class="card">
+                <h3><span class="status"></span> Authentification</h3>
+                <div id="auth-section">
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="login-email" placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe:</label>
+                        <input type="password" id="login-password" placeholder="•••••••••">
+                    </div>
+                    <button class="btn" onclick="login()">Se Connecter</button>
+                    <div id="auth-message"></div>
+                </div>
+                
+                <div id="register-section" class="hidden">
+                    <div class="form-group">
+                        <label>Nom complet:</label>
+                        <input type="text" id="register-name" placeholder="Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="register-email" placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe:</label>
+                        <input type="password" id="register-password" placeholder="min 6 caractères">
+                    </div>
+                    <button class="btn" onclick="register()">S'inscrire</button>
+                    <div id="register-message"></div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <button class="btn secondary" onclick="toggleAuth()">Basculer vers <span id="auth-toggle-text">Inscription</span></button>
+                </div>
+            </div>
+
+            <!-- Section Export -->
+            <div class="card">
+                <h3><span class="status"></span> Export de Données</h3>
+                <div id="export-section">
+                    <div class="form-group">
+                        <label>Type d'export:</label>
+                        <select id="export-type">
+                            <option value="users">Utilisateurs</option>
+                            <option value="devices">Appareils</option>
+                            <option value="energy">Données Énergétiques</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Format:</label>
+                        <select id="export-format">
+                            <option value="csv">CSV</option>
+                            <option value="pdf">PDF</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="exportData()">Exporter</button>
+                    <div id="export-message"></div>
+                </div>
+            </div>
+
+            <!-- Section Alertes -->
+            <div class="card">
+                <h3><span class="status warning"></span> Alertes Actives</h3>
+                <div id="alerts-section">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="total-alerts">0</div>
+                            <div class="stat-label">Total Alertes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="unread-alerts">0</div>
+                            <div class="stat-label">Non Lues</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="active-alerts">0</div>
+                            <div class="stat-label">Actives</div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="loadAlerts()">Rafraîchir</button>
+                    <div id="alerts-list"></div>
+                </div>
+            </div>
+
+            <!-- Section Cache Redis -->
+            <div class="card">
+                <h3><span class="status"></span> Cache Redis</h3>
+                <div id="cache-section">
+                    <div class="form-group">
+                        <label>Clé:</label>
+                        <input type="text" id="cache-key" placeholder="device:status:123">
+                    </div>
+                    <div class="form-group">
+                        <label>Valeur:</label>
+                        <input type="text" id="cache-value" placeholder="valeur à mettre en cache">
+                    </div>
+                    <button class="btn" onclick="setCache()">Mettre en Cache</button>
+                    <button class="btn secondary" onclick="getCache()">Récupérer du Cache</button>
+                    <div id="cache-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let currentToken = null;
+
+        // Fonctions d'authentification
+        function toggleAuth() {
+            const loginSection = document.getElementById('auth-section');
+            const registerSection = document.getElementById('register-section');
+            const toggleText = document.getElementById('auth-toggle-text');
+            
+            if (loginSection.classList.contains('hidden')) {
+                loginSection.classList.remove('hidden');
+                registerSection.classList.add('hidden');
+                toggleText.textContent = 'Inscription';
+            } else {
+                loginSection.classList.add('hidden');
+                registerSection.classList.remove('hidden');
+                toggleText.textContent = 'Connexion';
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const messageDiv = document.getElementById('auth-message');
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    currentToken = data.token;
+                    showMessage('auth-message', 'Connexion réussie! Token: ' + data.token.substring(0, 20) + '...', 'success');
+                    loadAlerts();
+                } else {
+                    showMessage('auth-message', 'Erreur: ' + (data.error || 'Échec de connexion'), 'error');
+                }
+            } catch (error) {
+                showMessage('auth-message', 'Erreur de connexion: ' + error.message, 'error');
+            }
+        }
+
+        async function register() {
+            const fullName = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const messageDiv = document.getElementById('register-message');
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ fullName, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.userId) {
+                    showMessage('register-message', 'Inscription réussie! ID: ' + data.userId, 'success');
+                    // Basculer vers login
+                    setTimeout(() => toggleAuth(), 2000);
+                } else {
+                    showMessage('register-message', 'Erreur: ' + (data.error || 'Échec d\'inscription'), 'error');
+                }
+            } catch (error) {
+                showMessage('register-message', 'Erreur d\'inscription: ' + error.message, 'error');
+            }
+        }
+
+        // Fonctions d'export
+        async function exportData() {
+            const type = document.getElementById('export-type').value;
+            const format = document.getElementById('export-format').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/export/${format}/${type}`, {
+                    headers: currentToken ? { 'Authorization': `Bearer ${currentToken}` } : {}
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${type}.${format}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    
+                    showMessage('export-message', `Export ${type.toUpperCase()} en ${format.toUpperCase()} réussi!`, 'success');
+                } else {
+                    showMessage('export-message', 'Erreur lors de l\'export', 'error');
+                }
+            } catch (error) {
+                showMessage('export-message', 'Erreur d\'export: ' + error.message, 'error');
+            }
+        }
+
+        // Fonctions d'alertes
+        async function loadAlerts() {
+            try {
+                const response = await fetch(`${API_BASE}/alerts/user/demo-user`);
+                const alerts = await response.json();
+                
+                document.getElementById('total-alerts').textContent = alerts.length;
+                document.getElementById('unread-alerts').textContent = alerts.filter(a => !a.isRead).length;
+                document.getElementById('active-alerts').textContent = alerts.filter(a => a.isActive).length;
+
+                displayAlerts(alerts);
+            } catch (error) {
+                console.error('Erreur chargement alertes:', error);
+                showMessage('alerts-list', 'Erreur de chargement des alertes', 'error');
+            }
+        }
+
+        function displayAlerts(alerts) {
+            const alertsList = document.getElementById('alerts-list');
+            
+            if (alerts.length === 0) {
+                alertsList.innerHTML = '<p style="color: #666;">Aucune alerte active</p>';
+                return;
+            }
+
+            const alertsHtml = alerts.slice(0, 5).map(alert => `
+                <div class="alert ${alert.severity === 'CRITICAL' ? 'error' : alert.severity === 'HIGH' ? 'error' : 'info'}">
+                    <strong>${alert.title}</strong><br>
+                    <small>${new Date(alert.createdAt).toLocaleString()}</small><br>
+                    ${alert.message}
+                </div>
+            `).join('');
+
+            alertsList.innerHTML = alertsHtml;
+        }
+
+        // Fonctions de cache
+        async function setCache() {
+            const key = document.getElementById('cache-key').value;
+            const value = document.getElementById('cache-value').value;
+
+            try {
+                // Simulation de cache Redis (dans un vrai projet, ce serait un appel API)
+                localStorage.setItem(`cache_${key}`, JSON.stringify({ value, timestamp: Date.now() }));
+                showMessage('cache-message', 'Donnée mise en cache avec succès!', 'success');
+            } catch (error) {
+                showMessage('cache-message', 'Erreur cache: ' + error.message, 'error');
+            }
+        }
+
+        async function getCache() {
+            const key = document.getElementById('cache-key').value;
+
+            try {
+                const cached = localStorage.getItem(`cache_${key}`);
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    showMessage('cache-message', `Valeur récupérée: ${data.value}`, 'info');
+                } else {
+                    showMessage('cache-message', 'Aucune donnée en cache pour cette clé', 'info');
+                }
+            } catch (error) {
+                showMessage('cache-message', 'Erreur récupération cache: ' + error.message, 'error');
+            }
+        }
+
+        // Utilitaire
+        function showMessage(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="alert ${type}">${message}</div>`;
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 5000);
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Smart Home IoT Dashboard chargé');
+            loadAlerts();
+        });
+    </script>
+</body>
+</html>

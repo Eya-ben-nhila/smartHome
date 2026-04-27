@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Dark Shadow Layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#A0000000" />
+        </shape>
+    </item>
+
+    <!-- House Image Layer -->
+    <item android:drawable="@drawable/your_house_image" />
+
+    <!-- Dark Overlay -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#60000000"
+                android:endColor="#30000000"
+                android:angle="90" />
+        </shape>
+    </item>
+
+</layer-list>

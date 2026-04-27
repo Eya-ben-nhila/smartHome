@@ -1,670 +1,437 @@
-.dashboard-container {
-  display: flex;
+.dashboard-content {
+  padding: 20px;
+  overflow-y: auto;
   height: 100vh;
   background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e8 50%, #fff3e0 100%);
 
-  .left-nav {
-    width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    gap: 20px;
+  .header-strip {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
-    .nav-item {
+    .strip-content {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      padding: 8px;
-      border-radius: 12px;
 
-      i {
-        font-size: 20px;
-        color: #757575;
-      }
+      .left-section {
+        display: flex;
+        align-items: center;
+        gap: 30px;
 
-      span {
-        font-size: 10px;
-        color: #757575;
-        font-weight: 500;
-      }
+        .dashboard-title {
+          font-size: 28px;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0;
+        }
 
-      &:hover {
-        background: rgba(33, 150, 243, 0.1);
+        .search-bar {
+          display: flex;
+          align-items: center;
+          background: #f5f5f5;
+          border-radius: 12px;
+          padding: 12px 20px;
+          cursor: pointer;
+          transition: all 0.3s ease;
 
-        i, span {
-          color: #2196F3;
+          i {
+            color: #757575;
+            margin-right: 12px;
+          }
+
+          input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+            color: #757575;
+            cursor: pointer;
+          }
+
+          &:hover {
+            background: #e8e8e8;
+          }
         }
       }
 
-      &.active {
-        background: rgba(33, 150, 243, 0.15);
+      .right-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
 
-        i, span {
-          color: #2196F3;
+        .category-filters {
+          display: flex;
+          gap: 8px;
+
+          .filter-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+
+            i {
+              font-size: 14px;
+              color: #757575;
+            }
+
+            span {
+              font-size: 13px;
+              color: #757575;
+              font-weight: 500;
+            }
+
+            &:hover {
+              background: #e8e8e8;
+            }
+
+            &.active {
+              background: #2196F3;
+              border-color: #2196F3;
+
+              i, span {
+                color: white;
+              }
+            }
+          }
+        }
+
+        .logout-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 20px;
+          background: #f44336;
+          color: white;
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 14px;
+          transition: all 0.3s ease;
+
+          i {
+            font-size: 16px;
+          }
+
+          &:hover {
+            background: #d32f2f;
+          }
         }
       }
     }
   }
 
-  // Remove main-content styling to avoid conflicts with layout component
-  .dashboard-content {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  // Device Cards Grid
+  .devices-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0 20px;
 
-    .header-strip {
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .device-card {
       background: white;
       border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
 
-      .strip-content {
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .card-content {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 20px;
+        align-items: center;
+        gap: 16px;
+        padding: 20px;
+      }
 
-        .left-section {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
+      .device-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 20px;
+        color: white;
+      }
 
-          .dashboard-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin: 0;
-          }
+      .device-info {
+        flex: 1;
 
-          .search-bar {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f5f5f5;
-            border-radius: 25px;
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 250px;
-
-            i {
-              color: #757575;
-              font-size: 14px;
-            }
-
-            input {
-              border: none;
-              background: transparent;
-              outline: none;
-              flex: 1;
-              font-size: 14px;
-              color: #424242;
-
-              &::placeholder {
-                color: #9ca3af;
-              }
-            }
-
-            &:hover {
-              background: #eeeeee;
-            }
-          }
+        h4 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
         }
 
-        .right-section {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-          flex-wrap: wrap;
-
-          .category-filters {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 0;
-            padding: 0;
-            overflow: visible;
-
-            .filter-chip {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              padding: 8px 16px;
-              background: #f5f5f5;
-              border-radius: 20px;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              white-space: nowrap;
-
-              i {
-                font-size: 14px;
-                color: #757575;
-              }
-
-              span {
-                font-size: 14px;
-                font-weight: 500;
-                color: #424242;
-              }
-
-              &:hover {
-                background: #eeeeee;
-              }
-
-              &.active {
-                background: #2196F3;
-                color: white;
-
-                i, span {
-                  color: white;
-                }
-              }
-            }
-          }
-
-          .logout-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: #802A00;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-
-            i {
-              font-size: 14px;
-              color: white;
-            }
-
-            span {
-              color: white;
-            }
-
-            &:hover {
-              background: #6A2200;
-              transform: translateY(-1px);
-              box-shadow: 0 4px 12px rgba(128, 42, 0, 0.3);
-            }
-          }
+        p {
+          margin: 0;
+          font-size: 14px;
+          color: #666;
+          font-weight: 500;
         }
       }
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-
-      .search-bar {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: white;
-        border-radius: 25px;
-        padding: 12px 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-
-        i {
-          color: #757575;
-          font-size: 14px;
-        }
-
-        span {
-          color: #424242;
-          font-size: 14px;
-          font-weight: 500;
-        }
+    // Camera Cards
+    .camera-card {
+      &.large {
+        grid-column: span 2;
+        grid-row: span 2;
+        height: 250px;
+        padding: 0;
+        border-radius: 16px;
+        overflow: hidden;
       }
 
-      .user-profile {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        i {
-          color: #757575;
-          font-size: 16px;
-          cursor: pointer;
-        }
+      .camera-feed {
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
 
         img {
-          width: 25px;
-          height: 25px;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .live-indicator {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .live-dot {
+          width: 8px;
+          height: 8px;
+          background: #4CAF50;
           border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+
+        .camera-controls {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          color: white;
+          font-size: 16px;
           cursor: pointer;
+          opacity: 0.8;
+          transition: opacity 0.3s ease;
         }
       }
     }
 
-    .category-filters {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-      overflow-x: auto;
-      padding-bottom: 8px;
+    // Light Cards
+    .light-card {
+      .device-icon {
+        background: linear-gradient(135deg, #FFC107, #FF9800);
+      }
 
-      .filter-chip {
+      .device-info p {
+        color: #4CAF50;
+      }
+    }
+
+    // TV Cards
+    .tv-card {
+      .device-icon {
+        background: linear-gradient(135deg, #9C27B0, #6A1B9A);
+      }
+
+      .device-info p {
+        color: #6A1B9A;
+      }
+    }
+
+    // Speaker Cards
+    .speaker-card {
+      .device-icon {
+        background: linear-gradient(135deg, #2196F3, #1976D2);
+      }
+
+      .device-info p {
+        color: #1976D2;
+      }
+    }
+
+    // Plug Cards
+    .plug-card {
+      .device-icon {
+        background: linear-gradient(135deg, #FF9800, #F57C00);
+      }
+
+      .device-info p {
+        color: #F57C00;
+      }
+    }
+
+    // Floor Lamp Cards
+    .floor-lamp-card {
+      .device-icon {
+        background: linear-gradient(135deg, #FFC107, #FF9800);
+      }
+
+      .device-info p {
+        color: #4CAF50;
+      }
+    }
+
+    // Temperature Cards
+    .temperature-card {
+      .device-icon {
+        background: linear-gradient(135deg, #FF9800, #F57C00);
+      }
+
+      .device-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .temperature-display {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 16px;
-        background: #f5f5f5;
-        border-radius: 20px;
+        margin-bottom: 8px;
+      }
+
+      .temp-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+      }
+
+      .temp-label {
+        font-size: 12px;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .temp-controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      .temp-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        background: #e0e0e0;
+        color: #333;
+        font-size: 16px;
         cursor: pointer;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-
-        i {
-          font-size: 14px;
-          color: #757575;
-        }
-
-        span {
-          font-size: 14px;
-          font-weight: 500;
-          color: #424242;
-        }
+        transition: all 0.2s ease;
 
         &:hover {
-          background: #eeeeee;
+          background: #d0d0d0;
+          color: #111;
         }
 
-        &.active {
-          background: #2196F3;
-          color: white;
-
-          i, span {
-            color: white;
-          }
+        &:active {
+          transform: scale(0.95);
         }
       }
     }
 
-    .devices-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      flex: 1;
-      align-items: start;
+    // Weather Cards
+    .weather-card {
+      .device-icon {
+        background: linear-gradient(135deg, #FFD54F, #FFC107);
+      }
 
-      .column {
+      .device-info p {
+        color: #FFC107;
+      }
+    }
+
+    // Air Quality Cards
+    .air-quality-card {
+      .device-icon {
+        background: linear-gradient(135deg, #4CAF50, #8BC34A);
+      }
+
+      .device-info p {
+        color: #8BC34A;
+      }
+    }
+
+    // Fan Cards
+    .fan-card {
+      .device-icon {
+        background: linear-gradient(135deg, #03A9F4, #0288D0);
+      }
+
+      .device-info p {
+        color: #0288D1;
+      }
+    }
+
+    // Indoor Temperature Cards
+    .indoor-temp {
+      .device-icon {
+        background: linear-gradient(135deg, #FF9800, #F57C00);
+      }
+
+      .room-list {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
 
-        .device-card {
-          background: white;
-          border-radius: 20px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-          overflow: hidden;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          height: fit-content;
+      .room-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #666;
+      }
 
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-          }
+      .select-sensors-btn {
+        background: #e0e0e0;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        color: #333;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
 
-          &.large {
-            grid-row: span 2;
-          }
-
-          .card-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            .device-icon {
-              width: 40px;
-              height: 40px;
-              border-radius: 20px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              margin-right: 12px;
-
-              i {
-                font-size: 20px;
-                color: white;
-              }
-            }
-
-            .device-info {
-              flex: 1;
-
-              h4 {
-                font-size: 18px;
-                font-weight: 600;
-                color: #212121;
-                margin: 0 0 4px 0;
-              }
-
-              p {
-                font-size: 14px;
-                color: #757575;
-                margin: 0;
-              }
-            }
-          }
-
-          // Light cards (orange/yellow background) - Color divided card background
-          &.light-card, &.floor-lamp-card {
-            .device-icon {
-              background: #564500;
-            }
-            .card-content {
-              background: linear-gradient(90deg, #FFE083 0%, #FFE083 50%, #FFEFC9 50%, #FFEFC9 100%);
-              position: relative;
-              
-              &::before {
-                content: '';
-                position: absolute;
-                left: 50%;
-                top: 0;
-                bottom: 0;
-                width: 1px;
-                background: rgba(86, 69, 0, 0.05);
-              }
-              
-              .device-info {
-                h4, p {
-                  color: #564500;
-                }
-              }
-            }
-          }
-
-          // Blue cards (fan, lock, speaker, garage, plug) - Color divided card background
-          &.speaker-card {
-            .device-icon {
-              background: #0040A3;
-            }
-            .card-content {
-              background: linear-gradient(90deg, #D9E2FF 0%, #D9E2FF 50%, #EDF0FF 50%, #EDF0FF 100%);
-              position: relative;
-              
-              &::before {
-                content: '';
-                position: absolute;
-                left: 50%;
-                top: 0;
-                bottom: 0;
-                width: 1px;
-                background: rgba(0, 64, 163, 0.05);
-              }
-              
-              .device-info {
-                h4, p {
-                  color: #0040A3;
-                }
-              }
-            }
-          }
-
-          // Cards without color division (lock, garage, plug, fan)
-          &.lock-card, &.garage-card, &.plug-card, &.fan-card {
-            .device-icon {
-              background: #0040A3;
-            }
-            .card-content {
-              background: #EDF0FF;
-              
-              .device-info {
-                h4, p {
-                  color: #0040A3;
-                }
-              }
-            }
-          }
-
-          // Temperature card (orange background) - Solid color background
-          &.temperature-card {
-            .card-content {
-              background: #FFE8D6;
-              position: relative;
-              display: flex;
-              flex-direction: row;
-              align-items: flex-start; // Changed from center to flex-start
-              
-              .device-icon {
-                background: #802A00;
-                width: 32px;
-                height: 32px;
-                border-radius: 16px;
-                margin-right: 12px;
-                margin-top: 8px; // Add top margin to position icon higher
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                i {
-                  font-size: 16px;
-                  color: white;
-                }
-              }
-              
-              .device-info {
-                h4, p {
-                  color: #802A00;
-                }
-
-                .temperature-display {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  margin: 22px 0;
-
-                  .temp-value {
-                    font-size: 32px;
-                    font-weight: 700;
-                    color: #853108;
-                    text-align: center;
-                    transform: translateY(-10px);
-                  }
-
-                  .temp-label {
-                    font-size: 12px;
-                    color: #802A00;
-                  }
-                }
-
-                .temp-controls {
-                  display: flex;
-                  gap: 8px;
-                  justify-content: center;
-
-                  .temp-btn {
-                    width: 114px;
-                    height: 32px;
-                    border: none;
-                    background: #FFB59A;
-                    border-radius: 12px;
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: #802A00;
-                    cursor: pointer;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                    transition: all 0.2s ease;
-
-                    &:hover {
-                      background: #FFA347;
-                    }
-                  }
-                }
-              }
-            }
-          }
-
-          // Indoor temperatures card (light grey background) - Solid color background
-          &.temperature-card.indoor-temp {
-            .card-content {
-              background: #F5F5F5;
-              position: relative;
-              display: flex;
-              flex-direction: row;
-              align-items: flex-start; // Changed from center to flex-start
-              
-              .device-icon {
-                background: #802A00;
-                width: 32px;
-                height: 32px;
-                border-radius: 16px;
-                margin-right: 12px;
-                margin-top: 8px; // Add top margin to position icon higher
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                i {
-                  font-size: 16px;
-                  color: white;
-                }
-              }
-              
-              .device-info {
-                h4, p {
-                  color: #757575;
-                }
-
-                .room-list {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 4px;
-                  margin: 6px 0;
-
-                  .room-item {
-                    display: flex;
-                    align-items: center;
-                    gap: 6px;
-                    font-size: 11px;
-                    color: #757575;
-
-                    i {
-                      font-size: 10px;
-                      color: #757575;
-                      width: 12px;
-                    }
-
-                    span {
-                      flex: 1;
-                    }
-                  }
-                }
-
-                .select-sensors-btn {
-                  width: 100%;
-                  padding: 6px 12px;
-                  margin-top: 8px;
-                  border: none;
-                  background: white;
-                  border-radius: 8px;
-                  font-size: 11px;
-                  font-weight: 500;
-                  color: #757575;
-                  cursor: pointer;
-                  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                  transition: all 0.2s ease;
-
-                  &:hover {
-                    background: #f5f5f5;
-                  }
-                }
-              }
-            }
-          }
-
-          // Camera cards
-          &.camera-card {
-            padding: 0;
-            border-radius: 20px;
-
-            .camera-feed {
-              position: relative;
-              width: 100%;
-              height: 160px;
-
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 20px 20px 0 0;
-              }
-
-              .live-indicator {
-                position: absolute;
-                top: 6px;
-                left: 6px;
-                display: flex;
-                align-items: center;
-                gap: 3px;
-                background: rgba(0, 0, 0, 0.7);
-                color: white;
-                padding: 3px 6px;
-                border-radius: 10px;
-                font-size: 10px;
-                font-weight: 500;
-
-                .live-dot {
-                  width: 5px;
-                  height: 5px;
-                  background: #4CAF50;
-                  border-radius: 50%;
-                  animation: pulse 2s infinite;
-                }
-              }
-
-              .camera-controls {
-                position: absolute;
-                bottom: 6px;
-                right: 6px;
-                width: 20px;
-                height: 20px;
-                background: rgba(0, 0, 0, 0.7);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-
-                i {
-                  color: white;
-                  font-size: 10px;
-                }
-              }
-            }
-
-            &.large {
-              .camera-feed {
-                height: 220px;
-              }
-            }
-          }
-
-          // White cards (air quality, weather, TV)
-          &.air-quality-card, &.weather-card, &.tv-card {
-            .device-icon {
-              background: #757575;
-            }
-            .card-content {
-              background: white;
-            }
-          }
+        &:hover {
+          background: #d0d0d0;
+          color: #111;
         }
       }
     }
@@ -673,12 +440,12 @@
 
 @keyframes pulse {
   0% {
-    opacity: 1;
+    transform: scale(1);
   }
   50% {
-    opacity: 0.5;
+    transform: scale(1.2);
   }
   100% {
-    opacity: 1;
+    transform: scale(1);
   }
 }

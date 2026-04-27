@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/border">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="@drawable/rounded_box_background"
+        android:layout_margin="8dp">
+
+        <!-- Profile Picture -->
+      <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/profile" />
+
+        <!-- App Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SmartHome"
+            android:textColor="#212121"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Your Automations -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_automation_box"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:text="Your Automations"
+          android:textColor="#212121"
+          android:textSize="16sp"
+          android:textStyle="bold" />
+
+        <!-- Horizontal ScrollView for Automation Boxes -->
+        <HorizontalScrollView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scrollbars="none">
+
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Good Morning Box -->
+            <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="147dp"
+              android:layout_marginEnd="12dp"
+              android:background="@drawable/rounded_automation_box"
+              android:backgroundTint="#E3F2FD"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+              <ImageView
+                app:tint="#2196F3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:src="@android:drawable/ic_menu_recent_history" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Good Morning"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lights • Coffee • Music"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Good Night Box -->
+            <LinearLayout
+              android:layout_width="153dp"
+              android:layout_height="match_parent"
+              android:layout_marginEnd="12dp"
+              android:background="@drawable/rounded_automation_box"
+              android:backgroundTint="#F3E5F5"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+              <ImageView
+                app:tint="#9C27B0"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:src="@android:drawable/ic_menu_preferences" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Good Night"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lock • Lights Off • Alarm"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Away Mode Box -->
+            <LinearLayout
+              android:layout_width="151dp"
+              android:layout_height="148dp"
+              android:layout_marginEnd="12dp"
+              android:background="@drawable/rounded_automation_box"
+              android:backgroundTint="#E8F5E8"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+              <ImageView
+                app:tint="#4CAF50"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:src="@android:drawable/ic_lock_lock" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Away Mode"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Security • Energy Save"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Movie Time Box -->
+            <LinearLayout
+              android:layout_width="145dp"
+              android:layout_height="match_parent"
+              android:background="@drawable/rounded_automation_box"
+              android:backgroundTint="#FFF3E0"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+              <ImageView
+                app:tint="#FF9800"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:src="@android:drawable/ic_menu_camera" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Movie Time"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Dim Lights • TV • Sound"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+        </HorizontalScrollView>
+
+      </LinearLayout>
+
+    <!-- Active Automations -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_automation_box"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:text="Active Automations"
+          android:textColor="#212121"
+          android:textSize="16sp"
+          android:textStyle="bold" />
+
+        <!-- Active Automation List -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <!-- Morning Routine Box -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:background="#3BC2C7CC"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <ImageView
+              app:tint="#2196F3"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginEnd="16dp"
+              android:src="@android:drawable/ic_menu_recent_history" />
+
+            <!-- Name and State -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Morning Routine"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:textColor="#2196F3"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Switch Button -->
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="true"
+              android:thumbTint="#FAF9F9"
+              android:trackTint="#040C47" />
+
+          </LinearLayout>
+
+          <!-- Evening Lights Box -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:background="#3BC2C7CC"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <ImageView
+              app:tint="#9C27B0"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginEnd="16dp"
+              android:src="@android:drawable/ic_menu_preferences" />
+
+            <!-- Name and State -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evening Lights"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scheduled"
+                android:textColor="#9C27B0"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Switch Button -->
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="false"
+              android:thumbTint="#FFFEFF"
+              android:trackTint="#040C47" />
+
+          </LinearLayout>
+
+          <!-- Security Mode Box -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#3BC2C7CC"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <ImageView
+              app:tint="#4CAF50"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginEnd="16dp"
+              android:src="@android:drawable/ic_lock_lock" />
+
+            <!-- Name and State -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Security Mode"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Standby"
+                android:textColor="#4CAF50"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Switch Button -->
+            <Switch
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:checked="false"
+              android:thumbTint="#F9FAF9"
+              android:trackTint="#040C47" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

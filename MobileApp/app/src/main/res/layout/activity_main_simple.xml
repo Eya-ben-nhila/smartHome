@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <!-- House Image Background -->
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/your_house_image"
+    android:scaleType="centerCrop" />
+
+  <!-- Shadow Overlay -->
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A0000000" />
+
+  <!-- Content -->
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:gravity="center"
+      android:padding="32dp">
+
+    <!-- Logo with Circular Background -->
+      <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circular_logo_background"
+        android:padding="8dp"
+        android:src="@drawable/ic_menu_home" />
+
+      <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="SmartMonitor"
+        android:textColor="#F6F6F6"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TextView
+      android:id="@+id/textView2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="20dp"
+      android:text="Your home , intelligently connected"
+      android:textColor="#26D1E7"
+      android:textSize="20sp" />
+
+      <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="18dp"
+        android:gravity="center"
+        android:text="Experience the future of living with seamless control over your environment , security , and atmosphere"
+        android:textColor="#98F6F6F6"
+        android:textSize="22sp" />
+
+      <Button
+        android:id="@+id/getStartedButton"
+        android:layout_width="309dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#4E6F7577"
+        android:text="Enter SmartMonitor"
+        android:textColor="#CDFFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+      <TextView
+        android:id="@+id/textView4"
+        android:layout_width="227dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="1dp"
+        android:text="Begin your intelligent journey"
+        android:textColor="#91FFFFFF" />
+
+    </LinearLayout>
+
+  </ScrollView>
+
+</FrameLayout>
