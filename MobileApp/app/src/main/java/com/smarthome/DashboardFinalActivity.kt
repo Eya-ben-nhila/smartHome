@@ -58,6 +58,13 @@ class DashboardFinalActivity : AppCompatActivity() {
         } catch (e: Exception) {
             // Bottom navigation not available in this layout
         }
+
+        // Add Device button
+        findViewById<android.widget.LinearLayout>(R.id.addDeviceButton)?.setOnClickListener {
+            Toast.makeText(this, "Opening Add Device Screen", Toast.LENGTH_SHORT).show()
+            // TODO: Navigate to Add Device activity
+            // For now, just show a toast message
+        }
     }
     
     private fun showProfileSettingsMenu() {

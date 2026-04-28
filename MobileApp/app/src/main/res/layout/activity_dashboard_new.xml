@@ -33,7 +33,6 @@
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_marginBottom="70dp"
     app:layout_constraintBottom_toTopOf="@+id/navigation"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,9 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:padding="16dp">
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:paddingTop="16dp">
 
       <!-- Quick Stats -->
       <LinearLayout
@@ -73,7 +74,7 @@
             <ImageView
               android:layout_width="32dp"
               android:layout_height="32dp"
-              android:src="@drawable/ic_thermostat"
+              android:src="@drawable/b"
               android:tint="@color/black" />
 
             <TextView
@@ -117,7 +118,7 @@
             <ImageView
               android:layout_width="32dp"
               android:layout_height="32dp"
-              android:src="@drawable/ic_energy"
+              android:src="@drawable/c"
               android:tint="@color/white" />
 
             <TextView
@@ -147,7 +148,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="#F5F5F5"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp">
 
@@ -179,7 +180,10 @@
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:background="@drawable/overview_box_border"
+              android:padding="8dp"
+              android:layout_marginEnd="4dp">
 
               <ImageView
                 android:layout_width="32dp"
@@ -200,7 +204,7 @@
                 android:layout_height="wrap_content"
                 android:text="12.5 kWh"
                 android:textColor="@color/text"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             </LinearLayout>
@@ -211,7 +215,10 @@
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:background="@drawable/overview_box_border"
+              android:padding="8dp"
+              android:layout_marginStart="4dp">
 
               <ImageView
                 android:layout_width="32dp"
@@ -232,7 +239,7 @@
                 android:layout_height="wrap_content"
                 android:text="245 L"
                 android:textColor="@color/text"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             </LinearLayout>
@@ -243,7 +250,10 @@
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:background="@drawable/overview_box_border"
+              android:padding="8dp"
+              android:layout_marginStart="4dp">
 
               <ImageView
                 android:layout_width="32dp"
@@ -264,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:text="22°C"
                 android:textColor="@color/text"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             </LinearLayout>
@@ -283,7 +293,10 @@
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:background="@drawable/overview_box_border"
+              android:padding="8dp"
+              android:layout_marginEnd="4dp">
 
               <TextView
                 android:layout_width="wrap_content"
@@ -297,7 +310,7 @@
                 android:layout_height="wrap_content"
                 android:text="45%"
                 android:textColor="@color/text"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             </LinearLayout>
@@ -308,7 +321,11 @@
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:background="@drawable/overview_box_border"
+              android:padding="8dp"
+              android:layout_marginStart="4dp"
+              android:layout_marginEnd="4dp">
 
               <TextView
                 android:layout_width="wrap_content"
@@ -322,7 +339,7 @@
                 android:layout_height="wrap_content"
                 android:text="Good"
                 android:textColor="#4CAF50"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             </LinearLayout>
@@ -333,7 +350,10 @@
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:background="@drawable/overview_box_border"
+              android:padding="8dp"
+              android:layout_marginStart="4dp">
 
               <TextView
                 android:layout_width="wrap_content"
@@ -347,7 +367,7 @@
                 android:layout_height="wrap_content"
                 android:text="750 lux"
                 android:textColor="@color/text"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             </LinearLayout>
@@ -681,6 +701,7 @@
             android:layout_marginBottom="16dp" />
 
           <LinearLayout
+            android:id="@+id/addDeviceButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -718,15 +739,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"/>
 
-      <!-- Recent Activity -->
-      <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp" />
-
+      
     </LinearLayout>
 
   </ScrollView>

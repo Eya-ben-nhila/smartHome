@@ -2,7 +2,13 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class AlertsSimpleActivity : AppCompatActivity() {
@@ -59,6 +65,106 @@ class AlertsSimpleActivity : AppCompatActivity() {
         } catch (e: Exception) {
             // Bottom navigation not available in this layout
         }
+        
+        // Setup dismiss buttons
+        setupDismissButtons()
+        
+        // Setup add rule functionality
+        setupAddRule()
+    }
+
+    private fun setupDismissButtons() {
+        // Dismiss Alert 1 (Critical)
+        findViewById<TextView>(R.id.dismissAlert1)?.setOnClickListener {
+            dismissAlert(1, "Security Breach Detected")
+        }
+
+        // Dismiss Alert 2 (Warning)
+        findViewById<TextView>(R.id.dismissAlert2)?.setOnClickListener {
+            dismissAlert(2, "High Energy Consumption")
+        }
+
+        // Dismiss Alert 3 (Info)
+        findViewById<TextView>(R.id.dismissAlert3)?.setOnClickListener {
+            dismissAlert(3, "Motion Detected")
+        }
+    }
+
+    private fun dismissAlert(alertId: Int, alertName: String) {
+        // Show confirmation dialog
+        AlertDialog.Builder(this)
+            .setTitle("Acquitter l'alerte")
+            .setMessage("Êtes-vous sûr de vouloir acquitter l'alerte: $alertName?")
+            .setPositiveButton("Acquitter") { dialog, _ ->
+                // Dismiss the alert
+                android.widget.Toast.makeText(this, "Alerte $alertName acquittée", android.widget.Toast.LENGTH_SHORT).show()
+                
+                // Here you would typically:
+                // 1. Remove the alert from the UI
+                // 2. Update the alert status in database
+                // 3. Send notification to server
+                
+                // For now, we'll just show a success message
+                dialog.dismiss()
+            }
+            .setNegativeButton("Annuler") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun setupAddRule() {
+        // Setup alert type spinner
+        val alertTypeSpinner = findViewById<Spinner>(R.id.alertTypeSpinner)
+        val alertTypes = arrayOf("Sécurité", "Énergie", "Température", "Mouvement", "Humidité", "Qualité de l'air")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, alertTypes)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        alertTypeSpinner?.adapter = adapter
+
+        // Setup add rule button
+        findViewById<TextView>(R.id.addRuleButton)?.setOnClickListener {
+            addAlertRule()
+        }
+    }
+
+    private fun addAlertRule() {
+        val alertTypeSpinner = findViewById<Spinner>(R.id.alertTypeSpinner)
+        val conditionEditText = findViewById<EditText>(R.id.conditionEditText)
+        val thresholdEditText = findViewById<EditText>(R.id.thresholdEditText)
+
+        val alertType = alertTypeSpinner?.selectedItem?.toString() ?: ""
+        val condition = conditionEditText?.text?.toString() ?: ""
+        val threshold = thresholdEditText?.text?.toString() ?: ""
+
+        // Validate inputs
+        if (condition.isEmpty() || threshold.isEmpty()) {
+            Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Show confirmation dialog
+        AlertDialog.Builder(this)
+            .setTitle("Ajouter une règle d'alerte")
+            .setMessage("Type: $alertType\nCondition: $condition\nSeuil: $threshold\n\nConfirmer l'ajout?")
+            .setPositiveButton("Ajouter") { dialog, _ ->
+                // Add the rule (for now, just show success message)
+                Toast.makeText(this, "Règle d'alerte ajoutée avec succès!", Toast.LENGTH_LONG).show()
+                
+                // Clear the form
+                conditionEditText?.text?.clear()
+                thresholdEditText?.text?.clear()
+                
+                // Here you would typically:
+                // 1. Save the rule to database
+                // 2. Update the alert system
+                // 3. Refresh the rules list
+                
+                dialog.dismiss()
+            }
+            .setNegativeButton("Annuler") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
     
     override fun onSupportNavigateUp(): Boolean {

@@ -335,6 +335,31 @@
             android:textColor="#757575"
             android:textSize="14sp" />
 
+          <!-- Dismiss Button -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+              android:id="@+id/dismissAlert1"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:background="@drawable/rounded_button_red"
+              android:paddingStart="12dp"
+              android:paddingTop="6dp"
+              android:paddingEnd="12dp"
+              android:paddingBottom="6dp"
+              android:text="Acquitter"
+              android:textColor="@color/white"
+              android:textSize="10sp"
+              android:textStyle="bold"
+              android:gravity="center" />
+
+          </LinearLayout>
+
         </LinearLayout>
 
         <!-- Alert Item 2 - Warning -->
@@ -396,6 +421,31 @@
             android:textColor="#757575"
             android:textSize="14sp" />
 
+          <!-- Dismiss Button -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+              android:id="@+id/dismissAlert2"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:background="@drawable/rounded_button_orange"
+              android:paddingStart="12dp"
+              android:paddingTop="6dp"
+              android:paddingEnd="12dp"
+              android:paddingBottom="6dp"
+              android:text="Acquitter"
+              android:textColor="@color/white"
+              android:textSize="10sp"
+              android:textStyle="bold"
+              android:gravity="center" />
+
+          </LinearLayout>
+
         </LinearLayout>
 
         <!-- Alert Item 3 - Info -->
@@ -456,6 +506,149 @@
             android:text="Movement detected in backyard - Security camera triggered"
             android:textColor="#757575"
             android:textSize="14sp" />
+
+          <!-- Dismiss Button -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+              android:id="@+id/dismissAlert3"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:background="@drawable/rounded_button_blue"
+              android:paddingStart="12dp"
+              android:paddingTop="6dp"
+              android:paddingEnd="12dp"
+              android:paddingBottom="6dp"
+              android:text="Acquitter"
+              android:textColor="@color/white"
+              android:textSize="10sp"
+              android:textStyle="bold"
+              android:gravity="center" />
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <!-- Add Rule Section -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/overview_item_box"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Section Header -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:layout_marginBottom="16dp">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚙️"
+            android:textSize="20sp"
+            android:layout_marginEnd="8dp" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ajouter une règle d'alerte"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Rule Type Selection -->
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Type d'alerte"
+          android:textColor="#757575"
+          android:textSize="12sp"
+          android:layout_marginBottom="4dp" />
+
+        <Spinner
+          android:id="@+id/alertTypeSpinner"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:background="@drawable/rounded_input_background"
+          android:layout_marginBottom="12dp" />
+
+        <!-- Condition Input -->
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Condition"
+          android:textColor="#757575"
+          android:textSize="12sp"
+          android:layout_marginBottom="4dp" />
+
+        <EditText
+          android:id="@+id/conditionEditText"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:background="@drawable/rounded_input_background"
+          android:hint="Ex: Température > 25°C"
+          android:paddingStart="12dp"
+          android:paddingEnd="12dp"
+          android:textSize="14sp"
+          android:layout_marginBottom="12dp" />
+
+        <!-- Threshold Input -->
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Seuil"
+          android:textColor="#757575"
+          android:textSize="12sp"
+          android:layout_marginBottom="4dp" />
+
+        <EditText
+          android:id="@+id/thresholdEditText"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:background="@drawable/rounded_input_background"
+          android:hint="Ex: 25"
+          android:inputType="number"
+          android:paddingStart="12dp"
+          android:paddingEnd="12dp"
+          android:textSize="14sp"
+          android:layout_marginBottom="16dp" />
+
+        <!-- Add Rule Button -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+          <TextView
+            android:id="@+id/addRuleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/rounded_button_blue"
+            android:paddingStart="20dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="8dp"
+            android:text="Ajouter la règle"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center" />
 
         </LinearLayout>
 
