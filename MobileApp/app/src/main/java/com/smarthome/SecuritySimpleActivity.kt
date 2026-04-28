@@ -2,6 +2,7 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,6 +17,11 @@ class SecuritySimpleActivity : AppCompatActivity() {
         
         // Enable back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
+        // Profile picture click -> go to Profile page
+        findViewById<ImageView>(R.id.profilePicture)?.setOnClickListener {
+            startActivity(Intent(this, ProfileSimpleActivity::class.java))
+        }
         
         // Setup bottom navigation
         setupBottomNavigation()

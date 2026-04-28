@@ -46,11 +46,6 @@ class AutomationsActivity : AppCompatActivity() {
             Toast.makeText(this, "Away Mode $status", Toast.LENGTH_SHORT).show()
         }
         
-        findViewById<Switch>(R.id.nightModeSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            val status = if (isChecked) "enabled" else "disabled"
-            Toast.makeText(this, "Night Mode $status", Toast.LENGTH_SHORT).show()
-        }
-        
         findViewById<Switch>(R.id.weekendModeSwitch)?.setOnCheckedChangeListener { _, isChecked ->
             val status = if (isChecked) "enabled" else "disabled"
             Toast.makeText(this, "Weekend Mode $status", Toast.LENGTH_SHORT).show()

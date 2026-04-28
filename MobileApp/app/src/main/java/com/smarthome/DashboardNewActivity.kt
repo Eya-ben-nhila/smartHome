@@ -9,7 +9,7 @@ class DashboardNewActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard_final)
+        setContentView(R.layout.activity_dashboard_new)
         
         // Setup button click listeners
         setupButtonListeners()

@@ -36,9 +36,6 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".DashboardFinalActivity"
-            android:exported="false" />
-        <activity
             android:name=".ActivityDashboardActivity"
             android:exported="false" />
         <activity
@@ -61,6 +58,36 @@
             android:exported="false" />
         <activity
             android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainSimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DashboardFinalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecuritySimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EnergySimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitySimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AutomationSimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AlertsSimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileSimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SigninSimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupSimpleActivity"
             android:exported="false" />
   </application>
 
