@@ -70,7 +70,7 @@ class SecuritySimpleActivity : AppCompatActivity() {
     
     // Navigation methods for bottom navigation
     fun openMainActivity(view: android.view.View) {
-        val intent = Intent(this, MainSimpleActivity::class.java)
+        val intent = Intent(this, DashboardFinalActivity::class.java)
         startActivity(intent)
         finish()
     }
