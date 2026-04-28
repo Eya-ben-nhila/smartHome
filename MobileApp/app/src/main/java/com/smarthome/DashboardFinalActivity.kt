@@ -3,6 +3,7 @@ package com.smarthome
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,41 +21,58 @@ class DashboardFinalActivity : AppCompatActivity() {
     private fun setupButtonListeners() {
         try {
             // Bottom navigation buttons
-            findViewById<android.widget.LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
-                // Already on dashboard page, no action needed
+            val navigationLayout = findViewById<LinearLayout>(R.id.navigation)
+            if (navigationLayout != null) {
+                // Home button
+                navigationLayout.findViewById<LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
+                    Toast.makeText(this, "Home button clicked - already on dashboard", Toast.LENGTH_SHORT).show()
+                    // Already on dashboard page, no action needed
+                }
+                
+                // Security button
+                navigationLayout.findViewById<LinearLayout>(R.id.securityNavButton)?.setOnClickListener {
+                    Toast.makeText(this, "Security button clicked - going to Security", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, SecuritySimpleActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            } else {
+                Toast.makeText(this, "ERROR: Navigation layout not found!", Toast.LENGTH_LONG).show()
             }
             
-            findViewById<android.widget.LinearLayout>(R.id.securityNavButton)?.setOnClickListener {
-                val intent = Intent(this, SecuritySimpleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            
-            findViewById<android.widget.LinearLayout>(R.id.energyNavButton)?.setOnClickListener {
-                val intent = Intent(this, EnergySimpleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            
-            findViewById<android.widget.LinearLayout>(R.id.activityNavButton)?.setOnClickListener {
-                val intent = Intent(this, ActivitySimpleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            
-            findViewById<android.widget.LinearLayout>(R.id.automationsNavButton)?.setOnClickListener {
-                val intent = Intent(this, AutomationSimpleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            
-            findViewById<android.widget.LinearLayout>(R.id.alertsNavButton)?.setOnClickListener {
-                val intent = Intent(this, AlertsSimpleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            // Energy button
+                navigationLayout.findViewById<LinearLayout>(R.id.energyNavButton)?.setOnClickListener {
+                    Toast.makeText(this, "Energy button clicked - going to Energy", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, EnergySimpleActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                
+                // Activity button
+                navigationLayout.findViewById<LinearLayout>(R.id.activityNavButton)?.setOnClickListener {
+                    Toast.makeText(this, "Activity button clicked - going to Activity", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, ActivitySimpleActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                
+                // Automation button
+                navigationLayout.findViewById<LinearLayout>(R.id.automationsNavButton)?.setOnClickListener {
+                    Toast.makeText(this, "Automation button clicked - going to Automation", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, AutomationSimpleActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                
+                // Alerts button
+                navigationLayout.findViewById<LinearLayout>(R.id.alertsNavButton)?.setOnClickListener {
+                    Toast.makeText(this, "Alerts button clicked - going to Alerts", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, AlertsSimpleActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
         } catch (e: Exception) {
-            // Bottom navigation not available in this layout
+            Toast.makeText(this, "Navigation setup error: ${e.message}", Toast.LENGTH_LONG).show()
         }
 
         // Add Device button
