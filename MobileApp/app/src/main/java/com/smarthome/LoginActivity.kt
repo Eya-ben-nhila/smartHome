@@ -23,8 +23,26 @@ class LoginActivity : AppCompatActivity() {
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
         
+        // Load saved preferences
+        loadSavedPreferences()
+        
         // Setup button click listeners
         setupButtonListeners()
+    }
+    
+    private fun loadSavedPreferences() {
+        val emailInput = findViewById<EditText>(R.id.emailInput)
+        val rememberMeCheckbox = findViewById<CheckBox>(R.id.rememberMeCheckbox)
+        
+        // Check if remember me was checked
+        val rememberMe = sharedPreferences.getBoolean("rememberMe", false)
+        val savedEmail = sharedPreferences.getString("savedEmail", "")
+        
+        if (rememberMe && !savedEmail.isNullOrEmpty()) {
+            // Load saved email
+            emailInput?.setText(savedEmail)
+            rememberMeCheckbox?.isChecked = true
+        }
     }
     
     private fun setupButtonListeners() {
@@ -38,6 +56,28 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Opening Signup", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
+        }
+        
+        // Setup remember me checkbox listener
+        val rememberMeCheckbox = findViewById<CheckBox>(R.id.rememberMeCheckbox)
+        val emailInput = findViewById<EditText>(R.id.emailInput)
+        
+        rememberMeCheckbox?.setOnCheckedChangeListener { _, isChecked ->
+            val email = emailInput?.text?.toString()?.trim()
+            val editor = sharedPreferences.edit()
+            
+            if (isChecked && !email.isNullOrEmpty()) {
+                // Save email when checkbox is checked
+                editor.putBoolean("rememberMe", true)
+                editor.putString("savedEmail", email)
+                Toast.makeText(this, "Email will be remembered", Toast.LENGTH_SHORT).show()
+            } else if (!isChecked) {
+                // Remove saved email when checkbox is unchecked
+                editor.putBoolean("rememberMe", false)
+                editor.remove("savedEmail")
+                Toast.makeText(this, "Email will not be remembered", Toast.LENGTH_SHORT).show()
+            }
+            editor.apply()
         }
     }
     

@@ -16,13 +16,6 @@ class DashboardNewActivity : AppCompatActivity() {
     }
     
     private fun setupButtonListeners() {
-        // Logout button
-        findViewById<android.widget.TextView>(R.id.logoutButton)?.setOnClickListener {
-            Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show()
-            
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        // No buttons to setup for now
     }
 }

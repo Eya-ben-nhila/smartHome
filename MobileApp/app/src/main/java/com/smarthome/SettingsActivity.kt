@@ -19,7 +19,7 @@ class SettingsActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_profile_simple)
         
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
@@ -35,43 +35,11 @@ class SettingsActivity : AppCompatActivity() {
     }
     
     private fun setupButtonListeners() {
-        // Back button
-        findViewById<ImageView>(R.id.backButton)?.setOnClickListener {
-            finish() // Go back to previous screen
-        }
-        
-        // Logout button
-        findViewById<Button>(R.id.logoutButton)?.setOnClickListener {
-            Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show()
-            
-            // Clear remember me preferences
-            val editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
-            
-            // Navigate back to main page (not dashboard)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
-        }
+        // No buttons to setup for now
     }
     
     private fun setupSwitchListeners() {
-        // Push Notifications Switch
-        findViewById<Switch>(R.id.pushNotificationsSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Push notifications: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
-        }
-        
-        // Email Notifications Switch
-        findViewById<Switch>(R.id.emailNotificationsSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Email notifications: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
-        }
-        
-        // Auto-Connect Switch
-        findViewById<Switch>(R.id.autoConnectSwitch)?.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(this, "Auto-connect: ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
-        }
+        // No switches to setup for now
     }
     
     private fun setupNavigation() {

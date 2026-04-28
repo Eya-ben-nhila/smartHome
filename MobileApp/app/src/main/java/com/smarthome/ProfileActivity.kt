@@ -29,32 +29,7 @@ class ProfileActivity : AppCompatActivity() {
     }
     
     private fun setupButtonListeners() {
-        // Back button
-        findViewById<ImageView>(R.id.backButton)?.setOnClickListener {
-            finish() // Go back to previous screen
-        }
-        
-        // Edit Profile button
-        findViewById<Button>(R.id.editProfileButton)?.setOnClickListener {
-            Toast.makeText(this, "Edit profile clicked", Toast.LENGTH_SHORT).show()
-            // TODO: Navigate to edit profile screen
-        }
-        
-        // Logout button
-        findViewById<Button>(R.id.logoutButton)?.setOnClickListener {
-            Toast.makeText(this, "Logging out...", Toast.LENGTH_SHORT).show()
-            
-            // Clear remember me preferences
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
-            
-            // Navigate back to main page (not dashboard)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
-        }
+        // No buttons to setup for now
     }
     
     private fun setupNavigation() {
