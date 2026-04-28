@@ -66,40 +66,7 @@ class ActivitySimpleActivity : AppCompatActivity() {
         return true
     }
     
-    // Navigation methods for bottom navigation
-    fun openMainActivity(view: android.view.View) {
-        val intent = Intent(this, DashboardFinalActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openSecurityActivity(view: android.view.View) {
-        val intent = Intent(this, SecuritySimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openEnergyActivity(view: android.view.View) {
-        val intent = Intent(this, EnergySimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openActivityActivity(view: android.view.View) {
-        // Already on activity page, no action needed
-    }
-    
-    fun openAutomationActivity(view: android.view.View) {
-        val intent = Intent(this, AutomationSimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openAlertsActivity(view: android.view.View) {
-        val intent = Intent(this, AlertsSimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+    // XML navigation methods removed - using programmatic navigation only
     
     fun openProfileSimpleActivity(view: android.view.View) {
         val intent = Intent(this, ProfileSimpleActivity::class.java)
