@@ -2,6 +2,7 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class SecuritySimpleActivity : AppCompatActivity() {
@@ -15,6 +16,51 @@ class SecuritySimpleActivity : AppCompatActivity() {
         
         // Enable back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
+        // Setup bottom navigation
+        setupBottomNavigation()
+    }
+    
+    private fun setupBottomNavigation() {
+        try {
+            // Home button
+            findViewById<LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
+                startActivity(Intent(this, MainSimpleActivity::class.java))
+                finish()
+            }
+            
+            // Security button (already on security page)
+            findViewById<LinearLayout>(R.id.securityNavButton)?.setOnClickListener {
+                // Already on security page
+            }
+            
+            // Energy button
+            findViewById<LinearLayout>(R.id.energyNavButton)?.setOnClickListener {
+                startActivity(Intent(this, EnergySimpleActivity::class.java))
+                finish()
+            }
+            
+            // Activity button
+            findViewById<LinearLayout>(R.id.activityNavButton)?.setOnClickListener {
+                startActivity(Intent(this, ActivitySimpleActivity::class.java))
+                finish()
+            }
+            
+            // Automation button
+            findViewById<LinearLayout>(R.id.automationsNavButton)?.setOnClickListener {
+                startActivity(Intent(this, AutomationSimpleActivity::class.java))
+                finish()
+            }
+            
+            // Alerts button
+            findViewById<LinearLayout>(R.id.alertsNavButton)?.setOnClickListener {
+                startActivity(Intent(this, AlertsSimpleActivity::class.java))
+                finish()
+            }
+            
+        } catch (e: Exception) {
+            // Bottom navigation not available in this layout
+        }
     }
     
     override fun onSupportNavigateUp(): Boolean {

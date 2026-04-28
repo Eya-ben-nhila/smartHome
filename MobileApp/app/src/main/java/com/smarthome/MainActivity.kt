@@ -60,8 +60,40 @@ class MainActivity : AppCompatActivity() {
             }
         }
         
+        val securityButton = Button(this).apply {
+            text = "Security"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, SecuritySimpleActivity::class.java))
+            }
+        }
+        
+        val energyButton = Button(this).apply {
+            text = "Energy"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, EnergySimpleActivity::class.java))
+            }
+        }
+        
+        val activityButton = Button(this).apply {
+            text = "Activity"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, ActivitySimpleActivity::class.java))
+            }
+        }
+        
+        val automationButton = Button(this).apply {
+            text = "Automation"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, AutomationSimpleActivity::class.java))
+            }
+        }
+        
         layout.addView(titleText)
         layout.addView(loginButton)
+        layout.addView(securityButton)
+        layout.addView(energyButton)
+        layout.addView(activityButton)
+        layout.addView(automationButton)
         setContentView(layout)
     }
 }

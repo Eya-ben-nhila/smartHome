@@ -525,6 +525,6 @@
     </ScrollView>
 
         <!-- Bottom Navigation -->
-        <include layout="@layout/bottom_navigation" />
+        <include layout="@layout/new_bottom_navigation" />
 
 </LinearLayout>

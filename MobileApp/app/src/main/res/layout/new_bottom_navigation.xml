@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dp"
     android:orientation="horizontal"
-    android:background="@drawable/bottom_nav_background"
-    android:padding="8dp"
-    android:elevation="8dp">
+    android:background="@android:color/white"
+    android:elevation="12dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <!-- Home -->
     <LinearLayout
         android:id="@+id/homeNavButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="8dp"
-        android:onClick="openMainActivity">
+        android:background="?android:attr/selectableItemBackgroundBorderless">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🏠"
-            android:textColor="#212121"
             android:textSize="20sp"
             android:layout_marginBottom="4dp" />
 
@@ -30,8 +29,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Home"
-            android:textColor="#757575"
-            android:textSize="10sp" />
+            android:textColor="#2196F3"
+            android:textSize="11sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -39,18 +39,16 @@
     <LinearLayout
         android:id="@+id/securityNavButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="8dp"
-        android:onClick="openSecuritySimpleActivity">
+        android:background="?android:attr/selectableItemBackgroundBorderless">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🔒"
-            android:textColor="#212121"
             android:textSize="20sp"
             android:layout_marginBottom="4dp" />
 
@@ -59,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Security"
             android:textColor="#757575"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
     </LinearLayout>
 
@@ -67,18 +65,16 @@
     <LinearLayout
         android:id="@+id/energyNavButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="8dp"
-        android:onClick="openEnergySimpleActivity">
+        android:background="?android:attr/selectableItemBackgroundBorderless">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="⚡"
-            android:textColor="#212121"
             android:textSize="20sp"
             android:layout_marginBottom="4dp" />
 
@@ -87,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="Energy"
             android:textColor="#757575"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
     </LinearLayout>
 
@@ -95,18 +91,16 @@
     <LinearLayout
         android:id="@+id/activityNavButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="8dp"
-        android:onClick="openActivitySimpleActivity">
+        android:background="?android:attr/selectableItemBackgroundBorderless">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="📈"
-            android:textColor="#212121"
             android:textSize="20sp"
             android:layout_marginBottom="4dp" />
 
@@ -115,7 +109,7 @@
             android:layout_height="wrap_content"
             android:text="Activity"
             android:textColor="#757575"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
     </LinearLayout>
 
@@ -123,27 +117,25 @@
     <LinearLayout
         android:id="@+id/automationsNavButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="8dp"
-        android:onClick="openAutomationSimpleActivity">
+        android:background="?android:attr/selectableItemBackgroundBorderless">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="⚙️"
-            android:textColor="#212121"
             android:textSize="20sp"
             android:layout_marginBottom="4dp" />
 
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Automation"
-        android:textColor="#757575"
-        android:textSize="9dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automation"
+            android:textColor="#757575"
+            android:textSize="11sp" />
 
     </LinearLayout>
 
@@ -151,18 +143,16 @@
     <LinearLayout
         android:id="@+id/alertsNavButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="8dp"
-        android:onClick="openAlertsSimpleActivity">
+        android:background="?android:attr/selectableItemBackgroundBorderless">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🔔"
-            android:textColor="#2196F3"
             android:textSize="20sp"
             android:layout_marginBottom="4dp" />
 
@@ -170,8 +160,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alerts"
-            android:textColor="#2196F3"
-            android:textSize="10sp" />
+            android:textColor="#757575"
+            android:textSize="11sp" />
 
     </LinearLayout>
 
