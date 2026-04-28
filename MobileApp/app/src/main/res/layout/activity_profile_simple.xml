@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/border">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/border"
         android:orientation="vertical">
 
-    <!-- Header -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:background="@drawable/rounded_box_background"
-        android:layout_margin="8dp">
+        <!-- Header -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:background="@drawable/rounded_box_background"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:padding="16dp">
 
-        <!-- Profile Picture -->
-      <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/profile" />
+          <!-- Profile Picture -->
+          <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/profile" />
 
-        <!-- App Name -->
-        <TextView
+          <!-- App Name -->
+          <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SmartHome"
@@ -35,194 +43,217 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <!-- Profile Info -->
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/box_with_border"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <!-- Profile Picture -->
-        <ImageView
-          android:layout_width="120dp"
-          android:layout_height="120dp"
-          android:layout_gravity="center"
+        <!-- Title Border -->
+        <View
+          android:layout_width="390dp"
+          android:layout_height="1dp"
+          android:layout_marginLeft="10dp"
           android:layout_marginBottom="16dp"
-          android:background="@drawable/profile"
-          android:padding="8dp" />
+          android:background="@color/gray_400" />
 
-        <!-- Name -->
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginBottom="8dp"
-          android:text="John Doe"
-          android:textColor="#212121"
-          android:textSize="24sp"
-          android:textStyle="bold" />
-
-        <!-- Email -->
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginBottom="24dp"
-          android:text="john.doe@smarthome.com"
-          android:textColor="#757575"
-          android:textSize="14sp" />
-
-        <!-- Edit Profile Button -->
-
-      </LinearLayout>
-
-    <!-- Settings -->
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/box_with_border"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:text="Settings"
-          android:textColor="#212121"
-          android:textSize="16sp"
-          android:textStyle="bold" />
-
-        <!-- Settings List -->
+        <!-- Profile Info -->
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:layout_margin="8dp"
+          android:background="@drawable/box_with_border"
+          android:orientation="vertical"
+          android:padding="20dp">
 
-          <!-- Notifications -->
-          <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+          <!-- Profile Picture -->
+          <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/profile"
+            android:padding="8dp" />
+
+          <!-- Name -->
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:text="John Doe"
+            android:textColor="#212121"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <ImageView
-              app:tint="#757575"
-              android:layout_width="24dp"
-              android:layout_height="24dp"
-              android:layout_marginEnd="12dp"
-              android:src="@android:drawable/ic_menu_preferences" />
+          <!-- Email -->
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:text="john.doe@smarthome.com"
+            android:textColor="#757575"
+            android:textSize="14sp" />
 
-            <TextView
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="Notifications"
-              android:textColor="#212121"
-              android:textSize="14sp" />
-
-            <Switch
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:checked="true" />
-
-          </LinearLayout>
-
-          <!-- Privacy -->
-          <LinearLayout
+          <!-- Edit Profile Button -->
+          <Button
+            android:id="@+id/editProfileButton"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#2196F3"
+            android:text="Edit Profile"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-            <ImageView
-              app:tint="#757575"
-              android:layout_width="24dp"
-              android:layout_height="24dp"
-              android:layout_marginEnd="12dp"
-              android:src="@android:drawable/ic_lock_lock" />
+        </LinearLayout>
 
-            <TextView
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="Privacy"
-              android:textColor="#212121"
-              android:textSize="14sp" />
+        <!-- Settings -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:background="@drawable/box_with_border"
+          android:orientation="vertical"
+          android:padding="20dp">
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text=">"
-              android:textColor="#757575"
-              android:textSize="16sp" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Settings"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-          </LinearLayout>
-
-          <!-- About -->
-
-          <!-- Help -->
+          <!-- Settings List -->
           <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-              app:tint="#757575"
-              android:layout_width="24dp"
-              android:layout_height="24dp"
-              android:layout_marginEnd="12dp"
-              android:src="@android:drawable/ic_menu_help" />
+            <!-- Notifications -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:layout_marginBottom="8dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
 
-            <TextView
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="Help & Support"
-              android:textColor="#212121"
-              android:textSize="14sp" />
+              <ImageView
+                app:tint="#757575"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@android:drawable/ic_menu_preferences" />
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text=">"
-              android:textColor="#757575"
-              android:textSize="16sp" />
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Notifications"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+              <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" />
+
+            </LinearLayout>
+
+            <!-- Privacy -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:layout_marginBottom="8dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+              <ImageView
+                app:tint="#757575"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@android:drawable/ic_lock_lock" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Privacy"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=">"
+                android:textColor="#757575"
+                android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- About -->
+
+            <!-- Help -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+              <ImageView
+                app:tint="#757575"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@android:drawable/ic_menu_help" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Help &amp; Support"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=">"
+                android:textColor="#757575"
+                android:textSize="16sp" />
+
+            </LinearLayout>
 
           </LinearLayout>
 
         </LinearLayout>
 
+        <!-- Logout Button -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:background="@drawable/rounded_box_background"
+          android:orientation="vertical"
+          android:padding="20dp">
+
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="#E7D7D7"
+            android:text="Logout"
+            android:textColor="#F44336"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
       </LinearLayout>
 
-    <!-- Logout Button -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_box_background"
-        android:padding="20dp"
-        android:layout_margin="8dp">
+    </ScrollView>
 
-      <Button
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:backgroundTint="#E7D7D7"
-        android:text="Logout"
-        android:textColor="#F44336"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        <!-- Bottom Navigation -->
+        <include layout="@layout/bottom_navigation" />
 
-    </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

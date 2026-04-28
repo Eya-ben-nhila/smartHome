@@ -17,9 +17,9 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_menu_home"
-        android:background="@color/gray_300"
-        android:padding="8dp" />
+        android:background="#D1BFC1C3"
+        android:padding="8dp"
+        android:src="@drawable/ic_menu_home" />
 
     <!-- Title -->
     <TextView
@@ -139,7 +139,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I agree to the Terms & Conditions"
+            android:text="I agree to the Terms &amp; Conditions"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -147,6 +147,7 @@
 
         <!-- Sign Up Button -->
         <Button
+          android:id="@+id/signupButton"
           android:layout_width="match_parent"
           android:layout_height="48dp"
           android:layout_marginBottom="16dp"

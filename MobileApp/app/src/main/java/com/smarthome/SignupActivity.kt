@@ -11,20 +11,13 @@ class SignupActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(R.layout.activity_signup_simple)
         
         // Setup button click listeners
         setupButtonListeners()
     }
     
     private fun setupButtonListeners() {
-        // Back button - navigate to main page
-        findViewById<ImageView>(R.id.backButton)?.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
         // Signup button click
         findViewById<Button>(R.id.signupButton)?.setOnClickListener {
             // Show success message

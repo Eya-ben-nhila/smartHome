@@ -2,73 +2,66 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     
-    private lateinit var profilePopupWindow: PopupWindow
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         
-        // Setup all click listeners
-        setupNavigation()
-    }
-    
-    private fun setupNavigation() {
-        // Language button click
-        findViewById<ImageButton>(R.id.btnLanguage)?.setOnClickListener {
-            // TODO: Show language selection dialog
-        }
-        
-        // Energy button click
-        findViewById<LinearLayout>(R.id.energyNavButton)?.setOnClickListener {
-            val intent = Intent(this, EnergyActivity::class.java)
-            startActivity(intent)
-        }
-        
-        // User profile click - show popup menu
-        findViewById<LinearLayout>(R.id.userProfile)?.setOnClickListener {
-            Toast.makeText(this, "Profile clicked!", Toast.LENGTH_SHORT).show()
-            showProfileMenu(it)
-        }
-        
-        // Main login/enter button click
-        findViewById<Button>(R.id.loginButton)?.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-        
-        // Swipe hint click (treat as enter button)
-        findViewById<LinearLayout>(R.id.bottomHint)?.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+        try {
+            // Try to use the original XML layout
+            setContentView(R.layout.activity_main_simple)
+            setupOriginalNavigation()
+        } catch (e: Exception) {
+            // Fallback to simple layout if XML fails
+            createFallbackLayout()
+            Toast.makeText(this, "Using fallback layout - original layout failed: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
     
-    private fun showProfileMenu(anchorView: View) {
-        val options = arrayOf("Profile", "Settings")
+    private fun setupOriginalNavigation() {
+        try {
+            // Get Started button - navigate to login
+            findViewById<Button>(R.id.getStartedButton)?.setOnClickListener {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            
+            // Profile click on textView
+            findViewById<TextView>(R.id.textView)?.setOnClickListener {
+                Toast.makeText(this, "Profile clicked!", Toast.LENGTH_SHORT).show()
+            }
+            
+        } catch (e: Exception) {
+            Toast.makeText(this, "Some features unavailable", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun createFallbackLayout() {
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(32, 32, 32, 32)
+        }
         
-        AlertDialog.Builder(this)
-            .setTitle("Menu")
-            .setItems(options) { dialog, which ->
-                when (which) {
-                    0 -> startActivity(Intent(this, ProfileActivity::class.java))
-                    1 -> startActivity(Intent(this, SettingsActivity::class.java))
-                }
-                dialog.dismiss()
+        val titleText = TextView(this).apply {
+            text = "SmartHome App (Fallback)"
+            textSize = 24f
+            setPadding(0, 0, 0, 50)
+        }
+        
+        val loginButton = Button(this).apply {
+            text = "Go to Login"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
+        }
+        
+        layout.addView(titleText)
+        layout.addView(loginButton)
+        setContentView(layout)
     }
 }

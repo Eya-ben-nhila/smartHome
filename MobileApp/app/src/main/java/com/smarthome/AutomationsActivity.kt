@@ -10,7 +10,7 @@ class AutomationsActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_automations)
+        setContentView(R.layout.activity_automation_simple)
         
         // Setup button click listeners
         setupButtonListeners()

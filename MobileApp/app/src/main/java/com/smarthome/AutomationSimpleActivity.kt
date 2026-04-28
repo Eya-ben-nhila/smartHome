@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class AlertsSimpleActivity : AppCompatActivity() {
+class AutomationSimpleActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_alerts_simple)
+        setContentView(R.layout.activity_automation_simple)
         
         // Set up action bar
-        supportActionBar?.title = "Alerts"
+        supportActionBar?.title = "Automation"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
     
@@ -46,9 +46,7 @@ class AlertsSimpleActivity : AppCompatActivity() {
     }
     
     fun openAutomationActivity(view: android.view.View) {
-        val intent = Intent(this, AutomationSimpleActivity::class.java)
-        startActivity(intent)
-        finish()
+        // Already on automation page, no action needed
     }
     
     fun openProfileSimpleActivity(view: android.view.View) {
@@ -58,6 +56,8 @@ class AlertsSimpleActivity : AppCompatActivity() {
     }
     
     fun openAlertsActivity(view: android.view.View) {
-        // Already on alerts page, no action needed
+        val intent = Intent(this, AlertsSimpleActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

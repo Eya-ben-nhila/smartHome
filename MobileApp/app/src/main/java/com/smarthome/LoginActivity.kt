@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
+import android.widget.EditText
 
 class LoginActivity : AppCompatActivity() {
     
@@ -18,26 +18,16 @@ class LoginActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_signin_simple)
         
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
-        
-        // Check if user is already logged in (remember me)
-        checkRememberedUser()
         
         // Setup button click listeners
         setupButtonListeners()
     }
     
     private fun setupButtonListeners() {
-        // Back button - navigate to main page
-        findViewById<ImageView>(R.id.backButton)?.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
         // Login button click
         findViewById<Button>(R.id.loginButton)?.setOnClickListener {
             validateAndLogin()
@@ -51,20 +41,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     
-    private fun checkRememberedUser() {
-        val isRemembered = sharedPreferences.getBoolean("rememberMe", false)
-        if (isRemembered) {
-            // Auto-login if remember me was checked
-            Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, DashboardFinalActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
-    
     private fun validateAndLogin() {
-        val emailInput = findViewById<TextInputEditText>(R.id.emailInput)
-        val passwordInput = findViewById<TextInputEditText>(R.id.passwordInput)
+        val emailInput = findViewById<EditText>(R.id.emailInput)
+        val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val rememberMeCheckbox = findViewById<CheckBox>(R.id.rememberMeCheckbox)
         
         val email = emailInput?.text?.toString()?.trim()

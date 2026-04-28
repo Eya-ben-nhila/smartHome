@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/border">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/border"
         android:orientation="vertical">
 
-    <!-- Header -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:background="@drawable/rounded_box_background"
-        android:layout_margin="8dp">
+        <!-- Header -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:background="@drawable/rounded_box_background"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:padding="16dp">
 
-        <!-- Profile Picture -->
-      <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/circle_background_white"
-        android:src="@drawable/profile" />
+          <!-- Profile Picture -->
+          <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle_background_white"
+            android:src="@drawable/profile" />
 
-        <!-- App Name -->
-        <TextView
+          <!-- App Name -->
+          <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SmartHome"
@@ -36,574 +44,587 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <!-- Current Usage Card -->
-
-      <!-- Energy Stats -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="8dp">
-
-        <!-- Daily Average -->
-      <LinearLayout
-        android:layout_width="185dp"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="4dp"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_automation_box"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <ImageView
-          app:tint="#2196F3"
-          android:layout_width="32dp"
-          android:layout_height="32dp"
-          android:layout_marginBottom="8dp"
-          android:src="@android:drawable/ic_menu_preferences" />
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="4dp"
-          android:text="3.2"
-          android:textColor="#374697"
-          android:textSize="24sp"
-          android:textStyle="bold" />
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Daily Avg"
-          android:textColor="#757575"
-          android:textSize="16sp" />
-
-      </LinearLayout>
-
-        <!-- Monthly Total -->
-      <LinearLayout
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_weight="1"
-        android:background="#E2EFFA"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <ImageView
-          app:tint="#4CAF50"
-          android:layout_width="32dp"
-          android:layout_height="32dp"
-          android:layout_marginBottom="12dp"
-          android:src="@android:drawable/ic_menu_preferences" />
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="8dp"
-          android:text="96.8"
-          android:textColor="#374697"
-          android:textSize="24sp"
-          android:textStyle="bold" />
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Monthly Total"
-          android:textColor="#212121"
-          android:textSize="12sp" />
-
-      </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- Energy Chart Area -->
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_automation_box"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+        <!-- Title Border -->
+        <View
+          android:layout_width="390dp"
+          android:layout_height="1dp"
+          android:layout_marginLeft="10dp"
           android:layout_marginBottom="16dp"
-          android:text="Weekly Overview"
-          android:textColor="#212121"
-          android:textSize="16sp"
-          android:textStyle="bold" />
+          android:background="@color/gray_400" />
 
-        <!-- Simple Bar Chart -->
+        <!-- Current Usage Card -->
+
+        <!-- Energy Stats -->
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:gravity="bottom"
+          android:layout_margin="8dp"
           android:orientation="horizontal">
 
-          <!-- Monday -->
+          <!-- Daily Average -->
           <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="185dp"
+            android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_automation_box"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <View
-              android:layout_width="24dp"
-              android:layout_height="60dp"
-              android:background="@drawable/rounded_bar_blue" />
+            <ImageView
+              app:tint="#2196F3"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginBottom="8dp"
+              android:src="@android:drawable/ic_menu_preferences" />
 
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Mon"
+              android:layout_marginBottom="4dp"
+              android:text="3.2"
+              android:textColor="#374697"
+              android:textSize="24sp"
+              android:textStyle="bold" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Daily Avg"
               android:textColor="#757575"
-              android:textSize="12sp" />
+              android:textSize="16sp" />
 
           </LinearLayout>
 
-          <!-- Tuesday -->
+          <!-- Monthly Total -->
           <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="194dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:background="#E2EFFA"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <View
-              android:layout_width="24dp"
-              android:layout_height="80dp"
-              android:background="@drawable/rounded_bar_dark_blue" />
+            <ImageView
+              app:tint="#4CAF50"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginBottom="12dp"
+              android:src="@android:drawable/ic_menu_preferences" />
 
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Tue"
-              android:textColor="#757575"
-              android:textSize="12sp" />
-
-          </LinearLayout>
-
-          <!-- Wednesday -->
-          <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <View
-              android:layout_width="24dp"
-              android:layout_height="45dp"
-              android:background="@drawable/rounded_bar_light_blue" />
+              android:layout_marginBottom="8dp"
+              android:text="96.8"
+              android:textColor="#374697"
+              android:textSize="24sp"
+              android:textStyle="bold" />
 
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Wed"
-              android:textColor="#757575"
-              android:textSize="12sp" />
-
-          </LinearLayout>
-
-          <!-- Thursday -->
-          <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <View
-              android:layout_width="24dp"
-              android:layout_height="90dp"
-              android:background="@drawable/rounded_bar_blue" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Thu"
-              android:textColor="#757575"
-              android:textSize="12sp" />
-
-          </LinearLayout>
-
-          <!-- Friday -->
-          <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <View
-              android:layout_width="24dp"
-              android:layout_height="70dp"
-              android:background="@drawable/rounded_bar_dark_blue" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Fri"
-              android:textColor="#757575"
-              android:textSize="12sp" />
-
-          </LinearLayout>
-
-          <!-- Saturday -->
-          <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <View
-              android:layout_width="24dp"
-              android:layout_height="55dp"
-              android:background="@drawable/rounded_bar_light_blue" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Sat"
-              android:textColor="#757575"
-              android:textSize="12sp" />
-
-          </LinearLayout>
-
-          <!-- Sunday -->
-          <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <View
-              android:layout_width="24dp"
-              android:layout_height="40dp"
-              android:background="@drawable/rounded_bar_sunday" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="Sun"
-              android:textColor="#757575"
+              android:text="Monthly Total"
+              android:textColor="#212121"
               android:textSize="12sp" />
 
           </LinearLayout>
 
         </LinearLayout>
 
-      </LinearLayout>
-
-    <!-- Devices Section -->
-
-      <!-- Energy Breakdown -->
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_automation_box"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:text="Energy Breakdown"
-          android:textColor="#212121"
-          android:textSize="16sp"
-          android:textStyle="bold" />
-
-        <!-- Heating -->
+        <!-- Energy Chart Area -->
         <LinearLayout
-          android:layout_width="358dp"
-          android:layout_height="49dp"
-          android:layout_marginBottom="16dp"
-          android:orientation="vertical">
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          android:background="@drawable/rounded_automation_box"
+          android:orientation="vertical"
+          android:padding="20dp">
 
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Weekly Overview"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+          <!-- Simple Bar Chart -->
           <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:gravity="bottom"
             android:orientation="horizontal">
 
-            <ImageView
-              android:layout_width="24dp"
-              android:layout_height="24dp"
-              android:layout_marginEnd="12dp"
-              android:src="@drawable/ic_heating" />
+            <!-- Monday -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
 
-            <TextView
+              <View
+                android:layout_width="24dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_bar_blue" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Mon"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Tuesday -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <View
+                android:layout_width="24dp"
+                android:layout_height="80dp"
+                android:background="@drawable/rounded_bar_dark_blue" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Tue"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Wednesday -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <View
+                android:layout_width="24dp"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_bar_light_blue" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Wed"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Thursday -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <View
+                android:layout_width="24dp"
+                android:layout_height="90dp"
+                android:background="@drawable/rounded_bar_blue" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Thu"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Friday -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <View
+                android:layout_width="24dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_bar_dark_blue" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Fri"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Saturday -->
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <View
+                android:layout_width="24dp"
+                android:layout_height="55dp"
+                android:background="@drawable/rounded_bar_light_blue" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Sat"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Sunday -->
+            <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Heating"
-              android:textColor="#212121"
-              android:textSize="14sp" />
+              android:gravity="center"
+              android:orientation="vertical">
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="45%"
-              android:textColor="#757575"
-              android:textSize="14sp"
-              android:textStyle="bold" />
+              <View
+                android:layout_width="24dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_bar_sunday" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Sun"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            </LinearLayout>
 
           </LinearLayout>
 
-          <!-- Progress Bar -->
+        </LinearLayout>
+
+        <!-- Devices Section -->
+
+        <!-- Energy Breakdown -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:background="@drawable/rounded_automation_box"
+          android:orientation="vertical"
+          android:padding="20dp">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Energy Breakdown"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+          <!-- Heating -->
+          <LinearLayout
+            android:layout_width="358dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="8dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+              <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_heating" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Heating"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45%"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Progress Bar -->
             <FrameLayout
               android:layout_width="match_parent"
               android:layout_height="8dp">
-              
+
               <!-- Background -->
               <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#E0E0E0" />
-                
+
               <!-- Progress Fill -->
               <View
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/progress_heating_orange" />
-                
+
             </FrameLayout>
-
-        </LinearLayout>
-
-        <!-- Cooling -->
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:orientation="vertical">
-
-          <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-              android:layout_width="24dp"
-              android:layout_height="24dp"
-              android:layout_marginEnd="12dp"
-              android:src="@drawable/ic_cooling_simple" />
-
-            <TextView
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="Cooling"
-              android:textColor="#212121"
-              android:textSize="14sp" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="30%"
-              android:textColor="#757575"
-              android:textSize="14sp"
-              android:textStyle="bold" />
 
           </LinearLayout>
 
-          <!-- Progress Bar -->
+          <!-- Cooling -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="8dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+              <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_cooling_simple" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cooling"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30%"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Progress Bar -->
             <FrameLayout
               android:layout_width="match_parent"
               android:layout_height="8dp">
-              
+
               <!-- Background -->
               <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#E0E0E0" />
-                
+
               <!-- Progress Fill -->
               <View
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/progress_cooling_blue" />
-                
+
             </FrameLayout>
 
-        </LinearLayout>
+          </LinearLayout>
 
-        <!-- Lighting -->
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-
+          <!-- Lighting -->
           <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="8dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+              <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_lighting" />
+
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lighting"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15%"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Progress Bar -->
+            <FrameLayout
+              android:layout_width="match_parent"
+              android:layout_height="8dp">
+
+              <!-- Background -->
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0" />
+
+              <!-- Progress Fill -->
+              <View
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/progress_lighting_green" />
+
+            </FrameLayout>
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Energy Cost Section -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:background="@drawable/rounded_automation_box"
+          android:orientation="vertical"
+          android:padding="20dp">
+
+          <!-- Current Cost -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <ImageView
-              android:layout_width="24dp"
-              android:layout_height="24dp"
-              android:layout_marginEnd="12dp"
-              android:src="@drawable/ic_lighting" />
 
             <TextView
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Lighting"
+              android:text="Current Cost"
               android:textColor="#212121"
               android:textSize="14sp" />
 
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="15%"
-              android:textColor="#757575"
-              android:textSize="14sp"
+              android:text="$1.20"
+              android:textColor="#2196F3"
+              android:textSize="16sp"
               android:textStyle="bold" />
 
           </LinearLayout>
 
-          <!-- Progress Bar -->
-            <FrameLayout
-              android:layout_width="match_parent"
-              android:layout_height="8dp">
-              
-              <!-- Background -->
-              <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#E0E0E0" />
-                
-              <!-- Progress Fill -->
-              <View
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/progress_lighting_green" />
-                
-            </FrameLayout>
+          <!-- Monthly Cost -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Monthly Cost"
+              android:textColor="#212121"
+              android:textSize="14sp" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="$36.00"
+              android:textColor="#4CAF50"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          </LinearLayout>
+
+          <!-- Rate -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:text="Rate per kWh"
+              android:textColor="#212121"
+              android:textSize="14sp" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="$0.12"
+              android:textColor="#757575"
+              android:textSize="16sp" />
+
+          </LinearLayout>
 
         </LinearLayout>
 
       </LinearLayout>
-
-            <!-- Energy Cost Section -->
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/rounded_automation_box"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <!-- Current Cost -->
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
-
-          <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Current Cost"
-            android:textColor="#212121"
-            android:textSize="14sp" />
-
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$1.20"
-            android:textColor="#2196F3"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <!-- Monthly Cost -->
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
-
-          <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Monthly Cost"
-            android:textColor="#212121"
-            android:textSize="14sp" />
-
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$36.00"
-            android:textColor="#4CAF50"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <!-- Rate -->
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
-
-          <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Rate per kWh"
-            android:textColor="#212121"
-            android:textSize="14sp" />
-
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$0.12"
-            android:textColor="#757575"
-            android:textSize="16sp" />
-
-        </LinearLayout>
-
-      </LinearLayout>
-
-        </LinearLayout>
 
         </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <include layout="@layout/bottom_navigation" />
+
+</LinearLayout>

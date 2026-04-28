@@ -41,4 +41,12 @@
     <color name="gray_800">#1F2937</color>
     <color name="gray_900">#111827</color>
     <color name="a">#8DA7B6</color>
+    
+    <!-- Additional colors for layouts -->
+    <color name="b">#8DA7B6</color>
+    <color name="c">#8DA7B6</color>
+    <color name="d">#8DA7B6</color>
+    <color name="e">#8DA7B6</color>
+    <color name="f">#8DA7B6</color>
+    <color name="g">#8DA7B6</color>
 </resources>

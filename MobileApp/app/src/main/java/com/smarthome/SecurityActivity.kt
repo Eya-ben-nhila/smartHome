@@ -9,7 +9,7 @@ class SecurityActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_security)
+        setContentView(R.layout.activity_security_simple)
         
         // Setup navigation
         setupNavigation()

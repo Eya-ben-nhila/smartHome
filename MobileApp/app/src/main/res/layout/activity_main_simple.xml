@@ -28,7 +28,7 @@
       android:gravity="center"
       android:padding="32dp">
 
-    <!-- Logo with Circular Background -->
+      <!-- Logo with Circular Background -->
       <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -47,15 +47,15 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
-    <TextView
-      android:id="@+id/textView2"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="20dp"
-      android:layout_marginTop="20dp"
-      android:text="Your home , intelligently connected"
-      android:textColor="#26D1E7"
-      android:textSize="20sp" />
+      <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Your home , intelligently connected"
+        android:textColor="#26D1E7"
+        android:textSize="20sp" />
 
       <TextView
         android:id="@+id/textView3"

@@ -9,7 +9,7 @@ class EnergyActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_energy)
+        setContentView(R.layout.activity_energy_simple)
         
         // Setup navigation
         setupNavigation()
