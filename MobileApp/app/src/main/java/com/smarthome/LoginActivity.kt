@@ -32,15 +32,18 @@ class LoginActivity : AppCompatActivity() {
     
     private fun loadSavedPreferences() {
         val emailInput = findViewById<EditText>(R.id.emailInput)
+        val passwordInput = findViewById<EditText>(R.id.passwordInput)
         val rememberMeCheckbox = findViewById<CheckBox>(R.id.rememberMeCheckbox)
         
         // Check if remember me was checked
         val rememberMe = sharedPreferences.getBoolean("rememberMe", false)
         val savedEmail = sharedPreferences.getString("savedEmail", "")
+        val savedPassword = sharedPreferences.getString("savedPassword", "")
         
         if (rememberMe && !savedEmail.isNullOrEmpty()) {
-            // Load saved email
+            // Load saved email and password
             emailInput?.setText(savedEmail)
+            passwordInput?.setText(savedPassword)
             rememberMeCheckbox?.isChecked = true
         }
     }
@@ -61,21 +64,25 @@ class LoginActivity : AppCompatActivity() {
         // Setup remember me checkbox listener
         val rememberMeCheckbox = findViewById<CheckBox>(R.id.rememberMeCheckbox)
         val emailInput = findViewById<EditText>(R.id.emailInput)
+        val passwordInput = findViewById<EditText>(R.id.passwordInput)
         
         rememberMeCheckbox?.setOnCheckedChangeListener { _, isChecked ->
             val email = emailInput?.text?.toString()?.trim()
+            val password = passwordInput?.text?.toString()?.trim()
             val editor = sharedPreferences.edit()
             
             if (isChecked && !email.isNullOrEmpty()) {
-                // Save email when checkbox is checked
+                // Save email and password when checkbox is checked
                 editor.putBoolean("rememberMe", true)
                 editor.putString("savedEmail", email)
-                Toast.makeText(this, "Email will be remembered", Toast.LENGTH_SHORT).show()
+                editor.putString("savedPassword", password)
+                Toast.makeText(this, "Email and password will be remembered", Toast.LENGTH_SHORT).show()
             } else if (!isChecked) {
-                // Remove saved email when checkbox is unchecked
+                // Remove saved email and password when checkbox is unchecked
                 editor.putBoolean("rememberMe", false)
                 editor.remove("savedEmail")
-                Toast.makeText(this, "Email will not be remembered", Toast.LENGTH_SHORT).show()
+                editor.remove("savedPassword")
+                Toast.makeText(this, "Email and password will not be remembered", Toast.LENGTH_SHORT).show()
             }
             editor.apply()
         }
@@ -117,9 +124,11 @@ class LoginActivity : AppCompatActivity() {
         if (rememberMeCheckbox?.isChecked == true) {
             editor.putBoolean("rememberMe", true)
             editor.putString("savedEmail", email)
+            editor.putString("savedPassword", password)
         } else {
             editor.putBoolean("rememberMe", false)
             editor.remove("savedEmail")
+            editor.remove("savedPassword")
         }
         editor.apply()
         
