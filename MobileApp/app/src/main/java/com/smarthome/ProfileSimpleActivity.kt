@@ -2,6 +2,7 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class ProfileSimpleActivity : AppCompatActivity() {
@@ -15,45 +16,59 @@ class ProfileSimpleActivity : AppCompatActivity() {
         
         // Enable back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
+        // Setup bottom navigation
+        setupBottomNavigation()
+    }
+    
+    private fun setupBottomNavigation() {
+        try {
+            val navigationLayout = findViewById<LinearLayout>(R.id.navigation)
+            if (navigationLayout != null) {
+                // Home button
+                navigationLayout.findViewById<LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
+                    val intent = Intent(this, DashboardFinalActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                
+                // Security button
+                navigationLayout.findViewById<LinearLayout>(R.id.securityNavButton)?.setOnClickListener {
+                    startActivity(Intent(this, SecuritySimpleActivity::class.java))
+                    finish()
+                }
+                
+                // Energy button
+                navigationLayout.findViewById<LinearLayout>(R.id.energyNavButton)?.setOnClickListener {
+                    startActivity(Intent(this, EnergySimpleActivity::class.java))
+                    finish()
+                }
+                
+                // Activity button
+                navigationLayout.findViewById<LinearLayout>(R.id.activityNavButton)?.setOnClickListener {
+                    startActivity(Intent(this, ActivitySimpleActivity::class.java))
+                    finish()
+                }
+                
+                // Automation button
+                navigationLayout.findViewById<LinearLayout>(R.id.automationsNavButton)?.setOnClickListener {
+                    startActivity(Intent(this, AutomationSimpleActivity::class.java))
+                    finish()
+                }
+                
+                // Alerts button
+                navigationLayout.findViewById<LinearLayout>(R.id.alertsNavButton)?.setOnClickListener {
+                    startActivity(Intent(this, AlertsSimpleActivity::class.java))
+                    finish()
+                }
+            }
+        } catch (e: Exception) {
+            // Navigation setup error
+        }
     }
     
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-    }
-    
-    // Navigation methods for bottom navigation
-    fun openMainActivity(view: android.view.View) {
-        val intent = Intent(this, DashboardFinalActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openSecurityActivity(view: android.view.View) {
-        val intent = Intent(this, SecuritySimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openEnergyActivity(view: android.view.View) {
-        val intent = Intent(this, EnergySimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openActivityActivity(view: android.view.View) {
-        val intent = Intent(this, ActivitySimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openAutomationActivity(view: android.view.View) {
-        val intent = Intent(this, AutomationSimpleActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-    
-    fun openAlertsActivity(view: android.view.View) {
-        // Already on profile page, no action needed
     }
 }
