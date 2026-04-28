@@ -32,7 +32,7 @@
       <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/circular_logo_background"
         android:padding="8dp"
         android:src="@drawable/ic_menu_home" />
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="70dp"
         android:layout_marginRight="18dp"
         android:gravity="center"
         android:text="Experience the future of living with seamless control over your environment , security , and atmosphere"

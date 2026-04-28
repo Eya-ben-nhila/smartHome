@@ -2,6 +2,7 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,6 +17,14 @@ class ProfileSimpleActivity : AppCompatActivity() {
         
         // Enable back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
+        // Logout button -> go back to welcome page
+        findViewById<Button>(R.id.logoutButton)?.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
         
         // Setup bottom navigation
         setupBottomNavigation()

@@ -239,6 +239,7 @@
           android:padding="20dp">
 
           <Button
+            android:id="@+id/logoutButton"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:backgroundTint="#E7D7D7"
