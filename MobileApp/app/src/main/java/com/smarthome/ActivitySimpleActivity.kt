@@ -23,7 +23,7 @@ class ActivitySimpleActivity : AppCompatActivity() {
         try {
             // Home button
             findViewById<LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
-                startActivity(Intent(this, MainSimpleActivity::class.java))
+                startActivity(Intent(this, DashboardFinalActivity::class.java))
                 finish()
             }
             

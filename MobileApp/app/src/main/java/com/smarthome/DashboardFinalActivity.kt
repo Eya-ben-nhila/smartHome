@@ -21,9 +21,7 @@ class DashboardFinalActivity : AppCompatActivity() {
         try {
             // Bottom navigation buttons
             findViewById<android.widget.LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
-                val intent = Intent(this, MainSimpleActivity::class.java)
-                startActivity(intent)
-                finish()
+                // Already on dashboard page, no action needed
             }
             
             findViewById<android.widget.LinearLayout>(R.id.securityNavButton)?.setOnClickListener {
