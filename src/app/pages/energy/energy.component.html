@@ -3,7 +3,7 @@
     <h1>Energy</h1>
     <p class="subtitle">Monitor your energy consumption and savings</p>
     <div class="time-filter">
-      <select>
+      <select [(ngModel)]="selectedFilter" (change)="onFilterChange()">
         <option>Last 7 days</option>
         <option>Last 24 hours</option>
         <option>Last 30 days</option>
@@ -65,9 +65,9 @@
       <div class="consumption-chart">
         <h3>Energy Consumption</h3>
         <div class="time-segments">
-          <button class="segment-btn active">Day</button>
-          <button class="segment-btn">Week</button>
-          <button class="segment-btn">Month</button>
+          <button class="segment-btn" [class.active]="selectedSegment === 'Day'" (click)="setSegment('Day')">Day</button>
+          <button class="segment-btn" [class.active]="selectedSegment === 'Week'" (click)="setSegment('Week')">Week</button>
+          <button class="segment-btn" [class.active]="selectedSegment === 'Month'" (click)="setSegment('Month')">Month</button>
         </div>
         <div class="chart-container">
           <svg class="energy-chart" viewBox="0 0 800 300">
@@ -95,32 +95,25 @@
             <!-- Chart Data -->
             <g class="chart-data">
               <!-- Area under the line -->
-              <path d="M 130,180 L 230,120 L 330,160 L 430,80 L 530,140 L 630,100 L 730,150 L 730,250 L 130,250 Z" 
-                    fill="url(#gradient)" opacity="0.3"/>
+              <path [attr.d]="areaPath" fill="url(#gradient)" opacity="0.3"/>
               
               <!-- Line chart -->
-              <path d="M 130,180 L 230,120 L 330,160 L 430,80 L 530,140 L 630,100 L 730,150" 
-                    stroke="#2196F3" stroke-width="3" fill="none"/>
+              <path [attr.d]="linePath" stroke="#2196F3" stroke-width="3" fill="none"/>
               
               <!-- Data points -->
-              <circle cx="130" cy="180" r="5" fill="#2196F3"/>
-              <circle cx="230" cy="120" r="5" fill="#2196F3"/>
-              <circle cx="330" cy="160" r="5" fill="#2196F3"/>
-              <circle cx="430" cy="80" r="5" fill="#2196F3"/>
-              <circle cx="530" cy="140" r="5" fill="#2196F3"/>
-              <circle cx="630" cy="100" r="5" fill="#2196F3"/>
-              <circle cx="730" cy="150" r="5" fill="#2196F3"/>
+              <circle *ngFor="let p of currentPoints" [attr.cx]="p.x" [attr.cy]="p.y" r="5" fill="#2196F3"/>
             </g>
             
             <!-- X-axis labels -->
             <g class="x-labels">
-              <text x="130" y="270" text-anchor="middle" fill="#757575" font-size="12">Mon</text>
-              <text x="230" y="270" text-anchor="middle" fill="#757575" font-size="12">Tue</text>
-              <text x="330" y="270" text-anchor="middle" fill="#757575" font-size="12">Wed</text>
-              <text x="430" y="270" text-anchor="middle" fill="#757575" font-size="12">Thu</text>
-              <text x="530" y="270" text-anchor="middle" fill="#757575" font-size="12">Fri</text>
-              <text x="630" y="270" text-anchor="middle" fill="#757575" font-size="12">Sat</text>
-              <text x="730" y="270" text-anchor="middle" fill="#757575" font-size="12">Sun</text>
+              <text *ngFor="let label of currentLabels; let i = index" 
+                    [attr.x]="currentPoints[i].x" 
+                    y="270" 
+                    text-anchor="middle" 
+                    fill="#757575" 
+                    font-size="12">
+                {{label}}
+              </text>
             </g>
             
             <!-- Gradient definition -->

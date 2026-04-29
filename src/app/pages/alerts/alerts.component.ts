@@ -31,7 +31,7 @@ export class AlertsComponent {
   acknowledgeAlert(alertId: string) {
     const alert = this.alerts.find(a => a.id === alertId);
     if (alert) {
-      alert.status = 'acknowledged';
+      alert.status = 'resolved';
     }
   }
 

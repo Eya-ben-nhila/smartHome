@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detailed Energy Analysis"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Real-time hourly usage breakdown for today"
+        android:textColor="#757575"
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Detailed Scrollable Graph -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <!-- Generate 24 hourly bars -->
+            <!-- I'll use a loop-like structure in Kotlin to add these, or just define a few prominent ones here -->
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="40dp" android:background="@drawable/rounded_bar_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="30dp" android:background="@drawable/rounded_bar_dark_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="02:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="35dp" android:background="@drawable/rounded_bar_light_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="04:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="120dp" android:background="@drawable/rounded_bar_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="06:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="180dp" android:background="@drawable/rounded_bar_dark_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="08:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="210dp" android:background="@drawable/rounded_bar_light_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="190dp" android:background="@drawable/rounded_bar_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="160dp" android:background="@drawable/rounded_bar_dark_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="14:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="220dp" android:background="@drawable/rounded_bar_light_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="16:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+                <View android:layout_width="16dp" android:layout_height="200dp" android:background="@drawable/rounded_bar_blue"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18:00" android:textSize="10sp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#F5F5F5"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insights"
+            android:textColor="#212121"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Peak usage detected at 4:00 PM (A/C and Kitchen appliances)."
+            android:textColor="#616161"
+            android:textSize="13sp"
+            android:layout_marginBottom="4dp"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• You saved 15% compared to yesterday morning."
+            android:textColor="#4CAF50"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

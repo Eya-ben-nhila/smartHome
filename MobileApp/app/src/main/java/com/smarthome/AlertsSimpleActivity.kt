@@ -29,8 +29,70 @@ class AlertsSimpleActivity : AppCompatActivity() {
         
         // Setup bottom navigation
         setupBottomNavigation()
+        
+        // Setup Filters
+        setupFilters()
     }
     
+    private fun setupFilters() {
+        val filterAll = findViewById<TextView>(R.id.filterAll)
+        val filterCritical = findViewById<TextView>(R.id.filterCritical)
+        val filterWarning = findViewById<TextView>(R.id.filterWarning)
+        val filterInfo = findViewById<TextView>(R.id.filterInfo)
+        
+        val filters = listOf(filterAll, filterCritical, filterWarning, filterInfo)
+        
+        filterAll?.setOnClickListener { updateFilterState(filterAll, filters, "All") }
+        filterCritical?.setOnClickListener { updateFilterState(filterCritical, filters, "Critical") }
+        filterWarning?.setOnClickListener { updateFilterState(filterWarning, filters, "Warning") }
+        filterInfo?.setOnClickListener { updateFilterState(filterInfo, filters, "Info") }
+    }
+    
+    private fun updateFilterState(selected: TextView, allFilters: List<TextView?>, type: String) {
+        // Update UI of filters
+        allFilters.forEach { filter ->
+            if (filter == selected) {
+                filter?.setBackgroundResource(R.drawable.oval_filter_active)
+                filter?.setTextColor(android.graphics.Color.WHITE)
+            } else {
+                filter?.setBackgroundResource(R.drawable.oval_filter_inactive)
+                filter?.setTextColor(android.graphics.Color.parseColor("#757575"))
+            }
+        }
+        
+        // Filter the cards
+        filterAlerts(type)
+    }
+    
+    private fun filterAlerts(type: String) {
+        val card1 = findViewById<LinearLayout>(R.id.alertCard1)
+        val card2 = findViewById<LinearLayout>(R.id.alertCard2)
+        val card3 = findViewById<LinearLayout>(R.id.alertCard3)
+        
+        when(type) {
+            "All" -> {
+                card1?.visibility = android.view.View.VISIBLE
+                card2?.visibility = android.view.View.VISIBLE
+                card3?.visibility = android.view.View.VISIBLE
+            }
+            "Critical" -> {
+                card1?.visibility = android.view.View.VISIBLE
+                card2?.visibility = android.view.View.GONE
+                card3?.visibility = android.view.View.GONE
+            }
+            "Warning" -> {
+                card1?.visibility = android.view.View.GONE
+                card2?.visibility = android.view.View.VISIBLE
+                card3?.visibility = android.view.View.GONE
+            }
+            "Info" -> {
+                card1?.visibility = android.view.View.GONE
+                card2?.visibility = android.view.View.GONE
+                card3?.visibility = android.view.View.VISIBLE
+            }
+        }
+    }
+
     private fun setupBottomNavigation() {
         try {
             // Home button
@@ -102,21 +164,53 @@ class AlertsSimpleActivity : AppCompatActivity() {
             .setTitle("Acquitter l'alerte")
             .setMessage("Êtes-vous sûr de vouloir acquitter l'alerte: $alertName?")
             .setPositiveButton("Acquitter") { dialog, _ ->
-                // Dismiss the alert
+                // Update the UI to show 'Résolue'
+                updateAlertUI(alertId, alertName)
+                
                 android.widget.Toast.makeText(this, "Alerte $alertName acquittée", android.widget.Toast.LENGTH_SHORT).show()
-                
-                // Here you would typically:
-                // 1. Remove the alert from the UI
-                // 2. Update the alert status in database
-                // 3. Send notification to server
-                
-                // For now, we'll just show a success message
                 dialog.dismiss()
             }
             .setNegativeButton("Annuler") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun updateAlertUI(alertId: Int, alertName: String) {
+        val cardId = when(alertId) {
+            1 -> R.id.alertCard1
+            2 -> R.id.alertCard2
+            3 -> R.id.alertCard3
+            else -> return
+        }
+        
+        val statusId = when(alertId) {
+            1 -> R.id.alertStatus1
+            2 -> R.id.alertStatus2
+            3 -> R.id.alertStatus3
+            else -> return
+        }
+        
+        val buttonId = when(alertId) {
+            1 -> R.id.dismissAlert1
+            2 -> R.id.dismissAlert2
+            3 -> R.id.dismissAlert3
+            else -> return
+        }
+        
+        // Update Card Background
+        findViewById<LinearLayout>(cardId)?.setBackgroundResource(R.drawable.alert_resolved_background)
+        
+        // Update Status Text
+        val statusView = findViewById<TextView>(statusId)
+        statusView?.text = "Résolue"
+        statusView?.setTextColor(android.graphics.Color.parseColor("#4CAF50"))
+        
+        // Update Button
+        val button = findViewById<TextView>(buttonId)
+        button?.text = "Résolue"
+        button?.setBackgroundResource(R.drawable.rounded_button_green)
+        button?.isEnabled = false // Disable once resolved
     }
 
     private fun setupAddRule() {

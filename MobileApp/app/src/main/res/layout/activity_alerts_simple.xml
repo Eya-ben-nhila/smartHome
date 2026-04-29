@@ -216,6 +216,7 @@
 
             <!-- All State -->
             <TextView
+              android:id="@+id/filterAll"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginEnd="8dp"
@@ -231,6 +232,7 @@
 
             <!-- Critical State -->
             <TextView
+              android:id="@+id/filterCritical"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginEnd="8dp"
@@ -246,6 +248,7 @@
 
             <!-- Warning State -->
             <TextView
+              android:id="@+id/filterWarning"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginEnd="8dp"
@@ -261,6 +264,7 @@
 
             <!-- Info State -->
             <TextView
+              android:id="@+id/filterInfo"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:background="@drawable/oval_filter_inactive"
@@ -279,6 +283,7 @@
 
         <!-- Alert Item 1 - Critical -->
         <LinearLayout
+          android:id="@+id/alertCard1"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="12dp"
@@ -301,6 +306,7 @@
               android:src="@drawable/ic_alert_critical" />
 
             <TextView
+              android:id="@+id/alertStatus1"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
@@ -365,6 +371,7 @@
 
         <!-- Alert Item 2 - Warning -->
         <LinearLayout
+          android:id="@+id/alertCard2"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="12dp"
@@ -387,6 +394,7 @@
               android:src="@drawable/ic_alert_warning" />
 
             <TextView
+              android:id="@+id/alertStatus2"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
@@ -451,6 +459,7 @@
 
         <!-- Alert Item 3 - Info -->
         <LinearLayout
+          android:id="@+id/alertCard3"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="12dp"
@@ -473,6 +482,7 @@
               android:src="@drawable/ic_alert_info" />
 
             <TextView
+              android:id="@+id/alertStatus3"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"

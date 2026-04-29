@@ -25,6 +25,39 @@ class EnergySimpleActivity : AppCompatActivity() {
         
         // Setup bottom navigation
         setupBottomNavigation()
+        
+        // Setup Energy Chart Double Click
+        setupChartActions()
+    }
+    
+    private fun setupChartActions() {
+        val chartArea = findViewById<LinearLayout>(R.id.energyChartArea)
+        chartArea?.setOnDoubleClickListener {
+            showDetailedAnalysisDialog()
+        }
+    }
+    
+    private fun showDetailedAnalysisDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_energy_detail, null)
+        
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setPositiveButton("Close", null)
+            .show()
+    }
+    
+    // Extension for double click
+    private fun android.view.View.setOnDoubleClickListener(onDoubleClick: () -> Unit) {
+        var lastClickTime: Long = 0
+        val doubleClickDelay: Long = 300 // ms
+        
+        this.setOnClickListener {
+            val currentTime = System.currentTimeMillis()
+            if (currentTime - lastClickTime < doubleClickDelay) {
+                onDoubleClick()
+            }
+            lastClickTime = currentTime
+        }
     }
     
     private fun setupBottomNavigation() {
