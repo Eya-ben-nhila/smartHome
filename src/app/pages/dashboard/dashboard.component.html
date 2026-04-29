@@ -49,211 +49,119 @@
   </div>
 
   <!-- Device Cards Grid -->
-  <div class="devices-grid">
-    <!-- Column 1: Live Camera + Front Door Lock + Garage -->
-    <div class="column">
-      <div class="device-card camera-card large">
-        <div class="camera-feed">
-          <img src="https://picsum.photos/seed/camera1/400/250.jpg" alt="Front door camera">
-          <div class="live-indicator">
-            <span class="live-dot"></span>
-            Live
-          </div>
-          <div class="camera-controls">
-            <i class="fas fa-expand"></i>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card lock-card" (dblclick)="openDeviceDetails('lock', getDeviceInfo('Front door lock').name, getDeviceInfo('Front door lock').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-lock"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Front door lock').name}}</h4>
-            <p>{{getDeviceInfo('Front door lock').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card garage-card" (dblclick)="openDeviceDetails('garage', getDeviceInfo('Garage').name, getDeviceInfo('Garage').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-car"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Garage').name}}</h4>
-            <p>{{getDeviceInfo('Garage').status}}</p>
-          </div>
-        </div>
-      </div>
+  <div class="devices-grid" cdkDropListGroup>
+    <!-- Column 1 -->
+    <div class="column" 
+         cdkDropList 
+         [cdkDropListData]="col1Devices"
+         (cdkDropListDropped)="onDrop($event)">
+      <ng-container *ngFor="let device of col1Devices">
+        <ng-container *ngTemplateOutlet="deviceCard; context: { $implicit: device }"></ng-container>
+      </ng-container>
     </div>
 
-    <!-- Column 2: Front Door Light + TV + Speaker + Plug + Floor Lamp -->
-    <div class="column">
-      <div class="device-card light-card" (dblclick)="openDeviceDetails('light', getDeviceInfo('Front door light').name, getDeviceInfo('Front door light').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-lightbulb"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Front door light').name}}</h4>
-            <p>{{getDeviceInfo('Front door light').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card tv-card" (dblclick)="openDeviceDetails('tv', getDeviceInfo('TV').name, getDeviceInfo('TV').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-tv"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('TV').name}}</h4>
-            <p>{{getDeviceInfo('TV').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card speaker-card" (dblclick)="openDeviceDetails('speaker', getDeviceInfo('Speaker').name, getDeviceInfo('Speaker').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-volume-up"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Speaker').name}}</h4>
-            <p>{{getDeviceInfo('Speaker').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card plug-card" (dblclick)="openDeviceDetails('plug', getDeviceInfo('Smart plug').name, getDeviceInfo('Smart plug').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-plug"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Smart plug').name}}</h4>
-            <p>{{getDeviceInfo('Smart plug').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card floor-lamp-card" (dblclick)="openDeviceDetails('lamp', getDeviceInfo('Floor lamp').name, getDeviceInfo('Floor lamp').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-lightbulb"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Floor lamp').name}}</h4>
-            <p>{{getDeviceInfo('Floor lamp').status}}</p>
-          </div>
-        </div>
-      </div>
+    <!-- Column 2 -->
+    <div class="column"
+         cdkDropList 
+         [cdkDropListData]="col2Devices"
+         (cdkDropListDropped)="onDrop($event)">
+      <ng-container *ngFor="let device of col2Devices">
+        <ng-container *ngTemplateOutlet="deviceCard; context: { $implicit: device }"></ng-container>
+      </ng-container>
     </div>
 
-    <!-- Column 3: Downstairs Temp + Second Live Camera -->
-    <div class="column">
-      <div class="device-card temperature-card" (dblclick)="openDeviceDetails('temp', getDeviceInfo('Downstairs').name, getDeviceInfo('Downstairs').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-thermometer-half"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Downstairs').name}}</h4>
-            <div class="temperature-display">
-              <span class="temp-value">68</span>
-              <span class="temp-label">Comfort</span>
-            </div>
-            <div class="temp-controls">
-              <button class="temp-btn">-</button>
-              <button class="temp-btn">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card camera-card" (dblclick)="openDeviceDetails('camera', getDeviceInfo('Backyard camera').name, getDeviceInfo('Backyard camera').status)">
-        <div class="camera-feed">
-          <img src="https://picsum.photos/seed/camera2/200/150.jpg" alt="Backyard camera">
-          <div class="live-indicator">
-            <span class="live-dot"></span>
-            {{getDeviceInfo('Backyard camera').status}}
-          </div>
-          <div class="camera-controls">
-            <i class="fas fa-expand"></i>
-          </div>
-        </div>
-      </div>
+    <!-- Column 3 -->
+    <div class="column"
+         cdkDropList 
+         [cdkDropListData]="col3Devices"
+         (cdkDropListDropped)="onDrop($event)">
+      <ng-container *ngFor="let device of col3Devices">
+        <ng-container *ngTemplateOutlet="deviceCard; context: { $implicit: device }"></ng-container>
+      </ng-container>
     </div>
 
-    <!-- Column 4: Fan + Outdoor AQI + San Francisco Temp + Indoor Temperatures -->
-    <div class="column">
-      <div class="device-card fan-card" (dblclick)="openDeviceDetails('fan', getDeviceInfo('Fan').name, getDeviceInfo('Fan').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-fan"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Fan').name}}</h4>
-            <p>{{getDeviceInfo('Fan').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card air-quality-card" (dblclick)="openDeviceDetails('air', getDeviceInfo('Outdoor AQI').name, getDeviceInfo('Outdoor AQI').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-wind"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Outdoor AQI').name}}</h4>
-            <p>{{getDeviceInfo('Outdoor AQI').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card weather-card" (dblclick)="openDeviceDetails('weather', getDeviceInfo('San Francisco').name, getDeviceInfo('San Francisco').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-sun"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('San Francisco').name}}</h4>
-            <p>{{getDeviceInfo('San Francisco').status}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="device-card temperature-card indoor-temp" (dblclick)="openDeviceDetails('indoor-temp', getDeviceInfo('Indoor temperatures').name, getDeviceInfo('Indoor temperatures').status)">
-        <div class="card-content">
-          <div class="device-icon">
-            <i class="fas fa-thermometer-half"></i>
-          </div>
-          <div class="device-info">
-            <h4>{{getDeviceInfo('Indoor temperatures').name}}</h4>
-            <div class="room-list">
-              <div class="room-item">
-                <i class="fas fa-home"></i>
-                <span>Downstairs: 68°F</span>
-              </div>
-              <div class="room-item">
-                <i class="fas fa-couch"></i>
-                <span>Living room: 72°F</span>
-              </div>
-              <div class="room-item">
-                <i class="fas fa-bed"></i>
-                <span>Guest bedroom: 70°F</span>
-              </div>
-            </div>
-            <button class="select-sensors-btn">Select sensors</button>
-          </div>
-        </div>
-      </div>
+    <!-- Column 4 -->
+    <div class="column"
+         cdkDropList 
+         [cdkDropListData]="col4Devices"
+         (cdkDropListDropped)="onDrop($event)">
+      <ng-container *ngFor="let device of col4Devices">
+        <ng-container *ngTemplateOutlet="deviceCard; context: { $implicit: device }"></ng-container>
+      </ng-container>
     </div>
   </div>
 </div>
+
+<!-- Reusable Device Card Template -->
+<ng-template #deviceCard let-device>
+  <div class="device-card" 
+       [ngClass]="[device.type + '-card', device.type === 'indoor-temp' ? 'temperature-card indoor-temp' : '', device.isLarge ? 'large' : '']"
+       cdkDrag
+       (dblclick)="openDeviceDetails(device.type, device.name, device.status)">
+    
+    <!-- Drag Placeholder -->
+    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+
+    <div class="card-content" *ngIf="device.type !== 'camera' && device.type !== 'temperature' && device.type !== 'indoor-temp'">
+      <div class="device-icon">
+        <i class="fas" [ngClass]="getIcon(device.type)"></i>
+      </div>
+      <div class="device-logo" *ngIf="device.type === 'lock' || device.type === 'garage'">
+        <i class="fas" [ngClass]="getIcon(device.type)"></i>
+      </div>
+      <div class="device-info">
+        <h4>{{device.name}}</h4>
+        <p>{{device.status}}</p>
+      </div>
+    </div>
+
+    <!-- Special Card: Camera -->
+    <div class="camera-feed" *ngIf="device.type === 'camera'">
+      <img [src]="device.isLarge ? 'https://picsum.photos/seed/camera1/400/250.jpg' : 'https://picsum.photos/seed/camera2/200/150.jpg'" [alt]="device.name">
+      <div class="live-indicator">
+        <span class="live-dot"></span>
+        {{device.status}}
+      </div>
+      <div class="camera-controls">
+        <i class="fas fa-expand"></i>
+      </div>
+    </div>
+
+    <!-- Special Card: Temperature -->
+    <div class="card-content" *ngIf="device.type === 'temperature'">
+      <div class="device-icon">
+        <i class="fas fa-thermometer-half"></i>
+      </div>
+      <div class="device-info">
+        <h4>{{device.name}}</h4>
+        <div class="temperature-display">
+          <span class="temp-value">{{device.status.replace('°F', '')}}</span>
+          <span class="temp-label">Comfort</span>
+        </div>
+        <div class="temp-controls">
+          <button class="temp-btn">-</button>
+          <button class="temp-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Card: Indoor Temp -->
+    <div class="card-content" *ngIf="device.type === 'indoor-temp'">
+      <div class="device-icon">
+        <i class="fas fa-thermometer-half"></i>
+      </div>
+      <div class="device-info">
+        <h4>{{device.name}}</h4>
+        <div class="room-list">
+          <div class="room-item"><i class="fas fa-home"></i> <span>Downstairs: 68°F</span></div>
+          <div class="room-item"><i class="fas fa-couch"></i> <span>Living room: 72°F</span></div>
+          <div class="room-item"><i class="fas fa-bed"></i> <span>Guest bedroom: 70°F</span></div>
+        </div>
+        <button class="select-sensors-btn">Select sensors</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Modal Ajouter Dispositif -->
 <div class="modal-overlay" *ngIf="showAddDeviceModal" (click)="closeAddDeviceModal()">

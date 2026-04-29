@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DragDropModule],
   templateUrl: './dashboard.component.html',
   styles: [`
     .dashboard-content {
       padding: 20px;
       overflow-y: auto;
       height: 100vh;
-      background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e8 50%, #fff3e0 100%);
+      background: #f0f2f5;
     }
 
     .header-strip {
@@ -714,9 +715,10 @@ import { FormsModule } from '@angular/forms';
         transform: scale(1);
       }
     }
+
   `]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   showAddDeviceModal = false;
   showDeviceDetailsModal = false;
   isEditingDevice = false;
@@ -752,16 +754,42 @@ export class DashboardComponent {
     { id: '4', name: 'TV', type: 'tv', status: 'Off', location: 'Salon' },
     { id: '5', name: 'Speaker', type: 'speaker', status: 'Playing - 50%', location: 'Salon' },
     { id: '6', name: 'Smart plug', type: 'plug', status: 'Off', location: 'Salon' },
-    { id: '7', name: 'Floor lamp', type: 'lamp', status: 'On - 50%', location: 'Salon' },
-    { id: '8', name: 'Downstairs', type: 'temp', status: '68°F', location: 'RDC' },
-    { id: '9', name: 'Backyard camera', type: 'camera', status: 'Live', location: 'Jardin' },
+    { id: '7', name: 'Floor lamp', type: 'floor-lamp', status: 'On - 50%', location: 'Salon' },
+    { id: '8', name: 'Downstairs', type: 'temperature', status: '68°F', location: 'RDC' },
+    { id: '9', name: 'Backyard camera', type: 'camera', status: 'Live', location: 'Jardin', isLarge: true },
     { id: '10', name: 'Fan', type: 'fan', status: 'On', location: 'Salon' },
-    { id: '11', name: 'Outdoor AQI', type: 'air', status: '32 - Good', location: 'Extérieur' },
+    { id: '11', name: 'Outdoor AQI', type: 'air-quality', status: '32 - Good', location: 'Extérieur' },
     { id: '12', name: 'San Francisco', type: 'weather', status: '56° Clear', location: 'Extérieur' },
     { id: '13', name: 'Indoor temperatures', type: 'indoor-temp', status: 'Multiple rooms', location: 'Maison' }
   ];
 
+  col1Devices: any[] = [];
+  col2Devices: any[] = [];
+  col3Devices: any[] = [];
+  col4Devices: any[] = [];
+
   constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Initialiser les colonnes
+    this.col1Devices = [this.devices.find(d => d.id === '9'), this.devices.find(d => d.id === '1'), this.devices.find(d => d.id === '2')];
+    this.col2Devices = [this.devices.find(d => d.id === '3'), this.devices.find(d => d.id === '4'), this.devices.find(d => d.id === '5'), this.devices.find(d => d.id === '6'), this.devices.find(d => d.id === '7')];
+    this.col3Devices = [this.devices.find(d => d.id === '8'), { ...this.devices.find(d => d.id === '9'), id: '9-small', isLarge: false }];
+    this.col4Devices = [this.devices.find(d => d.id === '10'), this.devices.find(d => d.id === '11'), this.devices.find(d => d.id === '12'), this.devices.find(d => d.id === '13')];
+  }
+
+  onDrop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
 
   goToSearch(): void {
     this.router.navigate(['/search']);
@@ -797,6 +825,7 @@ export class DashboardComponent {
         location: this.newDevice.location || 'Non spécifiée'
       };
       this.devices.push(device);
+      this.col4Devices.push(device); // Ajouter à la 4ème colonne par défaut
       console.log('Nouveau dispositif ajouté:', device);
       this.closeAddDeviceModal();
     }
@@ -868,6 +897,22 @@ export class DashboardComponent {
   getDeviceInfo(deviceName: string) {
     const device = this.devices.find(d => d.name === deviceName);
     return device || { name: deviceName, status: 'Unknown' };
+  }
+
+  getIcon(type: string): string {
+    switch (type) {
+      case 'light': return 'fa-lightbulb';
+      case 'camera': return 'fa-video';
+      case 'lock': return 'fa-lock';
+      case 'thermostat': return 'fa-thermometer-half';
+      case 'speaker': return 'fa-volume-up';
+      case 'plug': return 'fa-plug';
+      case 'floor-lamp': return 'fa-lightbulb';
+      case 'air-quality': return 'fa-wind';
+      case 'temperature': return 'fa-thermometer-half';
+      case 'garage': return 'fa-car';
+      default: return 'fa-cube';
+    }
   }
 
   private getDeviceLocation(name: string): string {
