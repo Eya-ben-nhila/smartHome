@@ -20,10 +20,30 @@ export class AlertsComponent {
     endTime: ''
   };
 
-  dismissAlert(alertType: string) {
-    console.log(`Dismissing alert: ${alertType}`);
-    // Here you would typically call a service to remove the alert
-    // For now, we'll just log it
+  alerts = [
+    { id: 'motion-activity', type: 'motion', icon: 'fa-running', title: 'Motion Detected', desc: 'Living room and hallway - 2 minutes ago', status: 'active' },
+    { id: 'door-activity', type: 'security', icon: 'fa-door-open', title: 'Door Access', desc: 'Main entrance - 15 minutes ago', status: 'active' },
+    { id: 'temp-activity', type: 'system', icon: 'fa-thermometer-half', title: 'Temperature Alert', desc: 'Living room - 1 hour ago', status: 'active' },
+    { id: 'energy-activity', type: 'energy', icon: 'fa-bolt', title: 'High Energy Usage', desc: 'Whole house - 2 hours ago', status: 'active' },
+    { id: 'camera-activity', type: 'security', icon: 'fa-video', title: 'Camera Motion', desc: 'Backyard - 3 hours ago', status: 'active' }
+  ];
+
+  acknowledgeAlert(alertId: string) {
+    const alert = this.alerts.find(a => a.id === alertId);
+    if (alert) {
+      alert.status = 'acknowledged';
+    }
+  }
+
+  resolveAlert(alertId: string) {
+    const alert = this.alerts.find(a => a.id === alertId);
+    if (alert) {
+      alert.status = 'resolved';
+    }
+  }
+
+  dismissAlert(alertId: string) {
+    this.acknowledgeAlert(alertId);
   }
 
   showAddRuleForm() {

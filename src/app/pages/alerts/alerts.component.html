@@ -92,78 +92,37 @@
     <div class="recent-activity">
       <h3>Recent Activity</h3>
       <div class="activity-list">
-        <div class="activity-item">
-          <div class="activity-icon motion">
-            <i class="fas fa-running"></i>
+        <div class="activity-item" *ngFor="let alert of alerts" [ngClass]="alert.status">
+          <div class="activity-icon" [ngClass]="alert.type">
+            <i class="fas" [ngClass]="alert.icon"></i>
           </div>
           <div class="activity-content">
-            <h4>Motion Detected</h4>
-            <p>Living room and hallway - 2 minutes ago</p>
+            <h4>{{alert.title}}</h4>
+            <p>{{alert.desc}}</p>
           </div>
           <div class="activity-actions">
-            <button class="dismiss-btn" (click)="dismissAlert('motion-activity')">
-              Acquitter
-            </button>
-          </div>
-        </div>
+            <!-- Case Active -->
+            <ng-container *ngIf="alert.status === 'active'">
+              <button class="dismiss-btn acknowledge" (click)="acknowledgeAlert(alert.id)">
+                Acquitter
+              </button>
+              <button class="dismiss-btn resolve" (click)="resolveAlert(alert.id)">
+                Résoudre
+              </button>
+            </ng-container>
 
-        <div class="activity-item">
-          <div class="activity-icon security">
-            <i class="fas fa-door-open"></i>
-          </div>
-          <div class="activity-content">
-            <h4>Door Access</h4>
-            <p>Main entrance - 15 minutes ago</p>
-          </div>
-          <div class="activity-actions">
-            <button class="dismiss-btn" (click)="dismissAlert('door-activity')">
-              Acquitter
-            </button>
-          </div>
-        </div>
+            <!-- Case Acknowledged -->
+            <ng-container *ngIf="alert.status === 'acknowledged'">
+              <span class="status-badge acknowledged">Acquittée</span>
+              <button class="dismiss-btn resolve" (click)="resolveAlert(alert.id)">
+                Résoudre
+              </button>
+            </ng-container>
 
-        <div class="activity-item">
-          <div class="activity-icon system">
-            <i class="fas fa-thermometer-half"></i>
-          </div>
-          <div class="activity-content">
-            <h4>Temperature Alert</h4>
-            <p>Living room - 1 hour ago</p>
-          </div>
-          <div class="activity-actions">
-            <button class="dismiss-btn" (click)="dismissAlert('temp-activity')">
-              Acquitter
-            </button>
-          </div>
-        </div>
-
-        <div class="activity-item">
-          <div class="activity-icon energy">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <div class="activity-content">
-            <h4>High Energy Usage</h4>
-            <p>Whole house - 2 hours ago</p>
-          </div>
-          <div class="activity-actions">
-            <button class="dismiss-btn" (click)="dismissAlert('energy-activity')">
-              Acquitter
-            </button>
-          </div>
-        </div>
-
-        <div class="activity-item">
-          <div class="activity-icon security">
-            <i class="fas fa-video"></i>
-          </div>
-          <div class="activity-content">
-            <h4>Camera Motion</h4>
-            <p>Backyard - 3 hours ago</p>
-          </div>
-          <div class="activity-actions">
-            <button class="dismiss-btn" (click)="dismissAlert('camera-activity')">
-              Acquitter
-            </button>
+            <!-- Case Resolved -->
+            <ng-container *ngIf="alert.status === 'resolved'">
+              <span class="status-badge resolved">Résolue</span>
+            </ng-container>
           </div>
         </div>
       </div>

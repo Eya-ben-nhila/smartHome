@@ -34,8 +34,18 @@
       android:layout_weight="1"
       android:text="SmartHome Dashboard"
       android:textColor="@color/text"
-      android:textSize="24sp"
+      android:textSize="20sp"
       android:textStyle="bold" />
+
+    <!-- Alert Trigger Button -->
+    <ImageView
+      android:id="@+id/alertTriggerButton"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginStart="8dp"
+      android:contentDescription="Trigger Alert"
+      android:padding="8dp"
+      android:src="@drawable/g" />
 
   </LinearLayout>
 
@@ -532,8 +542,8 @@
             android:layout_marginBottom="12dp"
             android:orientation="horizontal">
 
-            <!-- Smart TV -->
             <LinearLayout
+              android:id="@+id/deviceSmartTV"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginEnd="8dp"
@@ -550,6 +560,7 @@
                 android:textSize="24sp" />
 
               <TextView
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -559,6 +570,7 @@
                 android:textStyle="bold" />
 
               <TextView
+                android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Living Room"
@@ -567,8 +579,8 @@
 
             </LinearLayout>
 
-            <!-- Smart Light -->
             <LinearLayout
+              android:id="@+id/deviceSmartLight"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
@@ -585,6 +597,7 @@
                 android:textSize="24sp" />
 
               <TextView
+                android:id="@+id/lightName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -594,6 +607,7 @@
                 android:textStyle="bold" />
 
               <TextView
+                android:id="@+id/lightLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bedroom"
@@ -610,8 +624,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Smart Lock -->
             <LinearLayout
+              android:id="@+id/deviceSmartLock"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginEnd="8dp"
@@ -628,6 +642,7 @@
                 android:textSize="24sp" />
 
               <TextView
+                android:id="@+id/lockName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -637,6 +652,7 @@
                 android:textStyle="bold" />
 
               <TextView
+                android:id="@+id/lockLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Front Door"
@@ -645,8 +661,8 @@
 
             </LinearLayout>
 
-            <!-- Smart Fan -->
             <LinearLayout
+              android:id="@+id/deviceSmartFan"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
@@ -663,6 +679,7 @@
                 android:textSize="24sp" />
 
               <TextView
+                android:id="@+id/fanName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -672,6 +689,7 @@
                 android:textStyle="bold" />
 
               <TextView
+                android:id="@+id/fanLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Living Room"
@@ -685,6 +703,14 @@
         </LinearLayout>
 
       </androidx.cardview.widget.CardView>
+
+      <!-- Dynamic Devices Container -->
+      <LinearLayout
+        android:id="@+id/additionalDevicesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp" />
 
       <!-- Add Device Button -->
       <androidx.cardview.widget.CardView
@@ -763,5 +789,59 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
+
+  <!-- Alert Notification Overlay -->
+  <androidx.cardview.widget.CardView
+    android:id="@+id/alertNotification"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:visibility="gone"
+    app:cardBackgroundColor="#FF5252"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:layout_constraintTop_toBottomOf="@+id/header">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="24dp"
+      android:gravity="center_vertical">
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="ALERTE SÉCURITÉ"
+          android:textColor="@color/white"
+          android:textSize="22sp"
+          android:textStyle="bold" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:text="Mouvement détecté dans le jardin !"
+          android:textColor="@color/white"
+          android:textSize="18sp" />
+
+      </LinearLayout>
+
+      <ImageView
+        android:id="@+id/closeAlertButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:tint="@color/white" />
+
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

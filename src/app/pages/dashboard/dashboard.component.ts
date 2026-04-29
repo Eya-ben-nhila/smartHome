@@ -704,6 +704,89 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
       background: #d32f2f;
     }
 
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .alert-toast {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      z-index: 9999;
+      background: #ff5252;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(255, 82, 82, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.5s ease;
+    }
+
+    .alert-toast.acknowledged {
+      background: #e8f5e9;
+      color: #2e7d32;
+      box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+    }
+
+    .alert-toast.acknowledged .close-alert {
+      background: rgba(46, 125, 50, 0.1);
+      color: #2e7d32;
+    }
+
+    .acknowledge-btn {
+      background: white;
+      color: #ff5252;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .acknowledge-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .alert-toast i {
+      font-size: 24px;
+      animation: pulse 1s infinite;
+    }
+
+    .alert-toast-content h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .alert-toast-content p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .close-alert {
+      margin-left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
     @keyframes pulse {
       0% {
         transform: scale(1);
@@ -722,6 +805,9 @@ export class DashboardComponent implements OnInit {
   showAddDeviceModal = false;
   showDeviceDetailsModal = false;
   isEditingDevice = false;
+  showAlertNotification = false;
+  isAlertAcknowledged = false;
+  alertMessage = 'Attention : Mouvement détecté dans le jardin !';
   
   newDevice = {
     name: '',
@@ -803,6 +889,22 @@ export class DashboardComponent implements OnInit {
       this.col3Devices = layout.col3;
       this.col4Devices = layout.col4;
       this.devices = layout.allDevices || this.devices;
+
+      // Réparer si "Indoor temperatures" est manquant
+      const indoorTempExists = this.devices.some(d => d.id === '13');
+      if (!indoorTempExists) {
+        const indoorTemp = { id: '13', name: 'Indoor temperatures', type: 'indoor-temp', status: 'Multiple rooms', location: 'Maison' };
+        this.devices.push(indoorTemp);
+        this.col4Devices.push(indoorTemp);
+        this.saveDeviceLayout();
+      } else {
+        // Vérifier s'il est présent dans l'une des colonnes
+        const inColumns = [...this.col1Devices, ...this.col2Devices, ...this.col3Devices, ...this.col4Devices].some(d => d.id === '13');
+        if (!inColumns) {
+          this.col4Devices.push(this.devices.find(d => d.id === '13'));
+          this.saveDeviceLayout();
+        }
+      }
     } else {
       this.initDefaultLayout();
     }
@@ -941,6 +1043,23 @@ export class DashboardComponent implements OnInit {
   }
 
   // Méthode pour obtenir les informations d'un dispositif pour l'affichage
+  triggerAlert(): void {
+    this.isAlertAcknowledged = false;
+    this.alertMessage = 'Attention : Mouvement détecté dans le jardin !';
+    this.showAlertNotification = true;
+  }
+
+  acknowledgeAlert(): void {
+    this.isAlertAcknowledged = true;
+    this.alertMessage = 'Alerte acquittée par l\'utilisateur';
+    // On garde la notif affichée en vert
+  }
+
+  closeAlertNotification(): void {
+    this.showAlertNotification = false;
+    this.isAlertAcknowledged = false;
+  }
+
   getDeviceInfo(deviceName: string) {
     const device = this.devices.find(d => d.name === deviceName);
     return device || { name: deviceName, status: 'Unknown' };

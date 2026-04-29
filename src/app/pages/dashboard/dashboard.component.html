@@ -40,6 +40,9 @@
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
           </button>
+          <button class="add-device-btn" style="background: #ff5252; margin-right: 15px; padding: 10px 15px;" (click)="triggerAlert()" title="Trigger Alert">
+            <i class="fas fa-bell"></i>
+          </button>
           <button class="add-device-btn" (click)="openAddDeviceModal()">
             <i class="fas fa-plus"></i>
             <span>Ajouter</span>
@@ -162,6 +165,23 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Notification d'alerte -->
+<div class="alert-toast" *ngIf="showAlertNotification" [ngClass]="{'acknowledged': isAlertAcknowledged}">
+  <div class="alert-icon">
+    <i class="fas" [ngClass]="isAlertAcknowledged ? 'fa-check-circle' : 'fa-exclamation-triangle'"></i>
+  </div>
+  <div class="alert-toast-content">
+    <h4>{{ isAlertAcknowledged ? 'ALERTE ACQUITTÉE' : 'ALERTE SÉCURITÉ' }}</h4>
+    <p>{{alertMessage}}</p>
+  </div>
+  <button class="acknowledge-btn" *ngIf="!isAlertAcknowledged" (click)="acknowledgeAlert()">
+    Acquitter
+  </button>
+  <button class="close-alert" (click)="closeAlertNotification()">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
 
 <!-- Modal Ajouter Dispositif -->
 <div class="modal-overlay" *ngIf="showAddDeviceModal" (click)="closeAddDeviceModal()">
