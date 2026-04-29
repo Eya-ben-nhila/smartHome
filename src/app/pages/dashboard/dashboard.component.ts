@@ -208,8 +208,24 @@ import { FormsModule } from '@angular/forms';
       align-items: center;
       justify-content: center;
       border-radius: 12px;
-      font-size: 20px;
+      font-size: 28px;
       color: white;
+    }
+
+    .device-logo {
+      width: 32px;
+      height: 32px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #333;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      border: 2px solid #fff;
+      margin-left: -6px;
+      z-index: 2;
     }
 
     .device-info {
@@ -288,6 +304,24 @@ import { FormsModule } from '@angular/forms';
       transition: opacity 0.3s ease;
     }
 
+    // Lock Cards
+    .lock-card .device-icon {
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+    }
+
+    .lock-card .device-info p {
+      color: #f44336;
+    }
+
+    // Garage Cards
+    .garage-card .device-icon {
+      background: linear-gradient(135deg, #795548, #5D4037);
+    }
+
+    .garage-card .device-info p {
+      color: #795548;
+    }
+
     // Light Cards
     .light-card .device-icon {
       background: linear-gradient(135deg, #FFC107, #FF9800);
@@ -334,6 +368,10 @@ import { FormsModule } from '@angular/forms';
     }
 
     // Temperature Cards
+    .temperature-card {
+      background: linear-gradient(135deg, #fff5eb, #ffe8d4) !important;
+    }
+
     .temperature-card .device-icon {
       background: linear-gradient(135deg, #FF9800, #F57C00);
     }
@@ -373,15 +411,16 @@ import { FormsModule } from '@angular/forms';
       height: 32px;
       border: none;
       border-radius: 50%;
-      background: #e0e0e0;
+      background: white;
       color: #333;
       font-size: 16px;
       cursor: pointer;
       transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .temp-btn:hover {
-      background: #d0d0d0;
+      background: #f5f5f5;
       color: #111;
     }
 
@@ -437,7 +476,7 @@ import { FormsModule } from '@angular/forms';
     }
 
     .select-sensors-btn {
-      background: #e0e0e0;
+      background: white;
       border: none;
       border-radius: 8px;
       padding: 8px 16px;
@@ -445,10 +484,11 @@ import { FormsModule } from '@angular/forms';
       font-size: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .select-sensors-btn:hover {
-      background: #d0d0d0;
+      background: #f5f5f5;
       color: #111;
     }
 

@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transform: translateY(60px); /* Move a bit to the bottom */
+    transform: translateY(0); /* Move back to top */
   }
 
   .nav-item {

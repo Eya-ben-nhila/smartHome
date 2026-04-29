@@ -173,6 +173,22 @@
         color: white;
       }
 
+      .device-logo {
+        width: 32px;
+        height: 32px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #333;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        border: 2px solid #fff;
+        margin-left: -6px;
+        z-index: 2;
+      }
+
       .device-info {
         flex: 1;
 
@@ -263,6 +279,28 @@
       }
     }
 
+    // Lock Cards
+    .lock-card {
+      .device-icon {
+        background: linear-gradient(135deg, #f44336, #d32f2f);
+      }
+
+      .device-info p {
+        color: #f44336;
+      }
+    }
+
+    // Garage Cards
+    .garage-card {
+      .device-icon {
+        background: linear-gradient(135deg, #795548, #5D4037);
+      }
+
+      .device-info p {
+        color: #795548;
+      }
+    }
+
     // TV Cards
     .tv-card {
       .device-icon {
@@ -308,7 +346,9 @@
     }
 
     // Temperature Cards
-    .temperature-card {
+    .device-card.temperature-card {
+      background: linear-gradient(135deg, #fff5eb, #ffe8d4) !important;
+      
       .device-icon {
         background: linear-gradient(135deg, #FF9800, #F57C00);
       }
