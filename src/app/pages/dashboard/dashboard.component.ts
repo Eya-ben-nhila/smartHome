@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -768,10 +768,47 @@ export class DashboardComponent implements OnInit {
   col3Devices: any[] = [];
   col4Devices: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    // Initialiser les colonnes
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadDeviceLayout();
+    } else {
+      this.initDefaultLayout();
+    }
+  }
+
+  private saveDeviceLayout() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    
+    const layout = {
+      col1: this.col1Devices,
+      col2: this.col2Devices,
+      col3: this.col3Devices,
+      col4: this.col4Devices,
+      allDevices: this.devices
+    };
+    localStorage.setItem('smartHome_devices_layout', JSON.stringify(layout));
+  }
+
+  private loadDeviceLayout() {
+    const savedLayout = localStorage.getItem('smartHome_devices_layout');
+    if (savedLayout) {
+      const layout = JSON.parse(savedLayout);
+      this.col1Devices = layout.col1;
+      this.col2Devices = layout.col2;
+      this.col3Devices = layout.col3;
+      this.col4Devices = layout.col4;
+      this.devices = layout.allDevices || this.devices;
+    } else {
+      this.initDefaultLayout();
+    }
+  }
+
+  private initDefaultLayout() {
     this.col1Devices = [this.devices.find(d => d.id === '9'), this.devices.find(d => d.id === '1'), this.devices.find(d => d.id === '2')];
     this.col2Devices = [this.devices.find(d => d.id === '3'), this.devices.find(d => d.id === '4'), this.devices.find(d => d.id === '5'), this.devices.find(d => d.id === '6'), this.devices.find(d => d.id === '7')];
     this.col3Devices = [this.devices.find(d => d.id === '8'), { ...this.devices.find(d => d.id === '9'), id: '9-small', isLarge: false }];
@@ -789,6 +826,7 @@ export class DashboardComponent implements OnInit {
         event.currentIndex
       );
     }
+    this.saveDeviceLayout();
   }
 
   goToSearch(): void {
@@ -826,6 +864,7 @@ export class DashboardComponent implements OnInit {
       };
       this.devices.push(device);
       this.col4Devices.push(device); // Ajouter à la 4ème colonne par défaut
+      this.saveDeviceLayout();
       console.log('Nouveau dispositif ajouté:', device);
       this.closeAddDeviceModal();
     }
@@ -871,6 +910,7 @@ export class DashboardComponent implements OnInit {
     }
     
     console.log('Dispositif modifié et sauvegardé:', this.selectedDevice);
+    this.saveDeviceLayout();
     this.isEditingDevice = false;
   }
 
@@ -886,8 +926,15 @@ export class DashboardComponent implements OnInit {
 
   deleteDevice(): void {
     if (confirm(`Êtes-vous sûr de vouloir supprimer "${this.selectedDevice.name}" ?`)) {
-      // Supprimer le dispositif du tableau
-      this.devices = this.devices.filter(d => d.id !== this.selectedDevice.id);
+      // Supprimer le dispositif de la colonne où il se trouve
+      const filterFn = (d: any) => d.id !== this.selectedDevice.id;
+      this.col1Devices = this.col1Devices.filter(filterFn);
+      this.col2Devices = this.col2Devices.filter(filterFn);
+      this.col3Devices = this.col3Devices.filter(filterFn);
+      this.col4Devices = this.col4Devices.filter(filterFn);
+      
+      this.devices = this.devices.filter(filterFn);
+      this.saveDeviceLayout();
       console.log('Dispositif supprimé:', this.selectedDevice);
       this.closeDeviceDetailsModal();
     }
