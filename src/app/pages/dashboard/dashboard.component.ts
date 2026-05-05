@@ -805,6 +805,7 @@ export class DashboardComponent implements OnInit {
   showAddDeviceModal = false;
   showDeviceDetailsModal = false;
   isEditingDevice = false;
+  currentFilter = 'All';
   showAlertNotification = false;
   isAlertAcknowledged = false;
   alertMessage = 'Attention : Mouvement détecté dans le jardin !';
@@ -834,19 +835,19 @@ export class DashboardComponent implements OnInit {
 
   // Stockage des dispositifs avec leurs informations
   devices = [
-    { id: '1', name: 'Front door lock', type: 'lock', status: 'Locked', location: 'Entrée' },
-    { id: '2', name: 'Garage', type: 'garage', status: 'Closed', location: 'Garage' },
-    { id: '3', name: 'Front door light', type: 'light', status: 'On - 50%', location: 'Entrée' },
-    { id: '4', name: 'TV', type: 'tv', status: 'Off', location: 'Salon' },
-    { id: '5', name: 'Speaker', type: 'speaker', status: 'Playing - 50%', location: 'Salon' },
-    { id: '6', name: 'Smart plug', type: 'plug', status: 'Off', location: 'Salon' },
-    { id: '7', name: 'Floor lamp', type: 'floor-lamp', status: 'On - 50%', location: 'Salon' },
-    { id: '8', name: 'Downstairs', type: 'temperature', status: '68°F', location: 'RDC' },
-    { id: '9', name: 'Backyard camera', type: 'camera', status: 'Live', location: 'Jardin', isLarge: true },
-    { id: '10', name: 'Fan', type: 'fan', status: 'On', location: 'Salon' },
-    { id: '11', name: 'Outdoor AQI', type: 'air-quality', status: '32 - Good', location: 'Extérieur' },
-    { id: '12', name: 'San Francisco', type: 'weather', status: '56° Clear', location: 'Extérieur' },
-    { id: '13', name: 'Indoor temperatures', type: 'indoor-temp', status: 'Multiple rooms', location: 'Maison' }
+    { id: '1', name: 'Front door lock', type: 'lock', status: 'Locked', location: 'Entrée', isFavorite: true },
+    { id: '2', name: 'Garage', type: 'garage', status: 'Closed', location: 'Garage', isFavorite: true },
+    { id: '3', name: 'Front door light', type: 'light', status: 'On - 50%', location: 'Entrée', isFavorite: true },
+    { id: '4', name: 'TV', type: 'tv', status: 'Off', location: 'Salon', isFavorite: false },
+    { id: '5', name: 'Speaker', type: 'speaker', status: 'Playing - 50%', location: 'Salon', isFavorite: true },
+    { id: '6', name: 'Smart plug', type: 'plug', status: 'Off', location: 'Salon', isFavorite: false },
+    { id: '7', name: 'Floor lamp', type: 'floor-lamp', status: 'On - 50%', location: 'Salon', isFavorite: false },
+    { id: '8', name: 'Downstairs', type: 'temperature', status: '68°F', location: 'RDC', isFavorite: true },
+    { id: '9', name: 'Backyard camera', type: 'camera', status: 'Live', location: 'Jardin', isLarge: true, isFavorite: true },
+    { id: '10', name: 'Fan', type: 'fan', status: 'On', location: 'Salon', isFavorite: false },
+    { id: '11', name: 'Outdoor AQI', type: 'air-quality', status: '32 - Good', location: 'Extérieur', isFavorite: false },
+    { id: '12', name: 'San Francisco', type: 'weather', status: '56° Clear', location: 'Extérieur', isFavorite: false },
+    { id: '13', name: 'Indoor temperatures', type: 'indoor-temp', status: 'Multiple rooms', location: 'Maison', isFavorite: true }
   ];
 
   col1Devices: any[] = [];
@@ -862,14 +863,98 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.loadDeviceLayout();
+      // Si on a un filtre actif (autre que All), on l'applique
+      if (this.currentFilter !== 'All') {
+        this.applyFilter();
+      }
     } else {
       this.initDefaultLayout();
     }
   }
 
-  private saveDeviceLayout() {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
+  setFilter(filter: string) {
+    console.log('Filter clicked:', filter);
+    this.currentFilter = filter;
+    console.log('Current filter set to:', this.currentFilter);
+    this.applyFilter();
+    console.log('Filter applied. Column counts:', {
+      col1: this.col1Devices.length,
+      col2: this.col2Devices.length,
+      col3: this.col3Devices.length,
+      col4: this.col4Devices.length
+    });
+  }
+
+  applyFilter() {
+    console.log('Applying filter for:', this.currentFilter);
+    let filteredDevices = [...this.devices];
+    console.log('Total devices before filtering:', this.devices.length);
+
+    switch (this.currentFilter) {
+      case 'Favorites':
+        filteredDevices = this.devices.filter(d => (d as any).isFavorite);
+        console.log('Favorites filtered devices:', filteredDevices.length);
+        break;
+      case 'Cameras':
+        filteredDevices = this.devices.filter(d => d.type === 'camera');
+        console.log('Cameras filtered devices:', filteredDevices.length);
+        break;
+      case 'Lights':
+        filteredDevices = this.devices.filter(d => d.type === 'light' || d.type === 'floor-lamp');
+        console.log('Lights filtered devices:', filteredDevices.length);
+        break;
+      case 'Wifi':
+        filteredDevices = this.devices.filter(d => ['plug', 'speaker', 'tv'].includes(d.type));
+        console.log('Wifi filtered devices:', filteredDevices.length);
+        break;
+      case 'Climate':
+        filteredDevices = this.devices.filter(d => ['temperature', 'indoor-temp', 'air-quality', 'fan', 'weather'].includes(d.type));
+        console.log('Climate filtered devices:', filteredDevices.length);
+        break;
+      case 'All':
+      default:
+        console.log('Showing all devices');
+        // Pour 'All', on utilise soit le layout sauvegardé, soit le layout par défaut
+        const savedLayout = localStorage.getItem('smartHome_devices_layout');
+        if (savedLayout) {
+          console.log('Using saved layout for All');
+          const layout = JSON.parse(savedLayout);
+          this.col1Devices = layout.col1;
+          this.col2Devices = layout.col2;
+          this.col3Devices = layout.col3;
+          this.col4Devices = layout.col4;
+          return;
+        }
+        console.log('Using default layout for All');
+        this.initDefaultLayout();
+        return;
+    }
+
+    console.log('Filtered devices to distribute:', filteredDevices.length);
+    console.log('Filtered devices:', filteredDevices.map(d => ({ name: d.name, type: d.type, isFavorite: (d as any).isFavorite })));
+
+    // Répartir les dispositifs filtrés dans les 4 colonnes
+    this.col1Devices = [];
+    this.col2Devices = [];
+    this.col3Devices = [];
+    this.col4Devices = [];
+
+    filteredDevices.forEach((device, index) => {
+      const colIndex = index % 4;
+      if (colIndex === 0) this.col1Devices.push(device);
+      else if (colIndex === 1) this.col2Devices.push(device);
+      else if (colIndex === 2) this.col3Devices.push(device);
+      else this.col4Devices.push(device);
+    });
+
+    console.log('Devices distributed to columns:', {
+      col1: this.col1Devices.length,
+      col2: this.col2Devices.length,
+      col3: this.col3Devices.length,
+      col4: this.col4Devices.length
+    });
+
+    // Save the filtered layout
     const layout = {
       col1: this.col1Devices,
       col2: this.col2Devices,
@@ -878,6 +963,7 @@ export class DashboardComponent implements OnInit {
       allDevices: this.devices
     };
     localStorage.setItem('smartHome_devices_layout', JSON.stringify(layout));
+    console.log('Filter layout saved to localStorage');
   }
 
   private loadDeviceLayout() {

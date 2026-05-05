@@ -11,27 +11,27 @@
       </div>
       <div class="right-section">
           <div class="category-filters">
-            <div class="filter-chip active">
+            <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Favorites'}" (click)="setFilter('Favorites')">
               <i class="fas fa-heart"></i>
               <span>Favorites</span>
             </div>
-            <div class="filter-chip">
+            <div class="filter-chip" [ngClass]="{'active': currentFilter === 'All'}" (click)="setFilter('All')">
               <i class="fas fa-th"></i>
               <span>All</span>
             </div>
-            <div class="filter-chip">
+            <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Cameras'}" (click)="setFilter('Cameras')">
               <i class="fas fa-video"></i>
               <span>Cameras</span>
             </div>
-            <div class="filter-chip">
+            <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Lights'}" (click)="setFilter('Lights')">
               <i class="fas fa-lightbulb"></i>
               <span>Lights</span>
             </div>
-            <div class="filter-chip">
+            <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Wifi'}" (click)="setFilter('Wifi')">
               <i class="fas fa-wifi"></i>
               <span>Wifi</span>
             </div>
-            <div class="filter-chip">
+            <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Climate'}" (click)="setFilter('Climate')">
               <i class="fas fa-thermometer-half"></i>
               <span>Climate</span>
             </div>
