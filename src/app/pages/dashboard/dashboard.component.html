@@ -43,7 +43,7 @@
           <button class="add-device-btn" style="background: #ff5252; margin-right: 15px; padding: 10px 15px;" (click)="triggerAlert()" title="Trigger Alert">
             <i class="fas fa-bell"></i>
           </button>
-          <button class="add-device-btn" (click)="openAddDeviceModal()">
+                    <button class="add-device-btn" (click)="openAddDeviceModal()">
             <i class="fas fa-plus"></i>
             <span>Ajouter</span>
           </button>
@@ -116,6 +116,9 @@
         <h4>{{device.name}}</h4>
         <p>{{device.status}}</p>
       </div>
+      <div class="favorite-btn" (click)="toggleFavorite(device)" [class]="{'active': device.isFavorite}" [style.background]="device.isFavorite ? '#ffcdd2' : '#f5f5f5'" [style.color]="device.isFavorite ? '#d32f2f' : '#ccc'">
+        <i class="fas fa-heart"></i>
+      </div>
     </div>
 
     <!-- Special Card: Camera -->
@@ -128,6 +131,9 @@
       <div class="camera-controls">
         <i class="fas fa-expand"></i>
       </div>
+      <div class="favorite-btn" (click)="toggleFavorite(device)" [class]="{'active': device.isFavorite}" [style.background]="device.isFavorite ? '#ffcdd2' : '#f5f5f5'" [style.color]="device.isFavorite ? '#d32f2f' : '#ccc'">
+        <i class="fas fa-heart"></i>
+      </div>
     </div>
 
     <!-- Special Card: Temperature -->
@@ -138,13 +144,16 @@
       <div class="device-info">
         <h4>{{device.name}}</h4>
         <div class="temperature-display">
-          <span class="temp-value">{{device.status.replace('°F', '')}}</span>
+          <span class="temp-value">{{device.status.replace('F', '')}}</span>
           <span class="temp-label">Comfort</span>
         </div>
         <div class="temp-controls">
           <button class="temp-btn">-</button>
           <button class="temp-btn">+</button>
         </div>
+      </div>
+      <div class="favorite-btn" (click)="toggleFavorite(device)" [class]="{'active': device.isFavorite}" [style.background]="device.isFavorite ? '#ffcdd2' : '#f5f5f5'" [style.color]="device.isFavorite ? '#d32f2f' : '#ccc'">
+        <i class="fas fa-heart"></i>
       </div>
     </div>
 
@@ -161,6 +170,9 @@
           <div class="room-item"><i class="fas fa-bed"></i> <span>Guest bedroom: 70°F</span></div>
         </div>
         <button class="select-sensors-btn">Select sensors</button>
+      </div>
+      <div class="favorite-btn" (click)="toggleFavorite(device)" [class]="{'active': device.isFavorite}" [style.background]="device.isFavorite ? '#ffcdd2' : '#f5f5f5'" [style.color]="device.isFavorite ? '#d32f2f' : '#ccc'">
+        <i class="fas fa-heart"></i>
       </div>
     </div>
   </div>

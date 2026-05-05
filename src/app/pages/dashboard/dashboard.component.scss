@@ -76,6 +76,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            position: relative;
+            z-index: 1000;
+            user-select: none;
+            pointer-events: auto;
 
             i {
               font-size: 14px;
@@ -90,6 +94,8 @@
 
             &:hover {
               background: #e8e8e8;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             &.active {
@@ -206,6 +212,44 @@
           font-weight: 500;
         }
       }
+
+      .favorite-btn {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 50% !important;
+        background: #f5f5f5 !important;
+        border: none !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.3s ease !important;
+        color: #ccc !important;
+        position: absolute !important;
+        top: 50% !important;
+        right: 8px !important;
+        transform: translateY(-50%) !important;
+
+        &:hover {
+          background: #ffebee !important;
+          color: #e91e63 !important;
+          transform: translateY(-50%) scale(1.1) !important;
+        }
+
+        &.active {
+          background: #ffcdd2 !important;
+          color: #d32f2f !important;
+
+          &:hover {
+            background: #ef9a9a !important;
+            transform: translateY(-50%) scale(1.05) !important;
+          }
+        }
+
+        i {
+          font-size: 14px !important;
+        }
+      }
     }
 
     // Camera Cards
@@ -264,6 +308,27 @@
           cursor: pointer;
           opacity: 0.8;
           transition: opacity 0.3s ease;
+        }
+
+        .favorite-btn {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+
+          &:hover {
+            background: rgba(233, 30, 99, 0.8);
+          }
+
+          &.active {
+            background: #ffcdd2;
+            color: #d32f2f;
+
+            &:hover {
+              background: #ef9a9a;
+            }
+          }
         }
       }
     }
