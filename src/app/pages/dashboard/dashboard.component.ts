@@ -101,6 +101,31 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
       background: #45a049;
     }
 
+    .analytics-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .analytics-btn i {
+      font-size: 16px;
+    }
+
+    .analytics-btn:hover {
+      background: #1976D2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    }
+
     .category-filters {
       display: flex;
       gap: 8px;
@@ -1107,6 +1132,10 @@ export class DashboardComponent implements OnInit {
 
   goToSearch(): void {
     this.router.navigate(['/search']);
+  }
+
+  goToAnalytics(): void {
+    this.router.navigate(['/analytics']);
   }
 
   logout(): void {

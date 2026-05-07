@@ -131,6 +131,54 @@
             background: #d32f2f;
           }
         }
+
+        .add-device-btn {
+          background: #2196F3;
+          color: white;
+          border: none;
+          padding: 10px 16px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          i {
+            font-size: 12px;
+          }
+
+          &:hover {
+            background: #1976D2;
+            transform: translateY(-1px);
+          }
+        }
+
+        .analytics-btn {
+          background: #9C27B0;
+          color: white;
+          border: none;
+          padding: 10px 16px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          i {
+            font-size: 12px;
+          }
+
+          &:hover {
+            background: #7B1FA2;
+            transform: translateY(-1px);
+          }
+        }
       }
     }
   }

@@ -10,6 +10,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AlertsComponent } from './pages/alerts/alerts.component';
 import { SecurityComponent } from './pages/security/security.component';
 import { EnergyComponent } from './pages/energy/energy.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
 
 export const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -26,7 +27,8 @@ export const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'alerts', component: AlertsComponent },
       { path: 'security', component: SecurityComponent },
-      { path: 'energy', component: EnergyComponent }
+      { path: 'energy', component: EnergyComponent },
+      { path: 'analytics', component: AnalyticsComponent }
     ]
   }
 ];
