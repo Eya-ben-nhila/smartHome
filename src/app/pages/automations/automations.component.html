@@ -1,147 +1,95 @@
-<div class="automations-page">
-  <!-- Header -->
-  <div class="page-header">
-    <h1>Effortlessly create automations</h1>
-  </div>
+<div class="automations-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Smart Automation</h1>
+      <span class="active-rules">{{ rules.length }} Active Rules</span>
+    </div>
+    <button class="add-rule-btn" (click)="addRule(); $event.stopPropagation(); $event.preventDefault()">
+      <i class="fas fa-plus"></i> NEW RULE
+    </button>
+  </header>
 
-  <!-- Upcoming Section -->
-  <div class="upcoming-section">
-    <h3>Upcoming</h3>
-    <div class="upcoming-list">
-      <div class="upcoming-item active">
-        <div class="upcoming-content">
-          <div class="time">10:00 AM</div>
-          <div class="description">Today • Morning kettle</div>
-        </div>
-        <div class="upcoming-icon">
-          <i class="fas fa-coffee"></i>
-        </div>
-        <div class="close-btn">
-          <i class="fas fa-times"></i>
-        </div>
+  <div class="automations-grid">
+    <!-- Climate Insights -->
+    <div class="climate-section">
+      <div class="section-header">
+        <h3>Environmental Monitoring</h3>
       </div>
-
-      <div class="upcoming-item">
-        <div class="upcoming-content">
-          <div class="time">5:30 PM</div>
-          <div class="description">Friday jam</div>
+      <div class="stats-cards">
+        <div class="stat-card temp">
+          <div class="stat-icon"><i class="fas fa-thermometer-half"></i></div>
+          <div class="stat-info">
+            <span class="label">Indoor Temp</span>
+            <span class="value">{{ indoorTemp }}°C</span>
+          </div>
+          <div class="stat-progress">
+            <div class="progress-bar" style="width: 65%;"></div>
+          </div>
         </div>
-        <div class="upcoming-icon">
-          <i class="fas fa-music"></i>
+        <div class="stat-card humidity">
+          <div class="stat-icon"><i class="fas fa-tint"></i></div>
+          <div class="stat-info">
+            <span class="label">Humidity</span>
+            <span class="value">{{ humidity }}%</span>
+          </div>
+          <div class="stat-progress">
+            <div class="progress-bar" style="width: 45%;"></div>
+          </div>
         </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="upcoming-content">
-          <div class="time">6:30 PM</div>
-          <div class="description">Dinner time</div>
-        </div>
-        <div class="upcoming-icon">
-          <i class="fas fa-utensils"></i>
-        </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="upcoming-content">
-          <div class="time">7:30 PM</div>
-          <div class="description">Night time security</div>
-        </div>
-        <div class="upcoming-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="upcoming-content">
-          <div class="time">9:00 PM</div>
-          <div class="description">Evening lights</div>
-        </div>
-        <div class="upcoming-icon">
-          <i class="fas fa-lightbulb"></i>
+        <div class="stat-card aqi">
+          <div class="stat-icon"><i class="fas fa-wind"></i></div>
+          <div class="stat-info">
+            <span class="label">Air Quality</span>
+            <span class="value">{{ airQuality }}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Your Automations Section -->
-  <div class="your-automations-section">
-    <h3>Your automations</h3>
-    <div class="automations-list">
-      <div class="automation-item">
-        <div class="automation-icon">
-          <i class="fas fa-clock"></i>
-        </div>
-        <div class="automation-content">
-          <h4>Wake up</h4>
-          <p>Turn on lights and start coffee maker at 7:00 AM on weekdays</p>
-        </div>
-        <div class="play-btn">
-          <i class="fas fa-play"></i>
+    <!-- Smart Rules -->
+    <div class="rules-section">
+      <div class="section-header">
+        <h3>Automation Rules</h3>
+        <span class="filter">All Rooms <i class="fas fa-chevron-down"></i></span>
+      </div>
+      <div class="rules-grid">
+        <div class="rule-card" *ngFor="let rule of rules" [class.inactive]="!rule.active">
+          <div class="rule-icon" [style.background-color]="rule.color">
+            <i class="fas {{ rule.icon }}"></i>
+          </div>
+          <div class="rule-content">
+            <h4>{{ rule.name }}</h4>
+            <p>{{ rule.description }}</p>
+          </div>
+          <div class="rule-toggle">
+            <label class="switch">
+              <input type="checkbox" [checked]="rule.active" (change)="toggleRule(rule)">
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="automation-item">
-        <div class="automation-icon">
-          <i class="fas fa-coffee"></i>
-        </div>
-        <div class="automation-content">
-          <h4>Morning kettle</h4>
-          <p>Start electric kettle at 6:30 AM every day</p>
-        </div>
-        <div class="play-btn">
-          <i class="fas fa-play"></i>
-        </div>
+    <!-- Daily Schedule -->
+    <div class="schedule-section">
+      <div class="section-header">
+        <h3>Today's Schedule</h3>
       </div>
-
-      <div class="automation-item">
-        <div class="automation-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <div class="automation-content">
-          <h4>Night time security</h4>
-          <p>Lock all doors and arm security system at 10:00 PM</p>
-        </div>
-        <div class="play-btn">
-          <i class="fas fa-play"></i>
-        </div>
-      </div>
-
-      <div class="automation-item">
-        <div class="automation-icon">
-          <i class="fas fa-music"></i>
-        </div>
-        <div class="automation-content">
-          <h4>Friday jam</h4>
-          <p>Play favorite playlist and dim lights at 5:30 PM on Fridays</p>
-        </div>
-        <div class="play-btn">
-          <i class="fas fa-play"></i>
-        </div>
-      </div>
-
-      <div class="automation-item">
-        <div class="automation-icon">
-          <i class="fas fa-utensils"></i>
-        </div>
-        <div class="automation-content">
-          <h4>Dinner time</h4>
-          <p>Preheat oven and turn on kitchen lights at 6:30 PM</p>
-        </div>
-        <div class="play-btn">
-          <i class="fas fa-play"></i>
-        </div>
-      </div>
-
-      <div class="automation-item">
-        <div class="automation-icon">
-          <i class="fas fa-lightbulb"></i>
-        </div>
-        <div class="automation-content">
-          <h4>Evening lights</h4>
-          <p>Turn on living room and bedroom lights at sunset</p>
-        </div>
-        <div class="play-btn">
-          <i class="fas fa-play"></i>
+      <div class="schedule-list">
+        <div class="schedule-item" *ngFor="let item of schedules">
+          <div class="time-marker">
+            <span class="dot"></span>
+            <span class="time">{{ item.time }}</span>
+          </div>
+          <div class="schedule-card">
+            <div class="item-icon"><i class="fas {{ item.icon }}"></i></div>
+            <div class="item-info">
+              <span class="action">{{ item.action }}</span>
+              <span class="status">{{ item.status }}</span>
+            </div>
+            <button class="edit-btn"><i class="fas fa-ellipsis-v"></i></button>
+          </div>
         </div>
       </div>
     </div>

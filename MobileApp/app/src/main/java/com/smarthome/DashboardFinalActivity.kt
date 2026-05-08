@@ -17,11 +17,17 @@ import org.json.JSONArray
 import org.json.JSONObject
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.smarthome.network.ApiService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DashboardFinalActivity : AppCompatActivity() {
     
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var additionalDevicesContainer: LinearLayout
+    private lateinit var apiService: ApiService
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +35,10 @@ class DashboardFinalActivity : AppCompatActivity() {
         
         sharedPreferences = getSharedPreferences("DevicePrefs", Context.MODE_PRIVATE)
         additionalDevicesContainer = findViewById(R.id.additionalDevicesContainer)
+        apiService = ApiService(this)
+        
+        // Load devices from backend first
+        loadDevicesFromBackend()
         
         // Initialize and load static device info
         setupDevices()
@@ -352,5 +362,41 @@ class DashboardFinalActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .show()
+    }
+    
+    private fun loadDevicesFromBackend() {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val result = apiService.getDevices()
+                
+                result.onSuccess { response ->
+                    if (response.optBoolean("success", false)) {
+                        val devicesArray = response.optJSONArray("devices")
+                        if (devicesArray != null && devicesArray.length() > 0) {
+                            // Process and display devices from backend
+                            Toast.makeText(this@DashboardFinalActivity, "Loaded ${devicesArray.length()} devices from server", Toast.LENGTH_SHORT).show()
+                            
+                            // Save devices to local storage for offline use
+                            val editor = sharedPreferences.edit()
+                            editor.putString("backend_devices", devicesArray.toString())
+                            editor.apply()
+                        }
+                    }
+                }
+                
+                result.onFailure { error ->
+                    // Load cached devices if available
+                    val cachedDevices = sharedPreferences.getString("backend_devices", null)
+                    if (cachedDevices != null) {
+                        Toast.makeText(this@DashboardFinalActivity, "Using cached devices", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@DashboardFinalActivity, "Using offline mode", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                
+            } catch (e: Exception) {
+                Toast.makeText(this@DashboardFinalActivity, "Backend unavailable, using offline mode", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

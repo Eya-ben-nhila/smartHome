@@ -18,17 +18,23 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
     }
 
     .header-strip {
-      background: white;
-      border-radius: 16px;
-      padding: 20px 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
     }
 
     .strip-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
     }
 
     .left-section {
@@ -38,44 +44,52 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
     }
 
     .dashboard-title {
-      font-size: 28px;
-      font-weight: 700;
-      color: #1a1a1a;
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a1a2e, #4361ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin: 0;
     }
 
     .search-bar {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      padding: 8px 16px;
       display: flex;
       align-items: center;
-      background: #f5f5f5;
-      border-radius: 12px;
-      padding: 12px 20px;
-      cursor: pointer;
+      gap: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      width: 280px;
       transition: all 0.3s ease;
+    }
+
+    .search-bar:focus-within {
+      width: 320px;
+      border-color: #2196F3;
+      box-shadow: 0 8px 20px rgba(33, 150, 243, 0.1);
     }
 
     .search-bar i {
       color: #757575;
-      margin-right: 12px;
+      font-size: 14px;
     }
 
     .search-bar input {
       border: none;
-      background: none;
       outline: none;
-      font-size: 14px;
-      color: #757575;
-      cursor: pointer;
-    }
-
-    .search-bar:hover {
-      background: #e8e8e8;
+      background: transparent;
+      width: 100%;
+      font-size: 13px;
+      font-weight: 500;
+      color: #333;
     }
 
     .right-section {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
     }
 
     .add-device-btn {
@@ -206,51 +220,61 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
     }
 
     .device-card {
-      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       cursor: pointer;
+      overflow: hidden;
     }
 
     .device-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border-color: rgba(33, 150, 243, 0.3);
+      background: white;
     }
 
     .card-content {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 20px;
+      gap: 12px;
+      padding: 16px;
     }
 
     .device-icon {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 12px;
-      font-size: 28px;
+      border-radius: 10px;
+      font-size: 20px;
       color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .device-card:hover .device-icon {
+      transform: scale(1.05) rotate(3deg);
     }
 
     .device-logo {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       background: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 12px;
       color: #333;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       border: 2px solid #fff;
-      margin-left: -6px;
+      margin-left: -4px;
       z-index: 2;
     }
 
@@ -259,17 +283,19 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
     }
 
     .device-info h4 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
+      margin: 0 0 2px 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
     }
 
     .device-info p {
       margin: 0;
-      font-size: 14px;
+      font-size: 11px;
       color: #666;
-      font-weight: 500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     // Camera Cards

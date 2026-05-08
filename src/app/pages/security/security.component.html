@@ -1,176 +1,89 @@
 <div class="security-container">
-  <div class="security-header">
-    <h1>Security Center</h1>
-    <p class="subtitle">Monitor and control your home security systems</p>
-    <button class="emergency-btn">
-      <i class="fas fa-exclamation-triangle"></i>
-      Emergency
-    </button>
-  </div>
-
-  <div class="security-content">
-    <!-- Status Cards Row -->
-    <div class="status-cards">
-      <div class="status-card system-status">
-        <div class="card-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <div class="card-info">
-          <h3>System Status</h3>
-          <div class="status-value armed">Armed</div>
-          <p>All systems active</p>
-        </div>
-      </div>
-
-      <div class="status-card cameras">
-        <div class="card-icon">
-          <i class="fas fa-video"></i>
-        </div>
-        <div class="card-info">
-          <h3>Cameras</h3>
-          <div class="status-value">6/6</div>
-          <p>All online</p>
-        </div>
-      </div>
-
-      <div class="status-card sensors">
-        <div class="card-icon">
-          <i class="fas fa-broadcast-tower"></i>
-        </div>
-        <div class="card-info">
-          <h3>Sensors</h3>
-          <div class="status-value">12/12</div>
-          <p>All active</p>
-        </div>
-      </div>
-
-      <div class="status-card last-alert">
-        <div class="card-icon">
-          <i class="fas fa-bell"></i>
-        </div>
-        <div class="card-info">
-          <h3>Last Alert</h3>
-          <div class="status-value">2h</div>
-          <p>No new alerts</p>
-        </div>
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Advanced Security</h1>
+      <div class="status-badge" [class.armed]="isArmed">
+        <i class="fas" [class.fa-shield-alt]="isArmed" [class.fa-unlock]="!isArmed"></i>
+        <span>{{ systemStatus }}</span>
       </div>
     </div>
+    <div class="header-actions">
+      <button class="control-btn" [class.active]="isArmed" (click)="toggleSystem()">
+        {{ isArmed ? 'DISARM SYSTEM' : 'ARM SYSTEM' }}
+      </button>
+    </div>
+  </header>
 
-    <!-- Quick Actions and Security Zones -->
-    <div class="middle-section">
-      <div class="quick-actions">
-        <h3>Quick Actions</h3>
-        <div class="action-buttons">
-          <button class="action-btn lock">
-            <i class="fas fa-lock"></i>
-            <span>Lock All</span>
-          </button>
-          <button class="action-btn cameras">
-            <i class="fas fa-video"></i>
-            <span>View Cameras</span>
-          </button>
-          <button class="action-btn siren">
-            <i class="fas fa-bell"></i>
-            <span>Test Siren</span>
-          </button>
-          <button class="action-btn schedule">
-            <i class="fas fa-clock"></i>
-            <span>Schedule</span>
-          </button>
-        </div>
+  <div class="security-grid">
+    <!-- Camera Viewport -->
+    <div class="cameras-section">
+      <div class="section-header">
+        <h3>Live Monitoring</h3>
+        <span class="active-count">{{ cameras.length }} Cameras Active</span>
       </div>
-
-      <div class="security-zones">
-        <h3>Security Zones</h3>
-        <div class="zone-list">
-          <div class="zone-item">
-            <div class="zone-info">
-              <h4>Perimeter</h4>
-              <p>Doors & Windows</p>
+      <div class="camera-grid">
+        <div class="camera-card" *ngFor="let cam of cameras">
+          <div class="camera-feed">
+            <img [src]="cam.feed" [alt]="cam.name">
+            <div class="feed-overlay">
+              <span class="live-tag">LIVE</span>
+              <span class="cam-name">{{ cam.name }}</span>
             </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="slider"></span>
-            </label>
-          </div>
-          <div class="zone-item">
-            <div class="zone-info">
-              <h4>Interior</h4>
-              <p>Motion Sensors</p>
+            <div class="detection-tags" *ngIf="cam.detections.length > 0">
+              <span class="tag" *ngFor="let det of cam.detections">
+                <i class="fas fa-search"></i> {{ det }} Detected
+              </span>
             </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="slider"></span>
-            </label>
-          </div>
-          <div class="zone-item">
-            <div class="zone-info">
-              <h4>Garage</h4>
-              <p>Garage Door</p>
+            <div class="cam-controls">
+              <button><i class="fas fa-microphone"></i></button>
+              <button><i class="fas fa-volume-up"></i></button>
+              <button><i class="fas fa-expand"></i></button>
             </div>
-            <label class="toggle-switch">
-              <input type="checkbox">
-              <span class="slider"></span>
-            </label>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Camera Feeds and Emergency Contacts -->
-    <div class="bottom-section">
-      <div class="camera-feeds">
+    <!-- Quick Actions & Events -->
+    <div class="side-panel">
+      <!-- Panic Center -->
+      <div class="panic-center">
+        <h3>Emergency Actions</h3>
+        <div class="panic-buttons">
+          <button class="panic-btn fire">
+            <i class="fas fa-fire"></i>
+            <span>FIRE</span>
+          </button>
+          <button class="panic-btn police">
+            <i class="fas fa-user-shield"></i>
+            <span>POLICE</span>
+          </button>
+          <button class="panic-btn medical">
+            <i class="fas fa-heartbeat"></i>
+            <span>MEDICAL</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Detection History -->
+      <div class="event-history">
         <div class="section-header">
-          <h3>Camera Feeds</h3>
-          <a href="#" class="view-all">View All</a>
+          <h3>Recent Activity</h3>
+          <button class="view-all">View All</button>
         </div>
-        <div class="feed-grid">
-          <div class="feed-item">
-            <div class="feed-placeholder">
-              <i class="fas fa-video"></i>
-              <span class="live-tag">LIVE</span>
+        <div class="event-list">
+          <div class="event-item" *ngFor="let event of events" [class]="getSeverityClass(event.severity)">
+            <div class="event-icon">
+              <i class="fas {{ event.icon }}"></i>
             </div>
-            <p>Front Door</p>
-          </div>
-          <div class="feed-item">
-            <div class="feed-placeholder">
-              <i class="fas fa-video"></i>
-              <span class="live-tag">LIVE</span>
+            <div class="event-details">
+              <div class="event-main">
+                <span class="event-type">{{ event.type }}</span>
+                <span class="event-time">{{ event.time }}</span>
+              </div>
+              <p class="event-desc">{{ event.description }} at {{ event.location }}</p>
             </div>
-            <p>Backyard</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="emergency-contacts">
-        <h3>Emergency Contacts</h3>
-        <div class="contact-list">
-          <div class="contact-item police">
-            <div class="contact-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="contact-info">
-              <h4>Police</h4>
-              <p>911</p>
-            </div>
-          </div>
-          <div class="contact-item fire">
-            <div class="contact-icon">
-              <i class="fas fa-fire-extinguisher"></i>
-            </div>
-            <div class="contact-info">
-              <h4>Fire Department</h4>
-              <p>911</p>
-            </div>
-          </div>
-          <div class="contact-item medical">
-            <div class="contact-icon">
-              <i class="fas fa-ambulance"></i>
-            </div>
-            <div class="contact-info">
-              <h4>Medical</h4>
-              <p>911</p>
-            </div>
+            <button class="event-action"><i class="fas fa-chevron-right"></i></button>
           </div>
         </div>
       </div>

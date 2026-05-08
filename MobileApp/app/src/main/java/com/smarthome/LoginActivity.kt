@@ -11,17 +11,25 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
+import com.smarthome.network.ApiService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var apiService: ApiService
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin_simple)
         
-        // Initialize SharedPreferences
+        // Initialize SharedPreferences and API service
         sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        apiService = ApiService(this)
         
         // Load saved preferences
         loadSavedPreferences()
@@ -132,13 +140,48 @@ class LoginActivity : AppCompatActivity() {
         }
         editor.apply()
         
-        // Show success message
-        Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+        // Show loading message
+        Toast.makeText(this, "Logging in...", Toast.LENGTH_SHORT).show()
         
-        // Navigate to main dashboard
-        val intent = Intent(this, DashboardFinalActivity::class.java)
-        startActivity(intent)
-        finish()
+        // Login with backend API
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val result = apiService.login(email, password)
+                
+                result.onSuccess { response ->
+                    if (response.has("token")) {
+                        // Save token and user info
+                        val editor = sharedPreferences.edit()
+                        editor.putString("authToken", response.getString("token"))
+                        editor.putString("userId", response.getString("userId"))
+                        editor.putString("userEmail", response.getString("email"))
+                        editor.apply()
+                        
+                        Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_SHORT).show()
+                        
+                        // Navigate to main dashboard
+                        val intent = Intent(this@LoginActivity, DashboardFinalActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Login failed: ${response.optString("error", "Unknown error")}", Toast.LENGTH_LONG).show()
+                    }
+                }
+                
+                result.onFailure { error ->
+                    Toast.makeText(this@LoginActivity, "Network error: ${error.message}", Toast.LENGTH_LONG).show()
+                }
+                
+            } catch (e: Exception) {
+                // Fallback to local login if backend is not available
+                Toast.makeText(this@LoginActivity, "Using offline mode", Toast.LENGTH_SHORT).show()
+                
+                // Navigate to main dashboard
+                val intent = Intent(this@LoginActivity, DashboardFinalActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
     
     private fun isValidEmail(email: String): Boolean {
