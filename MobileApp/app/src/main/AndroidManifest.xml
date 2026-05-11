@@ -26,11 +26,15 @@
             </intent-filter>
     </activity>
     
+    <activity android:name=".SigninActivity" android:exported="false" />
+    <activity android:name=".SignupActivity" android:exported="false" />
     <activity android:name=".DashboardActivity" android:exported="false" />
     <activity android:name=".EnergyActivity" android:exported="false" />
     <activity android:name=".SecurityActivity" android:exported="false" />
     <activity android:name=".AutomationActivity" android:exported="false" />
+    <activity android:name=".AlertsActivity" android:exported="false" />
     <activity android:name=".ProfileActivity" android:exported="false" />
+    <activity android:name=".ActivityActivity" android:exported="false" />
     
   </application>
 

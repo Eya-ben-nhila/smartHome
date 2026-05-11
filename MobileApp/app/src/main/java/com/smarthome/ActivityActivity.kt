@@ -4,16 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.smarthome.databinding.ActivityAutomationSimpleBinding
+import com.smarthome.databinding.ActivityActivitySimpleBinding
 
 @AndroidEntryPoint
-class AutomationActivity : AppCompatActivity() {
+class ActivityActivity : AppCompatActivity() {
     
-    private lateinit var binding: ActivityAutomationSimpleBinding
+    private lateinit var binding: ActivityActivitySimpleBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAutomationSimpleBinding.inflate(layoutInflater)
+        binding = ActivityActivitySimpleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
         // Set up bottom navigation
@@ -38,12 +38,12 @@ class AutomationActivity : AppCompatActivity() {
         }
         
         binding.navigation.activityNavButton.setOnClickListener {
-            val intent = Intent(this, ActivityActivity::class.java)
-            startActivity(intent)
+            // Already on activity page
         }
         
         binding.navigation.automationsNavButton.setOnClickListener {
-            // Already on automation page
+            val intent = Intent(this, AutomationActivity::class.java)
+            startActivity(intent)
         }
         
         binding.navigation.alertsNavButton.setOnClickListener {
@@ -51,7 +51,7 @@ class AutomationActivity : AppCompatActivity() {
             startActivity(intent)
         }
         
-        // Profile picture click (if exists in layout)
+        // Profile picture click
         binding.profilePicture?.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
@@ -78,9 +78,9 @@ class AutomationActivity : AppCompatActivity() {
         val intent = Intent(this, SecurityActivity::class.java)
         startActivity(intent)
     }
-
-    fun openActivityActivity(view: android.view.View) {
-        val intent = Intent(this, ActivityActivity::class.java)
+    
+    fun openAutomationActivity(view: android.view.View) {
+        val intent = Intent(this, AutomationActivity::class.java)
         startActivity(intent)
     }
     

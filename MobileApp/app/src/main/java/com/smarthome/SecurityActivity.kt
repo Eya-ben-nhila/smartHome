@@ -21,7 +21,41 @@ class SecurityActivity : AppCompatActivity() {
     }
     
     private fun setupBottomNavigation() {
-        // Bottom navigation click handlers will be set up here
+        // Bottom navigation clicks
+        binding.navigation.homeNavButton.setOnClickListener {
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
+        }
+        
+        binding.navigation.securityNavButton.setOnClickListener {
+            // Already on security page
+        }
+        
+        binding.navigation.energyNavButton.setOnClickListener {
+            val intent = Intent(this, EnergyActivity::class.java)
+            startActivity(intent)
+        }
+        
+        binding.navigation.activityNavButton.setOnClickListener {
+            val intent = Intent(this, ActivityActivity::class.java)
+            startActivity(intent)
+        }
+        
+        binding.navigation.automationsNavButton.setOnClickListener {
+            val intent = Intent(this, AutomationActivity::class.java)
+            startActivity(intent)
+        }
+        
+        binding.navigation.alertsNavButton.setOnClickListener {
+            val intent = Intent(this, AlertsActivity::class.java)
+            startActivity(intent)
+        }
+        
+        // Profile picture click (if exists in layout)
+        binding.profilePicture?.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
     
     // Navigation methods for bottom navigation
@@ -42,6 +76,11 @@ class SecurityActivity : AppCompatActivity() {
     
     fun openAutomationActivity(view: android.view.View) {
         val intent = Intent(this, AutomationActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun openActivityActivity(view: android.view.View) {
+        val intent = Intent(this, ActivityActivity::class.java)
         startActivity(intent)
     }
     

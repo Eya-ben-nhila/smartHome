@@ -8,5 +8,8 @@ class SmartHomeApplication : Application() {
     
     override fun onCreate() {
         super.onCreate()
+        // Initialize AppPreferences for global state management
+        AppPreferences.init(this)
+        android.util.Log.d("SmartHomeApplication", "AppPreferences initialized")
     }
 }

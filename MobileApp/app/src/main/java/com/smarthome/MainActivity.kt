@@ -13,13 +13,22 @@ class MainActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Check if user is already logged in
+        if (AppPreferences.isLoggedIn()) {
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+        
         binding = ActivityMainSimpleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
         // Set up click listener for get started button
         binding.getStartedButton.setOnClickListener {
-            // Navigate to dashboard activity
-            val intent = Intent(this, DashboardActivity::class.java)
+            // Navigate to sign in activity
+            val intent = Intent(this, SigninActivity::class.java)
             startActivity(intent)
         }
     }
