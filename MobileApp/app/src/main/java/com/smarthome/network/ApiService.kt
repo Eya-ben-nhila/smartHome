@@ -1,261 +1,65 @@
 package com.smarthome.network
 
-import android.content.Context
-import android.util.Log
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import retrofit2.Response
+import retrofit2.http.*
+import com.smarthome.data.model.*
 
-class ApiService(private val context: Context) {
+interface ApiService {
     
-    companion object {
-        private const val BASE_URL = "http://10.0.2.2:8080" // For Android emulator
-        // For real device, use your computer's IP: "http://192.168.1.100:8080"
-        
-        // Alternative endpoints for testing
-        private const val FALLBACK_BASE_URL = "http://localhost:8080"
-    }
+    @POST("mobile/login")
+    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
     
-    // Login endpoint
-    suspend fun login(email: String, password: String): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/login")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "POST"
-            connection.setRequestProperty("Content-Type", "application/json")
-            connection.setRequestProperty("Accept", "application/json")
-            connection.doOutput = true
-            
-            val requestBody = JSONObject().apply {
-                put("email", email)
-                put("password", password)
-            }.toString()
-            
-            connection.outputStream.write(requestBody.toByteArray())
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("error", "HTTP $responseCode")
-                    put("message", "Login failed")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Login error", e)
-            Result.failure(e)
-        }
-    }
+    @GET("mobile/devices")
+    suspend fun getDevices(): Response<DevicesResponse>
     
-    // Get devices
-    suspend fun getDevices(): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/devices")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "GET"
-            connection.setRequestProperty("Accept", "application/json")
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("success", false)
-                    put("devices", emptyList<Any>())
-                    put("error", "HTTP $responseCode")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Get devices error", e)
-            // Return empty result on error
-            Result.success(JSONObject().apply {
-                put("success", true)
-                put("devices", emptyList<Any>())
-                put("total", 0)
-            })
-        }
-    }
+    @PUT("mobile/devices/{deviceId}/status")
+    suspend fun updateDeviceStatus(
+        @Path("deviceId") deviceId: String,
+        @Body request: UpdateDeviceStatusRequest
+    ): Response<BaseResponse>
     
-    // Update device status
-    suspend fun updateDeviceStatus(deviceId: String, status: String): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/devices/$deviceId/status")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "PUT"
-            connection.setRequestProperty("Content-Type", "application/json")
-            connection.setRequestProperty("Accept", "application/json")
-            connection.doOutput = true
-            
-            val requestBody = JSONObject().apply {
-                put("status", status)
-            }.toString()
-            
-            connection.outputStream.write(requestBody.toByteArray())
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("success", false)
-                    put("error", "HTTP $responseCode")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Update device status error", e)
-            Result.failure(e)
-        }
-    }
+    @GET("mobile/energy")
+    suspend fun getEnergyData(): Response<EnergyResponse>
     
-    // Get energy data
-    suspend fun getEnergyData(): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/energy")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "GET"
-            connection.setRequestProperty("Accept", "application/json")
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("success", false)
-                    put("error", "HTTP $responseCode")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Get energy data error", e)
-            Result.failure(e)
-        }
-    }
+    @GET("mobile/security")
+    suspend fun getSecurityEvents(): Response<SecurityResponse>
     
-    // Get security events
-    suspend fun getSecurityEvents(): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/security")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "GET"
-            connection.setRequestProperty("Accept", "application/json")
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("success", false)
-                    put("events", emptyList<Any>())
-                    put("error", "HTTP $responseCode")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Get security events error", e)
-            Result.failure(e)
-        }
-    }
+    @GET("mobile/automations")
+    suspend fun getAutomations(): Response<AutomationsResponse>
     
-    // Get automations
-    suspend fun getAutomations(): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/automations")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "GET"
-            connection.setRequestProperty("Accept", "application/json")
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("success", false)
-                    put("automations", emptyList<Any>())
-                    put("error", "HTTP $responseCode")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Get automations error", e)
-            Result.failure(e)
-        }
-    }
+    @GET("mobile/profile")
+    suspend fun getProfile(): Response<ProfileResponse>
     
-    // Get profile
-    suspend fun getProfile(): Result<JSONObject> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/profile")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "GET"
-            connection.setRequestProperty("Accept", "application/json")
-            
-            val responseCode = connection.responseCode
-            val response = if (responseCode == HttpURLConnection.HTTP_OK) {
-                val reader = BufferedReader(InputStreamReader(connection.inputStream))
-                val responseText = reader.readText()
-                JSONObject(responseText)
-            } else {
-                JSONObject().apply {
-                    put("success", false)
-                    put("error", "HTTP $responseCode")
-                }
-            }
-            
-            Result.success(response)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Get profile error", e)
-            Result.failure(e)
-        }
-    }
+    @GET("mobile/alerts")
+    suspend fun getAlerts(): Response<AlertsResponse>
     
-    // Health check
-    suspend fun healthCheck(): Result<Boolean> = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("$BASE_URL/mobile/health")
-            val connection = url.openConnection() as HttpURLConnection
-            
-            connection.requestMethod = "GET"
-            connection.connectTimeout = 5000
-            connection.readTimeout = 5000
-            
-            val responseCode = connection.responseCode
-            Result.success(responseCode == HttpURLConnection.HTTP_OK)
-        } catch (e: Exception) {
-            Log.e("ApiService", "Health check error", e)
-            Result.success(false)
-        }
-    }
+    @GET("mobile/health")
+    suspend fun healthCheck(): Response<HealthResponse>
+    
+    @POST("mobile/devices")
+    suspend fun createDevice(@Body device: DeviceRequest): Response<DeviceResponse>
+    
+    @PUT("mobile/devices/{deviceId}")
+    suspend fun updateDevice(
+        @Path("deviceId") deviceId: String,
+        @Body device: DeviceRequest
+    ): Response<DeviceResponse>
+    
+    @DELETE("mobile/devices/{deviceId}")
+    suspend fun deleteDevice(@Path("deviceId") deviceId: String): Response<BaseResponse>
+    
+    @POST("mobile/automations")
+    suspend fun createAutomation(@Body automation: AutomationRequest): Response<AutomationResponse>
+    
+    @PUT("mobile/automations/{automationId}")
+    suspend fun updateAutomation(
+        @Path("automationId") automationId: String,
+        @Body automation: AutomationRequest
+    ): Response<AutomationResponse>
+    
+    @DELETE("mobile/automations/{automationId}")
+    suspend fun deleteAutomation(@Path("automationId") automationId: String): Response<BaseResponse>
+    
+    @POST("mobile/automations/{automationId}/execute")
+    suspend fun executeAutomation(@Path("automationId") automationId: String): Response<BaseResponse>
 }
