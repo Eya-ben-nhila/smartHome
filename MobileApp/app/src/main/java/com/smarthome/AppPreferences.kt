@@ -13,6 +13,14 @@ object AppPreferences {
     private const val KEY_PASSWORD = "password"
     private const val KEY_NAME = "name"
     private val KEY_REMEMBER_ME = "remember_me"
+    private const val KEY_DEVICES = "devices_list"
+    
+    data class Device(
+        val id: String,
+        val name: String,
+        val location: String,
+        val icon: String
+    )
     
     private lateinit var prefs: SharedPreferences
     
@@ -151,6 +159,50 @@ object AppPreferences {
             prefs.getBoolean("alert_acquitted_$alertId", false)
         } catch (e: Exception) {
             false
+        }
+    }
+
+    fun getDevices(): List<Device> {
+        return try {
+            val json = prefs.getString(KEY_DEVICES, null)
+            if (json.isNullOrEmpty()) {
+                emptyList()
+            } else {
+                val type = object : com.google.gson.reflect.TypeToken<List<Device>>() {}.type
+                com.google.gson.Gson().fromJson(json, type)
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to get devices", e)
+            emptyList()
+        }
+    }
+    
+    fun saveDevice(device: Device) {
+        try {
+            val devices = getDevices().toMutableList()
+            // Check if it already exists (update)
+            val index = devices.indexOfFirst { it.id == device.id }
+            if (index != -1) {
+                devices[index] = device
+            } else {
+                devices.add(device)
+            }
+            
+            val json = com.google.gson.Gson().toJson(devices)
+            prefs.edit().putString(KEY_DEVICES, json).apply()
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to save device", e)
+        }
+    }
+    
+    fun removeDevice(deviceId: String) {
+        try {
+            val devices = getDevices().toMutableList()
+            devices.removeAll { it.id == deviceId }
+            val json = com.google.gson.Gson().toJson(devices)
+            prefs.edit().putString(KEY_DEVICES, json).apply()
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to remove device", e)
         }
     }
 
