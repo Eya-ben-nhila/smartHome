@@ -4,24 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.smarthome.databinding.ActivitySecuritySimpleBinding
+import com.smarthome.databinding.ActivityDashboardNewBinding
 
 @AndroidEntryPoint
-class SecurityActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity() {
     
-    private lateinit var binding: ActivitySecuritySimpleBinding
+    private lateinit var binding: ActivityDashboardNewBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySecuritySimpleBinding.inflate(layoutInflater)
+        binding = ActivityDashboardNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        // Set up bottom navigation
-        setupBottomNavigation()
+        // Set up navigation buttons
+        setupNavigation()
     }
     
-    private fun setupBottomNavigation() {
-        // Bottom navigation click handlers will be set up here
+    private fun setupNavigation() {
+        // Navigation will be handled by bottom navigation clicks
+        // Card clicks can be added later when we identify the correct view IDs
     }
     
     // Navigation methods for bottom navigation
@@ -30,13 +31,13 @@ class SecurityActivity : AppCompatActivity() {
         startActivity(intent)
     }
     
-    fun openDashboardActivity(view: android.view.View) {
-        val intent = Intent(this, DashboardActivity::class.java)
+    fun openEnergyActivity(view: android.view.View) {
+        val intent = Intent(this, EnergyActivity::class.java)
         startActivity(intent)
     }
     
-    fun openEnergyActivity(view: android.view.View) {
-        val intent = Intent(this, EnergyActivity::class.java)
+    fun openSecurityActivity(view: android.view.View) {
+        val intent = Intent(this, SecurityActivity::class.java)
         startActivity(intent)
     }
     

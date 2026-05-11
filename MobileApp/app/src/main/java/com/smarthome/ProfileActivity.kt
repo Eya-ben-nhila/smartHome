@@ -4,16 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.smarthome.databinding.ActivitySecuritySimpleBinding
+import com.smarthome.databinding.ActivityProfileSimpleBinding
 
 @AndroidEntryPoint
-class SecurityActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     
-    private lateinit var binding: ActivitySecuritySimpleBinding
+    private lateinit var binding: ActivityProfileSimpleBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySecuritySimpleBinding.inflate(layoutInflater)
+        binding = ActivityProfileSimpleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
         // Set up bottom navigation
@@ -40,13 +40,13 @@ class SecurityActivity : AppCompatActivity() {
         startActivity(intent)
     }
     
-    fun openAutomationActivity(view: android.view.View) {
-        val intent = Intent(this, AutomationActivity::class.java)
+    fun openSecurityActivity(view: android.view.View) {
+        val intent = Intent(this, SecurityActivity::class.java)
         startActivity(intent)
     }
     
-    fun openProfileActivity(view: android.view.View) {
-        val intent = Intent(this, ProfileActivity::class.java)
+    fun openAutomationActivity(view: android.view.View) {
+        val intent = Intent(this, AutomationActivity::class.java)
         startActivity(intent)
     }
 }

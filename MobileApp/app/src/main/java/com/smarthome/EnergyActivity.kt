@@ -2,51 +2,51 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import com.smarthome.databinding.ActivityEnergySimpleBinding
 
+@AndroidEntryPoint
 class EnergyActivity : AppCompatActivity() {
+    
+    private lateinit var binding: ActivityEnergySimpleBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_energy_simple)
+        binding = ActivityEnergySimpleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         
-        // Setup navigation
-        setupNavigation()
+        // Set up bottom navigation
+        setupBottomNavigation()
     }
     
-    private fun setupNavigation() {
-        // Bottom navigation buttons
-        findViewById<LinearLayout>(R.id.homeNavButton)?.setOnClickListener {
-            val intent = Intent(this, DashboardFinalActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
-        findViewById<LinearLayout>(R.id.activityNavButton)?.setOnClickListener {
-            val intent = Intent(this, ActivityDashboardActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
-        findViewById<LinearLayout>(R.id.automationsNavButton)?.setOnClickListener {
-            val intent = Intent(this, AutomationsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
-        findViewById<LinearLayout>(R.id.alertsNavButton)?.setOnClickListener {
-            val intent = Intent(this, AlertsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
-        findViewById<LinearLayout>(R.id.securityNavButton)?.setOnClickListener {
-            val intent = Intent(this, SecurityActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        
-        // Energy button is already active (current activity)
+    private fun setupBottomNavigation() {
+        // Bottom navigation click handlers will be set up here
+    }
+    
+    // Navigation methods for bottom navigation
+    fun openMainActivity(view: android.view.View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+    
+    fun openDashboardActivity(view: android.view.View) {
+        val intent = Intent(this, DashboardActivity::class.java)
+        startActivity(intent)
+    }
+    
+    fun openSecurityActivity(view: android.view.View) {
+        val intent = Intent(this, SecurityActivity::class.java)
+        startActivity(intent)
+    }
+    
+    fun openAutomationActivity(view: android.view.View) {
+        val intent = Intent(this, AutomationActivity::class.java)
+        startActivity(intent)
+    }
+    
+    fun openProfileActivity(view: android.view.View) {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
     }
 }
