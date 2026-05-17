@@ -4,10 +4,15 @@
     <div class="top-bar" *ngIf="showTopBar">
       <div class="time">9:30</div>
       <div class="search-bar">
-        <i class="fas fa-lock"></i>
-        <input type="text" placeholder="Ask Spring Street" (click)="goToSearch()">
+        <i class="fas fa-search"></i>
+        <input type="text" [placeholder]="'layout.search' | translate" (click)="goToSearch()">
       </div>
       <div class="status-icons">
+        <div class="header-lang-toggle">
+          <button class="lang-btn" [class.active]="translationService.currentLang() === 'en'" (click)="translationService.setLanguage('en')">EN</button>
+          <div class="lang-divider"></div>
+          <button class="lang-btn" [class.active]="translationService.currentLang() === 'fr'" (click)="translationService.setLanguage('fr')">FR</button>
+        </div>
         <span class="network-status">5G</span>
         <i class="fas fa-signal"></i>
         <div class="user-avatar">

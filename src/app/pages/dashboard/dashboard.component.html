@@ -3,50 +3,46 @@
   <div class="header-strip">
     <div class="strip-content">
       <div class="left-section">
-        <h2 class="dashboard-title">Smart Home Dashboard</h2>
+        <h2 class="dashboard-title">{{ 'dashboard.title' | translate }}</h2>
         <div class="search-bar">
           <i class="fas fa-lock"></i>
-          <input type="text" placeholder="Ask Spring Street" (click)="goToSearch()">
+          <input type="text" [placeholder]="'layout.search' | translate" (click)="goToSearch()">
         </div>
       </div>
       <div class="right-section">
           <div class="category-filters">
             <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Favorites'}" (click)="setFilter('Favorites')">
               <i class="fas fa-heart"></i>
-              <span>Favorites</span>
+              <span>{{ 'dashboard.filter.favorites' | translate }}</span>
             </div>
             <div class="filter-chip" [ngClass]="{'active': currentFilter === 'All'}" (click)="setFilter('All')">
               <i class="fas fa-th"></i>
-              <span>All</span>
+              <span>{{ 'dashboard.filter.all' | translate }}</span>
             </div>
             <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Cameras'}" (click)="setFilter('Cameras')">
               <i class="fas fa-video"></i>
-              <span>Cameras</span>
+              <span>{{ 'dashboard.filter.cameras' | translate }}</span>
             </div>
             <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Lights'}" (click)="setFilter('Lights')">
               <i class="fas fa-lightbulb"></i>
-              <span>Lights</span>
+              <span>{{ 'dashboard.filter.lights' | translate }}</span>
             </div>
             <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Wifi'}" (click)="setFilter('Wifi')">
               <i class="fas fa-wifi"></i>
-              <span>Wifi</span>
+              <span>{{ 'dashboard.filter.wifi' | translate }}</span>
             </div>
             <div class="filter-chip" [ngClass]="{'active': currentFilter === 'Climate'}" (click)="setFilter('Climate')">
               <i class="fas fa-thermometer-half"></i>
-              <span>Climate</span>
+              <span>{{ 'dashboard.filter.climate' | translate }}</span>
             </div>
           </div>
           <button class="logout-btn" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-          </button>
-          <button class="analytics-btn" (click)="goToAnalytics()">
-            <i class="fas fa-chart-bar"></i>
-            <span>Analytics</span>
+            <span>{{ 'dashboard.logout' | translate }}</span>
           </button>
           <button class="add-device-btn" (click)="openAddDeviceModal()">
             <i class="fas fa-plus"></i>
-            <span>Ajouter</span>
+            <span>{{ 'dashboard.addDevice' | translate }}</span>
           </button>
         </div>
     </div>
@@ -146,7 +142,7 @@
         <h4>{{device.name}}</h4>
         <div class="temperature-display">
           <span class="temp-value">{{device.status.replace('F', '')}}</span>
-          <span class="temp-label">Comfort</span>
+          <span class="temp-label">{{ 'dashboard.comfort' | translate }}</span>
         </div>
         <div class="temp-controls">
           <button class="temp-btn">-</button>
@@ -170,7 +166,7 @@
           <div class="room-item"><i class="fas fa-couch"></i> <span>Living room: 72°F</span></div>
           <div class="room-item"><i class="fas fa-bed"></i> <span>Guest bedroom: 70°F</span></div>
         </div>
-        <button class="select-sensors-btn">Select sensors</button>
+        <button class="select-sensors-btn">{{ 'dashboard.selectSensors' | translate }}</button>
       </div>
       <div class="favorite-btn" (click)="toggleFavorite(device)" [class]="{'active': device.isFavorite}" [style.background]="device.isFavorite ? '#ffcdd2' : '#f5f5f5'" [style.color]="device.isFavorite ? '#d32f2f' : '#ccc'">
         <i class="fas fa-heart"></i>
@@ -189,7 +185,7 @@
     <p>{{alertMessage}}</p>
   </div>
   <button class="acknowledge-btn" *ngIf="!isAlertAcknowledged" (click)="acknowledgeAlert()">
-    Acquitter
+    {{ 'dashboard.alert.acknowledge' | translate }}
   </button>
   <button class="close-alert" (click)="closeAlertNotification()">
     <i class="fas fa-times"></i>
@@ -200,36 +196,36 @@
 <div class="modal-overlay" *ngIf="showAddDeviceModal" (click)="closeAddDeviceModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <h3>Ajouter un dispositif</h3>
+      <h3>{{ 'dashboard.modal.addTitle' | translate }}</h3>
       <button class="close-btn" (click)="closeAddDeviceModal()">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label>Nom du dispositif</label>
-        <input type="text" [(ngModel)]="newDevice.name" placeholder="Entrez le nom">
+        <label>{{ 'dashboard.modal.name' | translate }}</label>
+        <input type="text" [(ngModel)]="newDevice.name" [placeholder]="'dashboard.modal.namePlaceholder' | translate">
       </div>
       <div class="form-group">
-        <label>Type de dispositif</label>
+        <label>{{ 'dashboard.modal.type' | translate }}</label>
         <select [(ngModel)]="newDevice.type">
-          <option value="">Sélectionnez un type</option>
-          <option value="light">Lumière</option>
-          <option value="camera">Caméra</option>
-          <option value="lock">Serrure</option>
-          <option value="thermostat">Thermostat</option>
-          <option value="speaker">Haut-parleur</option>
-          <option value="plug">Prise intelligente</option>
+          <option value="">{{ 'dashboard.modal.typePlaceholder' | translate }}</option>
+          <option value="light">{{ 'device.type.light' | translate }}</option>
+          <option value="camera">{{ 'device.type.camera' | translate }}</option>
+          <option value="lock">{{ 'device.type.lock' | translate }}</option>
+          <option value="thermostat">{{ 'device.type.thermostat' | translate }}</option>
+          <option value="speaker">{{ 'device.type.speaker' | translate }}</option>
+          <option value="plug">{{ 'device.type.plug' | translate }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label>Localisation</label>
-        <input type="text" [(ngModel)]="newDevice.location" placeholder="Ex: Salon, Chambre">
+        <label>{{ 'dashboard.modal.location' | translate }}</label>
+        <input type="text" [(ngModel)]="newDevice.location" [placeholder]="'dashboard.modal.locationPlaceholder' | translate">
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-cancel" (click)="closeAddDeviceModal()">Annuler</button>
-      <button class="btn-add" (click)="addDevice()">Ajouter</button>
+      <button class="btn-cancel" (click)="closeAddDeviceModal()">{{ 'dashboard.modal.cancel' | translate }}</button>
+      <button class="btn-add" (click)="addDevice()">{{ 'dashboard.modal.add' | translate }}</button>
     </div>
   </div>
 </div>
@@ -247,49 +243,49 @@
     <div class="modal-body">
       <div class="device-detail-info">
         <div class="detail-item">
-          <label>Type:</label>
+          <label>{{ 'dashboard.details.type' | translate }}</label>
           <span *ngIf="!isEditingDevice">{{selectedDevice.type}}</span>
           <select *ngIf="isEditingDevice" [(ngModel)]="selectedDevice.type" class="device-select">
-            <option value="light">Lumière</option>
-            <option value="camera">Caméra</option>
-            <option value="lock">Serrure</option>
-            <option value="thermostat">Thermostat</option>
-            <option value="speaker">Haut-parleur</option>
-            <option value="plug">Prise intelligente</option>
-            <option value="fan">Ventilateur</option>
-            <option value="air">Qualité air</option>
-            <option value="weather">Météo</option>
-            <option value="temp">Température</option>
+            <option value="light">{{ 'device.type.light' | translate }}</option>
+            <option value="camera">{{ 'device.type.camera' | translate }}</option>
+            <option value="lock">{{ 'device.type.lock' | translate }}</option>
+            <option value="thermostat">{{ 'device.type.thermostat' | translate }}</option>
+            <option value="speaker">{{ 'device.type.speaker' | translate }}</option>
+            <option value="plug">{{ 'device.type.plug' | translate }}</option>
+            <option value="fan">{{ 'device.type.fan' | translate }}</option>
+            <option value="air">{{ 'device.type.air' | translate }}</option>
+            <option value="weather">{{ 'device.type.weather' | translate }}</option>
+            <option value="temp">{{ 'device.type.temp' | translate }}</option>
           </select>
         </div>
         <div class="detail-item">
-          <label>Statut:</label>
+          <label>{{ 'dashboard.details.status' | translate }}</label>
           <span *ngIf="!isEditingDevice">{{selectedDevice.status}}</span>
           <input *ngIf="isEditingDevice" type="text" [(ngModel)]="selectedDevice.status" class="device-status-input">
         </div>
         <div class="detail-item">
-          <label>Localisation:</label>
-          <span *ngIf="!isEditingDevice">{{selectedDevice.location || 'Non spécifiée'}}</span>
-          <input *ngIf="isEditingDevice" type="text" [(ngModel)]="selectedDevice.location" class="device-location-input" placeholder="Entrez la localisation">
+          <label>{{ 'dashboard.details.location' | translate }}</label>
+          <span *ngIf="!isEditingDevice">{{selectedDevice.location || ('dashboard.details.notSpecified' | translate)}}</span>
+          <input *ngIf="isEditingDevice" type="text" [(ngModel)]="selectedDevice.location" class="device-location-input" [placeholder]="'dashboard.modal.locationPlaceholder' | translate">
         </div>
       </div>
     </div>
     <div class="modal-footer">
       <button *ngIf="!isEditingDevice" class="btn-edit" (click)="startEditingDevice()">
         <i class="fas fa-edit"></i>
-        Modifier
+        {{ 'dashboard.btn.edit' | translate }}
       </button>
       <button *ngIf="isEditingDevice" class="btn-save" (click)="saveDeviceChanges()">
         <i class="fas fa-save"></i>
-        Enregistrer
+        {{ 'dashboard.btn.save' | translate }}
       </button>
       <button *ngIf="isEditingDevice" class="btn-cancel" (click)="cancelEditing()">
         <i class="fas fa-times"></i>
-        Annuler
+        {{ 'dashboard.btn.cancel' | translate }}
       </button>
       <button *ngIf="!isEditingDevice" class="btn-delete" (click)="deleteDevice()">
         <i class="fas fa-trash"></i>
-        Supprimer
+        {{ 'dashboard.btn.delete' | translate }}
       </button>
     </div>
   </div>

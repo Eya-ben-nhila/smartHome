@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.smarthome.data.repository.SmartHomeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import com.smarthome.databinding.ActivitySigninSimpleBinding
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SigninActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivitySigninSimpleBinding
+    private val repository = SmartHomeRepository()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,21 +48,42 @@ class SigninActivity : AppCompatActivity() {
             val password = binding.passwordInput.text.toString()
             val rememberMe = binding.rememberMeCheckbox.isChecked
             
-            // Simple validation (in real app, you'd validate against backend)
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Save login session
-                AppPreferences.saveLoginSession(email, password, rememberMe, AppPreferences.getUserName() ?: "")
+                // Show loading state
+                binding.loginButton?.isEnabled = false
+                binding.loginButton?.text = "Signing in..."
                 
-                if (!rememberMe) {
-                    // If remember me is not checked, clear specifically email/password 
-                    // (though saveLoginSession just updated them, we clear them for next login pre-fill)
-                    AppPreferences.clearCredentials()
+                // Call backend API
+                lifecycleScope.launch {
+                    val result = repository.login(email, password)
+                    
+                    binding.loginButton?.isEnabled = true
+                    binding.loginButton?.text = "Sign In"
+                    
+                    result.onSuccess { authResponse ->
+                        // Save JWT token and user ID
+                        authResponse.token?.let { AppPreferences.setJwtToken(it) }
+                        authResponse.userId?.let { AppPreferences.setUserId(it) }
+                        authResponse.user?.fullName?.let { AppPreferences.setUserName(it) }
+                        
+                        // Save local session for remember me
+                        AppPreferences.saveLoginSession(email, password, rememberMe, authResponse.user?.fullName ?: "")
+                        
+                        if (!rememberMe) {
+                            AppPreferences.clearCredentials()
+                        }
+                        
+                        android.widget.Toast.makeText(this@SigninActivity, "Login successful!", android.widget.Toast.LENGTH_SHORT).show()
+                        
+                        // Navigate to dashboard
+                        val intent = Intent(this@SigninActivity, DashboardActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }.onFailure { error ->
+                        android.widget.Toast.makeText(this@SigninActivity, "Login failed: ${error.message}", android.widget.Toast.LENGTH_SHORT).show()
+                        android.util.Log.e("SigninActivity", "Login error", error)
+                    }
                 }
-                
-                // Navigate to dashboard after successful login
-                val intent = Intent(this, DashboardActivity::class.java)
-                startActivity(intent)
-                finish() // Close sign in activity so user can't go back
             } else {
                 android.widget.Toast.makeText(this, "Please enter email and password", android.widget.Toast.LENGTH_SHORT).show()
             }

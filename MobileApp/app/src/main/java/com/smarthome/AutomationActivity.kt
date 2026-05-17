@@ -3,13 +3,18 @@ package com.smarthome
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.smarthome.data.repository.SmartHomeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import com.smarthome.databinding.ActivityAutomationSimpleBinding
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AutomationActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityAutomationSimpleBinding
+    private val repository = SmartHomeRepository()
+    private var backendAutomations: List<Map<String, Any>> = emptyList()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +23,49 @@ class AutomationActivity : AppCompatActivity() {
         
         // Set up bottom navigation
         setupBottomNavigation()
+        
+        // Load automations from backend
+        loadAutomationsFromBackend()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // Reload automations when activity resumes
+        loadAutomationsFromBackend()
+    }
+    
+    private fun loadAutomationsFromBackend() {
+        val token = AppPreferences.getJwtToken()
+        if (token == null) {
+            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        lifecycleScope.launch {
+            val result = repository.getAllAutomations(token)
+            result.onSuccess { automations ->
+                backendAutomations = automations
+                displayAutomations(automations)
+            }.onFailure { error ->
+                android.widget.Toast.makeText(this@AutomationActivity, "Failed to load automations: ${error.message}", android.widget.Toast.LENGTH_SHORT).show()
+                android.util.Log.e("AutomationActivity", "Failed to load automations", error)
+            }
+        }
+    }
+    
+    private fun displayAutomations(automations: List<Map<String, Any>>) {
+        android.util.Log.d("AutomationActivity", "Loaded ${automations.size} automations from backend")
+        
+        // Log automation details
+        automations.forEach { automation ->
+            val id = automation["id"]
+            val name = automation["automationName"]
+            val isActive = automation["isActive"]
+            android.util.Log.d("AutomationActivity", "Automation: $name (ID: $id, Active: $isActive)")
+        }
+        
+        // In a full implementation, you would dynamically create automation cards
+        // For now, just log the data
     }
     
     private fun setupBottomNavigation() {

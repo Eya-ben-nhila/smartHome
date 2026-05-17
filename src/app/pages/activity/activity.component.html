@@ -2,15 +2,15 @@
   <!-- Filter Bar -->
   <div class="filter-bar">
     <div class="filter-chip active">
-      <span>Devices</span>
+      <span>{{ 'activity.filter.devices' | translate }}</span>
       <i class="fas fa-chevron-down"></i>
     </div>
     <div class="filter-chip">
-      <span>Events</span>
+      <span>{{ 'activity.filter.events' | translate }}</span>
       <i class="fas fa-chevron-down"></i>
     </div>
     <div class="filter-chip">
-      <span>Date</span>
+      <span>{{ 'activity.filter.date' | translate }}</span>
       <i class="fas fa-chevron-down"></i>
     </div>
   </div>
@@ -21,7 +21,7 @@
       <div class="brief-icon">
         <i class="fas fa-file-alt"></i>
       </div>
-      <h3>Tuesday's Home Brief</h3>
+      <h3>{{ 'activity.brief.title' | translate }}</h3>
     </div>
     <div class="brief-content">
       <p>Good morning! Here's what happened at your home overnight. The security system detected normal activity patterns with no unusual events. Temperature remained stable throughout the night at 68°F, and energy consumption was within expected ranges.</p>
@@ -31,7 +31,7 @@
     <div class="brief-actions">
       <button class="see-more-btn">
         <i class="fas fa-gem"></i>
-        See more
+        {{ 'activity.brief.seeMore' | translate }}
       </button>
       <div class="feedback-icons">
         <i class="fas fa-thumbs-up"></i>
@@ -42,14 +42,14 @@
 
   <!-- Today Section -->
   <div class="today-section">
-    <h3>Today</h3>
+    <h3>{{ 'activity.today' | translate }}</h3>
     <div class="activity-list">
       <div class="activity-item">
         <div class="activity-checkbox">
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Person delivers 4 boxes</p>
+          <p class="activity-description">{{ 'activity.event.delivery' | translate }}</p>
           <p class="activity-time">6:45 PM · Front door</p>
         </div>
         <div class="activity-thumbnail">
@@ -62,7 +62,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Motion detected in backyard</p>
+          <p class="activity-description">{{ 'activity.event.motionBackyard' | translate }}</p>
           <p class="activity-time">5:30 PM · Backyard</p>
         </div>
         <div class="activity-thumbnail">
@@ -75,7 +75,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Front door unlocked</p>
+          <p class="activity-description">{{ 'activity.event.doorUnlocked' | translate }}</p>
           <p class="activity-time">4:15 PM · Front door</p>
         </div>
         <div class="activity-thumbnail">
@@ -88,7 +88,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Kitchen light turned on</p>
+          <p class="activity-description">{{ 'activity.event.kitchenLight' | translate }}</p>
           <p class="activity-time">3:30 PM · Kitchen</p>
         </div>
         <div class="activity-thumbnail">
@@ -101,7 +101,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Temperature alert: Room too warm</p>
+          <p class="activity-description">{{ 'activity.event.tempAlert' | translate }}</p>
           <p class="activity-time">2:45 PM · Living room</p>
         </div>
         <div class="activity-thumbnail">
@@ -114,7 +114,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Garage door opened</p>
+          <p class="activity-description">{{ 'activity.event.garageOpened' | translate }}</p>
           <p class="activity-time">1:20 PM · Garage</p>
         </div>
         <div class="activity-thumbnail">
@@ -127,7 +127,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">Motion detected - driveway</p>
+          <p class="activity-description">{{ 'activity.event.motionDriveway' | translate }}</p>
           <p class="activity-time">12:00 PM · Driveway</p>
         </div>
         <div class="activity-thumbnail">
@@ -140,7 +140,7 @@
           <i class="fas fa-check-square"></i>
         </div>
         <div class="activity-content">
-          <p class="activity-description">System backup completed</p>
+          <p class="activity-description">{{ 'activity.event.backup' | translate }}</p>
           <p class="activity-time">11:30 AM · System</p>
         </div>
         <div class="activity-thumbnail">

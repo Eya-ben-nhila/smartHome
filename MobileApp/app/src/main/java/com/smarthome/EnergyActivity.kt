@@ -3,13 +3,17 @@ package com.smarthome
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.smarthome.data.repository.SmartHomeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import com.smarthome.databinding.ActivityEnergySimpleBinding
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class EnergyActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityEnergySimpleBinding
+    private val repository = SmartHomeRepository()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +22,48 @@ class EnergyActivity : AppCompatActivity() {
         
         // Set up bottom navigation
         setupBottomNavigation()
+        
+        // Load energy data from backend
+        loadEnergyDashboard()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // Reload energy data when activity resumes
+        loadEnergyDashboard()
+    }
+    
+    private fun loadEnergyDashboard() {
+        val token = AppPreferences.getJwtToken()
+        if (token == null) {
+            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        lifecycleScope.launch {
+            val result = repository.getEnergyDashboard(token)
+            result.onSuccess { dashboard ->
+                displayEnergyData(dashboard)
+            }.onFailure { error ->
+                android.widget.Toast.makeText(this@EnergyActivity, "Failed to load energy data: ${error.message}", android.widget.Toast.LENGTH_SHORT).show()
+                android.util.Log.e("EnergyActivity", "Failed to load energy data", error)
+            }
+        }
+    }
+    
+    private fun displayEnergyData(dashboard: Map<String, Any>) {
+        android.util.Log.d("EnergyActivity", "Energy dashboard data: $dashboard")
+        
+        // Extract values from the dashboard map
+        val totalConsumption = dashboard["totalConsumption"] as? Double ?: 0.0
+        val totalCost = dashboard["totalCost"] as? Double ?: 0.0
+        val averagePower = dashboard["averagePower"] as? Double ?: 0.0
+        
+        // Update UI 
+        binding.dailyAvgValue?.text = String.format("%.1f", averagePower)
+        binding.monthlyTotalValue?.text = String.format("%.1f", totalConsumption)
+        binding.currentCostValue?.text = String.format("$%.2f", totalCost / 30) // estimate daily
+        binding.monthlyCostValue?.text = String.format("$%.2f", totalCost)
     }
     
     private fun setupBottomNavigation() {

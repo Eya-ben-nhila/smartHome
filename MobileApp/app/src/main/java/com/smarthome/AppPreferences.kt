@@ -12,8 +12,10 @@ object AppPreferences {
     private const val KEY_EMAIL = "email"
     private const val KEY_PASSWORD = "password"
     private const val KEY_NAME = "name"
-    private val KEY_REMEMBER_ME = "remember_me"
+    private const val KEY_REMEMBER_ME = "remember_me"
     private const val KEY_DEVICES = "devices_list"
+    private const val KEY_JWT_TOKEN = "jwt_token"
+    private const val KEY_USER_ID = "user_id"
     
     data class Device(
         val id: String,
@@ -77,6 +79,50 @@ object AppPreferences {
         }
     }
     
+    fun getJwtToken(): String? {
+        return try {
+            val token = prefs.getString(KEY_JWT_TOKEN, null)
+            android.util.Log.d("AppPreferences", "Retrieved JWT token: ${if (token.isNullOrEmpty()) "null/empty" else "***"}")
+            token
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to get JWT token", e)
+            null
+        }
+    }
+    
+    fun setJwtToken(token: String) {
+        try {
+            val editor = prefs.edit()
+            editor.putString(KEY_JWT_TOKEN, token)
+            val success = editor.commit()
+            android.util.Log.d("AppPreferences", "Set JWT token, success=$success")
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to set JWT token", e)
+        }
+    }
+    
+    fun getUserId(): String? {
+        return try {
+            val userId = prefs.getString(KEY_USER_ID, null)
+            android.util.Log.d("AppPreferences", "Retrieved user ID: $userId")
+            userId
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to get user ID", e)
+            null
+        }
+    }
+    
+    fun setUserId(userId: String) {
+        try {
+            val editor = prefs.edit()
+            editor.putString(KEY_USER_ID, userId)
+            val success = editor.commit()
+            android.util.Log.d("AppPreferences", "Set user ID: $userId, success=$success")
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to set user ID", e)
+        }
+    }
+    
     fun getUserName(): String? {
         return try {
             val name = prefs.getString(KEY_NAME, null)
@@ -126,6 +172,10 @@ object AppPreferences {
     fun logout() {
         try {
             val editor = prefs.edit()
+            
+            // Always clear JWT token and user ID on logout
+            editor.remove(KEY_JWT_TOKEN)
+            editor.remove(KEY_USER_ID)
             
             // Only clear specific login session data if not remembered
             if (!shouldRememberMe()) {

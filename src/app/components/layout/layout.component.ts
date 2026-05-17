@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [SidebarComponent, CommonModule, RouterOutlet],
+  imports: [SidebarComponent, CommonModule, RouterOutlet, TranslatePipe],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
@@ -14,7 +16,7 @@ export class LayoutComponent implements OnInit {
   showSidebar = true;
   showTopBar = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public translationService: TranslationService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {

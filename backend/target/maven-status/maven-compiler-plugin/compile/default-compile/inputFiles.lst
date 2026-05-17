@@ -20,6 +20,8 @@ C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\
 C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\entity\DeviceEvent.java
 C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\entity\Automation.java
 C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\controller\EnergyController.java
+C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\config\MobileSecurityConfig.java
+C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\controller\MobileController.java
 C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\security\JwtTokenUtil.java
 C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\controller\AuthController.java
 C:\Users\eyabe\OneDrive\Desktop\iot-monitoring-platform - Copy\backend\src\main\java\com\smarthome\dto\LoginRequestDto.java

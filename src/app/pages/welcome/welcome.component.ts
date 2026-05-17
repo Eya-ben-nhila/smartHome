@@ -2,17 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TranslatePipe],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
   showLogin = false;
   showSignup = false;
+  isLoggingIn = false;
+  googleStep: 'button' | 'selection' | 'confirm' | 'add' = 'button';
+  selectedEmail = '';
+  accounts = [
+    { name: 'Eya Ben Nhila', email: 'eya.ben.nhila@gmail.com', avatar: 'E' },
+    { name: 'Work Account', email: 'e.bennhila@company.com', avatar: 'W' }
+  ];
+  newAccountEmail = '';
   loginForm = {
     email: '',
     password: '',
@@ -26,9 +36,13 @@ export class WelcomeComponent implements OnInit {
     agreeTerms: false
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public translationService: TranslationService) {}
 
   ngOnInit(): void {}
+
+  toggleLanguage(): void {
+    this.translationService.toggleLanguage();
+  }
 
   toggleLogin(): void {
     this.showLogin = !this.showLogin;
@@ -108,6 +122,50 @@ export class WelcomeComponent implements OnInit {
     // In real app, this would make an API call to create account
     alert('Account created successfully! Redirecting to dashboard...');
     this.router.navigate(['/dashboard']);
+  }
+
+  onGoogleLogin(): void {
+    this.googleStep = 'selection';
+  }
+
+  selectGoogleAccount(account: any): void {
+    this.selectedEmail = account.email;
+    this.googleStep = 'confirm';
+  }
+
+  showAddAccount(): void {
+    this.googleStep = 'add';
+  }
+
+  addNewAccount(): void {
+    if (this.newAccountEmail && this.newAccountEmail.includes('@')) {
+      const name = this.newAccountEmail.split('@')[0].split('.').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+      const avatar = name.charAt(0);
+      const newAcc = { name, email: this.newAccountEmail, avatar };
+      this.accounts.unshift(newAcc);
+      this.selectGoogleAccount(newAcc);
+      this.newAccountEmail = '';
+    }
+  }
+
+  confirmGoogleLogin(): void {
+    this.isLoggingIn = true;
+    
+    setTimeout(() => {
+      this.isLoggingIn = false;
+      this.googleStep = 'button';
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('loginType', 'google');
+      localStorage.setItem('userEmail', this.selectedEmail);
+      this.router.navigate(['/dashboard']);
+    }, 1500);
+  }
+
+  cancelGoogleLogin(): void {
+    this.googleStep = 'button';
+    this.selectedEmail = '';
+    this.isLoggingIn = false;
+    this.newAccountEmail = '';
   }
 
   goToSignup(): void {

@@ -2,35 +2,35 @@
   <div class="nav-items">
     <div class="nav-item home-item" [class.active]="currentPage === 'dashboard'" (click)="navigateTo('dashboard')">
       <i class="fas fa-home"></i>
-      <span>Home</span>
+      <span>{{ 'nav.home' | translate }}</span>
     </div>
     <div class="nav-item" [class.active]="currentPage === 'activity'" (click)="navigateTo('activity')">
       <i class="fas fa-chart-line"></i>
-      <span>Activity</span>
+      <span>{{ 'nav.activity' | translate }}</span>
     </div>
     <div class="nav-item" [class.active]="currentPage === 'automations'" (click)="navigateTo('automations')">
       <i class="fas fa-robot"></i>
-      <span>Automations</span>
+      <span>{{ 'nav.automations' | translate }}</span>
     </div>
     <div class="nav-item" [class.active]="currentPage === 'alerts'" (click)="navigateTo('alerts')">
       <i class="fas fa-bell"></i>
-      <span>Alerts</span>
+      <span>{{ 'nav.alerts' | translate }}</span>
     </div>
     <div class="nav-item" [class.active]="currentPage === 'security'" (click)="navigateTo('security')">
       <i class="fas fa-shield-alt"></i>
-      <span>Security</span>
+      <span>{{ 'nav.security' | translate }}</span>
     </div>
     <div class="nav-item" [class.active]="currentPage === 'energy'" (click)="navigateTo('energy')">
       <i class="fas fa-bolt"></i>
-      <span>Energy</span>
+      <span>{{ 'nav.energy' | translate }}</span>
     </div>
     <div class="nav-item" [class.active]="currentPage === 'analytics'" (click)="navigateTo('analytics')">
       <i class="fas fa-chart-bar"></i>
-      <span>Analytics</span>
+      <span>{{ 'nav.analytics' | translate }}</span>
     </div>
     <div class="nav-item profile-item" [class.active]="currentPage === 'profile'" (click)="navigateTo('profile')">
       <i class="fas fa-user"></i>
-      <span>Profile</span>
+      <span>{{ 'nav.profile' | translate }}</span>
     </div>
   </div>
 </div>

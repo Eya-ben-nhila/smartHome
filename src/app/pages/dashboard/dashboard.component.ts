@@ -3,11 +3,14 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { IotWebsocketService } from '../../services/iot-websocket.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, DragDropModule],
+  imports: [CommonModule, FormsModule, DragDropModule, TranslatePipe],
   templateUrl: './dashboard.component.html',
   styles: [`
     .dashboard-content {
@@ -914,7 +917,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private iotService: IotWebsocketService
   ) {}
 
   ngOnInit() {
@@ -924,6 +928,31 @@ export class DashboardComponent implements OnInit {
       if (this.currentFilter !== 'All') {
         this.applyFilter();
       }
+      
+      // Subscribe to real-time IoT updates
+      this.iotService.messages$.subscribe(msg => {
+        console.log('Real-time message received:', msg);
+        if (msg.type === 'DEVICE_DATA' || msg.type === 'DEVICE_STATUS_UPDATE') {
+          const deviceId = msg.deviceId || (msg.data && msg.data.id);
+          if (!deviceId) return;
+          
+          const deviceIndex = this.devices.findIndex(d => d.id === deviceId);
+          if (deviceIndex !== -1) {
+            if (msg.type === 'DEVICE_DATA') {
+              this.devices[deviceIndex].status = msg.data;
+            } else {
+              this.devices[deviceIndex] = { ...this.devices[deviceIndex], ...msg.data };
+            }
+            this.updateDeviceInColumns(deviceId, this.devices[deviceIndex]);
+            this.cdr.detectChanges();
+            console.log(`Device ${deviceId} updated successfully`);
+          }
+        } else if (msg.type === 'DEVICE_ALERT') {
+          this.alertMessage = msg.alert || 'Alerte détectée !';
+          this.showAlertNotification = true;
+          this.cdr.detectChanges();
+        }
+      });
     } else {
       this.initDefaultLayout();
     }
@@ -1160,9 +1189,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/search']);
   }
 
-  goToAnalytics(): void {
-    this.router.navigate(['/analytics']);
-  }
 
   logout(): void {
     localStorage.removeItem('userToken');

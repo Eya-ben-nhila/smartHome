@@ -1,7 +1,7 @@
 <div class="security-container">
   <header class="page-header">
     <div class="header-content">
-      <h1>Advanced Security</h1>
+      <h1>{{ 'security.title' | translate }}</h1>
       <div class="status-badge" [class.armed]="isArmed">
         <i class="fas" [class.fa-shield-alt]="isArmed" [class.fa-unlock]="!isArmed"></i>
         <span>{{ systemStatus }}</span>
@@ -9,7 +9,7 @@
     </div>
     <div class="header-actions">
       <button class="control-btn" [class.active]="isArmed" (click)="toggleSystem()">
-        {{ isArmed ? 'DISARM SYSTEM' : 'ARM SYSTEM' }}
+        {{ isArmed ? ('security.disarm' | translate) : ('security.arm' | translate) }}
       </button>
     </div>
   </header>
@@ -18,20 +18,20 @@
     <!-- Camera Viewport -->
     <div class="cameras-section">
       <div class="section-header">
-        <h3>Live Monitoring</h3>
-        <span class="active-count">{{ cameras.length }} Cameras Active</span>
+        <h3>{{ 'security.liveMonitoring' | translate }}</h3>
+        <span class="active-count">{{ cameras.length }} {{ 'security.camerasActive' | translate }}</span>
       </div>
       <div class="camera-grid">
         <div class="camera-card" *ngFor="let cam of cameras">
           <div class="camera-feed">
             <img [src]="cam.feed" [alt]="cam.name">
             <div class="feed-overlay">
-              <span class="live-tag">LIVE</span>
+              <span class="live-tag">{{ 'security.live' | translate }}</span>
               <span class="cam-name">{{ cam.name }}</span>
             </div>
             <div class="detection-tags" *ngIf="cam.detections.length > 0">
               <span class="tag" *ngFor="let det of cam.detections">
-                <i class="fas fa-search"></i> {{ det }} Detected
+                <i class="fas fa-search"></i> {{ det }} {{ 'security.detected' | translate }}
               </span>
             </div>
             <div class="cam-controls">
@@ -48,19 +48,19 @@
     <div class="side-panel">
       <!-- Panic Center -->
       <div class="panic-center">
-        <h3>Emergency Actions</h3>
+        <h3>{{ 'security.emergency' | translate }}</h3>
         <div class="panic-buttons">
           <button class="panic-btn fire">
             <i class="fas fa-fire"></i>
-            <span>FIRE</span>
+            <span>{{ 'security.fire' | translate }}</span>
           </button>
           <button class="panic-btn police">
             <i class="fas fa-user-shield"></i>
-            <span>POLICE</span>
+            <span>{{ 'security.police' | translate }}</span>
           </button>
           <button class="panic-btn medical">
             <i class="fas fa-heartbeat"></i>
-            <span>MEDICAL</span>
+            <span>{{ 'security.medical' | translate }}</span>
           </button>
         </div>
       </div>
@@ -68,8 +68,8 @@
       <!-- Detection History -->
       <div class="event-history">
         <div class="section-header">
-          <h3>Recent Activity</h3>
-          <button class="view-all">View All</button>
+          <h3>{{ 'security.recentActivity' | translate }}</h3>
+          <button class="view-all">{{ 'security.viewAll' | translate }}</button>
         </div>
         <div class="event-list">
           <div class="event-item" *ngFor="let event of events" [class]="getSeverityClass(event.severity)">

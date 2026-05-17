@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Assistant Configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .config-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .config-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .config-header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .config-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #495057;
+            transform: scale(1.02);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-connected {
+            background: #28a745;
+        }
+
+        .status-connecting {
+            background: #ffc107;
+        }
+
+        .status-error {
+            background: #dc3545;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+
+        .help-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+
+        .help-text h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .help-text p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            .config-container {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="config-container">
+        <div class="config-header">
+            <h1>🏠 Home Assistant Setup</h1>
+            <p>Configure your Home Assistant connection to enable real-time device control and monitoring</p>
+        </div>
+
+        <form id="configForm">
+            <div class="form-group">
+                <label for="haUrl">Home Assistant URL</label>
+                <input type="url" id="haUrl" name="haUrl" 
+                       placeholder="http://homeassistant.local:8123" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="accessToken">Access Token</label>
+                <input type="password" id="accessToken" name="accessToken" 
+                       placeholder="Enter your Home Assistant access token" 
+                       required>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="testConnection()">
+                    <span id="testStatus" class="status-indicator status-connecting"></span>
+                    Test Connection
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="clearConfig()">
+                    Clear
+                </button>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary" onclick="saveConfig()">
+                    Save & Launch Dashboard
+                </button>
+            </div>
+        </form>
+
+        <div class="help-text">
+            <h4>📖 How to get your Home Assistant URL:</h4>
+            <p>1. Open Home Assistant in your browser</p>
+            <p>2. Look at the URL in your browser's address bar</p>
+            <p>3. Use that exact URL (including http:// or https://)</p>
+            
+            <h4>🔑 How to get your Access Token:</h4>
+            <p>1. In Home Assistant, go to: <strong>Profile → Long-Lived Access Tokens</strong></p>
+            <p>2. Click <strong>Create Token</strong></p>
+            <p>3. Give the token a name (e.g., "smart-home-web")</p>
+            <p>4. Copy the generated token</p>
+            <p>5. Paste the token in the field above</p>
+        </div>
+
+        <div id="statusMessage" style="margin-top: 20px; padding: 15px; border-radius: 6px; display: none;"></div>
+    </div>
+
+    <script>
+        // Configuration management
+        let config = {
+            haUrl: localStorage.getItem('haUrl') || 'http://homeassistant.local:8123',
+            accessToken: localStorage.getItem('accessToken') || ''
+        };
+
+        // Load saved configuration
+        function loadConfig() {
+            document.getElementById('haUrl').value = config.haUrl;
+            document.getElementById('accessToken').value = config.accessToken;
+        }
+
+        // Save configuration
+        function saveConfig() {
+            const haUrl = document.getElementById('haUrl').value.trim();
+            const accessToken = document.getElementById('accessToken').value.trim();
+
+            if (!haUrl || !accessToken) {
+                showStatus('Please fill in all fields', 'error');
+                return;
+            }
+
+            // Validate URL
+            if (!haUrl.startsWith('http://') && !haUrl.startsWith('https://')) {
+                showStatus('URL must start with http:// or https://', 'error');
+                return;
+            }
+
+            // Save to localStorage
+            localStorage.setItem('haUrl', haUrl);
+            localStorage.setItem('accessToken', accessToken);
+
+            showStatus('Configuration saved! Redirecting to dashboard...', 'success');
+
+            // Redirect to dashboard after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'homeassistant-dashboard.html';
+            }, 2000);
+        }
+
+        // Test connection
+        async function testConnection() {
+            const haUrl = document.getElementById('haUrl').value.trim();
+            const accessToken = document.getElementById('accessToken').value.trim();
+            const testStatus = document.getElementById('testStatus');
+            const testButton = testStatus.parentElement;
+
+            if (!haUrl || !accessToken) {
+                showStatus('Please fill in all fields', 'error');
+                return;
+            }
+
+            // Show loading state
+            testStatus.className = 'status-indicator status-connecting';
+            testButton.disabled = true;
+            showStatus('Testing connection...', 'info');
+
+            try {
+                console.log(`🔍 Testing connection to ${haUrl}...`);
+
+                const response = await fetch(`${haUrl}/api/`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('✅ Connection successful!', data);
+                    testStatus.className = 'status-indicator status-connected';
+                    showStatus('Connection successful! You can now save the configuration.', 'success');
+                } else {
+                    console.error(`❌ Connection failed: HTTP ${response.status}`);
+                    testStatus.className = 'status-indicator status-error';
+                    showStatus(`Connection failed: HTTP ${response.status} - ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                console.error('❌ Connection test failed:', error);
+                testStatus.className = 'status-indicator status-error';
+                showStatus(`Connection failed: ${error.message}`, 'error');
+            } finally {
+                testButton.disabled = false;
+            }
+        }
+
+        // Clear configuration
+        function clearConfig() {
+            if (confirm('Are you sure you want to clear the saved configuration?')) {
+                localStorage.removeItem('haUrl');
+                localStorage.removeItem('accessToken');
+                document.getElementById('haUrl').value = '';
+                document.getElementById('accessToken').value = '';
+                showStatus('Configuration cleared', 'info');
+            }
+        }
+
+        // Show status message
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.style.display = 'block';
+            statusDiv.textContent = message;
+            
+            // Set color based on type
+            statusDiv.style.background = type === 'error' ? '#f8d7da' : 
+                                          type === 'success' ? '#d4edda' : 
+                                          type === 'info' ? '#d1ecf1' : '#f8f9fa';
+            statusDiv.style.color = type === 'error' ? '#721c24' : 
+                                      type === 'success' ? '#155724' : 
+                                      type === 'info' ? '#0c5460' : '#212529';
+            statusDiv.style.borderLeft = `4px solid ${type === 'error' ? '#f5c6cb' : 
+                                                  type === 'success' ? '#c3e6cb' : 
+                                                  type === 'info' ? '#bee5eb' : '#b8daff'}`;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize
+        loadConfig();
+    </script>
+</body>
+</html>

@@ -83,6 +83,7 @@
               android:src="@android:drawable/ic_menu_preferences" />
 
             <TextView
+              android:id="@+id/dailyAvgValue"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginBottom="4dp"
@@ -119,6 +120,7 @@
               android:src="@android:drawable/ic_menu_preferences" />
 
             <TextView
+              android:id="@+id/monthlyTotalValue"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginBottom="8dp"
@@ -561,6 +563,7 @@
               android:textSize="14sp" />
 
             <TextView
+              android:id="@+id/currentCostValue"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="$1.20"
@@ -587,6 +590,7 @@
               android:textSize="14sp" />
 
             <TextView
+              android:id="@+id/monthlyCostValue"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="$36.00"

@@ -1,15 +1,15 @@
 <div class="profile-container">
   <div class="profile-header">
-        <h1>User Profile</h1>
-    <p class="subtitle">Manage your account settings and preferences</p>
+        <h1>{{ 'profile.title' | translate }}</h1>
+    <p class="subtitle">{{ 'profile.subtitle' | translate }}</p>
   </div>
 
   <div class="profile-content">
     <!-- User Information Card - Full Width -->
     <div class="profile-card user-info-card">
       <div class="card-header">
-        <h3>User Information</h3>
-        <button class="edit-btn">Edit Profile</button>
+        <h3>{{ 'profile.userInfo' | translate }}</h3>
+        <button class="edit-btn">{{ 'profile.editBtn' | translate }}</button>
       </div>
       <div class="card-content">
         <div class="user-info">
@@ -19,7 +19,7 @@
           <div class="user-details">
             <h4>{{ userProfile.firstName }} {{ userProfile.lastName }}</h4>
             <p>{{ userProfile.email }}</p>
-            <p class="member-date">Member since October 2023</p>
+            <p class="member-date">{{ 'profile.memberSince' | translate }}</p>
           </div>
         </div>
       </div>
@@ -31,23 +31,23 @@
       <div class="col-md-6">
         <div class="profile-card">
           <div class="card-header">
-            <h3>Personal Information</h3>
+            <h3>{{ 'profile.personalInfo' | translate }}</h3>
           </div>
           <div class="card-content">
             <div class="form-group">
-              <label>First Name</label>
+              <label>{{ 'profile.firstName' | translate }}</label>
               <input type="text" [(ngModel)]="userProfile.firstName" name="firstName" />
             </div>
             <div class="form-group">
-              <label>Last Name</label>
+              <label>{{ 'profile.lastName' | translate }}</label>
               <input type="text" [(ngModel)]="userProfile.lastName" name="lastName" />
             </div>
             <div class="form-group">
-              <label>Email</label>
+              <label>{{ 'profile.email' | translate }}</label>
               <input type="email" [(ngModel)]="userProfile.email" name="email" />
             </div>
             <div class="form-group">
-              <label>Phone</label>
+              <label>{{ 'profile.phone' | translate }}</label>
               <input type="tel" [(ngModel)]="userProfile.phone" name="phone" />
             </div>
           </div>
@@ -58,26 +58,26 @@
       <div class="col-md-6">
         <div class="profile-card">
           <div class="card-header">
-            <h3>Security Settings</h3>
+            <h3>{{ 'profile.securitySettings' | translate }}</h3>
           </div>
           <div class="card-content">
             <div class="security-item">
               <div class="security-info">
-                <h4>Two-Factor Authentication</h4>
-                <span class="status" [class.enabled]="userProfile.twoFactorEnabled">{{ userProfile.twoFactorEnabled ? 'Enabled' : 'Disabled' }}</span>
+                <h4>{{ 'profile.twoFactor' | translate }}</h4>
+                <span class="status" [class.enabled]="userProfile.twoFactorEnabled">{{ userProfile.twoFactorEnabled ? ('profile.enabled' | translate) : ('profile.disabled' | translate) }}</span>
               </div>
             </div>
             <div class="security-item">
               <div class="security-info">
-                <h4>Password</h4>
-                <span class="password-info">Last changed 30 days ago</span>
+                <h4>{{ 'profile.password' | translate }}</h4>
+                <span class="password-info">{{ 'profile.passwordInfo' | translate }}</span>
               </div>
-              <button class="change-btn">Change</button>
+              <button class="change-btn">{{ 'profile.change' | translate }}</button>
             </div>
             <div class="security-item">
               <div class="security-info">
-                <h4>Login Alerts</h4>
-                <span>Get notified when someone logs in</span>
+                <h4>{{ 'profile.loginAlerts' | translate }}</h4>
+                <span>{{ 'profile.loginAlertsDesc' | translate }}</span>
               </div>
               <label class="toggle-switch">
                 <input type="checkbox" [(ngModel)]="userProfile.loginAlertsEnabled" name="loginAlerts">
@@ -92,13 +92,13 @@
       <div class="col-md-6">
         <div class="profile-card">
           <div class="card-header">
-            <h3>Notifications</h3>
+            <h3>{{ 'profile.notifications' | translate }}</h3>
           </div>
           <div class="card-content">
             <div class="notification-item">
               <div class="notification-info">
-                <h4>Email Notifications</h4>
-                <span>Receive updates via email</span>
+                <h4>{{ 'profile.emailNotif' | translate }}</h4>
+                <span>{{ 'profile.emailNotifDesc' | translate }}</span>
               </div>
               <label class="toggle-switch">
                 <input type="checkbox" [(ngModel)]="userProfile.emailNotifications" name="emailNotifications">
@@ -107,8 +107,8 @@
             </div>
             <div class="notification-item">
               <div class="notification-info">
-                <h4>Push Notifications</h4>
-                <span>Get instant alerts on your device</span>
+                <h4>{{ 'profile.pushNotif' | translate }}</h4>
+                <span>{{ 'profile.pushNotifDesc' | translate }}</span>
               </div>
               <label class="toggle-switch">
                 <input type="checkbox" [(ngModel)]="userProfile.pushNotifications" name="pushNotifications">
@@ -117,8 +117,8 @@
             </div>
             <div class="notification-item">
               <div class="notification-info">
-                <h4>SMS Alerts</h4>
-                <span>Receive text messages for urgent alerts</span>
+                <h4>{{ 'profile.smsAlerts' | translate }}</h4>
+                <span>{{ 'profile.smsAlertsDesc' | translate }}</span>
               </div>
               <label class="toggle-switch">
                 <input type="checkbox" [(ngModel)]="userProfile.smsAlerts" name="smsAlerts">
@@ -133,31 +133,31 @@
       <div class="col-md-6">
         <div class="profile-card">
           <div class="card-header">
-            <h3>Preferences</h3>
+            <h3>{{ 'profile.preferences' | translate }}</h3>
           </div>
           <div class="card-content">
             <div class="form-group">
-              <label>Language</label>
+              <label>{{ 'profile.language' | translate }}</label>
               <select [(ngModel)]="userProfile.language" name="language">
-                <option>English</option>
-                <option>Spanish</option>
-                <option>French</option>
+                <option>{{ 'profile.lang.english' | translate }}</option>
+                <option>{{ 'profile.lang.spanish' | translate }}</option>
+                <option>{{ 'profile.lang.french' | translate }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Timezone</label>
+              <label>{{ 'profile.timezone' | translate }}</label>
               <select [(ngModel)]="userProfile.timezone" name="timezone">
-                <option>Pacific Time (PT)</option>
-                <option>Eastern Time (ET)</option>
-                <option>Central Time (CT)</option>
+                <option>{{ 'profile.timezone.pt' | translate }}</option>
+                <option>{{ 'profile.timezone.et' | translate }}</option>
+                <option>{{ 'profile.timezone.ct' | translate }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Theme</label>
+              <label>{{ 'profile.theme' | translate }}</label>
               <select [(ngModel)]="userProfile.theme" name="theme">
-                <option>Light</option>
-                <option>Dark</option>
-                <option>Auto</option>
+                <option>{{ 'profile.theme.light' | translate }}</option>
+                <option>{{ 'profile.theme.dark' | translate }}</option>
+                <option>{{ 'profile.theme.auto' | translate }}</option>
               </select>
             </div>
           </div>
@@ -167,8 +167,8 @@
 
     <!-- Action Buttons -->
     <div class="action-buttons">
-      <button type="button" class="save-btn" (click)="saveChanges()">Save Changes</button>
-      <button type="button" class="cancel-btn" (click)="cancelChanges()">Cancel</button>
+      <button type="button" class="save-btn" (click)="saveChanges()">{{ 'profile.saveBtn' | translate }}</button>
+      <button type="button" class="cancel-btn" (click)="cancelChanges()">{{ 'profile.cancelBtn' | translate }}</button>
     </div>
   </div>
 </div>
@@ -183,12 +183,12 @@
       <div class="success-icon" style="font-size: 80px; color: #4CAF50; margin-bottom: 20px;">
         <i class="fas fa-check-circle"></i>
       </div>
-      <h3 style="margin-bottom: 15px; font-size: 24px; color: #333;">Success!</h3>
-      <p style="font-size: 18px; color: #666; margin-bottom: 30px;">Your profile changes have been saved successfully.</p>
-      <button type="button" 
-              class="btn-save" 
+      <h3 style="margin-bottom: 15px; font-size: 24px; color: #333;">{{ 'profile.modal.success' | translate }}</h3>
+      <p style="font-size: 18px; color: #666; margin-bottom: 30px;">{{ 'profile.modal.saved' | translate }}</p>
+      <button type="button"
+              class="btn-save"
               style="padding: 12px 60px; background: #4CAF50; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer;"
-              (click)="closeModal()">OK</button>
+              (click)="closeModal()">{{ 'profile.ok' | translate }}</button>
     </div>
   </div>
 }

@@ -1,13 +1,13 @@
 <div class="energy-container">
   <div class="energy-header">
-    <h1>Energy</h1>
-    <p class="subtitle">Monitor your energy consumption and savings</p>
+    <h1>{{ 'energy.title' | translate }}</h1>
+    <p class="subtitle">{{ 'energy.subtitle' | translate }}</p>
     <div class="time-filter">
       <select [(ngModel)]="selectedFilter" (change)="onFilterChange()">
-        <option>Last 7 days</option>
-        <option>Last 24 hours</option>
-        <option>Last 30 days</option>
-        <option>Last year</option>
+        <option>{{ 'energy.filter.7days' | translate }}</option>
+        <option>{{ 'energy.filter.24h' | translate }}</option>
+        <option>{{ 'energy.filter.30days' | translate }}</option>
+        <option>{{ 'energy.filter.year' | translate }}</option>
       </select>
     </div>
   </div>
@@ -20,9 +20,9 @@
           <i class="fas fa-bolt"></i>
         </div>
         <div class="metric-info">
-          <h3>Today's Usage</h3>
+          <h3>{{ 'energy.metric.todayUsage' | translate }}</h3>
           <div class="metric-value">24.5 <span>kWh</span></div>
-          <div class="metric-change positive">+12% from yesterday</div>
+          <div class="metric-change positive">{{ 'energy.metric.todayChange' | translate }}</div>
         </div>
       </div>
 
@@ -31,9 +31,9 @@
           <i class="fas fa-dollar-sign"></i>
         </div>
         <div class="metric-info">
-          <h3>Monthly Cost</h3>
+          <h3>{{ 'energy.metric.monthlyCost' | translate }}</h3>
           <div class="metric-value">$142.30</div>
-          <div class="metric-change positive">+8% from last month</div>
+          <div class="metric-change positive">{{ 'energy.metric.monthlyChange' | translate }}</div>
         </div>
       </div>
 
@@ -42,9 +42,9 @@
           <i class="fas fa-solar-panel"></i>
         </div>
         <div class="metric-info">
-          <h3>Solar Generated</h3>
+          <h3>{{ 'energy.metric.solarGenerated' | translate }}</h3>
           <div class="metric-value">18.2 <span>kWh</span></div>
-          <div class="metric-change">75% of usage</div>
+          <div class="metric-change">{{ 'energy.metric.solarPct' | translate }}</div>
         </div>
       </div>
 
@@ -53,9 +53,9 @@
           <i class="fas fa-leaf"></i>
         </div>
         <div class="metric-info">
-          <h3>Carbon Saved</h3>
+          <h3>{{ 'energy.metric.carbonSaved' | translate }}</h3>
           <div class="metric-value">156 <span>kg</span></div>
-          <div class="metric-change">This month</div>
+          <div class="metric-change">{{ 'energy.metric.carbonPeriod' | translate }}</div>
         </div>
       </div>
     </div>
@@ -63,11 +63,11 @@
     <!-- Energy Consumption and Usage Breakdown -->
     <div class="middle-section">
       <div class="consumption-chart">
-        <h3>Energy Consumption</h3>
+        <h3>{{ 'energy.chart.title' | translate }}</h3>
         <div class="time-segments">
-          <button class="segment-btn" [class.active]="selectedSegment === 'Day'" (click)="setSegment('Day')">Day</button>
-          <button class="segment-btn" [class.active]="selectedSegment === 'Week'" (click)="setSegment('Week')">Week</button>
-          <button class="segment-btn" [class.active]="selectedSegment === 'Month'" (click)="setSegment('Month')">Month</button>
+          <button class="segment-btn" [class.active]="selectedSegment === 'Day'" (click)="setSegment('Day')">{{ 'energy.segment.day' | translate }}</button>
+          <button class="segment-btn" [class.active]="selectedSegment === 'Week'" (click)="setSegment('Week')">{{ 'energy.segment.week' | translate }}</button>
+          <button class="segment-btn" [class.active]="selectedSegment === 'Month'" (click)="setSegment('Month')">{{ 'energy.segment.month' | translate }}</button>
         </div>
         <div class="chart-container">
           <svg class="energy-chart" viewBox="0 0 800 300">
@@ -128,11 +128,11 @@
       </div>
 
       <div class="usage-breakdown">
-        <h3>Usage Breakdown</h3>
+        <h3>{{ 'energy.breakdown.title' | translate }}</h3>
         <div class="breakdown-list">
           <div class="breakdown-item">
             <div class="breakdown-info">
-              <h4>Heating & Cooling</h4>
+              <h4>{{ 'energy.breakdown.heating' | translate }}</h4>
               <span class="percentage">45%</span>
             </div>
             <div class="progress-bar">
@@ -141,7 +141,7 @@
           </div>
           <div class="breakdown-item">
             <div class="breakdown-info">
-              <h4>Lighting</h4>
+              <h4>{{ 'energy.breakdown.lighting' | translate }}</h4>
               <span class="percentage">20%</span>
             </div>
             <div class="progress-bar">
@@ -150,7 +150,7 @@
           </div>
           <div class="breakdown-item">
             <div class="breakdown-info">
-              <h4>Appliances</h4>
+              <h4>{{ 'energy.breakdown.appliances' | translate }}</h4>
               <span class="percentage">25%</span>
             </div>
             <div class="progress-bar">
@@ -159,7 +159,7 @@
           </div>
           <div class="breakdown-item">
             <div class="breakdown-info">
-              <h4>Electronics</h4>
+              <h4>{{ 'energy.breakdown.electronics' | translate }}</h4>
               <span class="percentage">10%</span>
             </div>
             <div class="progress-bar">
@@ -172,15 +172,15 @@
 
     <!-- Energy Saving Tips -->
     <div class="energy-tips">
-      <h3>Energy Saving Tips</h3>
+      <h3>{{ 'energy.tips.title' | translate }}</h3>
       <div class="tips-grid">
         <div class="tip-card">
           <div class="tip-icon">
             <i class="fas fa-lightbulb"></i>
           </div>
           <div class="tip-content">
-            <h4>Smart Lighting</h4>
-            <p>Use LED bulbs and motion sensors to reduce lighting costs by up to 75%.</p>
+            <h4>{{ 'energy.tips.smart.title' | translate }}</h4>
+            <p>{{ 'energy.tips.smart.desc' | translate }}</p>
           </div>
         </div>
         <div class="tip-card">
@@ -188,8 +188,8 @@
             <i class="fas fa-thermometer-half"></i>
           </div>
           <div class="tip-content">
-            <h4>Optimize Temperature</h4>
-            <p>Adjust thermostat by 2°F to save up to 10% on heating/cooling.</p>
+            <h4>{{ 'energy.tips.temp.title' | translate }}</h4>
+            <p>{{ 'energy.tips.temp.desc' | translate }}</p>
           </div>
         </div>
         <div class="tip-card">
@@ -197,8 +197,8 @@
             <i class="fas fa-clock"></i>
           </div>
           <div class="tip-content">
-            <h4>Peak Hours</h4>
-            <p>Run appliances during off-peak hours to reduce electricity costs.</p>
+            <h4>{{ 'energy.tips.peak.title' | translate }}</h4>
+            <p>{{ 'energy.tips.peak.desc' | translate }}</p>
           </div>
         </div>
       </div>

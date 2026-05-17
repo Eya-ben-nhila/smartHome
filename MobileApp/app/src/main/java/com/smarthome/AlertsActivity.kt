@@ -3,13 +3,18 @@ package com.smarthome
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.smarthome.data.repository.SmartHomeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import com.smarthome.databinding.ActivityAlertsSimpleBinding
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AlertsActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityAlertsSimpleBinding
+    private val repository = SmartHomeRepository()
+    private var backendAlerts: List<Map<String, Any>> = emptyList()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,14 +24,86 @@ class AlertsActivity : AppCompatActivity() {
         // Set up navigation
         setupNavigation()
         
-        // Load saved alert states
-        loadAlertStates()
+        // Load alerts from backend
+        loadAlertsFromBackend()
         
         // Set up filters
         setupFilters()
         
         // Set up Add Rule section
         setupAddRuleSection()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // Reload alerts when activity resumes
+        loadAlertsFromBackend()
+    }
+    
+    private fun loadAlertsFromBackend() {
+        val token = AppPreferences.getJwtToken()
+        if (token == null) {
+            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        lifecycleScope.launch {
+            val result = repository.getAlerts(token)
+            result.onSuccess { alerts ->
+                backendAlerts = alerts
+                displayAlerts(alerts)
+            }.onFailure { error ->
+                android.widget.Toast.makeText(this@AlertsActivity, "Failed to load alerts: ${error.message}", android.widget.Toast.LENGTH_SHORT).show()
+                android.util.Log.e("AlertsActivity", "Failed to load alerts", error)
+                // Fallback to local storage if backend fails
+                loadAlertStates()
+            }
+        }
+    }
+    
+    private fun displayAlerts(alerts: List<Map<String, Any>>) {
+        // For now, keep the hardcoded UI but update based on backend data
+        // In a full implementation, you would dynamically create alert cards
+        android.util.Log.d("AlertsActivity", "Loaded ${alerts.size} alerts from backend")
+        
+        // Hide all cards initially
+        binding.alertCard1?.visibility = android.view.View.GONE
+        binding.alertCard2?.visibility = android.view.View.GONE
+        binding.alertCard3?.visibility = android.view.View.GONE
+        binding.alertCard4?.visibility = android.view.View.GONE
+        binding.alertCard5?.visibility = android.view.View.GONE
+        
+        // Display up to 5 alerts
+        alerts.take(5).forEachIndexed { index, alert ->
+            val card = when (index) {
+                0 -> binding.alertCard1
+                1 -> binding.alertCard2
+                2 -> binding.alertCard3
+                3 -> binding.alertCard4
+                4 -> binding.alertCard5
+                else -> null
+            }
+            card?.visibility = android.view.View.VISIBLE
+            
+            // Update alert details if needed
+            val alertId = alert["id"]?.toString() ?: (index + 1).toString()
+            val isResolved = alert["isResolved"] as? Boolean ?: false
+            
+            if (isResolved) {
+                val button = when (index) {
+                    0 -> binding.dismissAlert1
+                    1 -> binding.dismissAlert2
+                    2 -> binding.dismissAlert3
+                    3 -> binding.dismissAlert4
+                    4 -> binding.dismissAlert5
+                    else -> null
+                }
+                applyAcquittedState(button)
+            }
+        }
+        
+        // Apply current filter
+        updateFilter("all")
     }
     
     private fun setupAddRuleSection() {
@@ -143,37 +220,58 @@ class AlertsActivity : AppCompatActivity() {
     private fun setupAcquiterButtons() {
         // First Acquiter button (red)
         binding.dismissAlert1?.setOnClickListener {
-            applyAcquittedState(binding.dismissAlert1)
-            AppPreferences.setAlertAcquitted("1", true)
-            android.widget.Toast.makeText(this, "Alerte acquitée", android.widget.Toast.LENGTH_SHORT).show()
+            resolveAlertOnBackend(0, binding.dismissAlert1)
         }
         
         // Second Acquiter button (orange)
         binding.dismissAlert2?.setOnClickListener {
-            applyAcquittedState(binding.dismissAlert2)
-            AppPreferences.setAlertAcquitted("2", true)
-            android.widget.Toast.makeText(this, "Alerte acquitée", android.widget.Toast.LENGTH_SHORT).show()
+            resolveAlertOnBackend(1, binding.dismissAlert2)
         }
         
         // Third Acquiter button (blue)
         binding.dismissAlert3?.setOnClickListener {
-            applyAcquittedState(binding.dismissAlert3)
-            AppPreferences.setAlertAcquitted("3", true)
-            android.widget.Toast.makeText(this, "Alerte acquitée", android.widget.Toast.LENGTH_SHORT).show()
+            resolveAlertOnBackend(2, binding.dismissAlert3)
         }
 
         // Fourth Acquiter button (red - gas leak)
         binding.dismissAlert4?.setOnClickListener {
-            applyAcquittedState(binding.dismissAlert4)
-            AppPreferences.setAlertAcquitted("4", true)
-            android.widget.Toast.makeText(this, "Alerte acquitée", android.widget.Toast.LENGTH_SHORT).show()
+            resolveAlertOnBackend(3, binding.dismissAlert4)
         }
 
         // Fifth Acquiter button (orange - low battery)
         binding.dismissAlert5?.setOnClickListener {
-            applyAcquittedState(binding.dismissAlert5)
-            AppPreferences.setAlertAcquitted("5", true)
+            resolveAlertOnBackend(4, binding.dismissAlert5)
+        }
+    }
+    
+    private fun resolveAlertOnBackend(index: Int, button: android.widget.TextView?) {
+        val token = AppPreferences.getJwtToken()
+        if (token == null) {
+            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        // Get alert ID from backend alerts
+        if (index >= backendAlerts.size) {
+            // Fallback to local storage if no backend alert
+            applyAcquittedState(button)
+            AppPreferences.setAlertAcquitted((index + 1).toString(), true)
             android.widget.Toast.makeText(this, "Alerte acquitée", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        val alertId = backendAlerts[index]["id"]?.toString() ?: (index + 1).toString()
+        
+        lifecycleScope.launch {
+            val result = repository.resolveAlert(token, alertId)
+            result.onSuccess {
+                applyAcquittedState(button)
+                android.widget.Toast.makeText(this@AlertsActivity, "Alerte acquitée", android.widget.Toast.LENGTH_SHORT).show()
+                loadAlertsFromBackend() // Refresh the list
+            }.onFailure { error ->
+                android.widget.Toast.makeText(this@AlertsActivity, "Failed to resolve alert: ${error.message}", android.widget.Toast.LENGTH_SHORT).show()
+                android.util.Log.e("AlertsActivity", "Failed to resolve alert", error)
+            }
         }
     }
 

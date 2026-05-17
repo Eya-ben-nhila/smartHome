@@ -5,7 +5,7 @@
       <button class="close-btn" (click)="goBack()">
         <i class="fas fa-times"></i>
       </button>
-      <h1>Search or ask your home</h1>
+      <h1>{{ 'search.title' | translate }}</h1>
     </div>
     <div class="header-right">
       <span class="time">9:30</span>
@@ -49,23 +49,23 @@
 
   <!-- Suggested Actions -->
   <div class="suggested-actions">
-    <h3>Suggested</h3>
+    <h3>{{ 'search.suggested' | translate }}</h3>
     <div class="action-list">
       <div class="action-item" (click)="selectAction('What happened today?')">
         <i class="fas fa-arrow-right"></i>
-        <span>What happened today?</span>
+        <span>{{ 'search.actions.whatHappened' | translate }}</span>
       </div>
       <div class="action-item" (click)="selectAction('Create an automation')">
         <i class="fas fa-arrow-right"></i>
-        <span>Create an automation</span>
+        <span>{{ 'search.actions.createAutomation' | translate }}</span>
       </div>
       <div class="action-item" (click)="selectAction('Is the front door locked?')">
         <i class="fas fa-arrow-right"></i>
-        <span>Is the front door locked?</span>
+        <span>{{ 'search.actions.frontDoorLocked' | translate }}</span>
       </div>
       <div class="action-item" (click)="selectAction('Turn on the Living Room TV')">
         <i class="fas fa-arrow-right"></i>
-        <span>Turn on the Living Room TV</span>
+        <span>{{ 'search.actions.turnOnTV' | translate }}</span>
       </div>
     </div>
   </div>
@@ -73,9 +73,9 @@
   <!-- Search Input -->
   <div class="search-input-container">
     <div class="search-input">
-      <input 
-        type="text" 
-        placeholder="Ask Spring Street" 
+      <input
+        type="text"
+        [placeholder]="'search.placeholder' | translate"
         [(ngModel)]="searchQuery"
         (keyup.enter)="performSearch()"
         #searchInput
@@ -88,6 +88,6 @@
 
   <!-- Disclaimer -->
   <div class="disclaimer">
-    <p>Gemini can make mistakes, so double check it. <a href="#">Learn more</a></p>
+    <p>{{ 'search.disclaimer' | translate }} <a href="#">{{ 'search.learnMore' | translate }}</a></p>
   </div>
 </div>

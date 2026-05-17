@@ -1,7 +1,7 @@
 <div class="alerts-container">
   <div class="alerts-header">
-    <h1>Alerts</h1>
-    <p class="subtitle">Monitor and manage your home security alerts</p>
+    <h1>{{ 'alerts.title' | translate }}</h1>
+    <p class="subtitle">{{ 'alerts.subtitle' | translate }}</p>
   </div>
 
   <div class="alerts-content">
@@ -14,9 +14,9 @@
             <i class="fas fa-bell"></i>
           </div>
           <div class="card-info">
-            <h3>Total Alerts</h3>
+            <h3>{{ 'alerts.card.total' | translate }}</h3>
             <div class="card-value">24</div>
-            <p>Last 24 hours</p>
+            <p>{{ 'alerts.card.last24h' | translate }}</p>
           </div>
         </div>
 
@@ -25,9 +25,9 @@
             <i class="fas fa-exclamation-triangle"></i>
           </div>
           <div class="card-info">
-            <h3>Critical</h3>
+            <h3>{{ 'alerts.card.critical' | translate }}</h3>
             <div class="card-value">3</div>
-            <p>Requires attention</p>
+            <p>{{ 'alerts.card.requiresAttention' | translate }}</p>
           </div>
         </div>
 
@@ -36,9 +36,9 @@
             <i class="fas fa-exclamation-circle"></i>
           </div>
           <div class="card-info">
-            <h3>Warnings</h3>
+            <h3>{{ 'alerts.card.warnings' | translate }}</h3>
             <div class="card-value">8</div>
-            <p>Monitor closely</p>
+            <p>{{ 'alerts.card.monitor' | translate }}</p>
           </div>
         </div>
 
@@ -47,21 +47,21 @@
             <i class="fas fa-info-circle"></i>
           </div>
           <div class="card-info">
-            <h3>Info</h3>
+            <h3>{{ 'alerts.card.info' | translate }}</h3>
             <div class="card-value">13</div>
-            <p>General updates</p>
+            <p>{{ 'alerts.card.general' | translate }}</p>
           </div>
         </div>
       </div>
 
       <!-- Alert Distribution Chart -->
       <div class="chart-section">
-        <h3>Alert Distribution</h3>
+        <h3>{{ 'alerts.distribution' | translate }}</h3>
         <div class="chart-container">
           <div class="donut-chart">
             <div class="chart-center">
               <div class="total-count">24</div>
-              <div class="total-label">Total</div>
+              <div class="total-label">{{ 'alerts.total' | translate }}</div>
             </div>
             <div class="chart-segments">
               <div class="segment critical" style="--percentage: 12.5"></div>
@@ -90,7 +90,7 @@
     
     <!-- Recent Activity Section -->
     <div class="recent-activity">
-      <h3>Recent Activity</h3>
+      <h3>{{ 'alerts.recentActivity' | translate }}</h3>
       <div class="activity-list">
         <div class="activity-item" *ngFor="let alert of alerts" [ngClass]="alert.status">
           <div class="activity-icon" [ngClass]="alert.type">
@@ -103,25 +103,19 @@
           <div class="activity-actions">
             <!-- Case Active -->
             <ng-container *ngIf="alert.status === 'active'">
-              <button class="dismiss-btn acknowledge" (click)="acknowledgeAlert(alert.id)">
-                Acquitter
-              </button>
-              <button class="dismiss-btn resolve" (click)="resolveAlert(alert.id)">
-                Résoudre
-              </button>
+              <button class="dismiss-btn acknowledge" (click)="acknowledgeAlert(alert.id)">{{ 'alerts.btn.acknowledge' | translate }}</button>
+              <button class="dismiss-btn resolve" (click)="resolveAlert(alert.id)">{{ 'alerts.btn.resolve' | translate }}</button>
             </ng-container>
 
             <!-- Case Acknowledged -->
             <ng-container *ngIf="alert.status === 'acknowledged'">
-              <span class="status-badge acknowledged">Acquittée</span>
-              <button class="dismiss-btn resolve" (click)="resolveAlert(alert.id)">
-                Résoudre
-              </button>
+              <span class="status-badge acknowledged">{{ 'alerts.status.acknowledged' | translate }}</span>
+              <button class="dismiss-btn resolve" (click)="resolveAlert(alert.id)">{{ 'alerts.btn.resolve' | translate }}</button>
             </ng-container>
 
             <!-- Case Resolved -->
             <ng-container *ngIf="alert.status === 'resolved'">
-              <span class="status-badge resolved">Résolue</span>
+              <span class="status-badge resolved">{{ 'alerts.status.resolved' | translate }}</span>
             </ng-container>
           </div>
         </div>
@@ -131,9 +125,9 @@
     <!-- Add Rule Section -->
     <div class="add-rule-section">
       <div class="add-rule-header">
-        <h3>Alert Rules</h3>
+        <h3>{{ 'alerts.rules.title' | translate }}</h3>
         <button class="add-rule-btn" (click)="showAddRuleForm()">
-          <i class="fas fa-plus"></i> Add Rule
+          <i class="fas fa-plus"></i> {{ 'alerts.rules.addBtn' | translate }}
         </button>
       </div>
       
@@ -175,7 +169,7 @@
       <div class="form-overlay" (click)="hideAddRuleForm()"></div>
       <div class="form-container">
         <div class="form-header">
-          <h3>Add New Alert Rule</h3>
+          <h3>{{ 'alerts.rules.addTitle' | translate }}</h3>
           <button class="close-btn" (click)="hideAddRuleForm()">
             <i class="fas fa-times"></i>
           </button>
@@ -183,7 +177,7 @@
         
         <div class="form-content">
           <div class="form-group">
-            <label for="alertType">Alert Type</label>
+            <label for="alertType">{{ 'alerts.rules.type' | translate }}</label>
             <select id="alertType" [(ngModel)]="newRule.type">
               <option value="motion">Motion Detection</option>
               <option value="door">Door/Window</option>
@@ -194,32 +188,32 @@
           </div>
           
           <div class="form-group">
-            <label for="condition">Condition</label>
+            <label for="condition">{{ 'alerts.rules.condition' | translate }}</label>
             <select id="condition" [(ngModel)]="newRule.condition">
-              <option value="detected">Detected</option>
-              <option value="greater">Greater than</option>
-              <option value="less">Less than</option>
-              <option value="equals">Equals</option>
+              <option value="detected">{{ 'alerts.condition.detected' | translate }}</option>
+              <option value="greater">{{ 'alerts.condition.greater' | translate }}</option>
+              <option value="less">{{ 'alerts.condition.less' | translate }}</option>
+              <option value="equals">{{ 'alerts.condition.equals' | translate }}</option>
             </select>
           </div>
-          
+
           <div class="form-group">
-            <label for="threshold">Threshold/Value</label>
-            <input type="text" id="threshold" [(ngModel)]="newRule.threshold" placeholder="e.g., 25°C, Living Room">
+            <label for="threshold">{{ 'alerts.rules.threshold' | translate }}</label>
+            <input type="text" id="threshold" [(ngModel)]="newRule.threshold" [placeholder]="'alerts.rules.thresholdPlaceholder' | translate">
           </div>
-          
+
           <div class="form-group">
-            <label for="timeRange">Time Range (Optional)</label>
+            <label for="timeRange">{{ 'alerts.rules.timeRange' | translate }}</label>
             <div class="time-range">
               <input type="time" id="startTime" [(ngModel)]="newRule.startTime">
-              <span>to</span>
+              <span>{{ 'alerts.rules.to' | translate }}</span>
               <input type="time" id="endTime" [(ngModel)]="newRule.endTime">
             </div>
           </div>
           
           <div class="form-actions">
-            <button class="cancel-btn" (click)="hideAddRuleForm()">Cancel</button>
-            <button class="save-btn" (click)="saveRule()">Save Rule</button>
+            <button class="cancel-btn" (click)="hideAddRuleForm()">{{ 'alerts.rules.cancel' | translate }}</button>
+            <button class="save-btn" (click)="saveRule()">{{ 'alerts.rules.save' | translate }}</button>
           </div>
         </div>
       </div>
