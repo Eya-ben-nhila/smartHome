@@ -28,12 +28,12 @@ class DashboardActivity : AppCompatActivity() {
         // Set up navigation buttons
         setupNavigation()
         
-        // Load devices from backend
         loadDevicesFromBackend()
         
-        // Connect to WebSockets and observe real-time updates
-        WebSocketClient.connect()
-        observeWebSocketMessages()
+        if (!AppPreferences.isLocalMode()) {
+            WebSocketClient.connect()
+            observeWebSocketMessages()
+        }
     }
     
     private fun observeWebSocketMessages() {
@@ -93,9 +93,14 @@ class DashboardActivity : AppCompatActivity() {
     }
     
     private fun loadDevicesFromBackend() {
+        if (AppPreferences.isLocalMode()) {
+            android.util.Log.d("DashboardActivity", "Local mode active; skipping backend device load")
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("DashboardActivity", "No token available; skipping backend device load")
             return
         }
         
@@ -203,9 +208,22 @@ class DashboardActivity : AppCompatActivity() {
     }
     
     private fun createDeviceOnBackend(name: String, type: String, location: String) {
+        if (AppPreferences.isLocalMode()) {
+            AppPreferences.saveDevice(
+                AppPreferences.Device(
+                    id = System.currentTimeMillis().toString(),
+                    name = name,
+                    location = if (location.isEmpty()) "General" else location,
+                    icon = getIconForDeviceType(type)
+                )
+            )
+            android.widget.Toast.makeText(this, "Device saved locally", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("DashboardActivity", "No token available; cannot create device on backend")
             return
         }
         
@@ -323,9 +341,14 @@ class DashboardActivity : AppCompatActivity() {
     }
     
     private fun updateDeviceOnBackend(deviceId: String, name: String, type: String, location: String) {
+        if (AppPreferences.isLocalMode()) {
+            android.widget.Toast.makeText(this, "Device changes are local only", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("DashboardActivity", "No token available; cannot update device on backend")
             return
         }
         
@@ -359,9 +382,14 @@ class DashboardActivity : AppCompatActivity() {
     }
     
     private fun deleteDeviceOnBackend(deviceId: String) {
+        if (AppPreferences.isLocalMode()) {
+            android.widget.Toast.makeText(this, "Device changes are local only", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("DashboardActivity", "No token available; cannot delete device on backend")
             return
         }
         

@@ -38,7 +38,7 @@
           android:layout_height="wrap_content"
           android:layout_marginStart="12dp"
           android:layout_weight="1"
-          android:text="SmartHome"
+          android:text="@string/app_smart_home"
           android:textColor="#212121"
           android:textSize="20sp"
           android:textStyle="bold" />
@@ -65,7 +65,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="16dp"
-          android:text="Alerts Overview"
+          android:text="@string/alerts_overview"
           android:textColor="#212121"
           android:textSize="18sp"
           android:textStyle="bold" />
@@ -104,7 +104,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Critical"
+              android:text="@string/alerts_critical"
               android:textColor="#757575"
               android:textSize="16sp" />
 
@@ -139,7 +139,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Warning"
+              android:text="@string/alerts_warning"
               android:textColor="#757575"
               android:textSize="16sp" />
 
@@ -173,7 +173,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Info"
+              android:text="@string/alerts_info"
               android:textColor="#757575"
               android:textSize="16sp" />
 
@@ -195,7 +195,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="16dp"
-          android:text="Recent Alerts"
+          android:text="@string/alerts_recent"
           android:textColor="#212121"
           android:textSize="18sp"
           android:textStyle="bold" />
@@ -209,7 +209,7 @@
 
           <!-- State Filter Boxes -->
           <LinearLayout
-            android:layout_width="290dp"
+            android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal">
@@ -225,7 +225,7 @@
               android:paddingTop="8dp"
               android:paddingEnd="16dp"
               android:paddingBottom="8dp"
-              android:text="All"
+              android:text="@string/alerts_all"
               android:textColor="#FFFFFF"
               android:textSize="12sp"
               android:textStyle="bold" />
@@ -241,7 +241,7 @@
               android:paddingTop="8dp"
               android:paddingEnd="16dp"
               android:paddingBottom="8dp"
-              android:text="Critical"
+              android:text="@string/alerts_critical"
               android:textColor="#757575"
               android:textSize="12sp"
               android:textStyle="bold" />
@@ -257,7 +257,7 @@
               android:paddingTop="8dp"
               android:paddingEnd="16dp"
               android:paddingBottom="8dp"
-              android:text="Warning"
+              android:text="@string/alerts_warning"
               android:textColor="#757575"
               android:textSize="12sp"
               android:textStyle="bold" />
@@ -272,7 +272,7 @@
               android:paddingTop="8dp"
               android:paddingEnd="16dp"
               android:paddingBottom="8dp"
-              android:text="Info"
+              android:text="@string/alerts_info"
               android:textColor="#757575"
               android:textSize="12sp"
               android:textStyle="bold" />
@@ -310,7 +310,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Critical"
+              android:text="@string/alerts_critical"
               android:textColor="#F44336"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -318,7 +318,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Front Door"
+              android:text="@string/dashboard_front_door"
               android:textColor="#757575"
               android:textSize="12sp" />
 
@@ -329,7 +329,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Security Breach Detected"
+            android:text="@string/alerts_security_breach"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -338,7 +338,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Front door unlocked at 2:30 AM - Immediate action required"
+            android:text="@string/alerts_front_door_message"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -359,7 +359,7 @@
               android:paddingTop="6dp"
               android:paddingEnd="12dp"
               android:paddingBottom="6dp"
-              android:text="Acquitter"
+              android:text="@string/alerts_acknowledge"
               android:textColor="@color/white"
               android:textSize="10sp"
               android:textStyle="bold"
@@ -398,7 +398,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Warning"
+              android:text="@string/alerts_warning"
               android:textColor="#FF9800"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -406,7 +406,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Living Room"
+              android:text="@string/alerts_kitchen"
               android:textColor="#757575"
               android:textSize="12sp" />
 
@@ -417,7 +417,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="High Energy Consumption"
+            android:text="@string/alerts_high_energy"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -426,7 +426,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AC system using 25% more power than usual - Check thermostat settings"
+            android:text="@string/alerts_high_energy_message"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -447,7 +447,7 @@
               android:paddingTop="6dp"
               android:paddingEnd="12dp"
               android:paddingBottom="6dp"
-              android:text="Acquitter"
+              android:text="@string/alerts_acknowledge"
               android:textColor="@color/white"
               android:textSize="10sp"
               android:textStyle="bold"
@@ -486,7 +486,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Info"
+              android:text="@string/alerts_info"
               android:textColor="#2196F3"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -494,7 +494,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Backyard"
+              android:text="@string/security_backyard"
               android:textColor="#757575"
               android:textSize="12sp" />
 
@@ -505,7 +505,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Motion Detected"
+            android:text="@string/alerts_motion_detected"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -514,7 +514,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Movement detected in backyard - Security camera triggered"
+            android:text="@string/alerts_motion_message"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -535,7 +535,7 @@
               android:paddingTop="6dp"
               android:paddingEnd="12dp"
               android:paddingBottom="6dp"
-              android:text="Acquitter"
+              android:text="@string/alerts_acknowledge"
               android:textColor="@color/white"
               android:textSize="10sp"
               android:textStyle="bold"
@@ -544,7 +544,7 @@
           </LinearLayout>
 
         </LinearLayout>
-        
+
         <!-- Alert Item 4 - Critical -->
         <LinearLayout
           android:id="@+id/alertCard4"
@@ -573,7 +573,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Critical"
+              android:text="@string/alerts_critical"
               android:textColor="#F44336"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -581,7 +581,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Kitchen"
+              android:text="@string/dashboard_living_room"
               android:textColor="#757575"
               android:textSize="12sp" />
 
@@ -591,7 +591,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Gas Leak Detected"
+            android:text="@string/alerts_gas_leak"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -599,7 +599,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High carbon monoxide levels in kitchen - Evacuate immediately"
+            android:text="@string/alerts_gas_message"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -619,7 +619,7 @@
               android:paddingTop="6dp"
               android:paddingEnd="12dp"
               android:paddingBottom="6dp"
-              android:text="Acquitter"
+              android:text="@string/alerts_acknowledge"
               android:textColor="@color/white"
               android:textSize="10sp"
               android:textStyle="bold"
@@ -657,7 +657,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Warning"
+              android:text="@string/alerts_warning"
               android:textColor="#FF9800"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -665,7 +665,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Front Door"
+              android:text="@string/dashboard_front_door"
               android:textColor="#757575"
               android:textSize="12sp" />
 
@@ -675,7 +675,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Low Battery: Smart Lock"
+            android:text="@string/alerts_low_battery"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -683,7 +683,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Smart lock battery is at 10% - Replace batteries soon"
+            android:text="@string/alerts_low_battery_message"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -703,7 +703,7 @@
               android:paddingTop="6dp"
               android:paddingEnd="12dp"
               android:paddingBottom="6dp"
-              android:text="Acquitter"
+              android:text="@string/alerts_acknowledge"
               android:textColor="@color/white"
               android:textSize="10sp"
               android:textStyle="bold"
@@ -743,7 +743,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ajouter une règle d'alerte"
+            android:text="@string/alerts_add_rule_title"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -754,7 +754,7 @@
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Type d'alerte"
+          android:text="@string/alerts_alert_type"
           android:textColor="#757575"
           android:textSize="12sp"
           android:layout_marginBottom="4dp" />
@@ -770,7 +770,7 @@
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Condition"
+          android:text="@string/alerts_condition"
           android:textColor="#757575"
           android:textSize="12sp"
           android:layout_marginBottom="4dp" />
@@ -780,7 +780,7 @@
           android:layout_width="match_parent"
           android:layout_height="40dp"
           android:background="@drawable/rounded_input_background"
-          android:hint="Ex: Température > 25°C"
+          android:hint="@string/alerts_condition_hint"
           android:paddingStart="12dp"
           android:paddingEnd="12dp"
           android:textSize="14sp"
@@ -790,7 +790,7 @@
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Seuil"
+          android:text="@string/alerts_threshold"
           android:textColor="#757575"
           android:textSize="12sp"
           android:layout_marginBottom="4dp" />
@@ -800,7 +800,7 @@
           android:layout_width="match_parent"
           android:layout_height="40dp"
           android:background="@drawable/rounded_input_background"
-          android:hint="Ex: 25"
+          android:hint="@string/alerts_threshold_hint"
           android:inputType="number"
           android:paddingStart="12dp"
           android:paddingEnd="12dp"
@@ -823,7 +823,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="20dp"
             android:paddingBottom="8dp"
-            android:text="Ajouter la règle"
+            android:text="@string/alerts_add_rule"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"

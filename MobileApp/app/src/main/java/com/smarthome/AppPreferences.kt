@@ -16,6 +16,8 @@ object AppPreferences {
     private const val KEY_DEVICES = "devices_list"
     private const val KEY_JWT_TOKEN = "jwt_token"
     private const val KEY_USER_ID = "user_id"
+    private const val KEY_LANGUAGE = "language"
+    private const val KEY_LOCAL_MODE = "local_mode"
     
     data class Device(
         val id: String,
@@ -94,10 +96,35 @@ object AppPreferences {
         try {
             val editor = prefs.edit()
             editor.putString(KEY_JWT_TOKEN, token)
+            editor.putBoolean(KEY_LOCAL_MODE, false)
             val success = editor.commit()
             android.util.Log.d("AppPreferences", "Set JWT token, success=$success")
         } catch (e: Exception) {
             android.util.Log.e("AppPreferences", "Failed to set JWT token", e)
+        }
+    }
+
+    fun isLocalMode(): Boolean {
+        return try {
+            prefs.getBoolean(KEY_LOCAL_MODE, false) || (isLoggedIn() && prefs.getString(KEY_JWT_TOKEN, null).isNullOrEmpty())
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to check local mode", e)
+            false
+        }
+    }
+
+    fun setLocalMode(isLocalMode: Boolean) {
+        try {
+            val editor = prefs.edit()
+            editor.putBoolean(KEY_LOCAL_MODE, isLocalMode)
+            if (isLocalMode) {
+                editor.remove(KEY_JWT_TOKEN)
+                editor.remove(KEY_USER_ID)
+            }
+            val success = editor.commit()
+            android.util.Log.d("AppPreferences", "Set local mode: $isLocalMode, success=$success")
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to set local mode", e)
         }
     }
     
@@ -120,6 +147,25 @@ object AppPreferences {
             android.util.Log.d("AppPreferences", "Set user ID: $userId, success=$success")
         } catch (e: Exception) {
             android.util.Log.e("AppPreferences", "Failed to set user ID", e)
+        }
+    }
+
+    fun getLanguage(): String {
+        return try {
+            prefs.getString(KEY_LANGUAGE, "en") ?: "en"
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to get language", e)
+            "en"
+        }
+    }
+
+    fun setLanguage(language: String) {
+        try {
+            val normalizedLanguage = if (language == "fr") "fr" else "en"
+            prefs.edit().putString(KEY_LANGUAGE, normalizedLanguage).apply()
+            android.util.Log.d("AppPreferences", "Set language: $normalizedLanguage")
+        } catch (e: Exception) {
+            android.util.Log.e("AppPreferences", "Failed to set language", e)
         }
     }
     

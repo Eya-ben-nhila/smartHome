@@ -41,9 +41,16 @@ class AlertsActivity : AppCompatActivity() {
     }
     
     private fun loadAlertsFromBackend() {
+        if (AppPreferences.isLocalMode()) {
+            android.util.Log.d("AlertsActivity", "Local mode active; using local alert states")
+            loadAlertStates()
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("AlertsActivity", "No token available; skipping backend alert load")
+            loadAlertStates()
             return
         }
         
@@ -245,9 +252,18 @@ class AlertsActivity : AppCompatActivity() {
     }
     
     private fun resolveAlertOnBackend(index: Int, button: android.widget.TextView?) {
+        if (AppPreferences.isLocalMode()) {
+            applyAcquittedState(button)
+            AppPreferences.setAlertAcquitted((index + 1).toString(), true)
+            android.widget.Toast.makeText(this, "Alerte acquitÃ©e", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("AlertsActivity", "No token available; resolving alert locally")
+            applyAcquittedState(button)
+            AppPreferences.setAlertAcquitted((index + 1).toString(), true)
             return
         }
         

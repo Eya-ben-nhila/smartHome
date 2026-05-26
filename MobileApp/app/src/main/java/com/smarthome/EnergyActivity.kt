@@ -34,9 +34,14 @@ class EnergyActivity : AppCompatActivity() {
     }
     
     private fun loadEnergyDashboard() {
+        if (AppPreferences.isLocalMode()) {
+            android.util.Log.d("EnergyActivity", "Local mode active; using static energy dashboard")
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("EnergyActivity", "No token available; skipping backend energy load")
             return
         }
         

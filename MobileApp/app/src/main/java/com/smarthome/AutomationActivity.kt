@@ -35,9 +35,14 @@ class AutomationActivity : AppCompatActivity() {
     }
     
     private fun loadAutomationsFromBackend() {
+        if (AppPreferences.isLocalMode()) {
+            android.util.Log.d("AutomationActivity", "Local mode active; using static automations")
+            return
+        }
+
         val token = AppPreferences.getJwtToken()
         if (token == null) {
-            android.widget.Toast.makeText(this, "Please login first", android.widget.Toast.LENGTH_SHORT).show()
+            android.util.Log.w("AutomationActivity", "No token available; skipping backend automation load")
             return
         }
         

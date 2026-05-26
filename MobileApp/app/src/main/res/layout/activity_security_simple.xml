@@ -39,7 +39,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SmartHome"
+            android:text="@string/app_smart_home"
             android:textColor="#212121"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Security Cameras"
+            android:text="@string/security_cameras"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -98,7 +98,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Front Door"
+                  android:text="@string/dashboard_front_door"
                   android:textColor="#212121"
                   android:textSize="12sp"
                   android:textStyle="bold" />
@@ -113,7 +113,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="● Live"
+                  android:text="@string/security_live"
                   android:textColor="#4CAF50"
                   android:textSize="10sp" />
 
@@ -132,7 +132,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Backyard"
+                  android:text="@string/security_backyard"
                   android:textColor="#212121"
                   android:textSize="12sp"
                   android:textStyle="bold" />
@@ -147,7 +147,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="● Live"
+                  android:text="@string/security_live"
                   android:textColor="#4CAF50"
                   android:textSize="10sp" />
 
@@ -174,7 +174,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Garage"
+                  android:text="@string/security_garage"
                   android:textColor="#212121"
                   android:textSize="12sp"
                   android:textStyle="bold" />
@@ -189,7 +189,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="● Live"
+                  android:text="@string/security_live"
                   android:textColor="#4CAF50"
                   android:textSize="10sp" />
 
@@ -208,7 +208,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Driveway"
+                  android:text="@string/security_driveway"
                   android:textColor="#212121"
                   android:textSize="12sp"
                   android:textStyle="bold" />
@@ -223,7 +223,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="● Live"
+                  android:text="@string/security_live"
                   android:textColor="#4CAF50"
                   android:textSize="10sp" />
 
@@ -248,7 +248,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Security Controls"
+            android:text="@string/security_controls"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -288,7 +288,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Arm System"
+                  android:text="@string/security_arm_system"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -296,7 +296,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Armed"
+                  android:text="@string/security_armed"
                   android:textColor="#4CAF50"
                   android:textSize="12sp" />
 
@@ -340,7 +340,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Lock Doors"
+                  android:text="@string/security_lock_doors"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -348,7 +348,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Locked"
+                  android:text="@string/security_locked"
                   android:textColor="#4CAF50"
                   android:textSize="12sp" />
 
@@ -391,7 +391,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Motion Detection"
+                  android:text="@string/security_motion_detection"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -399,7 +399,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Standby"
+                  android:text="@string/security_standby"
                   android:textColor="#FF9800"
                   android:textSize="12sp" />
 

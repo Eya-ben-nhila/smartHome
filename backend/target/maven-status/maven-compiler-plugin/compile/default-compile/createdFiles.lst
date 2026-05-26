@@ -2,7 +2,6 @@ com\smarthome\automation\AutomationEngine$1.class
 com\smarthome\entity\Device.class
 com\smarthome\entity\ActionType.class
 com\smarthome\entity\Role.class
-com\smarthome\controller\MobileController.class
 com\smarthome\repository\DeviceEventRepository.class
 com\smarthome\service\AutomationService.class
 com\smarthome\security\JwtTokenUtil.class

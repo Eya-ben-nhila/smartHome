@@ -32,7 +32,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:text="SmartHome Dashboard"
+      android:text="@string/dashboard_title"
       android:textColor="@color/text"
       android:textSize="20sp"
       android:textStyle="bold" />
@@ -109,7 +109,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Temperature"
+              android:text="@string/dashboard_temperature"
               android:textColor="@color/black"
               android:textSize="12sp" />
 
@@ -153,7 +153,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Energy Usage"
+              android:text="@string/dashboard_energy_usage"
               android:textColor="@color/white"
               android:textSize="12sp" />
 
@@ -182,7 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Today's Overview"
+            android:text="@string/dashboard_today_overview"
             android:textColor="@color/text"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -215,7 +215,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Energy Usage"
+                android:text="@string/dashboard_energy_usage"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
@@ -250,7 +250,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Water Usage"
+                android:text="@string/dashboard_water_usage"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
@@ -285,7 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Temperature"
+                android:text="@string/dashboard_temperature"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
@@ -321,7 +321,7 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity"
+                android:text="@string/dashboard_humidity"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
@@ -350,14 +350,14 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Air Quality"
+                android:text="@string/dashboard_air_quality"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Good"
+                android:text="@string/dashboard_good"
                 android:textColor="#4CAF50"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -378,7 +378,7 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Light Level"
+                android:text="@string/dashboard_light_level"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
@@ -423,7 +423,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Camera Footage"
+              android:text="@string/dashboard_camera_footage"
               android:textColor="@color/text"
               android:textSize="16sp"
               android:textStyle="bold" />
@@ -436,7 +436,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="View all"
+              android:text="@string/dashboard_view_all"
               android:textColor="@color/accent"
               android:textSize="14sp" />
 
@@ -469,7 +469,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Front Door"
+                android:text="@string/dashboard_front_door"
                 android:textColor="@color/text"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -516,7 +516,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Active Devices"
+              android:text="@string/dashboard_active_devices"
               android:textColor="@color/text"
               android:textSize="16sp"
               android:textStyle="bold" />
@@ -529,7 +529,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="12 active"
+              android:text="@string/dashboard_active_count"
               android:textColor="#4CAF50"
               android:textSize="12sp" />
 
@@ -564,7 +564,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Smart TV"
+                android:text="@string/dashboard_smart_tv"
                 android:textColor="@color/text"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -573,7 +573,7 @@
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Living Room"
+                android:text="@string/dashboard_living_room"
                 android:textColor="@color/text_secondary"
                 android:textSize="10sp" />
 
@@ -601,7 +601,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Smart Light"
+                android:text="@string/dashboard_smart_light"
                 android:textColor="@color/text"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -610,7 +610,7 @@
                 android:id="@+id/lightLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bedroom"
+                android:text="@string/dashboard_bedroom"
                 android:textColor="@color/text_secondary"
                 android:textSize="10sp" />
 
@@ -646,7 +646,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Smart Lock"
+                android:text="@string/dashboard_smart_lock"
                 android:textColor="@color/text"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -655,7 +655,7 @@
                 android:id="@+id/lockLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Front Door"
+                android:text="@string/dashboard_front_door"
                 android:textColor="@color/text_secondary"
                 android:textSize="10sp" />
 
@@ -683,7 +683,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Smart Fan"
+                android:text="@string/dashboard_smart_fan"
                 android:textColor="@color/text"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -692,7 +692,7 @@
                 android:id="@+id/fanLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Living Room"
+                android:text="@string/dashboard_living_room"
                 android:textColor="@color/text_secondary"
                 android:textSize="10sp" />
 
@@ -731,7 +731,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Add Device"
+            android:text="@string/dashboard_add_device"
             android:textColor="@color/text"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -755,7 +755,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Add New Device"
+              android:text="@string/dashboard_add_new_device"
               android:textColor="#1976D2"
               android:textSize="16sp"
               android:textStyle="bold" />
@@ -818,7 +818,7 @@
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="ALERTE SÉCURITÉ"
+          android:text="@string/dashboard_security_alert"
           android:textColor="@color/white"
           android:textSize="22sp"
           android:textStyle="bold" />
@@ -827,7 +827,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
-          android:text="Mouvement détecté dans le jardin !"
+          android:text="@string/dashboard_motion_garden"
           android:textColor="@color/white"
           android:textSize="18sp" />
 

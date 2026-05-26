@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="SmartMonitor"
+        android:text="@string/welcome_brand"
         android:textColor="#F6F6F6"
         android:textSize="40sp"
         android:textStyle="bold" />
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Your home , intelligently connected"
+        android:text="@string/welcome_tagline"
         android:textColor="#26D1E7"
         android:textSize="20sp" />
 
@@ -65,7 +65,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginRight="18dp"
         android:gravity="center"
-        android:text="Experience the future of living with seamless control over your environment , security , and atmosphere"
+        android:text="@string/welcome_description"
         android:textColor="#98F6F6F6"
         android:textSize="22sp" />
 
@@ -76,7 +76,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="#4E6F7577"
-        android:text="Enter SmartMonitor"
+        android:text="@string/welcome_enter"
         android:textColor="#CDFFFFFF"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -87,11 +87,62 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="1dp"
-        android:text="Begin your intelligent journey"
+        android:text="@string/welcome_footer"
         android:textColor="#91FFFFFF" />
 
     </LinearLayout>
 
   </ScrollView>
+
+  <LinearLayout
+    android:id="@+id/languageToggle"
+    android:layout_width="wrap_content"
+    android:layout_height="44dp"
+    android:layout_gravity="top|end"
+    android:layout_marginTop="28dp"
+    android:layout_marginEnd="24dp"
+    android:background="#4E6F7577"
+    android:clickable="true"
+    android:elevation="12dp"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingStart="6dp"
+    android:paddingEnd="6dp">
+
+    <Button
+      android:id="@+id/englishButton"
+      android:layout_width="52dp"
+      android:layout_height="36dp"
+      android:backgroundTint="#26D1E7"
+      android:minWidth="0dp"
+      android:minHeight="0dp"
+      android:padding="0dp"
+      android:text="@string/language_english"
+      android:textColor="#FFFFFFFF"
+      android:textSize="13sp"
+      android:textStyle="bold" />
+
+    <View
+      android:layout_width="1dp"
+      android:layout_height="22dp"
+      android:layout_marginStart="4dp"
+      android:layout_marginEnd="4dp"
+      android:background="#66FFFFFF" />
+
+    <Button
+      android:id="@+id/frenchButton"
+      android:layout_width="52dp"
+      android:layout_height="36dp"
+      android:backgroundTint="#33FFFFFF"
+      android:minWidth="0dp"
+      android:minHeight="0dp"
+      android:padding="0dp"
+      android:text="@string/language_french"
+      android:textColor="#CDFFFFFF"
+      android:textSize="13sp"
+      android:textStyle="bold" />
+
+  </LinearLayout>
 
 </FrameLayout>

@@ -40,7 +40,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SmartHome"
+            android:text="@string/app_smart_home"
             android:textColor="#212121"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -95,7 +95,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Daily Avg"
+              android:text="@string/energy_daily_avg"
               android:textColor="#757575"
               android:textSize="16sp" />
 
@@ -132,7 +132,7 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Monthly Total"
+              android:text="@string/energy_monthly_total"
               android:textColor="#212121"
               android:textSize="12sp" />
 
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Weekly Overview"
+            android:text="@string/energy_weekly_overview"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -186,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Mon"
+                android:text="@string/energy_mon"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -210,7 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Tue"
+                android:text="@string/energy_tue"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -234,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Wed"
+                android:text="@string/energy_wed"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -258,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Thu"
+                android:text="@string/energy_thu"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -282,7 +282,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Fri"
+                android:text="@string/energy_fri"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -306,7 +306,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Sat"
+                android:text="@string/energy_sat"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -329,7 +329,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Sun"
+                android:text="@string/energy_sun"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -354,7 +354,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Energy Breakdown"
+            android:text="@string/energy_breakdown_title"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -383,7 +383,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Heating"
+                android:text="@string/energy_heating"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 
@@ -442,7 +442,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cooling"
+                android:text="@string/energy_cooling"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 
@@ -500,7 +500,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Lighting"
+                android:text="@string/energy_lighting"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 
@@ -558,7 +558,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Current Cost"
+              android:text="@string/energy_current_cost"
               android:textColor="#212121"
               android:textSize="14sp" />
 
@@ -585,7 +585,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Monthly Cost"
+              android:text="@string/energy_monthly_cost"
               android:textColor="#212121"
               android:textSize="14sp" />
 
@@ -611,7 +611,7 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_weight="1"
-              android:text="Rate per kWh"
+              android:text="@string/energy_rate_kwh"
               android:textColor="#212121"
               android:textSize="14sp" />
 

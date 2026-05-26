@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SmartHome"
+        android:text="@string/auth_brand"
         android:textColor="#212121"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -33,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Back"
+        android:text="@string/auth_welcome_back"
         android:textColor="#757575"
         android:textSize="16sp"
         android:layout_marginBottom="32dp" />
@@ -51,7 +51,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="8dp"
-          android:text="Email"
+          android:text="@string/auth_email"
           android:textColor="#212121"
           android:textSize="14sp"
           android:textStyle="bold" />
@@ -60,7 +60,7 @@
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Enter your email"
+            android:hint="@string/auth_enter_email"
             android:inputType="textEmailAddress"
             android:background="@drawable/rounded_input_background"
             android:padding="12dp"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="@string/auth_password"
             android:textColor="#212121"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -80,7 +80,7 @@
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Enter your password"
+            android:hint="@string/auth_enter_password"
             android:inputType="textPassword"
             android:background="@drawable/rounded_input_background"
             android:padding="12dp"
@@ -98,7 +98,7 @@
             android:id="@+id/rememberMeCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remember me"
+            android:text="@string/auth_remember_me"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -111,7 +111,7 @@
             android:id="@+id/forgotPasswordLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot password?"
+            android:text="@string/auth_forgot_password"
             android:textColor="#2196F3"
             android:textSize="14sp" />
 
@@ -124,7 +124,7 @@
           android:layout_height="48dp"
           android:layout_marginBottom="16dp"
           android:backgroundTint="#2196F3"
-          android:text="Sign In"
+          android:text="@string/auth_sign_in"
           android:textColor="@android:color/white"
           android:textSize="16sp"
           android:textStyle="bold" />
@@ -139,7 +139,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? "
+            android:text="@string/auth_no_account"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -147,7 +147,7 @@
             android:id="@+id/signupLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
+            android:text="@string/auth_sign_up"
             android:textColor="#2196F3"
             android:textSize="14sp"
             android:textStyle="bold" />

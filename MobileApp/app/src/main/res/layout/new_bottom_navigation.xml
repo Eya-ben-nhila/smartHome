@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"
+            android:text="@string/nav_home"
             android:textColor="#2196F3"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -55,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Security"
+            android:text="@string/nav_security"
             android:textColor="#757575"
             android:textSize="11sp" />
 
@@ -81,7 +81,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Energy"
+            android:text="@string/nav_energy"
             android:textColor="#757575"
             android:textSize="11sp" />
 
@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Activity"
+            android:text="@string/nav_activity"
             android:textColor="#757575"
             android:textSize="11sp" />
 
@@ -133,7 +133,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Automation"
+            android:text="@string/nav_automation"
             android:textColor="#757575"
             android:textSize="11sp" />
 
@@ -159,7 +159,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alerts"
+            android:text="@string/nav_alerts"
             android:textColor="#757575"
             android:textSize="11sp" />
 

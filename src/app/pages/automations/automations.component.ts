@@ -17,16 +17,16 @@ export class AutomationsComponent implements OnInit {
   airQuality = 'Excellent (12 AQI)';
   
   rules = [
-    { id: 1, name: 'Eco-Climate Save', description: 'Turn off AC when windows are open', active: true, icon: 'fa-leaf', color: '#4CAF50' },
-    { id: 2, name: 'Smart Evening Lights', description: 'Dim living room lights at sunset', active: true, icon: 'fa-moon', color: '#673AB7' },
-    { id: 3, name: 'Humidity Control', description: 'Activate dehumidifier if > 60%', active: false, icon: 'fa-tint', color: '#2196F3' },
-    { id: 4, name: 'Security Presence', description: 'Randomize lights when away', active: true, icon: 'fa-user-shield', color: '#F44336' }
+    { id: 1, name: 'Sécurité Surchauffe', description: 'Arrêter les moteurs si la température du four dépasse 250°C', active: true, icon: 'fa-exclamation-triangle', color: '#F44336' },
+    { id: 2, name: 'Extraction Fumées', description: 'Activer la ventilation si la qualité de l\'air < 50 AQI', active: true, icon: 'fa-wind', color: '#00BCD4' },
+    { id: 3, name: 'Régulation Cuve', description: 'Activer la vanne d\'admission si le niveau de cuve < 20%', active: false, icon: 'fa-tint', color: '#2196F3' },
+    { id: 4, name: 'Éclairage Sécurité', description: 'Activer l\'éclairage périphérique hors heures de production', active: true, icon: 'fa-shield-alt', color: '#4CAF50' }
   ];
 
   schedules = [
-    { time: '07:00 AM', action: 'Wake-up Scene', status: 'Next', icon: 'fa-sun' },
-    { time: '08:30 AM', action: 'All Lights Off', status: 'Scheduled', icon: 'fa-lightbulb' },
-    { time: '06:00 PM', action: 'Evening Comfort', status: 'Scheduled', icon: 'fa-couch' }
+    { time: '06:00 AM', action: 'Démarrage production (Ligne A/B)', status: 'Next', icon: 'fa-play' },
+    { time: '02:00 PM', action: 'Cycle de maintenance préventive', status: 'Scheduled', icon: 'fa-wrench' },
+    { time: '10:00 PM', action: 'Mode veille / Arrêt sécurité de nuit', status: 'Scheduled', icon: 'fa-power-off' }
   ];
 
   ngOnInit(): void {}

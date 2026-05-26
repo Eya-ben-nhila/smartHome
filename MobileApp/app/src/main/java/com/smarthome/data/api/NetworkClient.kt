@@ -8,8 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkClient {
     
-    private const val BASE_URL = "http://10.0.2.2:8080/" // Android emulator localhost
-    // For real device, use your computer's IP: "http://192.168.1.100:8080/"
+    private const val BASE_URL = "http://192.168.1.10:8080/" // PC backend on the local Wi-Fi network
     
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

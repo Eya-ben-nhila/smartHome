@@ -2,6 +2,7 @@ package com.smarthome.data.repository
 
 import com.smarthome.data.api.NetworkClient
 import com.smarthome.data.api.model.*
+import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,7 +19,7 @@ class SmartHomeRepository {
                 if (response.isSuccessful && response.body() != null) {
                     Result.success(response.body()!!)
                 } else {
-                    Result.failure(Exception("Registration failed: ${response.message()}"))
+                    Result.failure(BackendRequestException(getErrorMessage(response.errorBody()?.string(), "Registration failed: ${response.message()}")))
                 }
             } catch (e: Exception) {
                 Result.failure(e)
@@ -34,7 +35,7 @@ class SmartHomeRepository {
                 if (response.isSuccessful && response.body() != null) {
                     Result.success(response.body()!!)
                 } else {
-                    Result.failure(Exception("Login failed: ${response.message()}"))
+                    Result.failure(BackendRequestException(getErrorMessage(response.errorBody()?.string(), "Login failed: ${response.message()}")))
                 }
             } catch (e: Exception) {
                 Result.failure(e)
@@ -257,4 +258,17 @@ class SmartHomeRepository {
             }
         }
     }
+
+    private fun getErrorMessage(errorBody: String?, fallback: String): String {
+        if (errorBody.isNullOrBlank()) return fallback
+
+        return try {
+            val json = JsonParser.parseString(errorBody).asJsonObject
+            json.get("error")?.asString ?: json.get("message")?.asString ?: fallback
+        } catch (e: Exception) {
+            fallback
+        }
+    }
 }
+
+class BackendRequestException(message: String) : Exception(message)

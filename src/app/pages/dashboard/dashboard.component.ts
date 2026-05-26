@@ -862,7 +862,7 @@ export class DashboardComponent implements OnInit {
   currentFilter = 'All';
   showAlertNotification = false;
   isAlertAcknowledged = false;
-  alertMessage = 'Attention : Mouvement détecté dans le jardin !';
+  alertMessage = 'Attention : Intrusion zone dangereuse détectée !';
   
   newDevice = {
     name: '',
@@ -893,20 +893,20 @@ export class DashboardComponent implements OnInit {
 
   // Stockage des dispositifs avec leurs informations
   devices = [
-    { id: '1', name: 'Front door lock', type: 'lock', status: 'Locked', location: 'Entrée', isFavorite: true, isLarge: false },
-    { id: '2', name: 'Garage', type: 'garage', status: 'Closed', location: 'Garage', isFavorite: true, isLarge: false },
-    { id: '3', name: 'Front door light', type: 'light', status: 'On - 50%', location: 'Entrée', isFavorite: true, isLarge: false },
-    { id: '4', name: 'TV', type: 'tv', status: 'Off', location: 'Salon', isFavorite: false, isLarge: false },
-    { id: '5', name: 'Speaker', type: 'speaker', status: 'Playing - 50%', location: 'Salon', isFavorite: true, isLarge: false },
-    { id: '6', name: 'Smart plug', type: 'plug', status: 'Off', location: 'Salon', isFavorite: false, isLarge: false },
-    { id: '7', name: 'Floor lamp', type: 'floor-lamp', status: 'On - 50%', location: 'Salon', isFavorite: false, isLarge: false },
-    { id: '8', name: 'Downstairs', type: 'temperature', status: '68°F', location: 'RDC', isFavorite: true, isLarge: false },
-    { id: '9', name: 'Backyard camera', type: 'camera', status: 'Live', location: 'Jardin', isLarge: true, isFavorite: true },
-    { id: '9-2', name: 'Front door camera', type: 'camera', status: 'Live', location: 'Entrée', isLarge: false, isFavorite: true },
-    { id: '10', name: 'Fan', type: 'fan', status: 'On', location: 'Salon', isFavorite: false, isLarge: false },
-    { id: '11', name: 'Outdoor AQI', type: 'air-quality', status: '32 - Good', location: 'Extérieur', isFavorite: false, isLarge: false },
-    { id: '12', name: 'San Francisco', type: 'weather', status: '56° Clear', location: 'Extérieur', isFavorite: false, isLarge: false },
-    { id: '13', name: 'Indoor temperatures', type: 'indoor-temp', status: 'Multiple rooms', location: 'Maison', isFavorite: true, isLarge: false }
+    { id: '1', name: 'Vanne pneumatique', type: 'lock', status: 'Fermée', location: 'Atelier', isFavorite: true, isLarge: false },
+    { id: '2', name: 'Moteur convoyeur', type: 'garage', status: 'Arrêté', location: 'Ligne A', isFavorite: true, isLarge: false },
+    { id: '3', name: 'Éclairage atelier', type: 'light', status: 'On - 50%', location: 'Atelier', isFavorite: true, isLarge: false },
+    { id: '4', name: 'Convoyeur principal', type: 'tv', status: 'Off', location: 'Ligne B', isFavorite: false, isLarge: false },
+    { id: '5', name: 'Capteur de vibration', type: 'speaker', status: 'Actif', location: 'Compresseur', isFavorite: true, isLarge: false },
+    { id: '6', name: 'Niveau cuve', type: 'plug', status: '85%', location: 'Zone Stockage', isFavorite: false, isLarge: false },
+    { id: '7', name: 'Sirène d\'alarme', type: 'floor-lamp', status: 'Off', location: 'Atelier', isFavorite: false, isLarge: false },
+    { id: '8', name: 'Température four', type: 'temperature', status: '220°C', location: 'Zone Four', isFavorite: true, isLarge: false },
+    { id: '9', name: 'Caméra Zone stockage', type: 'camera', status: 'Live', location: 'Zone stockage', isLarge: true, isFavorite: true },
+    { id: '9-2', name: 'Caméra Portail', type: 'camera', status: 'Live', location: 'Portail', isLarge: false, isFavorite: true },
+    { id: '10', name: 'Ventilateur extracteur', type: 'fan', status: 'On', location: 'Atelier', isFavorite: false, isLarge: false },
+    { id: '11', name: 'Qualité air atelier', type: 'air-quality', status: '32 - Good', location: 'Atelier', isFavorite: false, isLarge: false },
+    { id: '12', name: 'Station météo site', type: 'weather', status: '18°C Nuageux', location: 'Extérieur', isFavorite: false, isLarge: false },
+    { id: '13', name: 'Températures zones', type: 'indoor-temp', status: 'Multiple zones', location: 'Atelier', isFavorite: true, isLarge: false }
   ];
 
   col1Devices: any[] = [];
@@ -1122,7 +1122,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadDeviceLayout() {
-    const savedLayout = localStorage.getItem('smartHome_devices_layout');
+    const savedLayout = localStorage.getItem('industrialIoT_devices_layout');
     if (savedLayout) {
       const layout = JSON.parse(savedLayout);
       this.col1Devices = layout.col1;
@@ -1131,10 +1131,10 @@ export class DashboardComponent implements OnInit {
       this.col4Devices = layout.col4;
       this.devices = layout.allDevices || this.devices;
 
-      // Réparer si "Indoor temperatures" est manquant
+      // Réparer si "Températures zones" est manquant
       const indoorTempExists = this.devices.some(d => d.id === '13');
       if (!indoorTempExists) {
-        const indoorTemp = { id: '13', name: 'Indoor temperatures', type: 'indoor-temp', status: 'Multiple rooms', location: 'Maison', isFavorite: true, isLarge: false };
+        const indoorTemp = { id: '13', name: 'Températures zones', type: 'indoor-temp', status: 'Multiple zones', location: 'Atelier', isFavorite: true, isLarge: false };
         this.devices.push(indoorTemp);
         this.col4Devices.push(indoorTemp);
         this.saveDeviceLayout();
@@ -1161,7 +1161,7 @@ export class DashboardComponent implements OnInit {
       col4: this.col4Devices,
       allDevices: this.devices
     };
-    localStorage.setItem('smartHome_devices_layout', JSON.stringify(layout));
+    localStorage.setItem('industrialIoT_devices_layout', JSON.stringify(layout));
   }
 
   private initDefaultLayout() {
@@ -1304,7 +1304,7 @@ export class DashboardComponent implements OnInit {
   // Méthode pour obtenir les informations d'un dispositif pour l'affichage
   triggerAlert(): void {
     this.isAlertAcknowledged = false;
-    this.alertMessage = 'Attention : Mouvement détecté dans le jardin !';
+    this.alertMessage = 'Attention : Intrusion zone dangereuse détectée !';
     this.showAlertNotification = true;
   }
 
@@ -1328,16 +1328,16 @@ export class DashboardComponent implements OnInit {
     switch (type) {
       case 'light': return 'fa-lightbulb';
       case 'camera': return 'fa-video';
-      case 'lock': return 'fa-lock';
-      case 'thermostat': return 'fa-thermometer-half';
-      case 'speaker': return 'fa-volume-up';
-      case 'plug': return 'fa-plug';
-      case 'floor-lamp': return 'fa-lightbulb';
+      case 'lock': return 'fa-cog';
+      case 'thermostat': return 'fa-temperature-high';
+      case 'speaker': return 'fa-wave-square';
+      case 'plug': return 'fa-tint';
+      case 'floor-lamp': return 'fa-exclamation-triangle';
       case 'air-quality': return 'fa-wind';
       case 'temperature': return 'fa-thermometer-half';
-      case 'garage': return 'fa-car';
+      case 'garage': return 'fa-industry';
       case 'fan': return 'fa-fan';
-      case 'weather': return 'fa-sun';
+      case 'weather': return 'fa-cloud-sun';
       default: return 'fa-circle';
     }
   }
@@ -1375,13 +1375,14 @@ export class DashboardComponent implements OnInit {
   }
 
   private getDeviceLocation(name: string): string {
-    if (name.toLowerCase().includes('front door')) return 'Entrée';
-    if (name.toLowerCase().includes('garage')) return 'Garage';
-    if (name.toLowerCase().includes('downstairs')) return 'RDC';
-    if (name.toLowerCase().includes('backyard')) return 'Jardin';
-    if (name.toLowerCase().includes('fan')) return 'Salon';
-    if (name.toLowerCase().includes('living room')) return 'Salon';
-    if (name.toLowerCase().includes('guest bedroom')) return 'Chambre d\'amis';
-    return 'Non spécifiée';
+    if (name.toLowerCase().includes('portail')) return 'Portail';
+    if (name.toLowerCase().includes('convoyeur')) return 'Ligne Production';
+    if (name.toLowerCase().includes('vibration')) return 'Compresseur';
+    if (name.toLowerCase().includes('stockage')) return 'Zone Stockage';
+    if (name.toLowerCase().includes('four')) return 'Zone Four';
+    if (name.toLowerCase().includes('ventilateur')) return 'Atelier';
+    if (name.toLowerCase().includes('air')) return 'Atelier';
+    if (name.toLowerCase().includes('salle serveur')) return 'Salle Serveur';
+    return 'Atelier';
   }
 }

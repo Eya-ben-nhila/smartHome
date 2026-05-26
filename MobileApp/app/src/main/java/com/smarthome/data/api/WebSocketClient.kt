@@ -10,8 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object WebSocketClient {
     private const val TAG = "WebSocketClient"
-    // Using the emulator localhost URL for the WebSocket endpoint
-    private const val WS_URL = "ws://10.0.2.2:8080/api/ws/smarthome"
+    private const val WS_URL = "ws://192.168.1.10:8080/api/ws/smarthome"
     
     private var webSocket: WebSocket? = null
     private val client = OkHttpClient.Builder()

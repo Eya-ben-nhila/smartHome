@@ -22,11 +22,11 @@ export class AlertsComponent {
   };
 
   alerts = [
-    { id: 'motion-activity', type: 'motion', icon: 'fa-running', title: 'Motion Detected', desc: 'Living room and hallway - 2 minutes ago', status: 'active' },
-    { id: 'door-activity', type: 'security', icon: 'fa-door-open', title: 'Door Access', desc: 'Main entrance - 15 minutes ago', status: 'active' },
-    { id: 'temp-activity', type: 'system', icon: 'fa-thermometer-half', title: 'Temperature Alert', desc: 'Living room - 1 hour ago', status: 'active' },
-    { id: 'energy-activity', type: 'energy', icon: 'fa-bolt', title: 'High Energy Usage', desc: 'Whole house - 2 hours ago', status: 'active' },
-    { id: 'camera-activity', type: 'security', icon: 'fa-video', title: 'Camera Motion', desc: 'Backyard - 3 hours ago', status: 'active' }
+    { id: 'motion-activity', type: 'motion', icon: 'fa-running', title: 'Intrusion Détectée', desc: 'Zone de stockage et zone de chargement - il y a 2 minutes', status: 'active' },
+    { id: 'door-activity', type: 'security', icon: 'fa-door-open', title: 'Accès Salle Contrôle', desc: 'Porte principale salle de contrôle - il y a 15 minutes', status: 'active' },
+    { id: 'temp-activity', type: 'system', icon: 'fa-thermometer-half', title: 'Alerte Surchauffe Four', desc: 'Four production 1 - il y a 1 heure', status: 'active' },
+    { id: 'energy-activity', type: 'energy', icon: 'fa-bolt', title: 'Charge Électrique Élevée', desc: 'Moteurs de convoyeur Ligne A - il y a 2 heures', status: 'active' },
+    { id: 'camera-activity', type: 'security', icon: 'fa-video', title: 'Mouvement Caméra', desc: 'Zone de stockage périphérique - il y a 3 heures', status: 'active' }
   ];
 
   acknowledgeAlert(alertId: string) {

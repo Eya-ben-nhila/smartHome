@@ -2,14 +2,15 @@ package com.smarthome
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.smarthome.data.repository.BackendRequestException
 import com.smarthome.data.repository.SmartHomeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import com.smarthome.databinding.ActivitySigninSimpleBinding
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
+import java.io.IOException
 
 @AndroidEntryPoint
 class SigninActivity : AppCompatActivity() {
@@ -51,41 +52,47 @@ class SigninActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Show loading state
                 binding.loginButton?.isEnabled = false
-                binding.loginButton?.text = "Signing in..."
+                binding.loginButton?.text = getString(R.string.auth_signing_in)
                 
-                // Call backend API
                 lifecycleScope.launch {
-                    val result = repository.login(email, password)
-                    
-                    binding.loginButton?.isEnabled = true
-                    binding.loginButton?.text = "Sign In"
-                    
-                    result.onSuccess { authResponse ->
-                        // Save JWT token and user ID
-                        authResponse.token?.let { AppPreferences.setJwtToken(it) }
-                        authResponse.userId?.let { AppPreferences.setUserId(it) }
-                        authResponse.user?.fullName?.let { AppPreferences.setUserName(it) }
-                        
-                        // Save local session for remember me
-                        AppPreferences.saveLoginSession(email, password, rememberMe, authResponse.user?.fullName ?: "")
-                        
-                        if (!rememberMe) {
-                            AppPreferences.clearCredentials()
+                    try {
+                        val result = withTimeoutOrNull(LOGIN_TIMEOUT_MS) {
+                            repository.login(email, password)
                         }
-                        
-                        android.widget.Toast.makeText(this@SigninActivity, "Login successful!", android.widget.Toast.LENGTH_SHORT).show()
-                        
-                        // Navigate to dashboard
-                        val intent = Intent(this@SigninActivity, DashboardActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }.onFailure { error ->
-                        android.widget.Toast.makeText(this@SigninActivity, "Login failed: ${error.message}", android.widget.Toast.LENGTH_SHORT).show()
-                        android.util.Log.e("SigninActivity", "Login error", error)
+
+                        if (result == null) {
+                            android.util.Log.w("SigninActivity", "Backend login timed out; using local mode")
+                            completeLocalLogin(email, password, rememberMe)
+                            return@launch
+                        }
+
+                        result.onSuccess { authResponse ->
+                            AppPreferences.setLocalMode(false)
+                            authResponse.token?.let { AppPreferences.setJwtToken(it) }
+                            authResponse.userId?.let { AppPreferences.setUserId(it) }
+                            authResponse.user?.fullName?.let { AppPreferences.setUserName(it) }
+                            completeLogin(email, password, rememberMe, authResponse.user?.fullName ?: "", R.string.auth_login_success)
+                        }.onFailure { error ->
+                            android.util.Log.e("SigninActivity", "Login error", error)
+                            if (error is IOException && error !is BackendRequestException) {
+                                completeLocalLogin(email, password, rememberMe)
+                            } else {
+                                android.widget.Toast.makeText(
+                                    this@SigninActivity,
+                                    getString(R.string.auth_login_failed, error.message ?: ""),
+                                    android.widget.Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    } finally {
+                        if (!isFinishing) {
+                            binding.loginButton?.isEnabled = true
+                            binding.loginButton?.text = getString(R.string.auth_sign_in)
+                        }
                     }
                 }
             } else {
-                android.widget.Toast.makeText(this, "Please enter email and password", android.widget.Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(this, getString(R.string.auth_missing_credentials), android.widget.Toast.LENGTH_SHORT).show()
             }
         }
         
@@ -99,7 +106,36 @@ class SigninActivity : AppCompatActivity() {
         // Forgot password link click (optional)
         binding.forgotPasswordLink?.setOnClickListener {
             // Handle forgot password (for now, just show a toast)
-            android.widget.Toast.makeText(this, "Forgot password feature coming soon!", android.widget.Toast.LENGTH_SHORT).show()
+            android.widget.Toast.makeText(this, getString(R.string.auth_forgot_coming_soon), android.widget.Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun completeLocalLogin(email: String, password: String, rememberMe: Boolean) {
+        AppPreferences.setLocalMode(true)
+        completeLogin(email, password, rememberMe, "", R.string.auth_login_offline)
+    }
+
+    private fun completeLogin(
+        email: String,
+        password: String,
+        rememberMe: Boolean,
+        name: String,
+        toastMessageRes: Int
+    ) {
+        AppPreferences.saveLoginSession(email, password, rememberMe, name)
+
+        if (!rememberMe) {
+            AppPreferences.clearCredentials()
+        }
+
+        android.widget.Toast.makeText(this@SigninActivity, getString(toastMessageRes), android.widget.Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this@SigninActivity, DashboardActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    companion object {
+        private const val LOGIN_TIMEOUT_MS = 8_000L
     }
 }

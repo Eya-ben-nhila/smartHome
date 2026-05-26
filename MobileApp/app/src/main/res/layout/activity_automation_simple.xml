@@ -39,7 +39,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SmartHome"
+            android:text="@string/app_smart_home"
             android:textColor="#212121"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Your Automations"
+            android:text="@string/automation_your_automations"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -105,7 +105,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginBottom="8dp"
-                  android:text="Good Morning"
+                  android:text="@string/automation_good_morning"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -114,7 +114,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="center"
-                  android:text="Lights • Coffee • Music"
+                  android:text="@string/automation_morning_actions"
                   android:textColor="#757575"
                   android:textSize="12sp" />
 
@@ -142,7 +142,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginBottom="8dp"
-                  android:text="Good Night"
+                  android:text="@string/automation_good_night"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -151,7 +151,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="center"
-                  android:text="Lock • Lights Off • Alarm"
+                  android:text="@string/automation_night_actions"
                   android:textColor="#757575"
                   android:textSize="12sp" />
 
@@ -179,7 +179,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginBottom="8dp"
-                  android:text="Away Mode"
+                  android:text="@string/automation_away_mode"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -188,7 +188,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="center"
-                  android:text="Security • Energy Save"
+                  android:text="@string/automation_away_actions"
                   android:textColor="#757575"
                   android:textSize="12sp" />
 
@@ -215,7 +215,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginBottom="8dp"
-                  android:text="Movie Time"
+                  android:text="@string/automation_movie_time"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -224,7 +224,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="center"
-                  android:text="Dim Lights • TV • Sound"
+                  android:text="@string/automation_movie_actions"
                   android:textColor="#757575"
                   android:textSize="12sp" />
 
@@ -249,7 +249,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Active Automations"
+            android:text="@string/automation_active_automations"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -288,7 +288,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Morning Routine"
+                  android:text="@string/automation_morning_routine"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -296,7 +296,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Active"
+                  android:text="@string/automation_active"
                   android:textColor="#2196F3"
                   android:textSize="12sp" />
 
@@ -341,7 +341,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Evening Lights"
+                  android:text="@string/automation_evening_lights"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -349,7 +349,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Scheduled"
+                  android:text="@string/automation_scheduled"
                   android:textColor="#9C27B0"
                   android:textSize="12sp" />
 
@@ -395,7 +395,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Security Mode"
+                  android:text="@string/automation_security_mode"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -403,7 +403,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Standby"
+                  android:text="@string/security_standby"
                   android:textColor="#4CAF50"
                   android:textSize="12sp" />
 
@@ -449,7 +449,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Weekend Mode"
+                  android:text="@string/automation_weekend_mode"
                   android:textColor="#212121"
                   android:textSize="14sp"
                   android:textStyle="bold" />
@@ -457,7 +457,7 @@
                 <TextView
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Disabled"
+                  android:text="@string/automation_disabled"
                   android:textColor="#FF9800"
                   android:textSize="12sp" />
 

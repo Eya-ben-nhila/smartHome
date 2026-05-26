@@ -37,23 +37,23 @@ export class AnalyticsComponent implements OnInit {
       { month: 'May', usage: 395, cost: 101.20 }
     ],
     devices: [
-      { name: 'HVAC System', usage: 45, percentage: 38, trend: 'up' },
-      { name: 'Lighting', usage: 22, percentage: 19, trend: 'stable' },
-      { name: 'Kitchen Appliances', usage: 18, percentage: 15, trend: 'down' },
-      { name: 'Entertainment', usage: 15, percentage: 13, trend: 'stable' },
+      { name: 'Facility HVAC', usage: 45, percentage: 38, trend: 'up' },
+      { name: 'Shop Lighting', usage: 22, percentage: 19, trend: 'stable' },
+      { name: 'Compressors', usage: 18, percentage: 15, trend: 'down' },
+      { name: 'Conveyor Motors', usage: 15, percentage: 13, trend: 'stable' },
       { name: 'Security System', usage: 12, percentage: 10, trend: 'down' },
-      { name: 'Other Devices', usage: 5, percentage: 5, trend: 'stable' }
+      { name: 'Other Equipment', usage: 5, percentage: 5, trend: 'stable' }
     ]
   };
 
   securityData = {
     events: [
-      { time: '2:30 AM', type: 'motion', location: 'Front Door', severity: 'low' },
-      { time: '6:45 AM', type: 'door_open', location: 'Garage', severity: 'normal' },
-      { time: '8:15 AM', type: 'motion', location: 'Backyard', severity: 'low' },
-      { time: '12:30 PM', type: 'package_detected', location: 'Front Door', severity: 'normal' },
-      { time: '3:45 PM', type: 'motion', location: 'Driveway', severity: 'medium' },
-      { time: '5:20 PM', type: 'unknown_access', location: 'Front Door', severity: 'high' }
+      { time: '2:30 AM', type: 'motion', location: 'Portail atelier', severity: 'low' },
+      { time: '6:45 AM', type: 'door_open', location: 'Quai déchargement', severity: 'normal' },
+      { time: '8:15 AM', type: 'motion', location: 'Zone stockage', severity: 'low' },
+      { time: '12:30 PM', type: 'package_detected', location: 'Portail atelier', severity: 'normal' },
+      { time: '3:45 PM', type: 'motion', location: 'Poste de garde', severity: 'medium' },
+      { time: '5:20 PM', type: 'unknown_access', location: 'Accès salle serveur', severity: 'high' }
     ],
     weeklyPattern: {
       normal: 85,
@@ -105,10 +105,10 @@ export class AnalyticsComponent implements OnInit {
 
   formatEventType(type: string): string {
     const nameMap: { [key: string]: string } = {
-      'motion': 'Motion Detected',
-      'door_open': 'Door Opened',
-      'package_detected': 'Package Delivered',
-      'unknown_access': 'Unknown Access'
+      'motion': 'Mouvement Détecté',
+      'door_open': 'Accès Zone',
+      'package_detected': 'Livraison Matières',
+      'unknown_access': 'Accès non autorisé'
     };
     return nameMap[type] || 'Security Event';
   }

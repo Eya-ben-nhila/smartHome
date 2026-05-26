@@ -38,7 +38,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SmartHome"
+            android:text="@string/app_smart_home"
             android:textColor="#212121"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -82,7 +82,7 @@
               android:layout_height="wrap_content"
               android:layout_gravity="bottom|center_horizontal"
               android:layout_marginBottom="24dp"
-              android:text="Change"
+              android:text="@string/profile_change"
               android:textColor="@color/white"
               android:background="#80000000"
               android:padding="4dp"
@@ -126,7 +126,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#2196F3"
-            android:text="Edit Profile"
+            android:text="@string/profile_edit"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -146,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Settings"
+            android:text="@string/profile_settings"
             android:textColor="#212121"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -176,7 +176,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Notifications"
+                android:text="@string/profile_notifications"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 
@@ -206,7 +206,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Privacy"
+                android:text="@string/profile_privacy"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 
@@ -239,7 +239,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Help &amp; Support"
+                android:text="@string/profile_help"
                 android:textColor="#212121"
                 android:textSize="14sp" />
 
@@ -270,7 +270,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:backgroundTint="#E7D7D7"
-            android:text="Logout"
+            android:text="@string/profile_logout"
             android:textColor="#F44336"
             android:textSize="16sp"
             android:textStyle="bold" />

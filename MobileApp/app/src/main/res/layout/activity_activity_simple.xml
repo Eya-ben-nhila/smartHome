@@ -38,7 +38,7 @@
           android:layout_height="wrap_content"
           android:layout_marginStart="12dp"
           android:layout_weight="1"
-          android:text="SmartHome"
+          android:text="@string/app_smart_home"
           android:textColor="#212121"
           android:textSize="20sp"
           android:textStyle="bold" />
@@ -84,7 +84,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="16dp"
-          android:text="Today's Home Debrief   🏠"
+          android:text="@string/activity_debrief_title"
           android:textColor="#212121"
           android:textSize="18sp"
           android:textStyle="bold" />
@@ -95,7 +95,7 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="20dp"
           android:lineSpacingExtra="4dp"
-          android:text="Today was a productive day with moderate energy usage. All systems are functioning normally with no security alerts detected."
+          android:text="@string/activity_debrief_body"
           android:textColor="#757575"
           android:textSize="14sp" />
 
@@ -126,7 +126,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginBottom="2dp"
-              android:text="Secure"
+              android:text="@string/activity_secure"
               android:textColor="#000000"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -183,7 +183,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginBottom="2dp"
-              android:text="Ready"
+              android:text="@string/activity_ready"
               android:textColor="#000000"
               android:textSize="14sp"
               android:textStyle="bold" />
@@ -214,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
-            android:text="Activity Timeline   📈"
+            android:text="@string/activity_timeline"
             android:textColor="#212121"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -259,7 +259,7 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Person deliveres 4 boxes"
+                android:text="@string/activity_delivery"
                 android:textColor="#212121"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -268,7 +268,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Front door unlocked"
+                android:text="@string/activity_front_door_unlocked"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -309,7 +309,7 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Motion detected in backyard "
+                android:text="@string/activity_motion_backyard"
                 android:textColor="#212121"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -318,7 +318,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Backyard camera"
+                android:text="@string/activity_backyard_camera"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -357,7 +357,7 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Front door unlocked"
+                android:text="@string/activity_front_door_unlocked"
                 android:textColor="#212121"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -366,7 +366,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="BY Emma"
+                android:text="@string/activity_by_emma"
                 android:textColor="#757575"
                 android:textSize="12sp" />
 
@@ -406,7 +406,7 @@
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperature Alert"
+                android:text="@string/activity_temperature_alert"
                 android:textColor="#212121"
                 android:textSize="14sp"
                 android:textStyle="bold" />

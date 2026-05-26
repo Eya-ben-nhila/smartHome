@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SmartHome"
+        android:text="@string/auth_brand"
         android:textColor="#212121"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Account"
+        android:text="@string/auth_create_account"
         android:textColor="#757575"
         android:textSize="16sp"
         android:layout_marginBottom="32dp" />
@@ -52,15 +52,16 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="8dp"
-          android:text="Full Name"
+          android:text="@string/auth_full_name"
           android:textColor="#212121"
           android:textSize="14sp"
           android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/fullNameInput"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Enter your full name"
+            android:hint="@string/auth_enter_full_name"
             android:inputType="textPersonName"
             android:background="@drawable/rounded_input_background"
             android:padding="12dp"
@@ -70,16 +71,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/auth_email"
             android:textColor="#212121"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
         <EditText
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Enter your email"
+            android:hint="@string/auth_enter_email"
             android:inputType="textEmailAddress"
             android:background="@drawable/rounded_input_background"
             android:padding="12dp"
@@ -89,16 +91,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="@string/auth_password"
             android:textColor="#212121"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
         <EditText
+            android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Create a password"
+            android:hint="@string/auth_create_password"
             android:inputType="textPassword"
             android:background="@drawable/rounded_input_background"
             android:padding="12dp"
@@ -108,16 +111,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm Password"
+            android:text="@string/auth_confirm_password"
             android:textColor="#212121"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
         <EditText
+            android:id="@+id/confirmPasswordInput"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Confirm your password"
+            android:hint="@string/auth_confirm_your_password"
             android:inputType="textPassword"
             android:background="@drawable/rounded_input_background"
             android:padding="12dp"
@@ -139,7 +143,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I agree to the Terms &amp; Conditions"
+            android:text="@string/auth_terms"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -152,7 +156,7 @@
           android:layout_height="48dp"
           android:layout_marginBottom="16dp"
           android:backgroundTint="#2196F3"
-          android:text="Sign Up"
+          android:text="@string/auth_sign_up"
           android:textColor="@android:color/white"
           android:textSize="16sp"
           android:textStyle="bold" />
@@ -167,7 +171,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? "
+            android:text="@string/auth_has_account"
             android:textColor="#757575"
             android:textSize="14sp" />
 
@@ -175,7 +179,7 @@
             android:id="@+id/signinLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="@string/auth_sign_in"
             android:textColor="#2196F3"
             android:textSize="14sp"
             android:textStyle="bold" />
