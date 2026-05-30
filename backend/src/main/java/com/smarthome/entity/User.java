@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @Field("profile_image_url")
     private String profileImageUrl;
 
-    private Role role = Role.USER;
+    private Role role = Role.EMPLOYEE;
 
     @Field("is_active")
     private boolean isActive = true;
@@ -103,7 +103,13 @@ public class User implements UserDetails {
     // UserDetails implementation
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        if (role == Role.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return List.of(
+                new SimpleGrantedAuthority("ROLE_EMPLOYEE"),
+                new SimpleGrantedAuthority("ROLE_USER")
+        );
     }
 
     @Override

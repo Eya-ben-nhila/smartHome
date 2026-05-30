@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ mode === 'create' ? 'Ajouter un utilisateur' : 'Modifier utilisateur' }}</h2>
+
+<div mat-dialog-content>
+  <div class="dialog-toolbar" *ngIf="mode === 'create'">
+    <button mat-stroked-button type="button" (click)="fillSampleIdentity()">Nom real-life auto</button>
+    <button mat-stroked-button type="button" (click)="setGeneratedAvatar()">Generer avatar</button>
+  </div>
+
+  <form [formGroup]="form" class="d-flex flex-column gap-2 pt-2 user-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="fullName" placeholder="Ex: Emma Johnson" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Ex: emma.johnson@smartmonitor.com" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ mode === 'create' ? 'Mot de passe' : 'Nouveau mot de passe (optionnel)' }}</mat-label>
+      <input matInput type="password" formControlName="password" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="ADMIN">ADMIN</mat-option>
+        <mat-option value="EMPLOYEE">EMPLOYEE</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Photo URL (optionnel)</mat-label>
+      <input matInput formControlName="profileImageUrl" placeholder="https://..." />
+    </mat-form-field>
+
+    <div class="avatar-preview-wrap" *ngIf="form.value.profileImageUrl">
+      <img class="avatar-preview" [src]="form.value.profileImageUrl!" alt="avatar preview" />
+    </div>
+
+    <mat-slide-toggle formControlName="enabled">Compte actif</mat-slide-toggle>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary" (click)="submit()">Enregistrer</button>
+</div>

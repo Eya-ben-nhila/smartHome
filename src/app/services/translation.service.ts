@@ -64,6 +64,7 @@ const TRANSLATIONS = {
     'nav.security': 'Security',
     'nav.energy': 'Energy',
     'nav.analytics': 'Analytics',
+    'nav.admin': 'Administration',
     'nav.profile': 'Profile',
 
     // Layout
@@ -381,6 +382,7 @@ const TRANSLATIONS = {
     'nav.security': 'Sécurité',
     'nav.energy': 'Énergie',
     'nav.analytics': 'Analytiques',
+    'nav.admin': 'Administration',
     'nav.profile': 'Profil',
 
     // Layout

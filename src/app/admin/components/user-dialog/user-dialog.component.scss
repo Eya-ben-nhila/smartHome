@@ -1,0 +1,24 @@
+.dialog-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.user-form {
+  min-width: 460px;
+}
+
+.avatar-preview-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.avatar-preview {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dbeafe;
+  box-shadow: 0 6px 18px rgba(33, 150, 243, 0.2);
+}

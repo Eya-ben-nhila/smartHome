@@ -1,5 +1,6 @@
 package com.smarthome.dto;
 
+import com.smarthome.entity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -16,6 +17,8 @@ public class UserRegistrationDto {
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
+    private Role role;
+
     // Default constructor
     public UserRegistrationDto() {}
 
@@ -28,4 +31,7 @@ public class UserRegistrationDto {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 }

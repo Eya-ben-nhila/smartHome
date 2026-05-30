@@ -2,6 +2,7 @@ package com.smarthome.controller;
 
 import com.smarthome.dto.LoginRequestDto;
 import com.smarthome.dto.UserRegistrationDto;
+import com.smarthome.entity.Role;
 import com.smarthome.entity.User;
 import com.smarthome.service.AuthService;
 import jakarta.validation.Valid;
@@ -72,6 +73,12 @@ public class AuthController {
             user.setFullName(registrationDto.getFullName().trim());
             user.setEmail(registrationDto.getEmail().trim().toLowerCase());
             user.setPassword(registrationDto.getPassword());
+            Role requestedRole = registrationDto.getRole();
+            if (requestedRole == Role.ADMIN || requestedRole == Role.EMPLOYEE) {
+                user.setRole(requestedRole);
+            } else {
+                user.setRole(Role.EMPLOYEE);
+            }
             
             User registeredUser = authService.registerUser(user);
             System.out.println("Registration successful! User ID: " + registeredUser.getId());
@@ -80,7 +87,8 @@ public class AuthController {
             return ResponseEntity.ok(Map.of(
                 "message", "User registered successfully",
                 "userId", registeredUser.getId(),
-                "email", registeredUser.getEmail()
+                "email", registeredUser.getEmail(),
+                "role", registeredUser.getRole().name()
             ));
         } catch (Exception e) {
             System.out.println("Registration error: " + e.getMessage());

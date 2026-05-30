@@ -28,6 +28,10 @@
       <i class="fas fa-chart-bar"></i>
       <span>{{ 'nav.analytics' | translate }}</span>
     </div>
+    <div class="nav-item" *ngIf="isAdmin$ | async" [class.active]="currentPage === 'admin'" (click)="navigateTo('admin')">
+      <i class="fas fa-user-shield"></i>
+      <span>{{ 'nav.admin' | translate }}</span>
+    </div>
     <div class="nav-item profile-item" [class.active]="currentPage === 'profile'" (click)="navigateTo('profile')">
       <i class="fas fa-user"></i>
       <span>{{ 'nav.profile' | translate }}</span>

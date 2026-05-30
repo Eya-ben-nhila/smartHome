@@ -1,5 +1,6 @@
 package com.smarthome.service;
 
+import com.smarthome.entity.Role;
 import com.smarthome.entity.User;
 import com.smarthome.repository.UserRepository;
 import com.smarthome.security.JwtTokenUtil;
@@ -48,7 +49,8 @@ public class AuthService {
                     "id", user.getId(),
                     "fullName", user.getFullName(),
                     "email", user.getEmail(),
-                    "role", user.getRole().name()
+                    "role", user.getRole().name(),
+                    "enabled", user.isActive()
                 ));
                 
                 return response;
@@ -64,8 +66,10 @@ public class AuthService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
-        
-        user.setRole(com.smarthome.entity.Role.USER);
+
+        if (user.getRole() == null || user.getRole() == Role.USER) {
+            user.setRole(Role.EMPLOYEE);
+        }
         user.setEmailVerified(false);
         user.setActive(true);
         

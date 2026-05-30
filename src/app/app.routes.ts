@@ -11,9 +11,12 @@ import { AlertsComponent } from './pages/alerts/alerts.component';
 import { SecurityComponent } from './pages/security/security.component';
 import { EnergyComponent } from './pages/energy/energy.component';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { adminGuard } from './guards/admin.guard';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 
 export const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'access-denied', component: AccessDeniedComponent },
   {
     path: '',
     component: LayoutComponent,
@@ -28,7 +31,12 @@ export const routes: Routes = [
       { path: 'alerts', component: AlertsComponent },
       { path: 'security', component: SecurityComponent },
       { path: 'energy', component: EnergyComponent },
-      { path: 'analytics', component: AnalyticsComponent }
+      { path: 'analytics', component: AnalyticsComponent },
+      {
+        path: 'admin',
+        canActivate: [adminGuard],
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+      }
     ]
   }
 ];

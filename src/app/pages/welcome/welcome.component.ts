@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../services/translation.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -33,10 +34,15 @@ export class WelcomeComponent implements OnInit {
     email: '',
     password: '',
     confirmPassword: '',
+    role: 'EMPLOYEE' as 'ADMIN' | 'EMPLOYEE',
     agreeTerms: false
   };
 
-  constructor(private router: Router, public translationService: TranslationService) {}
+  constructor(
+    private router: Router,
+    public translationService: TranslationService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -66,21 +72,29 @@ export class WelcomeComponent implements OnInit {
       return;
     }
 
-    // Simulate login process
-    console.log('Login attempt:', this.loginForm);
-    
-    // For demo purposes, redirect to dashboard
-    // In real app, this would make an API call to authenticate
-    if (this.loginForm.email && this.loginForm.password) {
-      // Store login state if remember me is checked
-      if (this.loginForm.rememberMe) {
-        localStorage.setItem('rememberMe', 'true');
-        localStorage.setItem('userEmail', this.loginForm.email);
+    this.authService.login(this.loginForm.email.trim().toLowerCase(), this.loginForm.password).subscribe({
+      next: (response) => {
+        if (this.loginForm.rememberMe) {
+          localStorage.setItem('rememberMe', 'true');
+          localStorage.setItem('userEmail', this.loginForm.email);
+        }
+        if (response.user.role === 'ADMIN') {
+          this.router.navigate(['/admin']);
+          return;
+        }
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        const msg = err?.error?.error;
+        if (err?.status === 0) {
+          this.router.navigate(['/access-denied'], { queryParams: { reason: 'backend-unreachable' } });
+          return;
+        }
+        this.router.navigate(['/access-denied'], {
+          queryParams: { reason: 'invalid-credentials', message: msg || 'Invalid credentials' }
+        });
       }
-      
-      // Navigate to dashboard
-      this.router.navigate(['/dashboard']);
-    }
+    });
   }
 
   onSignup(): void {
@@ -98,8 +112,8 @@ export class WelcomeComponent implements OnInit {
     }
 
     // Password validation
-    if (this.signupForm.password.length < 8) {
-      alert('Password must be at least 8 characters long');
+    if (this.signupForm.password.length < 6) {
+      alert('Password must be at least 6 characters long');
       return;
     }
 
@@ -115,13 +129,28 @@ export class WelcomeComponent implements OnInit {
       return;
     }
 
-    // Simulate signup process
-    console.log('Signup attempt:', this.signupForm);
-    
-    // For demo purposes, redirect to dashboard after successful signup
-    // In real app, this would make an API call to create account
-    alert('Account created successfully! Redirecting to dashboard...');
-    this.router.navigate(['/dashboard']);
+    this.authService.register(
+      this.signupForm.name.trim(),
+      this.signupForm.email.trim().toLowerCase(),
+      this.signupForm.password,
+      this.signupForm.role
+    ).subscribe({
+      next: () => {
+        alert('Compte cree avec succes. Connectez-vous.');
+        this.toggleSignup();
+        this.toggleLogin();
+      },
+      error: (err) => {
+        const msg = err?.error?.error ?? 'Unable to create account';
+        if (err?.status === 0) {
+          this.router.navigate(['/access-denied'], { queryParams: { reason: 'backend-unreachable' } });
+          return;
+        }
+        this.router.navigate(['/access-denied'], {
+          queryParams: { reason: 'signup-failed', message: msg }
+        });
+      }
+    });
   }
 
   onGoogleLogin(): void {
