@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 
@@ -10,8 +10,11 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
   templateUrl: './alerts.component.html',
   styleUrl: './alerts.component.scss'
 })
-export class AlertsComponent {
+export class AlertsComponent implements OnInit {
+  private readonly recentAlertsStorageKey = 'industrialIoT_recent_alerts';
   showRuleForm = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   
   newRule = {
     type: 'motion',
@@ -29,10 +32,19 @@ export class AlertsComponent {
     { id: 'camera-activity', type: 'security', icon: 'fa-video', title: 'Mouvement Caméra', desc: 'Zone de stockage périphérique - il y a 3 heures', status: 'active' }
   ];
 
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadRealtimeAlerts();
+    }
+  }
+
   acknowledgeAlert(alertId: string) {
     const alert = this.alerts.find(a => a.id === alertId);
     if (alert) {
-      alert.status = 'resolved';
+      alert.status = 'acknowledged';
+      if (isPlatformBrowser(this.platformId)) {
+        this.saveRealtimeAlerts();
+      }
     }
   }
 
@@ -40,6 +52,9 @@ export class AlertsComponent {
     const alert = this.alerts.find(a => a.id === alertId);
     if (alert) {
       alert.status = 'resolved';
+      if (isPlatformBrowser(this.platformId)) {
+        this.saveRealtimeAlerts();
+      }
     }
   }
 
@@ -81,5 +96,28 @@ export class AlertsComponent {
   deleteRule(ruleId: string) {
     console.log(`Deleting rule: ${ruleId}`);
     // Here you would typically call a service to delete the rule
+  }
+
+  private loadRealtimeAlerts() {
+    const storedAlerts = this.readStoredAlerts();
+    const staticAlertIds = new Set(this.alerts.map(alert => alert.id));
+    const realtimeAlerts = storedAlerts.filter((alert: any) => !staticAlertIds.has(alert.id));
+    this.alerts = [...realtimeAlerts, ...this.alerts];
+  }
+
+  private saveRealtimeAlerts() {
+    const realtimeAlerts = this.alerts
+      .filter((alert: any) => alert.source)
+      .slice(0, 20);
+
+    localStorage.setItem(this.recentAlertsStorageKey, JSON.stringify(realtimeAlerts));
+  }
+
+  private readStoredAlerts(): any[] {
+    try {
+      return JSON.parse(localStorage.getItem(this.recentAlertsStorageKey) || '[]');
+    } catch {
+      return [];
+    }
   }
 }

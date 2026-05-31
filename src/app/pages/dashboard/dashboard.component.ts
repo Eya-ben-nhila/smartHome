@@ -863,6 +863,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   showAlertNotification = false;
   isAlertAcknowledged = false;
   alertMessage = 'Attention : Intrusion zone dangereuse détectée !';
+  private lastMotionAlertSavedAt = 0;
   
   newDevice = {
     name: '',
@@ -1244,6 +1245,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   acknowledgeAlert(): void {
     this.isAlertAcknowledged = true;
     this.alertMessage = 'Alerte acquittée par l\'utilisateur';
+    this.markLatestMotionAlertAcknowledged();
     // On garde la notif affichée en vert
   }
 
@@ -1372,6 +1374,46 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const gasLevel = this.firstDefined(data.gasLevel, data.gas, data.mq2, data.mq2Value);
     const gasAlert = this.toBoolean(this.firstDefined(data.gasAlert, data.gasDetected));
     const motionDetected = this.toBoolean(this.firstDefined(data.motionDetected, data.motion, data.pir, data.pirMotion));
+    const luminosity = this.firstDefined(
+      data.luminosity,
+      data.luminosite,
+      data.luminosité,
+      data.light,
+      data.lightLevel,
+      data.ldr,
+      data.ldrValue,
+      data.valeurLue,
+      data.valeur_lue,
+      data.ldrRaw,
+      data.ldr_raw
+    );
+    const ldrState = this.normalizeLdrState(this.firstDefined(
+      data.ldrState,
+      data.ldrStatus,
+      data.ldr_status,
+      data.lightState,
+      data.lightStatus,
+      data.light_status,
+      data.luminosityState,
+      data.luminosityStatus,
+      data.luminosity_status,
+      data.luminositeState,
+      data.luminositeStatus,
+      data.luminositéState,
+      data.luminositéStatus,
+      data.etatLdr,
+      data.etat_ldr,
+      data.etatLuminosite,
+      data.etat_luminosite,
+      data.etatLuminosité,
+      data.etat_luminosité,
+      data.ldrEtat,
+      data.statusLdr,
+      data.status_ldr,
+      data.status,
+      data.state,
+      data.isDark
+    ));
 
     if (temperature !== undefined) {
       this.updateDeviceStatus('esp32-temp', `${temperature}°C`);
@@ -1387,11 +1429,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.updateDeviceStatus('esp32-gas', gasAlert ? `ALERTE gaz${levelText}` : `Normal${levelText}`);
     }
 
+    if (luminosity !== undefined) {
+      this.updateDeviceStatus('3', this.formatLuminosityPercentage(luminosity));
+    }
+
+    if (ldrState !== undefined) {
+      this.updateDeviceStatus('12', ldrState);
+    }
+
     if (motionDetected !== undefined) {
-      this.updateDeviceStatus('esp32-motion', motionDetected ? 'Mouvement détecté!' : 'Inactif');
+      this.updateDeviceStatus('4', motionDetected ? 'On' : 'Off');
       if (motionDetected) {
-        this.alertMessage = 'Mouvement détecté par le capteur PIR!';
+        this.alertMessage = 'Mouvement détecté sur le convoyeur principal!';
         this.showAlertNotification = true;
+        this.saveMotionAlertActivity();
       }
     }
   }
@@ -1401,9 +1452,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const lowerAlert = alertText.toLowerCase();
 
     if (lowerAlert.includes('motion') || lowerAlert.includes('mouvement')) {
-      this.updateDeviceStatus('esp32-motion', 'Mouvement détecté!');
-      this.alertMessage = 'Mouvement détecté par le capteur PIR!';
+      this.updateDeviceStatus('4', 'On');
+      this.alertMessage = 'Mouvement détecté sur le convoyeur principal!';
       this.showAlertNotification = true;
+      this.saveMotionAlertActivity();
     }
 
     if (data.gasAlert || lowerAlert.includes('gas') || lowerAlert.includes('gaz')) {
@@ -1496,5 +1548,73 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (typeof value === 'number') return value > 0;
     if (typeof value === 'string') return ['true', '1', 'yes', 'on', 'detected'].includes(value.toLowerCase());
     return Boolean(value);
+  }
+
+  private normalizeLdrState(value: any): string | undefined {
+    if (value === undefined || value === null) return undefined;
+    if (typeof value === 'boolean') return value ? 'Sombre' : 'Éclairé';
+
+    const normalized = String(value).trim().toLowerCase();
+    if (['sombre', 'dark', 'obscur', 'obscure', 'low', '0'].includes(normalized)) return 'Sombre';
+    if (['eclaire', 'éclairé', 'eclairé', 'éclaire', 'clair', 'claire', 'light', 'bright', 'high', '1'].includes(normalized)) return 'Éclairé';
+    return undefined;
+  }
+
+  private formatLuminosityPercentage(rawValue: any): string {
+    const numericValue = Number(rawValue);
+    if (!Number.isFinite(numericValue)) {
+      return `${rawValue}`;
+    }
+
+    const percentage = Math.max(0, Math.min(100, (numericValue / 4095.0) * 100.0));
+    return `${percentage.toFixed(1)}%`;
+  }
+
+  private saveMotionAlertActivity(): void {
+    const now = Date.now();
+    if (now - this.lastMotionAlertSavedAt < 60000) return;
+    this.lastMotionAlertSavedAt = now;
+
+    const storageKey = 'industrialIoT_recent_alerts';
+    const existingAlerts = this.readStoredAlerts(storageKey);
+    const activeMotionAlert = existingAlerts.find((alert: any) => alert.source === 'esp32-motion' && alert.status !== 'resolved');
+    const alert = {
+      id: activeMotionAlert?.id || `esp32-motion-${now}`,
+      source: 'esp32-motion',
+      type: 'motion',
+      icon: 'fa-running',
+      title: 'Mouvement détecté',
+      desc: `Convoyeur principal - ${new Date(now).toLocaleString()}`,
+      status: activeMotionAlert?.status || 'active',
+      createdAt: activeMotionAlert?.createdAt || now,
+      updatedAt: now
+    };
+
+    const nextAlerts = [
+      alert,
+      ...existingAlerts.filter((item: any) => item.id !== alert.id)
+    ].slice(0, 20);
+
+    localStorage.setItem(storageKey, JSON.stringify(nextAlerts));
+  }
+
+  private readStoredAlerts(storageKey: string): any[] {
+    try {
+      return JSON.parse(localStorage.getItem(storageKey) || '[]');
+    } catch {
+      return [];
+    }
+  }
+
+  private markLatestMotionAlertAcknowledged(): void {
+    const storageKey = 'industrialIoT_recent_alerts';
+    const alerts = this.readStoredAlerts(storageKey);
+    const latestMotionAlert = alerts.find((alert: any) => alert.source === 'esp32-motion' && alert.status === 'active');
+
+    if (latestMotionAlert) {
+      latestMotionAlert.status = 'acknowledged';
+      latestMotionAlert.updatedAt = Date.now();
+      localStorage.setItem(storageKey, JSON.stringify(alerts));
+    }
   }
 }
