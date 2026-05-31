@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { IotWebsocketService } from '../../services/iot-websocket.service';
+import { IoTMessage, IotWebsocketService } from '../../services/iot-websocket.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { TranslationService } from '../../services/translation.service';
 
@@ -855,7 +855,7 @@ import { TranslationService } from '../../services/translation.service';
 
   `]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   showAddDeviceModal = false;
   showDeviceDetailsModal = false;
   isEditingDevice = false;
@@ -897,22 +897,24 @@ export class DashboardComponent implements OnInit {
     { id: '2', name: 'Moteur convoyeur', type: 'garage', status: 'Arrêté', location: 'Ligne A', isFavorite: true, isLarge: false },
     { id: '3', name: 'Éclairage atelier', type: 'light', status: 'On - 50%', location: 'Atelier', isFavorite: true, isLarge: false },
     { id: '4', name: 'Convoyeur principal', type: 'tv', status: 'Off', location: 'Ligne B', isFavorite: false, isLarge: false },
-    { id: '5', name: 'Capteur de vibration', type: 'speaker', status: 'Actif', location: 'Compresseur', isFavorite: true, isLarge: false },
     { id: '6', name: 'Niveau cuve', type: 'plug', status: '85%', location: 'Zone Stockage', isFavorite: false, isLarge: false },
     { id: '7', name: 'Sirène d\'alarme', type: 'floor-lamp', status: 'Off', location: 'Atelier', isFavorite: false, isLarge: false },
     { id: '8', name: 'Température four', type: 'temperature', status: '220°C', location: 'Zone Four', isFavorite: true, isLarge: false },
     { id: '9', name: 'Caméra Zone stockage', type: 'camera', status: 'Live', location: 'Zone stockage', isLarge: true, isFavorite: true },
     { id: '9-2', name: 'Caméra Portail', type: 'camera', status: 'Live', location: 'Portail', isLarge: false, isFavorite: true },
-    { id: '10', name: 'Ventilateur extracteur', type: 'fan', status: 'On', location: 'Atelier', isFavorite: false, isLarge: false },
-    { id: '11', name: 'Qualité air atelier', type: 'air-quality', status: '32 - Good', location: 'Atelier', isFavorite: false, isLarge: false },
     { id: '12', name: 'Station météo site', type: 'weather', status: '18°C Nuageux', location: 'Extérieur', isFavorite: false, isLarge: false },
-    { id: '13', name: 'Températures zones', type: 'indoor-temp', status: 'Multiple zones', location: 'Atelier', isFavorite: true, isLarge: false }
+    { id: 'esp32-temp',name: 'Températures zones',type: 'indoor-temp',status: '--',location: 'Atelier', isFavorite: true,  isLarge: false },
+    { id: 'esp32-hum',name: 'Qualité air atelier',type: 'air-quality',status: '--',location: 'Atelier',isFavorite: false, isLarge: false },
+    { id: 'esp32-gas',name: 'Ventilateur extracteur',type: 'fan',status: '--',location: 'Atelier',isFavorite: false, isLarge: false },
+    { id: 'esp32-motion',name: 'Capteur de vibration',type: 'speaker',status: 'Inactif',location: 'Compresseur',isFavorite: true,isLarge: false },
   ];
 
   col1Devices: any[] = [];
   col2Devices: any[] = [];
   col3Devices: any[] = [];
   col4Devices: any[] = [];
+  private readonly esp32DeviceIds = ['esp32-temp', 'esp32-hum', 'esp32-gas', 'esp32-motion'];
+  private persistLayoutBeforeUnload = () => this.saveDeviceLayout();
 
   constructor(
     private router: Router,
@@ -924,35 +926,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.loadDeviceLayout();
+      window.addEventListener('beforeunload', this.persistLayoutBeforeUnload);
       // Si on a un filtre actif (autre que All), on l'applique
       if (this.currentFilter !== 'All') {
         this.applyFilter();
       }
       
-      // Subscribe to real-time IoT updates
-      this.iotService.messages$.subscribe(msg => {
-        console.log('Real-time message received:', msg);
-        if (msg.type === 'DEVICE_DATA' || msg.type === 'DEVICE_STATUS_UPDATE') {
-          const deviceId = msg.deviceId || (msg.data && msg.data.id);
-          if (!deviceId) return;
-          
-          const deviceIndex = this.devices.findIndex(d => d.id === deviceId);
-          if (deviceIndex !== -1) {
-            if (msg.type === 'DEVICE_DATA') {
-              this.devices[deviceIndex].status = msg.data;
-            } else {
-              this.devices[deviceIndex] = { ...this.devices[deviceIndex], ...msg.data };
-            }
-            this.updateDeviceInColumns(deviceId, this.devices[deviceIndex]);
-            this.cdr.detectChanges();
-            console.log(`Device ${deviceId} updated successfully`);
-          }
-        } else if (msg.type === 'DEVICE_ALERT') {
-          this.alertMessage = msg.alert || 'Alerte détectée !';
-          this.showAlertNotification = true;
-          this.cdr.detectChanges();
-        }
-      });
+      this.iotService.messages$.subscribe(msg => this.handleRealtimeMessage(msg));
     } else {
       this.initDefaultLayout();
     }
@@ -999,30 +979,7 @@ export class DashboardComponent implements OnInit {
         break;
       case 'All':
       default:
-        // Use the exact same layout as original dashboard - DO NOT CHANGE ANYTHING
-        this.col1Devices = [
-          this.devices.find(d => d.id === '9'), 
-          this.devices.find(d => d.id === '1'), 
-          this.devices.find(d => d.id === '2')
-        ];
-        this.col2Devices = [
-          this.devices.find(d => d.id === '3'), 
-          this.devices.find(d => d.id === '4'), 
-          this.devices.find(d => d.id === '5'), 
-          this.devices.find(d => d.id === '6'), 
-          this.devices.find(d => d.id === '7')
-        ];
-        this.col3Devices = [
-          this.devices.find(d => d.id === '8'), 
-          { ...this.devices.find(d => d.id === '9'), id: '9-small', isLarge: false },
-          this.devices.find(d => d.id === '9-2') // Add second camera here
-        ];
-        this.col4Devices = [
-          this.devices.find(d => d.id === '10'), 
-          this.devices.find(d => d.id === '11'), 
-          this.devices.find(d => d.id === '12'), 
-          this.devices.find(d => d.id === '13')
-        ];
+        this.initDefaultLayout();
         console.log('All filter - Original layout restored');
         this.cdr.detectChanges();
         return;
@@ -1081,30 +1038,7 @@ export class DashboardComponent implements OnInit {
         break;
       case 'All':
       default:
-        // Use original layout
-        this.col1Devices = [
-          this.devices.find(d => d.id === '9'), 
-          this.devices.find(d => d.id === '1'), 
-          this.devices.find(d => d.id === '2')
-        ];
-        this.col2Devices = [
-          this.devices.find(d => d.id === '3'), 
-          this.devices.find(d => d.id === '4'), 
-          this.devices.find(d => d.id === '5'), 
-          this.devices.find(d => d.id === '6'), 
-          this.devices.find(d => d.id === '7')
-        ];
-        this.col3Devices = [
-          this.devices.find(d => d.id === '8'), 
-          { ...this.devices.find(d => d.id === '9'), id: '9-small', isLarge: false },
-          this.devices.find(d => d.id === '9-2')
-        ];
-        this.col4Devices = [
-          this.devices.find(d => d.id === '10'), 
-          this.devices.find(d => d.id === '11'), 
-          this.devices.find(d => d.id === '12'), 
-          this.devices.find(d => d.id === '13')
-        ];
+        this.initDefaultLayout();
         this.cdr.detectChanges();
         return;
     }
@@ -1130,24 +1064,17 @@ export class DashboardComponent implements OnInit {
       this.col3Devices = layout.col3;
       this.col4Devices = layout.col4;
       this.devices = layout.allDevices || this.devices;
-
-      // Réparer si "Températures zones" est manquant
-      const indoorTempExists = this.devices.some(d => d.id === '13');
-      if (!indoorTempExists) {
-        const indoorTemp = { id: '13', name: 'Températures zones', type: 'indoor-temp', status: 'Multiple zones', location: 'Atelier', isFavorite: true, isLarge: false };
-        this.devices.push(indoorTemp);
-        this.col4Devices.push(indoorTemp);
-        this.saveDeviceLayout();
-      } else {
-        // Vérifier s'il est présent dans l'une des colonnes
-        const inColumns = [...this.col1Devices, ...this.col2Devices, ...this.col3Devices, ...this.col4Devices].some(d => d.id === '13');
-        if (!inColumns) {
-          this.col4Devices.push(this.devices.find(d => d.id === '13'));
-          this.saveDeviceLayout();
-        }
-      }
+      this.ensureEsp32Devices();
+      this.cleanLayoutColumns();
+      this.placeIndustrialActuatorsAfterTankLevel();
     } else {
       this.initDefaultLayout();
+    }
+  }
+
+  ngOnDestroy() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.removeEventListener('beforeunload', this.persistLayoutBeforeUnload);
     }
   }
 
@@ -1165,10 +1092,16 @@ export class DashboardComponent implements OnInit {
   }
 
   private initDefaultLayout() {
-    this.col1Devices = [this.devices.find(d => d.id === '9'), this.devices.find(d => d.id === '1'), this.devices.find(d => d.id === '2')];
-    this.col2Devices = [this.devices.find(d => d.id === '3'), this.devices.find(d => d.id === '4'), this.devices.find(d => d.id === '5'), this.devices.find(d => d.id === '6'), this.devices.find(d => d.id === '7')];
-    this.col3Devices = [this.devices.find(d => d.id === '8'), { ...this.devices.find(d => d.id === '9'), id: '9-small', isLarge: false }];
-    this.col4Devices = [this.devices.find(d => d.id === '10'), this.devices.find(d => d.id === '11'), this.devices.find(d => d.id === '12'), this.devices.find(d => d.id === '13')];
+    this.ensureEsp32Devices();
+    this.col1Devices = this.getDevicesById(['9', '1', '2']);
+    this.col2Devices = this.getDevicesById(['3', '4', '6', '7']);
+    this.col3Devices = [
+      ...this.getDevicesById(['8']),
+      { ...this.devices.find(d => d.id === '9'), id: '9-small', isLarge: false },
+      ...this.getDevicesById(['9-2'])
+    ].filter(Boolean);
+    this.col4Devices = this.getDevicesById(['12', 'esp32-temp', 'esp32-hum']);
+    this.placeIndustrialActuatorsAfterTankLevel();
   }
 
   onDrop(event: CdkDragDrop<any[]>) {
@@ -1384,5 +1317,184 @@ export class DashboardComponent implements OnInit {
     if (name.toLowerCase().includes('air')) return 'Atelier';
     if (name.toLowerCase().includes('salle serveur')) return 'Salle Serveur';
     return 'Atelier';
+  }
+
+  private updateDeviceStatus(deviceId: string, newStatus: string): void {
+    const idx = this.devices.findIndex(d => d.id === deviceId);
+    if (idx !== -1) {
+      this.devices[idx].status = newStatus;
+      this.updateDeviceInColumns(deviceId, this.devices[idx]);
+    }
+  }
+
+  private handleRealtimeMessage(msg: IoTMessage): void {
+    console.log('Real-time message received:', msg);
+
+    if (msg.type === 'DEVICE_DATA') {
+      const data = this.parseRealtimePayload(msg.data);
+      const sourceDeviceId = data.deviceId || msg.deviceId;
+
+      if (this.isEsp32Message(sourceDeviceId)) {
+        this.applyEsp32SensorData(data);
+        this.cdr.detectChanges();
+      }
+    }
+
+    if (msg.type === 'DEVICE_ALERT') {
+      const data = this.parseRealtimePayload(msg.alert);
+      const sourceDeviceId = data.deviceId || msg.deviceId;
+
+      if (this.isEsp32Message(sourceDeviceId)) {
+        this.applyEsp32Alert(data);
+        this.cdr.detectChanges();
+      }
+    }
+  }
+
+  private parseRealtimePayload(payload: any): any {
+    if (payload == null) return {};
+    if (typeof payload !== 'string') return payload;
+
+    try {
+      return JSON.parse(payload);
+    } catch {
+      return { alert: payload };
+    }
+  }
+
+  private isEsp32Message(deviceId: any): boolean {
+    return typeof deviceId === 'string' && deviceId.toLowerCase().startsWith('esp32');
+  }
+
+  private applyEsp32SensorData(data: any): void {
+    const temperature = this.firstDefined(data.temperature, data.temp, data.temperatureC);
+    const humidity = this.firstDefined(data.humidity, data.hum);
+    const gasLevel = this.firstDefined(data.gasLevel, data.gas, data.mq2, data.mq2Value);
+    const gasAlert = this.toBoolean(this.firstDefined(data.gasAlert, data.gasDetected));
+    const motionDetected = this.toBoolean(this.firstDefined(data.motionDetected, data.motion, data.pir, data.pirMotion));
+
+    if (temperature !== undefined) {
+      this.updateDeviceStatus('esp32-temp', `${temperature}°C`);
+    }
+
+    if (humidity !== undefined) {
+      const humidityStatus = Number(humidity) < 60 ? 'Good' : 'High';
+      this.updateDeviceStatus('esp32-hum', `${humidity}% - ${humidityStatus}`);
+    }
+
+    if (gasLevel !== undefined || gasAlert !== undefined) {
+      const levelText = gasLevel !== undefined ? ` ${gasLevel}` : '';
+      this.updateDeviceStatus('esp32-gas', gasAlert ? `ALERTE gaz${levelText}` : `Normal${levelText}`);
+    }
+
+    if (motionDetected !== undefined) {
+      this.updateDeviceStatus('esp32-motion', motionDetected ? 'Mouvement détecté!' : 'Inactif');
+      if (motionDetected) {
+        this.alertMessage = 'Mouvement détecté par le capteur PIR!';
+        this.showAlertNotification = true;
+      }
+    }
+  }
+
+  private applyEsp32Alert(data: any): void {
+    const alertText = String(data.alert || data.message || '');
+    const lowerAlert = alertText.toLowerCase();
+
+    if (lowerAlert.includes('motion') || lowerAlert.includes('mouvement')) {
+      this.updateDeviceStatus('esp32-motion', 'Mouvement détecté!');
+      this.alertMessage = 'Mouvement détecté par le capteur PIR!';
+      this.showAlertNotification = true;
+    }
+
+    if (data.gasAlert || lowerAlert.includes('gas') || lowerAlert.includes('gaz')) {
+      const level = this.firstDefined(data.level, data.gasLevel, data.gas);
+      this.alertMessage = `Alerte gaz détecté!${level !== undefined ? ` Niveau: ${level}` : ''}`;
+      this.showAlertNotification = true;
+    }
+
+    if (data.uid) {
+      this.alertMessage = `RFID: ${data.uid} - ${data.access || 'badge détecté'}`;
+      this.showAlertNotification = true;
+    }
+
+    if (alertText && !this.showAlertNotification) {
+      this.alertMessage = alertText;
+      this.showAlertNotification = true;
+    }
+  }
+
+  private ensureEsp32Devices(): void {
+    const requiredDevices = [
+      { id: 'esp32-temp', name: 'Températures zones', type: 'indoor-temp', status: '--', location: 'Atelier', isFavorite: true, isLarge: false },
+      { id: 'esp32-hum', name: 'Qualité air atelier', type: 'air-quality', status: '--', location: 'Atelier', isFavorite: false, isLarge: false },
+      { id: 'esp32-gas', name: 'Ventilateur extracteur', type: 'fan', status: '--', location: 'Atelier', isFavorite: false, isLarge: false },
+      { id: 'esp32-motion', name: 'Capteur de vibration', type: 'speaker', status: 'Inactif', location: 'Compresseur', isFavorite: true, isLarge: false },
+    ];
+
+    requiredDevices.forEach(device => {
+      if (!this.devices.some(existing => existing.id === device.id)) {
+        this.devices.push(device);
+      }
+    });
+  }
+
+  private cleanLayoutColumns(): void {
+    this.col1Devices = this.cleanDeviceArray(this.col1Devices);
+    this.col2Devices = this.cleanDeviceArray(this.col2Devices);
+    this.col3Devices = this.cleanDeviceArray(this.col3Devices);
+    this.col4Devices = this.cleanDeviceArray(this.col4Devices);
+
+    this.esp32DeviceIds.forEach(id => {
+      const alreadyVisible = [...this.col1Devices, ...this.col2Devices, ...this.col3Devices, ...this.col4Devices]
+        .some(device => device.id === id);
+      const device = this.devices.find(item => item.id === id);
+
+      if (!alreadyVisible && device) {
+        this.col4Devices.push(device);
+      }
+    });
+
+    this.saveDeviceLayout();
+  }
+
+  private placeIndustrialActuatorsAfterTankLevel(): void {
+    const actuatorIds = ['esp32-gas', 'esp32-motion'];
+    const removeActuators = (devices: any[]) => (devices || []).filter(device => !actuatorIds.includes(device?.id));
+
+    this.col1Devices = removeActuators(this.col1Devices);
+    this.col2Devices = removeActuators(this.col2Devices);
+    this.col3Devices = removeActuators(this.col3Devices);
+    this.col4Devices = removeActuators(this.col4Devices);
+
+    const actuators = this.getDevicesById(actuatorIds);
+    const tankLevelIndex = this.col2Devices.findIndex(device => device.id === '6');
+    const insertIndex = tankLevelIndex === -1 ? this.col2Devices.length : tankLevelIndex + 1;
+
+    this.col2Devices.splice(insertIndex, 0, ...actuators);
+    this.saveDeviceLayout();
+  }
+
+  private cleanDeviceArray(devices: any[]): any[] {
+    return (devices || [])
+      .filter(device => device && device.id)
+      .map(device => this.devices.find(item => item.id === device.id) || device);
+  }
+
+  private getDevicesById(ids: string[]): any[] {
+    return ids
+      .map(id => this.devices.find(device => device.id === id))
+      .filter(Boolean);
+  }
+
+  private firstDefined(...values: any[]): any {
+    return values.find(value => value !== undefined && value !== null);
+  }
+
+  private toBoolean(value: any): boolean | undefined {
+    if (value === undefined || value === null) return undefined;
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'number') return value > 0;
+    if (typeof value === 'string') return ['true', '1', 'yes', 'on', 'detected'].includes(value.toLowerCase());
+    return Boolean(value);
   }
 }
